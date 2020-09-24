@@ -4,6 +4,9 @@ import TopBar from "../../components/TopBar/topBar";
 import styles from "./landing.module.scss";
 import Mobile from "../../assets/images/mobil.png";
 import Card from "../../components/Card/card";
+import Man1 from "../../assets/images/man1.jpg";
+import Man2 from "../../assets/images/man2.webp";
+import Man3 from "../../assets/images/man3.jpg";
 import {
   FinansalRaporlarIcon,
   GelirGiderIcon,
@@ -98,6 +101,19 @@ export default function Landing() {
         </div>
 
         {/*******  Demtist Comments Card ********/}
+        <div className={styles.dentistCommentsCard}>
+          {DentistCommentsData.map((item) => {
+            return (
+              <Card
+                type={item.type}
+                name={item.name}
+                content={item.content}
+                starCount={item.starCount}
+                avatar={item.avatar}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -110,4 +126,31 @@ const FeaturesCardsData = [
   { title: "Finansal Raporlar", type: "finansal" },
   { title: "Gelir Gider Takibi", type: "gelir" },
   { title: "Güvenlik", type: "guvenlik" },
+];
+
+const DentistCommentsData = [
+  {
+    type: "dentistSay",
+    name: "Regina Webster",
+    content:
+      "Senectus et netus et malesuada fames ac turpis  nisl tincidunt eget nullam non nisi condimentum  lacinia quis. Sit amet justo donec enim..",
+    starCount: 5,
+    avatar: Man1,
+  },
+  {
+    type: "dentistSay",
+    name: "Sadie Butler",
+    content:
+      "Senectus et netus et malesuada fames ac turpis  nisl tincidunt eget nullam non nisi condimentum  lacinia quis. Sit amet justo donec enim..",
+    starCount: 4,
+    avatar: Man2,
+  },
+  {
+    type: "dentistSay",
+    name: "Manuel Cortez",
+    content:
+      "Senectus et netus et malesuada fames ac turpis  nisl tincidunt eget nullam non nisi condimentum  lacinia quis. Sit amet justo donec enim..",
+    starCount: 5,
+    avatar: Man3,
+  },
 ];

@@ -1,0 +1,64 @@
+@import '../../../../helpers/variableBreakpoints.scss';
+
+.DentistSay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 320px;
+    height: 180px;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px 0 rgba(26, 90, 255, 0.1);
+
+
+    & .Top {
+        display: flex;
+        margin-top: 24px;
+        justify-content: flex-start;
+        width: 100%;
+        align-items: flex-start;
+        flex: 1;
+
+        & .avatar {
+            width: 42px;
+            height: 42px;
+            margin-left: 24px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            & img {
+                width: 100%;
+            }
+        }
+
+        & .otherDetails {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+
+            & .name {
+                font-size: 16px;
+                color: $otherBlue;
+                font-family: SofiaBold
+            }
+
+            & .star {
+                margin-top: 3px;
+
+                & .starIcon {
+                    width: 12px;
+                    margin: 0 3px;
+                    height: 12px;
+                }
+            }
+        }
+    }
+
+    & .Content {
+        flex: 3;
+        padding: 12px 30px;
+        font-size: 14px;
+        color: $lightBlue
+    }
+}
