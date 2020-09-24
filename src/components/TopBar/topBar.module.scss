@@ -1,0 +1,25 @@
+.TopBarContainer {
+    display: flex;
+    height: 100px;
+
+    & .logoContainer {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .logo {
+            cursor: pointer;
+            height: 50px;
+            width: 160px;
+        }
+    }
+
+    & .links {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        font-family: SofiaMedium;
+        align-items: center;
+    }
+}
