@@ -1,60 +1,64 @@
 @import "../../helpers/variableBreakpoints.scss";
 
 .Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 16px;
+
+  & .primary {
+    cursor: pointer;
+    color: $darkBlue;
+    transition: 0.3s;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+
+  & .secondary {
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 16px 16px;
+    justify-content: center;
+    border-radius: 17px;
+    cursor: pointer;
+    background-color: $turkuaz;
+    height: 50px;
+    width: 170px;
+    transition: 0.3s;
 
-    & .primary {
-        cursor: pointer;
-        color: $darkBlue;
-        transition: 0.3s;
+    padding: 0 24px;
 
-        &:hover {
-            color: $blue;
-        }
+    &:hover {
+      opacity: 0.8;
     }
+  }
 
-    & .secondary {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 17px;
-        cursor: pointer;
-        background-color: $turkuaz;
-        height: 50px;
-        width: 170px;
-        transition: 0.3s;
+  & .tertiary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 17px;
+    cursor: pointer;
+    background-color: $blue;
+    height: 58px;
+    transition: 0.3s;
+    width: 200px;
+    color: white;
+    padding: 0 24px;
+    box-shadow: -1px 5px 7px 0 rgba(26, 90, 255, 0.23);
 
-        padding: 0 24px;
-
-        &:hover {
-            opacity: 0.8;
-        }
+    &:hover {
+      opacity: 0.8;
     }
+  }
 
-    & .tertiary {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 17px;
-        cursor: pointer;
-        background-color: $blue;
-        height: 58px;
-        transition: 0.3s;
-        width: 200px;
-        color: white;
-        padding: 0 24px;
-        box-shadow: -1px 5px 7px 0 rgba(26, 90, 255, 0.23);
-
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-
+  .packages {
+    width: 450px;
+    font-family: SofiaBold;
+  }
 }
 
 .noPadding {
-    padding: 0
+  padding: 0;
 }

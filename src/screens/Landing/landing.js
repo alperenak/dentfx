@@ -7,10 +7,14 @@ import Card from "../../components/Card/card";
 import Man1 from "../../assets/images/man1.jpg";
 import Man2 from "../../assets/images/man2.webp";
 import Man3 from "../../assets/images/man3.jpg";
+import VideoImage from "../../assets/images/video-bg.png";
+import OnerilenPaket from "../../assets/icons/onerilenPaketIcon.svg";
 import {
+  Arrow,
   FinansalRaporlarIcon,
   GelirGiderIcon,
   GuvenlikIcon,
+  OnerilenPaketIcon,
   OtomatikHatirlatmaIcon,
   RandevuYonetimIcon,
   TedaviPlanIcon,
@@ -100,7 +104,7 @@ export default function Landing() {
           </div>
         </div>
 
-        {/*******  Demtist Comments Card ********/}
+        {/*******  Dentist Comments Card ********/}
         <div className={styles.dentistCommentsCard}>
           {DentistCommentsData.map((item) => {
             return (
@@ -113,6 +117,86 @@ export default function Landing() {
               />
             );
           })}
+        </div>
+
+        <div className={styles.commentArrowButtonsContainer}>
+          <div className={styles.commentArrowButtons}>
+            <div className={styles.arrowCircle}>
+              <Arrow className={styles.arrow} />
+            </div>
+            <div className={styles.arrowCircle}>
+              <Arrow className={styles.reverseArrow} />
+            </div>
+          </div>
+        </div>
+
+        {/*******  Dentfx Video ********/}
+
+        <div className={styles.videoContainer}>
+          <div className={styles.backgroundAbsolute}>
+            <div className={styles.fullAbsolute}></div>
+          </div>
+          <div className={styles.videoContainerText}>
+            <div className={styles.videoContainerMediumTitle}>Senectus et</div>
+            <div className={styles.videoContainerBlackTitle}>
+              malesuada fames.
+            </div>
+            <div className={styles.videoContainerDescription}>
+              Dolor magna eget est lorem ipsum dolor. Urna cursus eget nunc
+              scelerisque viverra mauris in aliquam. Leo vel orci porta non.
+            </div>
+          </div>
+          <div className={styles.videoCard}>
+            <div className={styles.rotatedCard} />
+            <div className={styles.videoImage}>
+              <img src={VideoImage} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/*******  Dentfx Packages ********/}
+
+      <div className={styles.packagesContainer}>
+        <div className={styles.packagesSection}>
+          <div className={styles.packagesText}>
+            <div className={styles.packagesMediumTitle}>frequently asked</div>
+            <div className={styles.packagesBlackTitle}>questions</div>
+          </div>
+          <div className={styles.packagesSmallCards}>
+            {packagesSmallCardData.map((item) => {
+              return (
+                <Card
+                  type={item.type}
+                  title={item.title}
+                  description={item.description}
+                >
+                  <OnerilenPaketIcon
+                    svgColor="#57658a"
+                    className={styles.packagesIcon}
+                  />
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+        <div className={styles.packagesCard}>
+          <Card
+            type={"bigPackages"}
+            packageName={"POLİKLİNİK PAKETİ"}
+            packagePrice={2000}
+            packageDescription={
+              "Klinik pakete göre daha ekonomik, daha uzun süreli kullanım."
+            }
+            packagesFeatures={[
+              "Sınırsız Kullanıcı",
+              "Sınırsız Doktor",
+              "Sınırsız Hasta",
+            ]}
+            buttonTitle={"Paket Seç"}
+          >
+            <img src={OnerilenPaket} />
+          </Card>
         </div>
       </div>
     </div>
@@ -152,5 +236,23 @@ const DentistCommentsData = [
       "Senectus et netus et malesuada fames ac turpis  nisl tincidunt eget nullam non nisi condimentum  lacinia quis. Sit amet justo donec enim..",
     starCount: 5,
     avatar: Man3,
+  },
+];
+
+const packagesSmallCardData = [
+  {
+    type: "packages",
+    title: "Ücretsiz Paket",
+    description: "Eget aliquet nibh praesent tristique magna.",
+  },
+  {
+    type: "packages",
+    title: "Poliklinik Paketi",
+    description: "Volutpat commodo sed egestas egestas fringilla.",
+  },
+  {
+    type: "packages",
+    title: "Klinik Paketi",
+    description: "Ultrices sagittis orci a scelerisque.",
   },
 ];

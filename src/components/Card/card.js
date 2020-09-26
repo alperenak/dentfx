@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./card.module.scss";
 import Features from "./sub-components/features/features";
 import DentistSay from "./sub-components/dentistSay/dentistSay";
+import Packages from "./sub-components/packages/packages";
+import BigPackages from "./sub-components/bigPackages/bigPackages";
 
 export default function Card(props) {
   return (
@@ -17,6 +19,10 @@ function RenderByTypes(props) {
     return <Features {...props} />;
   } else if (type === "dentistSay") {
     return <DentistSay {...props} />;
+  } else if (type === "packages") {
+    return <Packages {...props} />;
+  } else if (type === "bigPackages") {
+    return <BigPackages {...props} />;
   } else {
     return <div>hata</div>;
   }
