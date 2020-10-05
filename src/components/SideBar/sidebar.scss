@@ -1,0 +1,36 @@
+.List {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 250px;
+
+  & .listItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 40px;
+
+    & .text {
+      font-family: 'SofiaRegular';
+      font-size: 14px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #061b52;
+
+      &:hover {
+        color: #1a5aff;
+      }
+    }
+
+    & img {
+      width: 20px;
+      height: 20px;
+      margin: 0 20px 0 0;
+    }
+  }
+}

@@ -1,0 +1,197 @@
+@import '../../helpers/responsiveBreakpointsMixins';
+@import '../../helpers/variableBreakpoints';
+
+.SignUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  & .Container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    border-radius: 16px;
+    box-shadow: 0 0 18px 0 rgba(26, 90, 255, 0.1);
+    width: 100%;
+    height: 750px;
+
+    @include x-large {
+      flex-direction: column;
+    }
+
+    & .image {
+      position: relative;
+      height: 100%;
+      width: 60%;
+      @include x-large {
+        display: none;
+      }
+
+      & .signUpImage {
+        height: 100%;
+        width: 100%;
+      }
+
+      & .signUpIcon {
+        position: absolute;
+        height: 40px;
+        width: 112px;
+        top: 32px;
+        left: calc(50% - 56px);
+      }
+
+      & .signUpText {
+        position: absolute;
+        bottom: 64px;
+        right: 64px;
+        width: 45%;
+
+        & .header {
+          font-family: 'SofiaBold';
+          font-size: 20px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.6;
+          letter-spacing: normal;
+          text-align: left;
+          color: #ffffff;
+          margin-bottom: 10px;
+        }
+        & .text {
+          font-family: 'SofiaRegular';
+          font-size: 10px;
+          font-weight: 500;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.88;
+          letter-spacing: normal;
+          text-align: left;
+          color: #ffffff;
+        }
+      }
+    }
+
+
+    & .formContainer {
+      height: 100%;
+      width: 50%;
+      padding: 16px 64px;
+      @include x-large {
+        height: 100%;
+        width: 100%;
+      }
+
+      & .welcomingSection {
+        display: flex;
+        margin-bottom: 40px;
+
+        & img {
+          width: 48px;
+          height: 48px;
+        }
+
+        & .textContainer {
+          display: flex;
+          align-items: start;
+          flex-direction: column;
+          justify-content: space-between;
+          margin-left: 22px;
+
+          & .header {
+            font-family: 'SofiaBold';
+            font-size: 20px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: $darkBlue;
+
+            @include small {
+              font-size: 16px;
+            }
+          }
+          & .text {
+            font-family: 'SofiaRegular';
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #909ab2;
+
+            @include small {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      & .inputContainer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+
+        & .input {
+          width: 48%;
+        }
+
+        & .phone {
+          width: 100%;
+        }
+      }
+
+      & .buttonContainer {
+        display: flex;
+        justify-content: flex-end;
+        & .login {
+          height: 40px;
+          width: 114px;
+        }
+      }
+
+      & .forgotPassword {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      & .signInButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        & .signInButton {
+          width: 100%;
+          height: 40px;
+        }
+        & .strokeContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 16px;
+          & .stroke {
+            height: 1px;
+            width: 100%;
+            background-color: #e7eeff;
+          }
+          & .strokeText {
+            font-family: 'SofiaRegular';
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.5;
+            letter-spacing: normal;
+            text-align: center;
+            color: #778699;
+            margin: 0 7px;
+          }
+        }
+      }
+    }
+  }
+}

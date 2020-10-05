@@ -1,0 +1,305 @@
+@import '../../../../helpers/responsiveBreakpointsMixins.scss';
+
+
+.inputWrapper {
+  position: relative;
+  cursor: text;
+  margin: 8px 0;
+  width: fit-content;
+
+  &.disabled {
+    cursor: not-allowed !important;
+
+    & .inputContainer {
+      background: #ddd;
+    }
+
+    &>div,
+    label,
+    input {
+      cursor: not-allowed !important;
+    }
+  }
+
+  & label {
+    font-family: "SofiaBold";
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2c3f58;
+    padding: 0 1px;
+
+    @include small {
+      font-size: calc(2px + 10px);
+
+    }
+  }
+
+  & .labelDescription {
+    padding: 0 1px;
+    margin: 4px 0 0;
+    font-family: "SofiaRegular";
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2c3f58;
+  }
+
+  & .inputSearchBar {
+    border-radius: 15px !important;
+  }
+
+  & .inputContainer {
+    display: flex;
+    outline: none;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    margin: 8px 0 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: solid 1px #e7eeff;
+
+    @include small {
+      padding: 8px 12px;
+    }
+
+    &:focus-within {
+      border: 1px solid #2c3f58;
+    }
+
+    &.large {
+      width: calc(100%);
+    }
+
+    &.full {
+      width: 534px;
+    }
+
+    &.medium {
+      width: 390px;
+    }
+
+    &.half {
+      width: 234px;
+    }
+
+
+    &.error {
+      border: 1px solid red;
+      background-color: rgba(red, 0.1);
+    }
+
+    &.textarea {
+      min-width: 234px;
+      min-height: 234px;
+      resize: none;
+      color: #2c3f58;
+      font-size: calc(2px + 12px);
+
+
+
+      &::placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+      }
+
+      &::-moz-placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+      }
+
+      &::-ms-input-placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+      }
+
+      &::-webkit-input-placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+      }
+    }
+
+    & .icon {
+      width: 15px;
+      height: 15px;
+
+      &.right {
+        margin-left: 8px;
+      }
+
+      &.left {
+        margin-right: 8px;
+      }
+    }
+
+    & input {
+      outline: none;
+      border: none;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: #2c3f58;
+      font-size: calc(2px + 12px);
+      width: 100%;
+
+      &::placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+
+        @include small {
+          font-size: calc(2px + 8px);
+        }
+      }
+
+      &::-moz-placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+
+        @include medium {
+          font-size: calc(2px + 8px);
+        }
+      }
+
+      &::-ms-input-placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+
+        @include medium {
+          font-size: calc(2px + 8px);
+        }
+      }
+
+      &::-webkit-input-placeholder {
+        color: #afb8c3;
+        font-size: calc(2px + 11px);
+
+        @include medium {
+          font-size: calc(2px + 8px);
+        }
+      }
+    }
+
+    &.responsive {
+      width: 390px;
+
+      @include medium {
+        width: 320px;
+
+      }
+
+      @include small {
+        width: 280px;
+
+      }
+    }
+
+    &.compose {
+      width: calc(100% - 32px);
+    }
+
+    & .composeInput {
+      padding-right: 28px;
+    }
+  }
+
+  & .errorMessage {
+    position: absolute;
+    font-family: "SofiaRegular";
+    font-size: calc(2px + 12px);
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: -0.24px;
+    color: #f90000;
+    margin: 7px 8px;
+
+    @include medium {
+      font-size: calc(2px + 10px);
+    }
+  }
+
+  & .tooltip {
+    position: absolute;
+    margin: 0;
+    padding: 12px 16px;
+    z-index: 12;
+    list-style-type: none;
+    top: 83px;
+    left: 30%;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.08);
+    border: solid 1px #e5e5e5;
+    background-color: #ffffff;
+    font-family: "SofiaRegular";
+    font-size: calc(2px + 14px);
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: -0.28px;
+    color: #646464;
+
+    &:before,
+    &:after {
+      content: ' ';
+      position: absolute;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      display: block;
+      width: 0;
+      left: 35%;
+    }
+
+    &:before {
+      border-bottom: 8px solid #e5e5e5;
+      top: -8px;
+    }
+
+    &:after {
+      top: -7px;
+      border-bottom: 8px solid white;
+      z-index: 1;
+    }
+
+    & li {
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    & img {
+      margin: 10px;
+      width: 13px;
+    }
+
+    & .validText {
+      text-decoration: line-through;
+      font-size: calc(2px + 14px);
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: -0.28px;
+      color: #439e4a;
+
+      @include medium {
+        font-size: calc(2px + 12px);
+      }
+    }
+  }
+}
+
+.disclaimer {
+  color: #646464;
+  font-size: x-small;
+}

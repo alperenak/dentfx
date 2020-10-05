@@ -7,21 +7,25 @@ body {
 
 @font-face {
   font-family: SofiaRegular;
+  src: local('SofiaRegular');
   src: url(./assets/fonts/SofiaProRegular.woff);
 }
 
 @font-face {
   font-family: SofiaMedium;
+  src: local('SofiaMedium');
   src: url(./assets/fonts/SofiaPro-Medium.woff);
 }
 
 @font-face {
   font-family: SofiaBold;
+  src: local('SofiaBold');
   src: url(./assets/fonts/SofiaPro-Bold.woff);
 }
 
 @font-face {
   font-family: SofiaBlack;
+  src: local('SofiaBlack');
   src: url(./assets/fonts/SofiaPro-Black.woff);
 }
 
@@ -38,5 +42,5 @@ code {
 html, body, #root {
   width: 100%;
   height: 100%;
-  font-family: SofiaRegular;
+  font-family: 'SofiaRegular';
 }

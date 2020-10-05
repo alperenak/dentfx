@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./features.module.scss";
+import styles from "./features.scss";
 
 export default function Features({ title, children }) {
   return (

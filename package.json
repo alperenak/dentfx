@@ -3,21 +3,50 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-minify-dead-code-elimination": "^0.5.1",
+    "css-loader": "^3.6.0",
+    "express": "^4.17.1",
+    "file-loader": "^6.0.0",
+    "moment": "^2.27.0",
     "node-sass": "^4.14.1",
+    "prop-types": "latest",
     "react": "^16.13.1",
+    "react-datepicker": "^3.1.3",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-indiana-drag-scroll": "^1.6.1",
+    "react-pdf": "^5.0.0",
+    "react-phone-number-input": "^3.0.25",
+    "react-rating-stars-component": "^2.2.0",
+    "react-scripts": "3.4.1",
+    "react-youtube": "^7.12.0",
+    "recharts": "^1.8.5",
+    "sass-loader": "^9.0.2",
+    "shave": "^2.5.9",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "webpack": "^4.44.2",
+    "webpack-dev-middleware": "^3.7.2",
+    "google-map-react": "latest"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "icons": "svgr --icon --replace-attr-values '#000=currentColor' ./src/assets/icons -d ./src/icons",
-    "eject": "react-scripts eject"
+    "build": "webpack --display-error-details --config webpack.config.js",
+    "serve": "node server.js",
+    "watch": "NODE_ENV=development yarn serve",
+    "watch_windows": "set NODE_ENV=development&&yarn serve",
+    "start_production": "NODE_ENV=production yarn build && yarn serve",
+    "start_production_windows": "set NODE_ENV=production&&yarn build&&yarn serve"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -26,8 +55,7 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all",
-      "ie10"
+      "not op_mini all"
     ],
     "development": [
       "last 1 chrome version",
@@ -36,6 +64,17 @@
     ]
   },
   "devDependencies": {
-    "@svgr/cli": "^5.4.0"
+    "babel-plugin-react-directives": "^1.1.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "cors": "^2.8.5",
+    "express-static-gzip": "^2.0.7",
+    "html-webpack-plugin": "^4.5.0",
+    "react-router-dom": "^5.2.0",
+    "webpack-hot-middleware": "^2.25.0"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/assets"
+    ]
   }
 }

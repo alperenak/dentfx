@@ -1,0 +1,282 @@
+@import "../../helpers/variableBreakpoints.scss";
+
+.LandingPageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  & .LandingPageMain {
+    display: flex;
+    flex-direction: column;
+    padding-top: 56px;
+
+    & .Introduction {
+      display: flex;
+
+      & .IntroductionText {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 738px;
+        height: 700px;
+
+        & .IntroductionTitle {
+          font-family: 'SofiaBlack';
+          font-size: 56px;
+          color: $darkBlue;
+        }
+
+        & .IntroductionDescription {
+          font-family: 'SofiaBold';
+          font-size: 20px;
+          color: $lightBlue;
+          width: 370px;
+          margin-top: 48px;
+          margin-bottom: 36px;
+
+          & a {
+            color: $blue;
+          }
+        }
+      }
+
+      & .IntroductionImage {
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    & .Features {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 520px;
+
+      & .FeaturesTitle {
+        font-family: 'SofiaBlack';
+        color: $darkBlue;
+        font-size: 50px;
+      }
+
+      & .FeaturesDescription {
+        font-family: 'SofiaRegular';
+        color: $darkBlue;
+        font-size: 20px;
+        margin-top: 24px;
+      }
+    }
+
+    & .FeaturesCardContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      & .FeaturesCard {
+        display: grid;
+        margin-top: 72px;
+        width: 1300px;
+        height: 400px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 400px));
+
+        & .icons {
+          width: 36px;
+          height: 36px;
+        }
+      }
+    }
+
+    & .DentistCommentsContainer {
+      margin-top: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      & .DentistCommentText {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        & .DentistCommentMediumTitle {
+          color: $darkBlue;
+          font-family: 'SofiaMedium';
+          font-size: 50px;
+        }
+
+        & .DentistCommentBoldTitle {
+          color: $darkBlue;
+          font-family: 'SofiaBold';
+          font-size: 50px;
+        }
+
+        & .DentistCommentDescription {
+          text-align: center;
+          margin-top: 24px;
+          color: $lightBlue;
+          font-size: 20px;
+          width: 400px;
+        }
+      }
+    }
+
+    & .dentistCommentsCard {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 72px;
+    }
+
+    & .commentArrowButtonsContainer {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-top: 24px;
+
+      & .commentArrowButtons {
+        display: flex;
+
+        & .arrowCircle {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: white;
+          transition: 0.3s;
+          box-shadow: 0 2px 5px 0 rgba(26, 90, 255, 0.1);
+          cursor: pointer;
+          margin: 0 16px;
+
+          & .arrow {
+            width: 7px;
+            fill: $darkBlue;
+          }
+
+          & .reverseArrow {
+            width: 7px;
+            fill: $darkBlue;
+
+            transform: rotate(180deg);
+          }
+        }
+
+        & .arrowCircle:hover {
+          background-color: $blue;
+        }
+
+        & .arrowCircle:hover .arrow {
+          fill: white;
+        }
+
+        & .arrowCircle:hover .reverseArrow {
+          fill: white;
+        }
+      }
+    }
+  }
+
+  & .videoContainer {
+    display: flex;
+    width: 100%;
+    height: 723px;
+    padding-top: 220px;
+    margin-top: 120px;
+    position: relative;
+
+    & .videoContainerText {
+      flex: 1;
+
+      & .videoContainerMediumTitle {
+        font-size: 50px;
+        font-family: SofiaMedium;
+        color: $darkBlue;
+      }
+
+      & .videoContainerBlackTitle {
+        font-size: 50px;
+        font-family: SofiaBlack;
+        color: $darkBlue;
+      }
+
+      & .videoContainerDescription {
+        margin-top: 36px;
+        font-size: 20px;
+        width: 500px;
+        color: $lightBlue;
+      }
+    }
+
+    & .videoCard {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+
+      & .rotatedCard {
+        position: absolute;
+        width: 580px;
+        height: 320px;
+        border-radius: 20px;
+        background-color: white;
+        z-index: -1;
+        right: 50px;
+        transform: rotate(-7deg);
+        box-shadow: 0 10px 28px 0 rgba(26, 90, 255, 0.1);
+      }
+    }
+  }
+
+  & .packagesContainer {
+    display: flex;
+    width: 100%;
+
+    & .packagesSection {
+      display: flex;
+      flex-direction: column;
+
+      & .packagesText {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 70px;
+
+        & .packagesMediumTitle {
+          font-size: 50px;
+          color: $darkBlue;
+          font-family: SofiaMedium;
+        }
+
+        & .packagesBlackTitle {
+          font-size: 50px;
+          font-family: SofiaBlack;
+          color: $darkBlue
+        }
+
+      }
+
+
+      & .packagesSmallCards {
+        & .packagesIcon {
+          width: 25px;
+          height: 25px;
+        }
+
+      }
+    }
+
+    & .packagesCard {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 150px;
+      margin-left: 70px;
+    }
+  }
+}

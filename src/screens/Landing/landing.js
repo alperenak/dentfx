@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "../../components/Button/button";
 import TopBar from "../../components/TopBar/topBar";
-import styles from "./landing.module.scss";
+import styles from "./landing.scss";
 import Mobile from "../../assets/images/mobil.png";
 import Card from "../../components/Card/card";
 import Man1 from "../../assets/images/man1.jpg";
-import Man2 from "../../assets/images/man2.webp";
+import Man2 from "../../assets/images/man1.jpg";
 import Man3 from "../../assets/images/man3.jpg";
 import VideoImage from "../../assets/images/video-bg.png";
 import OnerilenPaket from "../../assets/icons/onerilenPaketIcon.svg";
@@ -21,7 +21,6 @@ import {
 } from "../../icons";
 
 function RenderIcon({ type }) {
-  console.log(type);
   if (type === "randevu") {
     return <RandevuYonetimIcon className={styles.icons} />;
   } else if (type === "tedavi") {
@@ -58,6 +57,8 @@ export default function Landing() {
               className={styles.IntroductionButton}
               title={"Hemen Başla!"}
               type={"tertiary"}
+              to={'/login'}
+              mission={'link'}
             />
           </div>
           <div className={styles.IntroductionImage}>
@@ -79,9 +80,9 @@ export default function Landing() {
 
         <div className={styles.FeaturesCardContainer}>
           <div className={styles.FeaturesCard}>
-            {FeaturesCardsData.map((item) => {
+            {FeaturesCardsData.map((item, i) => {
               return (
-                <Card type={"features"} title={item.title}>
+                <Card key={i} type={"features"} title={item.title}>
                   <RenderIcon type={item.type} />
                 </Card>
               );
@@ -106,9 +107,10 @@ export default function Landing() {
 
         {/*******  Dentist Comments Card ********/}
         <div className={styles.dentistCommentsCard}>
-          {DentistCommentsData.map((item) => {
+          {DentistCommentsData.map((item, i) => {
             return (
               <Card
+                key={i}
                 type={item.type}
                 name={item.name}
                 content={item.content}

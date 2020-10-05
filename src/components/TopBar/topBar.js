@@ -6,7 +6,7 @@ const ButtonData = [
   { type: "primary", title: "Özelikler" },
   { type: "primary", title: "Fiyat" },
   { type: "primary", title: "İletişim" },
-  { type: "secondary", title: "Uygulamaya Git" },
+  { type: "secondary", title: "Uygulamaya Git", to: '/login' },
 ];
 
 export default function TopBar() {
@@ -16,8 +16,8 @@ export default function TopBar() {
         <Logo className={styles.logo} />
       </div>
       <div className={styles.links}>
-        {ButtonData.map((item) => {
-          return <Button type={item.type} title={item.title} />;
+        {ButtonData.map((item, i) => {
+          return <Button key={i} type={item.type} title={item.title} to={item.to} mission={'link'} />;
         })}
       </div>
     </div>

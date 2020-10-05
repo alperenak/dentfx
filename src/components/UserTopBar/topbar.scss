@@ -1,0 +1,94 @@
+.Container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 120px;
+
+  & .logo {
+    cursor: pointer;
+    margin: 8px 0 0;
+  }
+
+  & .inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & .filterIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+      -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+      -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+      -o-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      margin: 8px 0 0 20px;
+
+      & img {
+        width: 14px;
+      }
+    }
+  }
+
+  & .label {
+    margin: 8px 0 0;
+    width: 167px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #fffce0;
+    font-family: 'SofiaRegular';
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    text-align: center;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #f7ab00;
+    & span {
+      font-family: 'SofiaBold';
+    }
+  }
+
+  & .notification {
+    height: 20px;
+    cursor: pointer;
+    margin: 8px 0 0;
+  }
+
+  & .user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SofiaRegular';
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    text-align: center;
+    color: #061b52;
+    margin: 8px 0 0;
+    cursor: pointer;
+
+    & .avatarContainer {
+      width: 30px;
+      height: 30px;
+      margin-left: 15px;
+      border-radius: 50%;
+      background-color: #2c3f58;
+
+      & img {
+        width: 100%;
+      }
+    }
+  }
+}

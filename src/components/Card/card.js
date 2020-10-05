@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "./card.module.scss";
+import styles from "./card.scss";
 import Features from "./sub-components/features/features";
 import DentistSay from "./sub-components/dentistSay/dentistSay";
+import PropTypes from "prop-types";
 import Packages from "./sub-components/packages/packages";
 import BigPackages from "./sub-components/bigPackages/bigPackages";
 
@@ -27,3 +28,7 @@ function RenderByTypes(props) {
     return <div>hata</div>;
   }
 }
+
+Card.propTypes = {
+  type: PropTypes.string
+};
