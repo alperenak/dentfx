@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 /*** Styles ***/
 import styles from "./button.scss";
 
-export default function Button({ type, ButtonStyle, style, title, mission, onClick, to}) {
+export default function Button({ type, ButtonStyle, style, title, mission, onClick, className, to}) {
   return (
     <div className={`${styles.Button} ${styles[ButtonStyle]}`}>
       {mission !== 'link' && <RenderButton onClick={onClick} type={type} title={title} className={className} />}
