@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
+import {Link} from "react-router-dom";
 
 /*** Styles ***/
 import styles from './sidebar.scss';
@@ -18,33 +19,65 @@ import kampanyaIcon from '../../icons/kampanya-icon.svg';
 import kampanyaIconBlue from '../../icons/kampanya-icon-blue.svg';
 import dentfxSocialIcon from '../../icons/dentfx-social-icon.svg';
 import dentfxSocialIconBlue from '../../icons/dentfx-social-icon-blue.svg';
+import {getCookie} from "../../utils/cookie";
+
+function usePrevious(value) {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+
+  return ref.current;
+}
 
 function RenderList() {
   const tempList = [
-    { title: 'Anasayfa', icon: homeIcon, hoverIcon: homeIconBlue},
-    { title: 'Profilim', icon: profileIcon, hoverIcon: profileIconBlue},
-    { title: 'Sorularım', icon: messageIcon, hoverIcon: messageIconBlue},
-    { title: 'Randevularım', icon: randevuIcon, hoverIcon: randevuIconBlue},
-    { title: 'Cüzdanım', icon: walletIcon, hoverIcon: walletIconBlue},
-    { title: 'Kampanyalar', icon: kampanyaIcon, hoverIcon: kampanyaIconBlue},
-    { title: 'DentFX Social', icon: dentfxSocialIcon, hoverIcon: dentfxSocialIconBlue},
+    { title: 'Anasayfa', icon: homeIcon, hoverIcon: homeIconBlue, href:`/`},
+    { title: 'Profilim', icon: profileIcon, hoverIcon: profileIconBlue, href:`/profile/${getCookie('user_id')}`},
+    { title: 'Sorularım', icon: messageIcon, hoverIcon: messageIconBlue, href:`/messages`},
+    { title: 'Randevularım', icon: randevuIcon, hoverIcon: randevuIconBlue, href:`/appointment`},
+    { title: 'Cüzdanım', icon: walletIcon, hoverIcon: walletIconBlue, href:`/wallet`},
+    { title: 'Kampanyalar', icon: kampanyaIcon, hoverIcon: kampanyaIconBlue, href:`/campaigns`},
+    { title: 'DentFX Social', icon: dentfxSocialIcon, hoverIcon: dentfxSocialIconBlue, href:`/social`},
   ];
 
   const [list, setList] = useState(tempList);
   const [hoverItem, setHoverItem] = useState(-1);
 
+  const mounted = useRef();
+  const prevList = usePrevious(list);
+
+  useEffect(() => {
+    if (!mounted.current) {
+      setList(list.map(el => {
+        el.selected = window.location.pathname === el.href;
+        return el;
+      }));
+      mounted.current = true;
+    } else {
+      if (Object.is(prevList, list)) {
+        setList(list.map(el => {
+          el.selected = window.location.pathname === el.href;
+          return el;
+        }));
+      }
+    }
+  });
+
   return list.map((item, i) => {
     return (
-      <div
+      <Link
         onMouseOver={() => setHoverItem(i)}
         onMouseLeave={() => setHoverItem(-1)}
         key={i}
-        className={styles.listItem}
+        to={item.href}
+        className={`${styles.listItem} ${item.selected ? styles.selected : ''}`}
       >
-        {hoverItem !== i && <img src={item.icon} alt={"icon"}/>}
-        {hoverItem === i && <img src={item.hoverIcon} alt={"icon"}/>}
+        {(hoverItem !== i && !item.selected) && <img src={item.icon} alt={"icon"}/>}
+        {(hoverItem === i || item.selected) && <img src={item.hoverIcon} alt={"icon"}/>}
         <div className={styles.text}>{item.title}</div>
-      </div>
+      </Link>
     );
   });
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactStars from "react-rating-stars-component";
 
 /*** Styles ***/
@@ -10,6 +10,8 @@ import bookmarkIcon from '../../icons/bookmark.svg';
 import bookmarkedIcon from '../../icons/bookmarked.svg';
 
 export default function ClinicListItem({clinic}) {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
   return (
     <div className={styles.Clinic}>
       <img className={styles.avatar} src={clinic.avatar} alt="avatar"/>
@@ -32,7 +34,22 @@ export default function ClinicListItem({clinic}) {
           />
         </div>
       </div>
-      <img className={styles.bookmark} src={bookmarkIcon} alt="bookmark" />
+      {!isBookmarked &&
+        <img
+          onClick={() => setIsBookmarked(true)}
+          className={styles.bookmark}
+          src={bookmarkIcon}
+          alt="bookmark"
+        />
+      }
+      {isBookmarked &&
+        <img
+          onClick={() => setIsBookmarked(false)}
+          className={styles.bookmark}
+          src={bookmarkedIcon}
+          alt="bookmark"
+        />
+      }
     </div>
   );
 };

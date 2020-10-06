@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 
 /*** Components ***/
 import ClinicListItem from "../../components/ClinicListItem/clinicListItem";

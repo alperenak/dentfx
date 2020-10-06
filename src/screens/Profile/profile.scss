@@ -1,0 +1,85 @@
+.Profile {
+  width: 100%;
+
+  & .profileCard {
+    position: relative;
+    width: 510px;
+    height: 160px;
+    background-color: #360d57;
+    background-image: url("../../assets/images/profile-cover-photo.png");
+    border-radius: 12px;
+    & .profileImage {
+      position: absolute;
+      bottom: -54px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    & .editIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 10px;
+      right: 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 3px 0 rgba(6, 27, 82, 0.35);
+      background-color: rgba(#ffffff, 0.7);
+
+      &:hover {
+        background-color: rgba(#ffffff, 1);
+      }
+
+      & img {
+        width: 8.1px;
+        height: 8.2px;
+      }
+    }
+  }
+  & .profileName {
+    margin: 10px 130px 40px;
+    font-family: 'SofiaBold';
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #061b52;
+  }
+
+  & .tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1px;
+    border-bottom: solid 1px #f6f9ff;
+    width: 100%;
+    & .tab {
+      padding: 20px;
+      font-family: 'SofiaRegular';
+      font-size: 14px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: 0.1px;
+      color: #909ab2;
+      text-align: center;
+      cursor: pointer;
+      width: 50%;
+
+      &.selected {
+        padding: 20px 20px 19px;
+        color: #1a5aff;
+        border-radius: 1px;
+        border-bottom: solid 1px #1a5aff;
+      }
+    }
+  }
+}
