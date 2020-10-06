@@ -10,6 +10,7 @@ import Landing from "./screens/Landing/landing";
 import Login from "./screens/Login/login";
 import SignUp from "./screens/SignUp/signUp";
 import Home from "./screens/Home/home";
+import Messages from "./screens/Messages/Messages";
 
 /*** Styles ***/
 import styles from "./App.scss";
@@ -57,10 +58,14 @@ function App() {
                 path="/profile/:id"
                 render={(props) => <Profile {...props} />}
               />
+              <Route
+                path="/messages"
+                render={(props) => <Messages {...props} />}
+              />
             </div>
           </Switch>
         </Router>
-        <RightMenu />
+        <RightMenu v-if={authorized} />
       </div>{" "}
       <Footer />
     </>
