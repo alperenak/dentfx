@@ -4,6 +4,10 @@ import Message from "../../components/Message/Message";
 /*** Styles ***/
 import styles from "./messages.scss";
 
+/*** Icons ***/
+import noQuestionIllustration from "../../icons/illustration_1.svg";
+import { string } from "prop-types";
+
 let dentists = [
   {
     name: " Dt. Brody W.",
@@ -57,7 +61,7 @@ let dentists = [
   },
 ];
 
-let messages = [
+let messagesArray = [
   {
     sender: {
       name: "Erhan Koca",
@@ -115,14 +119,79 @@ let messages = [
 ];
 
 class Messages extends Component {
-  state = { search: "" };
+  state = {
+    search: "",
+    messages: messagesArray,
+    dentists: [],
+    files: [],
+    path: null,
+  };
+
+  componentDidMount = () => {
+    const path = this.props.location.pathname.split("/messages/");
+    this.setState({ path: path[1] });
+  };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  render() {
-    let { search } = this.state;
+  onFileChange = async (e) => {
+    e.preventDefault();
+
+    await this.setState({ files: e.target.files });
+    console.log(this.state.files);
+  };
+
+  renderNoQuestion = () => {
+    return (
+      <div className={styles.noQuestionContainer}>
+        <img src={noQuestionIllustration} alt="" />
+        <div className={styles.title}> There is no question.</div>
+        <button>Ask questions now!</button>
+      </div>
+    );
+  };
+
+  renderNewQuestion = () => {
+    return (
+      <div className={styles.newQuestionContainer}>
+        <div className={styles.headerSection}>
+          <div className={styles.header}>
+            Choose a dentist or clinic and send a message!
+          </div>
+          <div className={styles.content}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Exercitationem illo debitis voluptatibus, sunt non nihil veniam
+            aperiam eligendi nesciunt libero iure aliquid magnam error!
+          </div>
+        </div>
+        <div className={styles.mainSection}>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="dentist">Dentist or Clinic</label>
+            <input type="text" name="dentist" placeholder="Florya Hospi" />
+          </div>
+
+          <div className={styles.inputWrapper}>
+            <label htmlFor="dentist">Your Message</label>
+            <textarea name="message"></textarea>
+          </div>
+
+          {/* TODO: ADD FUNCTIONALITY TO FILE INPUT  */}
+          <div className={styles.photoUploadWrapper}>
+            <div className={styles.photoUpload}>
+              <input type="file" name="" id="" onChange={this.onFileChange} />
+            </div>
+          </div>
+
+          <button className={styles.sendMessageButton}>Send message</button>
+        </div>
+      </div>
+    );
+  };
+
+  renderMainList = () => {
+    let { search, messages } = this.state;
 
     return (
       <div className={styles.container}>
@@ -142,7 +211,7 @@ class Messages extends Component {
           <div className={styles.dentistContainer}>
             {dentists.map((dentist, i) => {
               return (
-                <div className={styles.dentist}>
+                <div className={styles.dentist} key={i}>
                   <div className={styles.imageContainer}>
                     <img src={dentist.image} alt="" />
                     <div
@@ -175,6 +244,19 @@ class Messages extends Component {
           </div>
         </div>
       </div>
+    );
+  };
+
+  render() {
+    let { messages, dentists, path } = this.state;
+    if (path === "new") return this.renderNewQuestion();
+
+    return (
+      <>
+        {messages.length === 0
+          ? this.renderNoQuestion()
+          : this.renderMainList()}
+      </>
     );
   }
 }

@@ -188,7 +188,7 @@ const renderHistory = () => {
 
           {details.checkpoints.map((checkpoint, i) => {
             return (
-              <div className={styles.checkpoint}>
+              <div className={styles.checkpoint} key={i}>
                 <div>
                   <img src={checkpointIcon} alt="" />
                 </div>
