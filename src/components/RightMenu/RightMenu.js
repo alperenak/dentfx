@@ -10,6 +10,10 @@ import checkpointIcon from "../../icons/Shape.svg";
 import dentalImplantIcon from "../../icons/dental-implant.svg";
 import dropdownIcon from "../../icons/dropdown-disabled.svg";
 import dentHospitalIcon from "../../icons/dent-hospital-icon.svg";
+import dentalAnalysisIcon from "../../icons/dental-analysis-icon.svg";
+
+/*** Components ***/
+import Message from "../Message/Message";
 
 const renderMessages = () => {
   const tempMessages = [
@@ -37,16 +41,13 @@ const renderMessages = () => {
 
   return messages.map((message, i) => {
     return (
-      <div className={styles.message_container} key={i}>
-        <div className={styles.avatar}>
-          <img src={message.image} alt="" />
-        </div>
-        <div className={styles.content}>
-          <div className={styles.name}>{message.title}</div>
-          <div className={styles.message}>{message.content}</div>
-        </div>
-        <div className={styles.time}>{message.time}</div>
-      </div>
+      <Message
+        image={message.image}
+        title={message.title}
+        content={message.content}
+        time={message.time}
+        key={i}
+      />
     );
   });
 };
@@ -173,7 +174,7 @@ const renderHistory = () => {
           </div>
 
           <div className={styles.header}>
-            <img src={dropdownIcon} alt="" />
+            <img src={dentalAnalysisIcon} alt="" />
             <div className={styles.title}>{details.title}</div>
           </div>
 

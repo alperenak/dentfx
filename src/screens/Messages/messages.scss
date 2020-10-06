@@ -2,8 +2,15 @@
   display: flex;
   flex-direction: column;
 
+  & .header {
+    color: #061b52;
+    font-weight: bold;
+    margin: 30px 0;
+  }
+
   & .searchSection {
-    width: 100%;
+    align-self: center;
+    width: 80%;
     height: 50px;
     border: 1px solid #e7eeff;
     border-radius: 10px;
@@ -16,6 +23,58 @@
       height: 40px;
       border: none;
       outline: none;
+      ::placeholder {
+        color: #e7eeff;
+      }
+    }
+  }
+
+  & .favDentistSection {
+    & .dentistContainer {
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+      overflow-x: auto;
+      display: flex;
+      flex-direction: row;
+      max-width: 100%;
+
+      height: 150px;
+
+      & .dentist {
+        flex: 0 0 auto;
+        margin: 0;
+        height: 100px;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        & img {
+          border-radius: 100%;
+          width: 60px;
+        }
+        & .online {
+          position: relative;
+          bottom: 20px;
+          left: 65%;
+          border-radius: 100%;
+          width: 20px;
+          height: 20px;
+          border: 3px solid white;
+          background-color: #00ebc7;
+        }
+        & .offline {
+          position: relative;
+          bottom: 20px;
+          left: 65%;
+          border-radius: 100%;
+          width: 20px;
+          height: 20px;
+          border: 3px solid white;
+          background-color: #474e5d;
+        }
+      }
     }
   }
 }
