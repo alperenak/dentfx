@@ -18,6 +18,7 @@ import styles from "./App.scss";
 import { getCookie } from "./utils/cookie";
 import Profile from "./screens/Profile/profile";
 import RightMenu from "./components/RightMenu/RightMenu";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -31,36 +32,38 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.App}>
-      <Router>
-        <UserTopBar v-if={authorized} />
-        <SideBar v-if={authorized} />
-        <RightMenu />
-        <Switch>
-          <Route
-            v-if={!authorized}
-            path="/"
-            exact
-            render={(props) => <Landing {...props} />}
-          />
-          <Route path="/login" render={(props) => <Login {...props} />} />
-          <Route path="/signup" render={(props) => <SignUp {...props} />} />
-          <div className={styles.screenContainer}>
+    <>
+      <div className={styles.App}>
+        <Router>
+          <UserTopBar v-if={authorized} />
+          <SideBar v-if={authorized} />
+          <Switch>
             <Route
-              v-if={authorized}
+              v-if={!authorized}
               path="/"
               exact
-              render={(props) => <Home {...props} />}
+              render={(props) => <Landing {...props} />}
             />
-            <Route
-              path="/profile/:id"
-              render={(props) => <Profile {...props} />}
-            />
-          </div>
-        </Switch>
-      </Router>
-      <RightMenu />
-    </div>
+            <Route path="/login" render={(props) => <Login {...props} />} />
+            <Route path="/signup" render={(props) => <SignUp {...props} />} />
+            <div className={styles.screenContainer}>
+              <Route
+                v-if={authorized}
+                path="/"
+                exact
+                render={(props) => <Home {...props} />}
+              />
+              <Route
+                path="/profile/:id"
+                render={(props) => <Profile {...props} />}
+              />
+            </div>
+          </Switch>
+        </Router>
+        <RightMenu />
+      </div>{" "}
+      <Footer />
+    </>
   );
 }
 

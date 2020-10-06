@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <style>
+            .cls-1{fill:#909ab2}
+        </style>
+    </defs>
+    <g id="messenger-icon" transform="translate(-1449.392 -3416.346)">
+        <g id="_004-messenger" transform="translate(1449.392 3416.346)">
+            <path id="Path_3287" d="M161.8 210.211l-3.177 3.364 2.891-1.586 1.511 1.586 3.159-3.364-2.859 1.559zm0 0" class="cls-1" transform="translate(-152.349 -201.966)"/>
+            <path id="Path_3288" d="M10 0a10 10 0 1 0 10 10A10 10 0 0 0 10 0zm.078 15.353A6.422 6.422 0 0 1 8.3 15.1l-2.017 1.15v-2.157A5.461 5.461 0 0 1 4.07 9.747a5.818 5.818 0 0 1 6.009-5.606 5.818 5.818 0 0 1 6.009 5.606 5.818 5.818 0 0 1-6.01 5.606zm0 0" class="cls-1"/>
+        </g>
+    </g>
+</svg>

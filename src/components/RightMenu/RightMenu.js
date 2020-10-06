@@ -164,9 +164,8 @@ const renderHistory = () => {
 
         <div className={`${styles.details} ${classname_open}`}>
           <div className={styles.clinicDetails}>
-            <div>
-              <img src={dentHospitalIcon} alt="" />
-            </div>
+            <img src={dentHospitalIcon} alt="" />
+
             <div className={styles.metadata}>
               <div className={styles.clinic}>{details.clinic}</div>
               <div className={styles.dentist}>{details.dentist}</div>
@@ -178,7 +177,7 @@ const renderHistory = () => {
             <div className={styles.title}>{details.title}</div>
           </div>
 
-          <div className={styles.image}>
+          <div className={styles.details_image}>
             <img src={details.image} alt="" />
           </div>
 

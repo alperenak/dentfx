@@ -1,9 +1,10 @@
 .rightBar {
   width: 400px;
   position: absolute;
-  right: 10%;
+  right: 50px;
   top: 150px;
-  height: auto;
+  height: 80vh;
+  overflow: auto;
 
   .sectionHeader {
     color: #283b6a;
@@ -72,6 +73,7 @@
     flex-direction: column;
     justify-content: space-around;
     margin-bottom: 50px;
+
     .accordion_container {
       display: flex;
       flex-direction: column;
@@ -81,6 +83,7 @@
       padding: 5px 0;
       border-bottom: 1px solid #f6f9ff;
       border-radius: 10px;
+
       &.open {
         background-color: #f6f9ff;
       }
@@ -90,6 +93,7 @@
         flex-direction: row;
         justify-content: space-around;
         width: 100%;
+
         .content {
           max-width: 80%;
           display: flex;
@@ -137,8 +141,15 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+
         &.open {
           max-height: 900px;
+        }
+
+        & .details_image {
+          align-self: center;
+          width: auto;
+          height: auto;
         }
 
         & .title {
@@ -153,6 +164,7 @@
           flex-direction: row;
           justify-content: space-around;
           margin: 15px 15px;
+
           & .metadata {
             margin-left: 50px;
             display: flex;
@@ -173,6 +185,7 @@
             }
           }
         }
+
         .header {
           justify-content: start;
           .title {
