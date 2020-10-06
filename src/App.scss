@@ -18,4 +18,13 @@
   @include small {
     padding: 0 16px;
   }
+
+  & .screenContainer {
+    position: absolute;
+    top: 120px;
+    left: 372px;
+    right: 558px;
+    height: calc(100vh - 120px);
+    overflow: scroll;
+  }
 }

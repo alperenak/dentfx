@@ -16,6 +16,7 @@ import styles from "./App.scss";
 
 /*** Utils ***/
 import {getCookie} from "./utils/cookie";
+import Profile from "./screens/Profile/profile";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -30,21 +31,15 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <UserTopBar v-if={authorized}/>
-      <SideBar v-if={authorized}/>
       <Router>
+        <UserTopBar v-if={authorized}/>
+        <SideBar v-if={authorized}/>
         <Switch>
           <Route
               v-if={!authorized}
               path="/"
               exact
               render={(props) => (<Landing {...props} />)}
-          />
-          <Route
-            v-if={authorized}
-            path="/"
-            exact
-            render={(props) => (<Home {...props} />)}
           />
           <Route
             path="/login"
@@ -54,6 +49,18 @@ function App() {
             path="/signup"
             render={(props) => (<SignUp {...props} />)}
           />
+          <div className={styles.screenContainer}>
+            <Route
+              v-if={authorized}
+              path="/"
+              exact
+              render={(props) => (<Home {...props} />)}
+            />
+            <Route
+              path="/profile/:id"
+              render={(props) => (<Profile {...props} />)}
+            />
+          </div>
         </Switch>
       </Router>
     </div>
