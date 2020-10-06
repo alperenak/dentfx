@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14">
+    <defs>
+        <style>
+            .cls-1{fill:#5c8aff}
+        </style>
+    </defs>
+    <g id="dental-implant" transform="translate(-34.953)">
+        <g id="Group_35011" transform="translate(39.336 11.1)">
+            <g id="Group_35010">
+                <path id="Path_9104" d="M196.851 407.782v.181a.41.41 0 0 0 .263.383l1.207.465a.41.41 0 0 0 .295 0l1.207-.465a.41.41 0 0 0 .263-.383v-2.025z" class="cls-1" transform="translate(-196.851 -405.938)"/>
+            </g>
+        </g>
+        <g id="Group_35013" transform="translate(39.336 9.167)">
+            <g id="Group_35012">
+                <path id="Path_9105" d="M196.851 337.094v.989l3.235-1.844v-.989z" class="cls-1" transform="translate(-196.851 -335.25)"/>
+            </g>
+        </g>
+        <g id="Group_35015" transform="translate(34.953)">
+            <g id="Group_35014">
+                <path id="Path_9106" d="M46 .579a2.551 2.551 0 0 0-2.158-.522l-.788.169a9.969 9.969 0 0 1-4.2 0l-.79-.169a2.551 2.551 0 0 0-2.157.522 2.591 2.591 0 0 0-.954 2.021v2.294a41.787 41.787 0 0 0 12-.012V2.6A2.591 2.591 0 0 0 46 .579z" class="cls-1" transform="translate(-34.953)"/>
+            </g>
+        </g>
+        <g id="Group_35017" transform="translate(34.953 5.707)">
+            <g id="Group_35016">
+                <path id="Path_9107" d="M40.919 209.142a42.623 42.623 0 0 1-5.959-.419v.884a1.259 1.259 0 0 0 1.115 1.256l2.415.272q.431.049.864.08v1.857l3.211-1.857c.008 0 .426-.034.625-.055l.239-.025 2.415-.272a1.259 1.259 0 0 0 1.115-1.256v-.9a42.629 42.629 0 0 1-6.04.435z" class="cls-1" transform="translate(-34.96 -208.712)"/>
+            </g>
+        </g>
+    </g>
+</svg>

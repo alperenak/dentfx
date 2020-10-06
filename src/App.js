@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /*** Components ***/
 import UserTopBar from "./components/UserTopBar/userTopBar";
@@ -15,13 +15,14 @@ import Home from "./screens/Home/home";
 import styles from "./App.scss";
 
 /*** Utils ***/
-import {getCookie} from "./utils/cookie";
+import { getCookie } from "./utils/cookie";
+import RightMenu from "./components/RightMenu/RightMenu";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    if (getCookie('token')) {
+    if (getCookie("token")) {
       setAuthorized(true);
     } else {
       setAuthorized(false);
@@ -30,32 +31,28 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <UserTopBar v-if={authorized}/>
-      <SideBar v-if={authorized}/>
+      <UserTopBar v-if={authorized} />
+      <SideBar v-if={authorized} />
+
       <Router>
         <Switch>
           <Route
-              v-if={!authorized}
-              path="/"
-              exact
-              render={(props) => (<Landing {...props} />)}
+            v-if={!authorized}
+            path="/"
+            exact
+            render={(props) => <Landing {...props} />}
           />
           <Route
             v-if={authorized}
             path="/"
             exact
-            render={(props) => (<Home {...props} />)}
+            render={(props) => <Home {...props} />}
           />
-          <Route
-            path="/login"
-            render={(props) => (<Login {...props} />)}
-          />
-          <Route
-            path="/signup"
-            render={(props) => (<SignUp {...props} />)}
-          />
+          <Route path="/login" render={(props) => <Login {...props} />} />
+          <Route path="/signup" render={(props) => <SignUp {...props} />} />
         </Switch>
       </Router>
+      <RightMenu />
     </div>
   );
 }
