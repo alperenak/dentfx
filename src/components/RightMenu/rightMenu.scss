@@ -1,7 +1,7 @@
 .rightBar {
   width: 400px;
   position: absolute;
-  right: 50px;
+  right: 120px;
   top: 125px;
   height: 80vh;
   overflow: auto;
@@ -40,7 +40,6 @@
       border-radius: 10px;
 
       &.open {
-        background-color: #f6f9ff;
       }
 
       .header {
@@ -48,6 +47,20 @@
         flex-direction: row;
         justify-content: space-around;
         width: 100%;
+
+        & .icon {
+          background-color: #f6f9ff;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 13px 14px;
+
+          & img {
+            width: 12px;
+            height: 14px;
+          }
+        }
 
         .content {
           max-width: 80%;
@@ -96,15 +109,20 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        border-radius: 20px;
+        background-color: #f6f9ff;
 
         &.open {
           max-height: 900px;
+          padding: 20px;
         }
 
         & .details_image {
           align-self: center;
-          width: auto;
-          height: auto;
+
+          & img {
+            width: 100%;
+          }
         }
 
         & .title {
@@ -121,7 +139,7 @@
           margin: 15px 15px;
 
           & .metadata {
-            margin-left: 50px;
+            margin-left: 15px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
