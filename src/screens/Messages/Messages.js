@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import Message from "../../components/Message/Message";
 
 /*** Styles ***/
 import styles from "./messages.scss";
 
 /*** Icons ***/
+import backButton from "../../icons/Chevron-right.svg";
+import detailsIcon from "../../icons/three-dots-more-indicator.svg";
 import noQuestionIllustration from "../../icons/illustration_1.svg";
-import { string } from "prop-types";
+import addFile from "../../icons/add-file.svg";
+import sendButton from "../../icons/send-button.svg";
+
+/*** Components ***/
+import Message from "../../components/Message/Message";
+import MessageSingle from "../../components/MessageSingle/MessageSingle";
 
 let dentists = [
   {
@@ -118,13 +124,78 @@ let messagesArray = [
   },
 ];
 
+let SingleMessagesArray = [
+  {
+    isMine: true,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I sent you a message now!",
+  },
+  {
+    isMine: false,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I'm a dentist!",
+  },
+  {
+    isMine: true,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I sent you a message once again now!",
+  },
+  {
+    isMine: true,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I sent you a message now!",
+  },
+  {
+    isMine: false,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I'm a dentist!",
+  },
+  {
+    isMine: true,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I sent you a message once again now!",
+  },
+  {
+    isMine: true,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I sent you a message now!",
+  },
+  {
+    isMine: false,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I'm a dentist!",
+  },
+  {
+    isMine: true,
+    time: "11.53",
+    date: "07.10.2020",
+    message: "Yo I sent you a message once again now!",
+  },
+];
+
 class Messages extends Component {
   state = {
     search: "",
     messages: messagesArray,
+    singleMessages: SingleMessagesArray,
     dentists: [],
     files: [],
     path: null,
+    sender: {
+      name: "Erhan Koca",
+      clinic: "Medicana Hospitals Group",
+      avatar: "https://picsum.photos/200",
+      onlineStatus: false,
+    },
+    messageToSend: "",
   };
 
   componentDidMount = () => {
@@ -141,6 +212,20 @@ class Messages extends Component {
 
     await this.setState({ files: e.target.files });
     console.log(this.state.files);
+  };
+
+  onSendMessage = () => {
+    let message = {
+      isMine: true,
+      time: new Date().getHours() + ":" + new Date().getMinutes(),
+      date: "07.10.2020",
+      message: this.state.messageToSend,
+    };
+
+    this.setState({
+      singleMessages: [...this.state.singleMessages, message],
+      messageToSend: "",
+    });
   };
 
   renderNoQuestion = () => {
@@ -185,6 +270,66 @@ class Messages extends Component {
           </div>
 
           <button className={styles.sendMessageButton}>Send message</button>
+        </div>
+      </div>
+    );
+  };
+
+  renderMessageDetails = () => {
+    let { sender, singleMessages } = this.state;
+    return (
+      <div className={styles.messageDetailsContainer}>
+        <div className={styles.header}>
+          <div className={styles.avatar}>
+            <img src={sender.avatar} alt="" />
+            <div
+              className={sender.onlineStatus ? styles.online : styles.offline}
+            ></div>
+          </div>
+
+          <div className={styles.senderInfo}>
+            <div className={styles.name}>{sender.name}</div>
+            <div className={styles.clinicName}> {sender.clinic} </div>
+          </div>
+
+          <div className={styles.rightButtons}>
+            <div className={styles.backButton}>
+              <img src={backButton} alt="" />
+              <div className={styles.text}> Back </div>
+            </div>
+
+            <div className={styles.detailsButton}>
+              <img src={detailsIcon} alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.messagesContainer}>
+          {singleMessages.map((message, i) => {
+            if (message.isMine) return <MessageSingle message={message} />;
+            else return <MessageSingle message={message} sender={sender} />;
+          })}
+        </div>
+
+        <div className={styles.sendMessageContainer}>
+          <div className={`${styles.leftIcon} ${styles.icon}`}>
+            <img src={addFile} alt="" />
+          </div>
+          <div className={styles.inputContainer}>
+            <input
+              type="text"
+              name="messageToSend"
+              onChange={this.onChange}
+              value={this.state.messageToSend}
+            />
+          </div>
+
+          <div
+            className={`${styles.rightIcon} ${styles.icon}`}
+            onClick={this.onSendMessage}
+          >
+            <img src={sendButton} alt="" />
+          </div>
         </div>
       </div>
     );
@@ -249,6 +394,8 @@ class Messages extends Component {
 
   render() {
     let { messages, dentists, path } = this.state;
+
+    if (path === "details") return this.renderMessageDetails();
     if (path === "new") return this.renderNewQuestion();
 
     return (

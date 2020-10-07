@@ -1,4 +1,5 @@
 .container {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 
@@ -81,6 +82,7 @@
 }
 
 .noQuestionContainer {
+  overflow: hidden;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -116,6 +118,7 @@
 }
 
 .newQuestionContainer {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -197,6 +200,136 @@
       color: white;
       font-weight: bold;
       border-radius: 10px;
+    }
+  }
+}
+
+.messageDetailsContainer {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  & .header {
+    margin: 25px 0;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    & .avatar {
+      width: 60px;
+      margin-right: 35px;
+      & .online {
+        position: relative;
+        bottom: 30%;
+        left: 70%;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background-color: #00ebc7;
+        border: 3px solid #ffffff;
+      }
+      & .offline {
+        position: relative;
+        bottom: 30%;
+        left: 70%;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background-color: #474e5d;
+        border: 3px solid #ffffff;
+      }
+      & img {
+        width: 60px;
+        border-radius: 100%;
+      }
+    }
+
+    & .senderInfo {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    & .rightButtons {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      & .backButton {
+        display: flex;
+        flex-direction: row;
+
+        & img {
+          width: 24px;
+          height: 24px;
+          margin-right: 25px;
+        }
+      }
+      & .detailsButton img {
+        margin-left: 25px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  & .messagesContainer {
+    overflow-y: visible;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 400px;
+    align-items: center;
+  }
+
+  & .sendMessageContainer {
+    margin-top: 16px;
+    padding: 8px 0;
+    position: relative;
+    bottom: 100%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    & .inputContainer {
+      width: 80%;
+      height: 50px;
+      border-radius: 15px;
+      background-color: #f6f9ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & input {
+        width: 95%;
+        height: 90%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    & .icon {
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 15px;
+      :hover {
+        cursor: pointer;
+      }
+
+      & img {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
