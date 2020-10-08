@@ -11,6 +11,7 @@ import Login from "./screens/Login/login";
 import SignUp from "./screens/SignUp/signUp";
 import Home from "./screens/Home/home";
 import Messages from "./screens/Messages/Messages";
+import Appointment from "./screens/Appointment/Appointment";
 
 /*** Styles ***/
 import styles from "./App.scss";
@@ -53,6 +54,12 @@ function App() {
                 path="/"
                 exact
                 render={(props) => <Home {...props} />}
+              />
+              <Route
+                v-if={authorized}
+                path="/appointment"
+                exact
+                render={(props) => <Appointment {...props} />}
               />
               <Route
                 path="/profile/:id"

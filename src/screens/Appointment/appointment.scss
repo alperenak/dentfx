@@ -1,0 +1,113 @@
+$completedBG: #f6f9ff;
+$cancelledBG: #ffeaee;
+$activeBG: #e8fefa;
+
+$completedBadge: #1a5aff;
+$cancelledBadge: #ff5470;
+$activeBadge: #00ebc7;
+
+$darkText: #061b52;
+$mutedText: #909ab2;
+
+$headerBG: #fbfcff;
+
+.topbarContainer {
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  & .upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & .breadcrumbs {
+      font-weight: bold;
+      color: #061b52;
+    }
+
+    & .newAppointmentBtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      cursor: pointer;
+      & div {
+        color: $completedBadge;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  & .navbar {
+    display: flex;
+    flex-direction: row;
+
+    & .navLink {
+      margin-right: 30px;
+      color: #bec4d2;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      &.active {
+        color: $completedBadge;
+      }
+    }
+  }
+}
+
+.newAppointment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 177px;
+    background-color: $headerBG;
+    margin-bottom: 30px;
+
+    & img {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    & .headerText {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: $darkText;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  & .content {
+    & .twoInputs {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    & .submitBtn {
+      background-color: $completedBadge;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      color: white;
+      height: 44px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      transition: 0.3s ease;
+      margin-top: 30px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
