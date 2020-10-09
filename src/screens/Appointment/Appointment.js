@@ -13,48 +13,6 @@ import addCircle from "../../icons/Icons_add-circle.svg";
 /*** Components ***/
 import AppointmentCard from "./AppointmentCard";
 
-const dummy_data = [
-  {
-    id: "5f74d8796ea5351efea89753",
-    User: {
-      id: "5f5b8da929f9b23a09026619",
-      name: "İbrahimibrahim",
-      surname: "Kamacı",
-      avatar:
-        "https://i.pinimg.com/originals/fc/04/73/fc047347b17f7df7ff288d78c8c281cf.png",
-    },
-    Clinic: {
-      avatar:
-        "https://i.pinimg.com/originals/fc/04/73/fc047347b17f7df7ff288d78c8c281cf.png",
-      rate: 4.5,
-      _id: "5f6e84f05996e32f41d32414",
-      name: "Innovation And Partners Dental",
-    },
-    Dentist: {
-      id: "5f6eae3f8cf83c51024768b1",
-      name: "Zafer Yasir",
-      surname: "Yılmaz",
-      avatar:
-        "https://i.pinimg.com/originals/fc/04/73/fc047347b17f7df7ff288d78c8c281cf.png",
-      rate: 4.8,
-    },
-    date: "01.10.2020",
-    startTime: "02:30",
-    endTime: "06:00",
-    isCheckIn: false,
-    paymentType: "onCheckIn",
-    isCancelledByDentist: false,
-    isCancelledByUser: false,
-    isConfirmed: true,
-    isPayed: false,
-    createdAt: "2020-09-30T19:11:53.404Z",
-    isDone: false,
-    price: 70.0,
-    description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis voluptas vitae qui, veniam dolorum quos asperiores suscipit iste, quis sequi maiores non deserunt aliquam quo provident voluptates sint animi repellendus!",
-  },
-];
-
 class Appointment extends Component {
   state = {
     accordionActive: false,

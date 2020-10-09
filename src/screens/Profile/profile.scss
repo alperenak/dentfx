@@ -44,7 +44,7 @@
   }
   & .profileName {
     margin: 10px 130px 40px;
-    font-family: 'SofiaBold';
+    font-family: "SofiaBold";
     font-size: 16px;
     font-weight: bold;
     font-stretch: normal;
@@ -63,7 +63,7 @@
     width: 100%;
     & .tab {
       padding: 20px;
-      font-family: 'SofiaRegular';
+      font-family: "SofiaRegular";
       font-size: 14px;
       font-weight: 500;
       font-stretch: normal;
@@ -81,5 +81,126 @@
         border-bottom: solid 1px #1a5aff;
       }
     }
+  }
+}
+
+.overviewWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  & .card {
+    align-items: center;
+    height: 50px;
+    border-radius: 12px;
+    margin: 20px 0;
+    flex: 0 49%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #e7eeff;
+    & .icon {
+      margin-left: 25px;
+    }
+    & .content {
+      margin-left: 25px;
+      color: #061b52;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+.settingsWrapper {
+  display: flex;
+  flex-direction: column;
+
+  & .tab {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #f6f9ff;
+    align-items: center;
+    & :last-child {
+      justify-content: flex-end;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & .iconWrapper {
+      border-radius: 100%;
+      background-color: #909ab2;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+    }
+
+    & .text {
+      color: #061b52;
+      font-weight: bold;
+    }
+
+    & .rightIcon {
+      transform: rotate(180deg);
+      margin-left: auto;
+    }
+  }
+}
+
+.settingsWrapper {
+  & .header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #f6f9ff;
+    align-items: center;
+    & :last-child {
+      justify-content: flex-end;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & .iconWrapper {
+      border-radius: 100%;
+      background-color: #909ab2;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+    }
+
+    & .text {
+      color: #061b52;
+      font-weight: bold;
+    }
+
+    & .rightIcon {
+      margin-left: auto;
+    }
+  }
+
+  & .submitButton {
+    width: 534px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    background-color: #1a5aff;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    margin-top: 15px;
   }
 }
