@@ -21,6 +21,7 @@ import { getCookie } from "./utils/cookie";
 import Profile from "./screens/Profile/profile";
 import RightMenu from "./components/RightMenu/RightMenu";
 import Footer from "./components/Footer/Footer";
+import NewAppointment from "./screens/Appointment/NewAppointment";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -60,6 +61,12 @@ function App() {
                 path="/appointment"
                 exact
                 render={(props) => <Appointment {...props} />}
+              />
+              <Route
+                v-if={authorized}
+                path="/appointment/new"
+                exact
+                render={(props) => <NewAppointment {...props} />}
               />
               <Route
                 path="/profile/:id"

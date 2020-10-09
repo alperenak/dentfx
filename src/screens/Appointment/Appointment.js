@@ -9,12 +9,9 @@ import { getCookie } from "../../utils/cookie";
 
 //*** Icons ***/
 import addCircle from "../../icons/Icons_add-circle.svg";
-import illustration from "../../icons/illustration_2.svg";
 
 /*** Components ***/
 import AppointmentCard from "./AppointmentCard";
-import Input from "../../components/Input";
-import Button from "../../components/Button/button";
 
 const dummy_data = [
   {
@@ -71,13 +68,6 @@ class Appointment extends Component {
     activeCount: 0,
     completedCount: 0,
     pendingCount: 0,
-    searchParams: {
-      dateStart: new Date(),
-      dateEnd: new Date(),
-      keyword: "",
-      location: "",
-    },
-    keyword: "",
   };
 
   componentDidMount = async () => {
@@ -132,8 +122,6 @@ class Appointment extends Component {
     this.setState({ activeLink: clicked });
     console.log(this.state.completedAppointments);
   };
-
-  submitAppointment = () => {};
 
   renderTopBar = () => {
     let {
@@ -245,96 +233,17 @@ class Appointment extends Component {
     });
   };
 
-  renderNewAppointment = () => {
-    return (
-      <div className={styles.newAppointment}>
-        <div className={styles.header}>
-          <img src={illustration} alt="" />
-          <div className={styles.headerText}>
-            <div className={styles.title}>Hi Erhan,</div>
-            <div className={styles.subtitle}>
-              Hi Peter, make an appointment easily!
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.content}>
-          <div className={styles.inputContainer}>
-            <Input
-              type="text"
-              size="full"
-              label={"What are you looking for?"}
-              placeholder="Ex.: Kanal Tedavisi"
-              onChange={(keyword) => {
-                console.log(keyword);
-                this.setState({
-                  searchParams: { ...this.state.searchParams, keyword },
-                });
-              }}
-            />
-          </div>
-
-          <div className={styles.twoInputs}>
-            <Input
-              type="date"
-              size="half"
-              label={"From Date"}
-              defaultValue={new Date().toLocaleDateString()}
-              name={"dateStart"}
-              onChange={(dateStart) => {
-                this.setState({
-                  searchParams: { ...this.state.searchParams, dateStart },
-                });
-              }}
-            />
-            <Input
-              type="date"
-              size="half"
-              label={"Until Date"}
-              defaultValue={new Date().toLocaleDateString()}
-              name={"dateEnd"}
-              onChange={(dateEnd) => {
-                this.setState({
-                  searchParams: { ...this.state.searchParams, dateEnd },
-                });
-              }}
-            />
-          </div>
-
-          <div className={styles.inputContainer}>
-            <Input
-              type="select"
-              size="full"
-              label={"Select Location"}
-              placeholder={"Istanbul"}
-              onChange={(location) => {
-                this.setState({
-                  searchParams: { ...this.state.searchParams, location },
-                });
-              }}
-            />
-          </div>
-
-          <button className={styles.submitBtn} onClick={this.submitAppointment}>
-            Randevu Ara
-          </button>
-        </div>
-      </div>
-    );
-  };
-
   render() {
     let { activeLink } = this.state;
 
     return (
       <div>
-        {activeLink !== "new" && this.renderTopBar()}
+        {this.renderTopBar()}
         {activeLink === "all" && this.renderAll()}
         {activeLink === "active" && this.renderActive()}
         {activeLink === "completed" && this.renderCompleted()}
         {activeLink === "cancelled" && this.renderCancelled()}
         {activeLink === "pending" && this.renderPending()}
-        {activeLink === "new" && this.renderNewAppointment()}
       </div>
     );
   }
