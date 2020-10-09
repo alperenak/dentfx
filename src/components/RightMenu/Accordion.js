@@ -6,6 +6,7 @@ import styles from "./rightMenu.scss";
 /*** Icons ***/
 import sendIcon from "../../icons/send.svg";
 import checkpointIcon from "../../icons/Shape.svg";
+import checkpointIcon_negative from "../../icons/Shape_2.svg";
 import dentalImplantIcon from "../../icons/dental-implant.svg";
 import dropdownIcon from "../../icons/dropdown-disabled.svg";
 import dentHospitalIcon from "../../icons/dent-hospital-icon.svg";
@@ -77,7 +78,10 @@ class Accordion extends Component {
             return (
               <div className={styles.checkpoint} key={i}>
                 <div>
-                  <img src={checkpointIcon} alt="" />
+                  {checkpoint.isCheck && <img src={checkpointIcon} alt="" />}
+                  {!checkpoint.isCheck && (
+                    <img src={checkpointIcon_negative} alt="" />
+                  )}
                 </div>
                 <div>{checkpoint.text}</div>
               </div>
