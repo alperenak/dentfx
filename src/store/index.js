@@ -287,4 +287,29 @@ export default {
       errorMessageBuilder
     );
   },
+  async getNotifications({ userId }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/notification?userId=${userId}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async setNotificationRead({ notificationId }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/notification/${notificationId}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
 };

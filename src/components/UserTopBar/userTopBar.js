@@ -1,48 +1,128 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 /*** Components ***/
 import Input from "../Input";
 
 /*** Utils ***/
 import store from "../../store";
-import {getCookie} from "../../utils/cookie";
+import { getCookie, eraseCookie } from "../../utils/cookie";
 
 /*** Styles ***/
-import styles from './topbar.scss';
+import styles from "./topbar.scss";
 
 /*** Icons ***/
-import logo from '../../assets/icons/logo.svg';
-import filterIcon from '../../icons/filter-icon.svg';
-import notification from '../../icons/notification-icon.svg';
+import logo from "../../assets/icons/logo.svg";
+import filterIcon from "../../icons/filter-icon.svg";
+import notification from "../../icons/notification-icon.svg";
+import logoutIcon from "../../icons/logout.svg";
 
 export default function UserTopBar() {
   const [user, setUser] = useState();
+  const [dropdown, setDropdown] = useState(false);
+  const [dropdownType, setDropdownType] = useState("notifications");
+  const [notifications, setNotifications] = useState(null);
 
   async function getUser() {
-    let res = await store.getUserDetail({userId: getCookie('user_id')});
+    let res = await store.getUserDetail({ userId: getCookie("user_id") });
 
     setUser(res.data);
   }
 
+  async function getNotifications() {
+    let res = await store.getNotifications({ userId: getCookie("user_id") });
+    setNotifications(res.data);
+  }
+
   useEffect(() => {
+    getNotifications();
     getUser();
   }, []);
 
-  return (
-    <div className={styles.Container}>
-      <img className={styles.logo} src={logo} alt={'logo'} />
-      <div className={styles.inputContainer}>
-        <Input type={'text'} placeholder={'Ara'} size={'half'} />
-        <div className={styles.filterIcon}>
-          <img src={filterIcon} alt={'logo'} />
+  const RenderDropdown = ({ type }) => {
+    return (
+      <div
+        className={`${styles.dropdownMenuContainer} ${
+          type === "menu" ? styles.menu : styles.notifications
+        }`}
+      >
+        <div className={styles.dropdownMenu}>
+          <div className={styles.links}>
+            {type === "menu" && (
+              <div
+                className={styles.link}
+                onClick={() => {
+                  eraseCookie(["token", "user_type", "user_id"]);
+                  window.location.pathname = "/";
+                }}
+              >
+                <img src={logoutIcon} className={styles.icon}></img>
+                <div className={styles.text}>Logout</div>
+              </div>
+            )}
+
+            {type === "notifications" &&
+              notifications?.map((notification, i) => {
+                return (
+                  <div
+                    key={i}
+                    className={`${styles.link} ${styles.notification} ${
+                      notification.isRead === false &&
+                      styles.notificationNotRead
+                    }`}
+                    onClick={async () => {
+                      await store.setNotificationRead({
+                        notificationId: notification.id,
+                      });
+                      await getNotifications();
+                    }}
+                  >
+                    <div className={styles.title}>{notification.title}</div>
+                    <div className={styles.text}>{notification.message}</div>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>
-      <div className={styles.label}>DentFX Puanı<span>{`: 2000`}</span></div>
-      <img className={styles.notification} src={notification} alt={'notification'} />
-      <div className={styles.user}>
-        {`${user?.name} ${user?.surname}`}
-        <img className={styles.avatarContainer} src={user?.avatar} alt={'notification'} />
+    );
+  };
+
+  return (
+    <>
+      <div className={styles.Container}>
+        <img className={styles.logo} src={logo} alt={"logo"} />
+        <div className={styles.inputContainer}>
+          <Input type={"text"} placeholder={"Ara"} size={"half"} />
+          <div className={styles.filterIcon}>
+            <img src={filterIcon} alt={"logo"} />
+          </div>
+        </div>
+        <div className={styles.label}>
+          DentFX Puanı<span>{`: 2000`}</span>
+        </div>
+        <img
+          className={styles.notification}
+          src={notification}
+          alt={"notification"}
+          onClick={() => {
+            setDropdownType("notifications");
+            dropdown ? setDropdown(false) : setDropdown(true);
+          }}
+        />
+        <div className={styles.user}>
+          {`${user?.name} ${user?.surname}`}
+          <img
+            className={styles.avatarContainer}
+            src={user?.avatar}
+            alt={"notification"}
+            onClick={() => {
+              setDropdownType("menu");
+              dropdown ? setDropdown(false) : setDropdown(true);
+            }}
+          />
+        </div>
       </div>
-    </div>
+      {dropdown && <RenderDropdown type={dropdownType} />}
+    </>
   );
-};
+}
