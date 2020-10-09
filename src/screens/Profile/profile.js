@@ -20,10 +20,15 @@ import chevronRightIcon from "../../icons/Chevron-right.svg";
 
 //*** Components ***/
 import Input from "../../components/Input";
+import Switch from "react-input-switch";
 
 export default function Profile() {
+  //#region General States
   const [user, setUser] = useState();
   const [selectedTab, setSelectedTab] = useState(0);
+  //#endregion
+
+  //#region Profile Settings States
   const [profileName, setProfileName] = useState(user?.name);
   const [profileSurname, setProfileSurname] = useState(user?.surname);
   const [profileEmail, setProfileEmail] = useState(user?.email);
@@ -31,6 +36,17 @@ export default function Profile() {
     new Date().toLocaleDateString()
   );
   const [profilePhone, setProfilePhone] = useState(user?.phone);
+  //#endregion
+
+  //#region Notifications States
+  const [notification1, setNotification1] = useState(false);
+  const [notification2, setNotification2] = useState(false);
+  const [notification3, setNotification3] = useState(false);
+  //#endregion
+
+  //#region Language Settings States
+  const [selectedLanguage, setSelectedLanguage] = useState("Türkçe");
+  //#endregion
 
   async function getUser() {
     let res = await store.getUserDetail({ userId: getCookie("user_id") });
@@ -128,14 +144,19 @@ export default function Profile() {
     const onClickSubmit = async () => {};
 
     return (
-      <div className={styles.settingsWrapper}>
+      <div className={`${styles.settingsWrapper} ${styles.profileSettings}`}>
         <div className={styles.header}>
           <div className={styles.iconWrapper}>
             <img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
           </div>
           <div className={styles.text}>Profile Settings</div>
 
-          <img src={chevronRightIcon} alt="" className={styles.rightIcon} />
+          <img
+            src={chevronRightIcon}
+            alt=""
+            className={styles.rightIcon}
+            onClick={() => setSelectedTab(1)}
+          />
         </div>
 
         <div className={styles.inputs}>
@@ -186,14 +207,85 @@ export default function Profile() {
       <div className={styles.settingsWrapper}>
         <div className={styles.header}>
           <div className={styles.iconWrapper}>
-            <img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
+            <img src={notificationIcon} alt="" className={styles.leftIcon} />
           </div>
           <div className={styles.text}>Notification Settings</div>
 
-          <img src={chevronRightIcon} alt="" className={styles.rightIcon} />
+          <img
+            src={chevronRightIcon}
+            alt=""
+            className={styles.rightIcon}
+            onClick={() => setSelectedTab(1)}
+          />
         </div>
-        <div className={styles.inputs}></div>
+
+        <div className={styles.inputs}>
+          <div className={styles.item}>
+            <div className={styles.text}>Notification Setting 1</div>
+            <div className={styles.switch}>
+              <Switch
+                on={true}
+                off={false}
+                value={notification1}
+                onChange={setNotification1}
+              />
+            </div>
+          </div>
+
+          <div className={styles.item}>
+            <div className={styles.text}>Notification Setting 1</div>
+            <div className={styles.switch}>
+              <Switch
+                on={true}
+                off={false}
+                value={notification2}
+                onChange={setNotification2}
+              />
+            </div>
+          </div>
+
+          <div className={styles.item}>
+            <div className={styles.text}>Notification Setting 1</div>
+            <div className={styles.switch}>
+              <Switch
+                on={true}
+                off={false}
+                value={notification3}
+                onChange={setNotification3}
+              />
+            </div>
+          </div>
+        </div>
+
         <button className={styles.submitButton}>Kaydet</button>
+      </div>
+    );
+  }
+
+  function languageSettings() {
+    return (
+      <div className={styles.settingsWrapper}>
+        <div className={styles.header}>
+          <div className={styles.iconWrapper}>
+            <img
+              src={languageSettingsIcon}
+              alt=""
+              className={styles.leftIcon}
+            />
+          </div>
+          <div className={styles.text}>Language Settings</div>
+
+          <img
+            src={chevronRightIcon}
+            alt=""
+            className={styles.rightIcon}
+            onClick={() => setSelectedTab(1)}
+          />
+        </div>
+
+        <div className={styles.inputs}>
+          <Input type="select" size="full" />
+        </div>
       </div>
     );
   }
@@ -232,8 +324,8 @@ export default function Profile() {
         {selectedTab === 0 && overviewTab()}
         {selectedTab === 1 && settingsTab()}
         {selectedTab === 2 && profileSettings()}
-        {selectedTab === 3 && overviewTab()}
-        {selectedTab === 4 && overviewTab()}
+        {selectedTab === 3 && notificationSettings()}
+        {selectedTab === 4 && languageSettings()}
       </div>
     </div>
   );

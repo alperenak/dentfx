@@ -165,10 +165,6 @@
       justify-content: flex-end;
     }
 
-    &:hover {
-      cursor: pointer;
-    }
-
     & .iconWrapper {
       border-radius: 100%;
       background-color: #909ab2;
@@ -187,6 +183,9 @@
 
     & .rightIcon {
       margin-left: auto;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -202,5 +201,16 @@
     color: white;
     font-weight: bold;
     margin-top: 15px;
+  }
+
+  & .inputs .item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f6f9ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    & .switch {
+      margin-left: auto;
+    }
   }
 }
