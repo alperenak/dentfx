@@ -32,7 +32,9 @@
       border-radius: 12px;
       box-shadow: 0 2px 3px 0 rgba(6, 27, 82, 0.35);
       background-color: #1a5aff;
-
+      &:hover {
+        cursor: pointer;
+      }
       & button {
         color: white;
         font-weight: bold;

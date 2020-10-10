@@ -201,6 +201,10 @@
     color: white;
     font-weight: bold;
     margin-top: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   & .inputs .item {

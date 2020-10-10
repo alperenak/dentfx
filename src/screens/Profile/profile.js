@@ -52,11 +52,11 @@ export default function Profile() {
     let res = await store.getUserDetail({ userId: getCookie("user_id") });
 
     setUser(res.data);
-    setProfileName(user?.name);
-    setProfileSurname(user?.surname);
-    setProfileEmail(user?.email);
+    setProfileName(res.data.name);
+    setProfileSurname(res.data.surname);
+    setProfileEmail(res.data.email);
     setProfileBirthday(new Date().toLocaleDateString());
-    setProfilePhone(user?.phone);
+    setProfilePhone(res.data.phone);
   }
 
   useEffect(() => {
@@ -141,7 +141,15 @@ export default function Profile() {
   }
 
   function profileSettings() {
-    const onClickSubmit = async () => {};
+    const onClickSubmit = async () => {
+      await store.updateUserProfile({
+        userId: user.id,
+        name: profileName,
+        surname: profileSurname,
+        email: profileEmail,
+        phone: profilePhone,
+      });
+    };
 
     return (
       <div className={`${styles.settingsWrapper} ${styles.profileSettings}`}>
@@ -197,7 +205,9 @@ export default function Profile() {
           />
         </div>
 
-        <button className={styles.submitButton}>Kaydet</button>
+        <button className={styles.submitButton} onClick={onClickSubmit}>
+          Kaydet
+        </button>
       </div>
     );
   }

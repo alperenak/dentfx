@@ -103,7 +103,13 @@ class ClinicDetail extends Component {
             alt="avatar"
           />
           <div className={styles.createAppointment}>
-            <button>Create Appointment</button>
+            <button
+              onClick={() =>
+                (window.location = `/appointment/create/${clinic.id}`)
+              }
+            >
+              Create Appointment
+            </button>
           </div>
         </div>
 

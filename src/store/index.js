@@ -192,7 +192,7 @@ export default {
   }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = "token";
-    let path = `/login/${userId}`;
+    let path = `/user/${userId}`;
     let payload = { userId, name, surname, email, phone, country, city };
     return await http.makePutRequest(
       path,
