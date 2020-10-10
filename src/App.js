@@ -22,6 +22,7 @@ import Profile from "./screens/Profile/profile";
 import RightMenu from "./components/RightMenu/RightMenu";
 import Footer from "./components/Footer/Footer";
 import NewAppointment from "./screens/Appointment/NewAppointment";
+import ClinicDetail from "./screens/ClinicDetails/ClinicDetail";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -75,6 +76,11 @@ function App() {
               <Route
                 path="/messages"
                 render={(props) => <Messages {...props} />}
+              />
+
+              <Route
+                path="/clinic/:id"
+                render={(props) => <ClinicDetail {...props} />}
               />
             </div>
           </Switch>
