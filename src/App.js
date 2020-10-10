@@ -11,6 +11,7 @@ import Login from "./screens/Login/login";
 import SignUp from "./screens/SignUp/signUp";
 import Home from "./screens/Home/home";
 import Messages from "./screens/Messages/Messages";
+import Appointment from "./screens/Appointment/Appointment";
 
 /*** Styles ***/
 import styles from "./App.scss";
@@ -20,6 +21,7 @@ import { getCookie } from "./utils/cookie";
 import Profile from "./screens/Profile/profile";
 import RightMenu from "./components/RightMenu/RightMenu";
 import Footer from "./components/Footer/Footer";
+import NewAppointment from "./screens/Appointment/NewAppointment";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -53,6 +55,18 @@ function App() {
                 path="/"
                 exact
                 render={(props) => <Home {...props} />}
+              />
+              <Route
+                v-if={authorized}
+                path="/appointment"
+                exact
+                render={(props) => <Appointment {...props} />}
+              />
+              <Route
+                v-if={authorized}
+                path="/appointment/new"
+                exact
+                render={(props) => <NewAppointment {...props} />}
               />
               <Route
                 path="/profile/:id"

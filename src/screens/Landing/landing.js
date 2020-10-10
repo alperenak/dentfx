@@ -57,8 +57,8 @@ export default function Landing() {
               className={styles.IntroductionButton}
               title={"Hemen Başla!"}
               type={"tertiary"}
-              to={'/login'}
-              mission={'link'}
+              to={"/login"}
+              mission={"link"}
             />
           </div>
           <div className={styles.IntroductionImage}>
@@ -166,9 +166,10 @@ export default function Landing() {
             <div className={styles.packagesBlackTitle}>questions</div>
           </div>
           <div className={styles.packagesSmallCards}>
-            {packagesSmallCardData.map((item) => {
+            {packagesSmallCardData.map((item, i) => {
               return (
                 <Card
+                  key={i}
                   type={item.type}
                   title={item.title}
                   description={item.description}

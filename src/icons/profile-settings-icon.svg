@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.005" height="16.005" viewBox="0 0 16.005 16.005">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;fill-rule:evenodd}
+        </style>
+    </defs>
+    <g id="profile-settings-icon" transform="translate(-617 -466)">
+        <path id="Path_8746" d="M5.6 13a3.6 3.6 0 0 0 0 7.2h8.8a3.6 3.6 0 1 0 0-7.2zm0 5.6a2 2 0 1 0-2-2 2 2 0 0 0 2 2z" class="cls-1" transform="translate(615 461.803)"/>
+        <path id="Path_8747" d="M5.6 2a3.6 3.6 0 1 0 0 7.2h8.8a3.6 3.6 0 1 0 0-7.2zm8.8 5.6a2 2 0 1 0-2-2 2 2 0 0 0 2 2z" class="cls-1" transform="translate(615 464)"/>
+    </g>
+</svg>

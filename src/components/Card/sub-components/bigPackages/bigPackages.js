@@ -22,8 +22,12 @@ export default function BigPackages({
       </div>
       <div className={styles.packageDescription}>{packageDescription}</div>
       <div className={styles.packagesFeatures}>
-        {packagesFeatures.map((item) => {
-          return <div className={styles.PackagesFeaturesLabel}>{item}</div>;
+        {packagesFeatures.map((item, i) => {
+          return (
+            <div key={i} className={styles.PackagesFeaturesLabel}>
+              {item}
+            </div>
+          );
         })}
       </div>
       <Button title={buttonTitle} type={"tertiary"} style={"packages"} />

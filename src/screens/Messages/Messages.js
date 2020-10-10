@@ -306,8 +306,12 @@ class Messages extends Component {
 
         <div className={styles.messagesContainer}>
           {singleMessages.map((message, i) => {
-            if (message.isMine) return <MessageSingle message={message} />;
-            else return <MessageSingle message={message} sender={sender} />;
+            if (message.isMine)
+              return <MessageSingle message={message} key={i} />;
+            else
+              return (
+                <MessageSingle message={message} sender={sender} key={i} />
+              );
           })}
         </div>
 
