@@ -62,6 +62,7 @@ $headerBG: #fbfcff;
   display: flex;
   flex-direction: column;
   align-items: center;
+
   & .header {
     display: flex;
     flex-direction: column;
@@ -69,6 +70,7 @@ $headerBG: #fbfcff;
     height: 177px;
     background-color: $headerBG;
     margin-bottom: 30px;
+    width: 100%;
 
     & img {
       margin-top: 30px;
@@ -86,6 +88,7 @@ $headerBG: #fbfcff;
   }
 
   & .content {
+    margin-bottom: 25px;
     & .twoInputs {
       display: flex;
       justify-content: space-between;
@@ -108,6 +111,70 @@ $headerBG: #fbfcff;
       &:hover {
         opacity: 0.7;
       }
+    }
+  }
+}
+
+.searchResultsWrapper {
+  border-top: 1px solid #909ab2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  & .card {
+    height: 70px;
+    margin: 25px 0 7.5px;
+    border-radius: 12px;
+    border: solid 1px #e7eeff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & .image {
+      margin: 0 15px 0 20px;
+      width: 40px;
+      height: 40px;
+
+      & img {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+      }
+    }
+
+    & .name {
+      color: #061b52;
+      font-weight: bold;
+    }
+
+    & .rating {
+      margin-left: auto;
+      margin-right: 25px;
+    }
+  }
+}
+
+.aboutTab {
+  display: flex;
+  flex-direction: column;
+
+  & .item {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    & div {
+      margin: 10px 0;
+    }
+    & .header {
+      font-weight: bold;
+      color: #061b52;
+    }
+
+    & .content {
+      color: #061b52;
     }
   }
 }

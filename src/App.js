@@ -21,7 +21,7 @@ import { getCookie } from "./utils/cookie";
 import Profile from "./screens/Profile/profile";
 import RightMenu from "./components/RightMenu/RightMenu";
 import Footer from "./components/Footer/Footer";
-import NewAppointment from "./screens/Appointment/NewAppointment";
+import SearchAppointment from "./screens/Appointment/SearchAppointment";
 import ClinicDetail from "./screens/ClinicDetails/ClinicDetail";
 
 function App() {
@@ -65,9 +65,9 @@ function App() {
               />
               <Route
                 v-if={authorized}
-                path="/appointment/new"
+                path="/appointment/search"
                 exact
-                render={(props) => <NewAppointment {...props} />}
+                render={(props) => <SearchAppointment {...props} />}
               />
               <Route
                 path="/profile/:id"

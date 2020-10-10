@@ -312,4 +312,16 @@ export default {
       errorMessageBuilder
     );
   },
+  async SearchAppointment({ keyword, city, country, date }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/clinic?keyword=${keyword}&city=${city}&country=${country}&date=${date}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
 };
