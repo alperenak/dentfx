@@ -97,7 +97,7 @@ class Appointment extends Component {
           </div>
           <div
             className={styles.newAppointmentBtn}
-            onClick={() => this.setState({ activeLink: "new" })}
+            onClick={() => this.props.history.push("/appointment/search")}
           >
             <img src={addCircle} alt="" />
             <div>Yeni Randevu</div>

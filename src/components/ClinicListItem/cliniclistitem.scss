@@ -3,6 +3,11 @@
   justify-content: space-between;
   align-items: start;
   width: 100%;
+  border-bottom: 1px solid #e7eeff;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   & .avatar {
     width: 48px;
@@ -19,7 +24,7 @@
     justify-content: center;
     width: 80%;
     & .name {
-      font-family: 'SofiaBold';
+      font-family: "SofiaBold";
       font-size: 16px;
       font-weight: bold;
       font-stretch: normal;
@@ -31,7 +36,7 @@
     }
 
     & .location {
-      font-family: 'SofiaRegular';
+      font-family: "SofiaRegular";
       font-size: 14px;
       font-weight: normal;
       font-stretch: normal;

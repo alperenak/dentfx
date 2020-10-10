@@ -1,26 +1,29 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 
 /*** Styles ***/
-import styles from './cliniclistitem.scss';
+import styles from "./cliniclistitem.scss";
 
 /*** Icons ***/
-import locationIcon from '../../icons/location-icon-gray.svg';
-import bookmarkIcon from '../../icons/bookmark.svg';
-import bookmarkedIcon from '../../icons/bookmarked.svg';
+import locationIcon from "../../icons/location-icon-gray.svg";
+import bookmarkIcon from "../../icons/bookmark.svg";
+import bookmarkedIcon from "../../icons/bookmarked.svg";
 
-export default function ClinicListItem({clinic}) {
+export default function ClinicListItem({ clinic }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   return (
-    <div className={styles.Clinic}>
-      <img className={styles.avatar} src={clinic.avatar} alt="avatar"/>
+    <div
+      className={styles.Clinic}
+      onClick={() => {
+        window.location = `/clinic/${clinic.id}`;
+      }}
+    >
+      <img className={styles.avatar} src={clinic.avatar} alt="avatar" />
       <div className={styles.texts}>
-        <div className={styles.name}>
-          {clinic.name}
-        </div>
+        <div className={styles.name}>{clinic.name}</div>
         <div className={styles.location}>
-          <img src={locationIcon} alt="icon"/>
+          <img src={locationIcon} alt="icon" />
           {`${clinic.city}, ${clinic.country}`}
         </div>
         <div className={styles.rate}>
@@ -34,22 +37,22 @@ export default function ClinicListItem({clinic}) {
           />
         </div>
       </div>
-      {!isBookmarked &&
+      {!isBookmarked && (
         <img
           onClick={() => setIsBookmarked(true)}
           className={styles.bookmark}
           src={bookmarkIcon}
           alt="bookmark"
         />
-      }
-      {isBookmarked &&
+      )}
+      {isBookmarked && (
         <img
           onClick={() => setIsBookmarked(false)}
           className={styles.bookmark}
           src={bookmarkedIcon}
           alt="bookmark"
         />
-      }
+      )}
     </div>
   );
-};
+}

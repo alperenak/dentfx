@@ -23,6 +23,7 @@ import RightMenu from "./components/RightMenu/RightMenu";
 import Footer from "./components/Footer/Footer";
 import SearchAppointment from "./screens/Appointment/SearchAppointment";
 import ClinicDetail from "./screens/ClinicDetails/ClinicDetail";
+import CreateAppointment from "./screens/CreateAppointment/CreateAppointment";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -81,6 +82,12 @@ function App() {
               <Route
                 path="/clinic/:id"
                 render={(props) => <ClinicDetail {...props} />}
+              />
+              <Route
+                v-if={authorized}
+                path="/appointment/create/:id"
+                exact
+                render={(props) => <CreateAppointment {...props} />}
               />
             </div>
           </Switch>

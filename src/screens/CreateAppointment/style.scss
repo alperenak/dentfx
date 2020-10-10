@@ -1,0 +1,85 @@
+$completedBG: #f6f9ff;
+$cancelledBG: #ffeaee;
+$activeBG: #e8fefa;
+
+$completedBadge: #1a5aff;
+$cancelledBadge: #ff5470;
+$activeBadge: #00ebc7;
+
+$darkText: #061b52;
+$mutedText: #909ab2;
+
+$headerBG: #fbfcff;
+
+.createAppointmentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 177px;
+    background-color: $headerBG;
+    margin-bottom: 30px;
+    width: 100%;
+
+    & img {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    & .headerText {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: $darkText;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  & .content {
+    margin-bottom: 25px;
+
+    & .disclaimer {
+      width: 100%;
+      margin: 30px 0;
+      padding: 20px;
+      background-color: #f6f9ff;
+      border-radius: 12px;
+
+      & .textBlue {
+        color: #1a5aff;
+      }
+
+      & .textRed {
+        margin-top: 15px;
+        color: #ff5470;
+      }
+      & span {
+        font-weight: bold;
+      }
+    }
+
+    & .submitBtn {
+      background-color: $completedBadge;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      color: white;
+      height: 44px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      transition: 0.3s ease;
+      margin-top: 30px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
