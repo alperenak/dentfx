@@ -111,6 +111,10 @@ $pendingBadge: rgb(255, 241, 111);
               height: 36px;
               font-weight: bolder;
               border-radius: 4px;
+
+              &:hover {
+                cursor: pointer;
+              }
             }
             & .positiveBtn {
               color: white;

@@ -7,6 +7,9 @@ import styles from "./AppointmentCard.scss";
 import dropdownIcon from "../../icons/dropdown-disabled.svg";
 import dentHospitalIcon from "../../icons/dent-hospital-icon.svg";
 
+/*** Utils ***/
+import store from "../../store";
+
 class AppointmentCard extends Component {
   state = { status: "", accordionActive: styles.accordionInactive, data: [] };
 
@@ -14,14 +17,10 @@ class AppointmentCard extends Component {
     let { data } = this.props;
 
     if (data?.isDone) {
-      console.log(data?.isDone);
-
       return this.setState({ status: "completed" });
     } else if (data?.isConfirmed) {
-      console.log(data?.isConfirmed);
       return this.setState({ status: "active" });
     } else if (data?.isCancelledByDentist || data?.isCancelledByUser) {
-      console.log(data?.isCancelledByDentist);
       return this.setState({ status: "cancelled" });
     }
     return this.setState({ status: "pending" });
@@ -40,7 +39,11 @@ class AppointmentCard extends Component {
   onClickRandevuyaGit = () => {};
 
   //Randevuyu iptal et butonu
-  onClickCancelAppointment = () => {};
+  onClickCancelAppointment = async () => {
+    let { data } = this.props;
+
+    await store.CancelAppointment({ appointmentID: data.id });
+  };
 
   renderDetailsButton = () => {
     let {

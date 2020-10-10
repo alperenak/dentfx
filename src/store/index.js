@@ -324,4 +324,16 @@ export default {
       errorMessageBuilder
     );
   },
+  async CancelAppointment({ appointmentID }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/appointment/${appointmentID}/cancel`;
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
 };
