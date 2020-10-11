@@ -23,6 +23,15 @@ export default function UserTopBar() {
   const [notifications, setNotifications] = useState(null);
 
   async function getUser() {
+    let userType = getCookie("user_type");
+
+    if (userType === "dentist") {
+      let res = await store.getDentistDetail({
+        dentistId: getCookie("user_id"),
+      });
+
+      return setUser(res.data);
+    }
     let res = await store.getUserDetail({ userId: getCookie("user_id") });
 
     setUser(res.data);

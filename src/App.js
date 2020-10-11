@@ -8,6 +8,7 @@ import SideBar from "./components/SideBar/sideBar";
 /*** Screens ***/
 import Landing from "./screens/Landing/landing";
 import Login from "./screens/Login/login";
+import LoginDentist from "./screens/LoginDentist/LoginDentist";
 import SignUp from "./screens/SignUp/signUp";
 import Home from "./screens/Home/home";
 import Messages from "./screens/Messages/Messages";
@@ -49,7 +50,12 @@ function App() {
               exact
               render={(props) => <Landing {...props} />}
             />
+            <Route
+              path="/login/dentist"
+              render={(props) => <LoginDentist {...props} />}
+            />
             <Route path="/login" render={(props) => <Login {...props} />} />
+
             <Route path="/signup" render={(props) => <SignUp {...props} />} />
             <div className={styles.screenContainer}>
               <Route

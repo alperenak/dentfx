@@ -26,10 +26,14 @@ class Appointment extends Component {
     activeCount: 0,
     completedCount: 0,
     pendingCount: 0,
+    userType: null,
   };
 
   componentDidMount = async () => {
     let userId = getCookie("user_id");
+    let userType = getCookie("user_type");
+    this.setState({ userType });
+
     let completedCount = 0;
     let activeCount = 0;
     let cancelledCount = 0;
@@ -88,6 +92,7 @@ class Appointment extends Component {
       activeCount,
       completedCount,
       pendingCount,
+      userType,
     } = this.state;
     return (
       <div className={styles.topbarContainer}>
@@ -95,13 +100,15 @@ class Appointment extends Component {
           <div className={styles.breadcrumbs}>
             Randevularım / Tedavi Geçmişim
           </div>
-          <div
-            className={styles.newAppointmentBtn}
-            onClick={() => this.props.history.push("/appointment/search")}
-          >
-            <img src={addCircle} alt="" />
-            <div>Yeni Randevu</div>
-          </div>
+          {userType !== "dentist" && (
+            <div
+              className={styles.newAppointmentBtn}
+              onClick={() => this.props.history.push("/appointment/search")}
+            >
+              <img src={addCircle} alt="" />
+              <div>Yeni Randevu</div>
+            </div>
+          )}
         </div>
 
         <div className={styles.navbar}>
