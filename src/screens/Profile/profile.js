@@ -56,17 +56,21 @@ export default function Profile() {
         dentistId: getCookie("user_id"),
       });
 
-      return setUser(res.data);
+      setUser(res.data);
+      setProfileName(res.data?.name);
+      setProfileSurname(res.data?.surname);
+      setProfileEmail(res.data?.email);
+      setProfileBirthday(new Date().toLocaleDateString());
+      setProfilePhone(res.data?.phone);
     } else {
       let res = await store.getUserDetail({ userId: getCookie("user_id") });
+      setUser(res.data);
+      setProfileName(res.data.name);
+      setProfileSurname(res.data.surname);
+      setProfileEmail(res.data.email);
+      setProfileBirthday(new Date().toLocaleDateString());
+      setProfilePhone(res.data.phone);
     }
-
-    setUser(res.data);
-    setProfileName(res.data.name);
-    setProfileSurname(res.data.surname);
-    setProfileEmail(res.data.email);
-    setProfileBirthday(new Date().toLocaleDateString());
-    setProfilePhone(res.data.phone);
   }
 
   useEffect(() => {
