@@ -24,7 +24,7 @@ async function login({ email, password }) {
     setCookie("token", res.data.token, {});
     setCookie("user_id", res.data.id, {});
     setCookie("user_type", "dentist", {});
-    window.location.pathname = "/";
+    window.location.pathname = `/profile/${res.data.id}`;
   } else {
     //res.errorData.title
     //res.errorData.message

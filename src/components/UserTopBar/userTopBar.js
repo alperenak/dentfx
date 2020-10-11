@@ -30,11 +30,11 @@ export default function UserTopBar() {
         dentistId: getCookie("user_id"),
       });
 
-      return setUser(res.data);
+      setUser(res.data);
+    } else if (userType === "user") {
+      let res = await store.getUserDetail({ userId: getCookie("user_id") });
+      setUser(res.data);
     }
-    let res = await store.getUserDetail({ userId: getCookie("user_id") });
-
-    setUser(res.data);
   }
 
   async function getNotifications() {
