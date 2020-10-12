@@ -12,6 +12,7 @@ import store from "../../store";
 
 /*** Components ***/
 import Message from "../../components/Message/Message";
+import { getCookie } from "../../utils/cookie";
 
 class Messages extends Component {
   state = {
@@ -91,13 +92,15 @@ class Messages extends Component {
           />
         </div>
 
-        <div
-          className={styles.newMessageBtn}
-          onClick={() => (window.location = "/messages/new")}
-        >
-          <img src={addCircle} alt="" />
-          <div>Yeni Mesaj</div>
-        </div>
+        {getCookie("user_type") === "user" && (
+          <div
+            className={styles.newMessageBtn}
+            onClick={() => (window.location = "/messages/new")}
+          >
+            <img src={addCircle} alt="" />
+            <div>Yeni Mesaj</div>
+          </div>
+        )}
 
         <div className={styles.messagesSection}>
           <div className={styles.header}>Messages</div>
