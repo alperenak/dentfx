@@ -18,7 +18,6 @@ class Messages extends Component {
   state = {
     search: "",
     messages: [],
-    //singleMessages: SingleMessagesArray,
     dentists: [],
     files: [],
     path: null,
@@ -42,13 +41,6 @@ class Messages extends Component {
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-  };
-
-  onFileChange = async (e) => {
-    e.preventDefault();
-
-    await this.setState({ files: e.target.files });
-    console.log(this.state.files);
   };
 
   onSendMessage = () => {
