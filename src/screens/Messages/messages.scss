@@ -317,6 +317,20 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+
+      & name {
+        width: 118px;
+        height: 16px;
+        font-family: SofiaPro;
+        font-size: 16px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 0.75;
+        letter-spacing: normal;
+        text-align: left;
+        color: #061b52;
+      }
     }
 
     & .rightButtons {

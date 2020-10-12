@@ -26,7 +26,8 @@
       bottom: 25px;
       width: 24px;
       height: 24px;
-      background-color: #5520f5;
+      background-color: #1a5aff
+    ;
       border: 3px solid white;
       font-size: 16px;
       display: flex;
@@ -42,12 +43,14 @@
     width: 70%;
 
     .name {
-      color: #293b6a;
+      color: #061b52
+    ;
       font-weight: 700;
       font-size: 16px;
     }
     .message {
-      color: #b0b7c8;
+      color: #061b52
+    ;
       font-weight: light;
       overflow: hidden;
       white-space: nowrap;
@@ -58,7 +61,7 @@
 
       &.bold {
         font-weight: bold;
-        color: #5520f5;
+        color: #061b52;
       }
     }
   }
