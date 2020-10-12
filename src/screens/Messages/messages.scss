@@ -193,6 +193,11 @@
   & .headerSection {
     text-align: center;
 
+    & .icon img {
+      width: 60px;
+      height: auto;
+    }
+
     & div {
       margin: 25px 0;
     }

@@ -1,9 +1,25 @@
 .Aside {
-    display: flex;
+  display: flex;
 
-    & .fileName {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  & .fileName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.container {
+  width: 90%;
+}
+
+button.choose {
+  margin: 25px 0;
+  font-weight: bold;
+  font-size: 16px;
+  width: 80%;
+  height: 60px;
+  border: 1px solid #1a5aff;
+  outline: none;
+  border-radius: 12px;
+  background-color: transparent;
+  color: #1a5aff;
 }

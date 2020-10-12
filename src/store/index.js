@@ -401,4 +401,29 @@ export default {
       errorMessageBuilder
     );
   },
+  async CreateNewChat(payload) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/chat/conversation`;
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+  async SearchChat({ keyword }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/chat/search?keyword=${keyword}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
 };

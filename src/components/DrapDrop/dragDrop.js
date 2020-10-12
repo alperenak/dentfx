@@ -1,11 +1,16 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import styles from "./dragDrop.module.scss";
 import { useDropzone } from "react-dropzone";
-import { GetToken, uploadFile } from "../../../actions/action";
-import Button from "../../Button/button";
-import axios from "axios";
+/* import Button from "../../Button/button";
+ */
 export default function DropzoneField(props) {
   const [file, setFile] = useState();
+
+  const onDrop = useCallback((acceptedFiles) => {
+    props.onFileChange(acceptedFiles);
+    return <li key={acceptedFiles.path}>{acceptedFiles.path}</li>;
+  }, []);
+
   const {
     acceptedFiles,
     getRootProps,
@@ -14,12 +19,12 @@ export default function DropzoneField(props) {
     isDragAccept,
     open,
     isDragReject,
-  } = useDropzone({ noClick: true });
+  } = useDropzone({ noClick: true, onDrop });
 
   const files = acceptedFiles.map((file) => {
-    // console.log(file);
     return <li key={file.path}>{file.path}</li>;
   });
+
   const baseStyle = {
     flex: 1,
     display: "flex",
@@ -31,9 +36,10 @@ export default function DropzoneField(props) {
     borderColor: "#eeeeee",
     borderStyle: "dashed",
     backgroundColor: "#fafafa",
-    color: "#6e2af5",
+    color: "#909ab2",
     outline: "none",
     transition: "border .24s ease-in-out",
+    width: "100%",
   };
 
   const activeStyle = {
@@ -43,7 +49,6 @@ export default function DropzoneField(props) {
   const acceptStyle = {
     borderColor: "#00e676",
   };
-  const token = GetToken();
 
   const rejectStyle = {
     borderColor: "#ff1744",
@@ -58,12 +63,16 @@ export default function DropzoneField(props) {
     }),
     [isDragActive, isDragReject, isDragAccept]
   );
+
   return (
-    <section className="container">
+    <section className={styles.container}>
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-        <Button title={"Choose"} type={"outlined"} onClick={open} />
+        <p>Drag and drop your file or</p>
+
+        <button className={styles.choose} onClick={open}>
+          Choose
+        </button>
       </div>
       <aside className={styles.Aside}>
         <div className={styles.fileName}>{files}</div>
