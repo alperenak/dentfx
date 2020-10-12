@@ -22,6 +22,7 @@ export default function UserTopBar() {
   const [dropdown, setDropdown] = useState(false);
   const [dropdownType, setDropdownType] = useState("notifications");
   const [notifications, setNotifications] = useState(null);
+  const [unreadNotifs, setUnreadNotifs] = useState(null);
 
   async function getUser() {
     let userType = getCookie("user_type");
@@ -45,7 +46,8 @@ export default function UserTopBar() {
 
   async function getNotifications() {
     let res = await store.getNotifications({ userId: getCookie("user_id") });
-    setNotifications(res.data);
+    setNotifications(res.data.notifications);
+    setUnreadNotifs(res.data.unread);
   }
 
   useEffect(() => {
@@ -115,15 +117,18 @@ export default function UserTopBar() {
         <div className={styles.label}>
           DentFX Puanı<span>{`: 2000`}</span>
         </div>
-        <img
-          className={styles.notification}
-          src={notification}
-          alt={"notification"}
-          onClick={() => {
-            setDropdownType("notifications");
-            dropdown ? setDropdown(false) : setDropdown(true);
-          }}
-        />
+        <div className={styles.notificationWrapper}>
+          <img
+            className={styles.notification}
+            src={notification}
+            alt={"notification"}
+            onClick={() => {
+              setDropdownType("notifications");
+              dropdown ? setDropdown(false) : setDropdown(true);
+            }}
+          />
+          {unreadNotifs > 0 && <div className={styles.unread} />}
+        </div>
         <div className={styles.user}>
           {userType === "clinic"
             ? `${user?.name}`

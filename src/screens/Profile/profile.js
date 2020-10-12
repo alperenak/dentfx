@@ -221,7 +221,7 @@ export default function Profile() {
           {userType !== "clinic" && (
             <Input
               type={"date"}
-              defaultValue={new Date().toLocaleDateString()}
+              //defaultValue={new Date().toLocaleDateString()}
               size={"full"}
               label="Doğum Tarihi"
               onChange={setProfileBirthday}
