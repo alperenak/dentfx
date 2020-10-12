@@ -5,6 +5,7 @@ import styles from "./messages.scss";
 
 /*** Icons ***/
 import noQuestionIllustration from "../../icons/illustration_1.svg";
+import addCircle from "../../icons/Icons_add-circle.svg";
 
 /*** Utils ***/
 import store from "../../store";
@@ -73,42 +74,7 @@ class Messages extends Component {
     );
   };
 
-  renderNewQuestion = () => {
-    return (
-      <div className={styles.newQuestionContainer}>
-        <div className={styles.headerSection}>
-          <div className={styles.header}>
-            Choose a dentist or clinic and send a message!
-          </div>
-          <div className={styles.content}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem illo debitis voluptatibus, sunt non nihil veniam
-            aperiam eligendi nesciunt libero iure aliquid magnam error!
-          </div>
-        </div>
-        <div className={styles.mainSection}>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="dentist">Dentist or Clinic</label>
-            <input type="text" name="dentist" placeholder="Florya Hospi" />
-          </div>
-
-          <div className={styles.inputWrapper}>
-            <label htmlFor="dentist">Your Message</label>
-            <textarea name="message"></textarea>
-          </div>
-
-          {/* TODO: ADD FUNCTIONALITY TO FILE INPUT  */}
-          <div className={styles.photoUploadWrapper}>
-            <div className={styles.photoUpload}>
-              <input type="file" name="" id="" onChange={this.onFileChange} />
-            </div>
-          </div>
-
-          <button className={styles.sendMessageButton}>Send message</button>
-        </div>
-      </div>
-    );
-  };
+  renderNewQuestion = () => {};
 
   renderMainList = () => {
     let { search, messages } = this.state;
@@ -123,6 +89,14 @@ class Messages extends Component {
             onChange={this.onChange}
             placeholder="Search messages or user"
           />
+        </div>
+
+        <div
+          className={styles.newMessageBtn}
+          onClick={() => (window.location = "/messages/new")}
+        >
+          <img src={addCircle} alt="" />
+          <div>Yeni Mesaj</div>
         </div>
 
         <div className={styles.messagesSection}>
@@ -148,16 +122,14 @@ class Messages extends Component {
   };
 
   render() {
-    let { messages, dentists, path } = this.state;
-
-    if (path === "new") return this.renderNewQuestion();
+    let { messages } = this.state;
 
     return (
-      <>
+      <div className={styles.Wrapper}>
         {messages.length === 0
           ? this.renderNoQuestion()
           : this.renderMainList()}
-      </>
+      </div>
     );
   }
 }
