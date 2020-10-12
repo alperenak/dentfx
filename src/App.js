@@ -98,11 +98,13 @@ function App() {
 
               <Route
                 path="/messages/details/:id"
+                exact
                 render={(props) => <MessageDetails {...props} />}
               />
 
               <Route
                 path="/messages"
+                exact
                 render={(props) => <Messages {...props} />}
               />
 

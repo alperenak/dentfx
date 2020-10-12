@@ -10,84 +10,54 @@ import sendButton from "../../icons/send-button.svg";
 import store from "../../store";
 
 import MessageSingle from "../../components/MessageSingle/MessageSingle";
-
-let SingleMessagesArray = [
-  {
-    isMine: true,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I sent you a message now!",
-  },
-  {
-    isMine: false,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I'm a dentist!",
-  },
-  {
-    isMine: true,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I sent you a message once again now!",
-  },
-  {
-    isMine: true,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I sent you a message now!",
-  },
-  {
-    isMine: false,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I'm a dentist!",
-  },
-  {
-    isMine: true,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I sent you a message once again now!",
-  },
-  {
-    isMine: true,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I sent you a message now!",
-  },
-  {
-    isMine: false,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I'm a dentist!",
-  },
-  {
-    isMine: true,
-    time: "11.53",
-    date: "07.10.2020",
-    message: "Yo I sent you a message once again now!",
-  },
-];
+import { getCookie } from "../../utils/cookie";
 
 class MessageDetails extends Component {
   state = {
+    conversationID: null,
     singleMessages: [],
-    sender: {
-      name: "Erhan Koca",
-      clinic: "Medicana Hospitals Group",
-      avatar: "https://picsum.photos/200",
-      onlineStatus: false,
-    },
+    sender: {},
+    messageToSend: "",
   };
   componentDidMount = async () => {
     let conversationID = this.props.match.params.id;
 
-    console.log(this.props);
+    this.setState({ conversationID });
+
+    await this.getMessageDetails();
+  };
+
+  getMessageDetails = async () => {
+    let conversationID = this.props.match.params.id;
+
     let res = await store.GetMessageDetails({ conversationID });
 
     this.setState({
       singleMessages: res.data.messages,
-      sender: res.data.user_two,
+      sender: res.data.contact,
     });
+  };
+
+  onSendMessage = async () => {
+    let { conversationID, messageToSend, sender } = this.state;
+    let receiver = { id: sender.id, userType: sender.userType };
+
+    await store.SendMessage({
+      conversationID,
+      receiver,
+      body: messageToSend,
+      attachements: [],
+    });
+
+    await this.getMessageDetails();
+    this.setState({ messageToSend: "" });
+
+    var list = document.getElementById("list");
+    list.scrollTop = list.offsetHeight;
+  };
+
+  onChange = (e) => {
+    this.setState({ messageToSend: e.target.value });
   };
 
   render() {
@@ -97,14 +67,14 @@ class MessageDetails extends Component {
       <div className={styles.messageDetailsContainer}>
         <div className={styles.header}>
           <div className={styles.avatar}>
-            <img src={sender.avatar} alt="" />
+            <img src={sender?.avatar} alt="" />
             <div
-              className={sender.onlineStatus ? styles.online : styles.offline}
+              className={sender?.onlineStatus ? styles.online : styles.offline}
             ></div>
           </div>
 
           <div className={styles.senderInfo}>
-            <div className={styles.name}>{sender.name}</div>
+            <div className={styles.name}>{sender?.name}</div>
             {/* <div className={styles.clinicName}> {sender.clinic} </div> */}
           </div>
 
@@ -123,7 +93,7 @@ class MessageDetails extends Component {
           </div>
         </div>
 
-        <div className={styles.messagesContainer}>
+        <div className={styles.messagesContainer} id="list">
           {singleMessages.length > 0 &&
             singleMessages.map((message, i) => {
               if (message.isMine)

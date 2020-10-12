@@ -7,6 +7,10 @@
   padding: 5px 0;
   height: fit-content;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .avatar {
     width: 60px;
     height: 60px;
@@ -14,6 +18,23 @@
       border-radius: 100%;
       width: 60px;
       height: 60px;
+    }
+
+    & .unread {
+      position: relative;
+      right: -65%;
+      bottom: 25px;
+      width: 24px;
+      height: 24px;
+      background-color: #5520f5;
+      border: 3px solid white;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      color: white;
+      font-weight: bold;
     }
   }
 
@@ -34,6 +55,11 @@
       -ms-text-overflow: ellipsis;
       -o-text-overflow: ellipsis;
       font-size: 12px;
+
+      &.bold {
+        font-weight: bold;
+        color: #5520f5;
+      }
     }
   }
 

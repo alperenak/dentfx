@@ -365,7 +365,7 @@ export default {
   async GetNewMessages() {
     let baseUrl = config.baseUrl;
     let tokenCookieName = "token";
-    let path = `/conversation/new`;
+    let path = `/chat/new`;
 
     return await http.makeGetRequest(
       path,
@@ -384,6 +384,20 @@ export default {
       path,
       baseUrl,
       tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+  async SendMessage({ conversationID, receiver, body, attachements }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/chat/conversation/${conversationID}`;
+    let payload = { receiver, body, attachements };
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
       errorMessageBuilder
     );
   },

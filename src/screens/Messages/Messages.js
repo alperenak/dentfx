@@ -297,28 +297,6 @@ class Messages extends Component {
           />
         </div>
 
-        <div className={styles.favDentistSection}>
-          <div className={styles.header}>Favorite Dentists</div>
-
-          <div className={styles.dentistContainer}>
-            {dentists.map((dentist, i) => {
-              return (
-                <div className={styles.dentist} key={i}>
-                  <div className={styles.imageContainer}>
-                    <img src={dentist.image} alt="" />
-                    <div
-                      className={
-                        dentist.onlineStatus ? styles.online : styles.offline
-                      }
-                    ></div>
-                  </div>
-                  <div className={styles.name}>{dentist.name}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         <div className={styles.messagesSection}>
           <div className={styles.header}>Messages</div>
           <div className={styles.messageContainer}>
@@ -330,6 +308,8 @@ class Messages extends Component {
                   content={message?.lastMessage.body}
                   time={message?.lastMessage.createdAt}
                   key={i}
+                  id={message.id}
+                  unread={message.unread}
                 />
               );
             })}
