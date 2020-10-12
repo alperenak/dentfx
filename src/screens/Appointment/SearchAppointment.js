@@ -105,7 +105,7 @@ class SearchAppointment extends Component {
               type="date"
               size="full"
               label={"From Date"}
-              defaultValue={new Date().toLocaleDateString()}
+              //defaultValue={new Date().toLocaleDateString()}
               name={"dateStart"}
               onChange={(date) => {
                 date = new Date(dateStart).toLocaleDateString();

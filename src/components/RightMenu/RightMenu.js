@@ -47,6 +47,7 @@ class RightMenu extends Component {
           time={message?.lastMessage.createdAt}
           id={message.id}
           key={i}
+          unread={message.unread}
         />
       );
     });

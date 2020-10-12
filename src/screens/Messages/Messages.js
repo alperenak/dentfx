@@ -16,7 +16,7 @@ class Messages extends Component {
   state = {
     search: "",
     messages: [],
-    singleMessages: SingleMessagesArray,
+    //singleMessages: SingleMessagesArray,
     dentists: [],
     files: [],
     path: null,
