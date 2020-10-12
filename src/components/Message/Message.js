@@ -13,7 +13,9 @@ const Message = ({ image, title, content, time }) => {
         <div className={styles.name}>{title}</div>
         <div className={styles.message}>{content}</div>
       </div>
-      <div className={styles.time}>{time}</div>
+      <div className={styles.time}>{`${new Date(time).getHours()}:${new Date(
+        time
+      ).getMinutes()}`}</div>
     </div>
   );
 };

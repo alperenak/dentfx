@@ -46,8 +46,6 @@ class Appointment extends Component {
 
     const response = await store.getAppointments({ userId });
 
-    console.log(response);
-
     if (response.data) {
       this.setState({ allAppointments: response.data });
 
@@ -100,7 +98,7 @@ class Appointment extends Component {
           <div className={styles.breadcrumbs}>
             Randevularım / Tedavi Geçmişim
           </div>
-          {userType !== "dentist" && (
+          {userType === "user" && (
             <div
               className={styles.newAppointmentBtn}
               onClick={() => this.props.history.push("/appointment/search")}
@@ -197,6 +195,8 @@ class Appointment extends Component {
       return <AppointmentCard data={record} key={i} />;
     });
   };
+
+  renderClinic = () => {};
 
   render() {
     let { activeLink } = this.state;

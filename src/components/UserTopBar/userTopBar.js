@@ -18,6 +18,7 @@ import logoutIcon from "../../icons/logout.svg";
 
 export default function UserTopBar() {
   const [user, setUser] = useState();
+  const [userType, setUserType] = useState();
   const [dropdown, setDropdown] = useState(false);
   const [dropdownType, setDropdownType] = useState("notifications");
   const [notifications, setNotifications] = useState(null);
@@ -26,13 +27,18 @@ export default function UserTopBar() {
     let userType = getCookie("user_type");
 
     if (userType === "dentist") {
+      setUserType("dentist");
       let res = await store.getDentistDetail({
         dentistId: getCookie("user_id"),
       });
-
       setUser(res.data);
     } else if (userType === "user") {
+      setUserType("user");
       let res = await store.getUserDetail({ userId: getCookie("user_id") });
+      setUser(res.data);
+    } else if (userType === "clinic") {
+      setUserType("clinic");
+      let res = await store.getClinicDetail({ clinicId: getCookie("user_id") });
       setUser(res.data);
     }
   }
@@ -119,7 +125,10 @@ export default function UserTopBar() {
           }}
         />
         <div className={styles.user}>
-          {`${user?.name} ${user?.surname}`}
+          {userType === "clinic"
+            ? `${user?.name}`
+            : `${user?.name} ${user?.surname}`}
+
           <img
             className={styles.avatarContainer}
             src={user?.avatar}

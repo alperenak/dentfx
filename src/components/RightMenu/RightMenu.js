@@ -33,25 +33,36 @@ const tempMessages = [
 ];
 
 class RightMenu extends Component {
-  state = { history: [], messages: tempMessages };
+  state = { history: [], messages: [] };
 
   componentDidMount = async () => {
     const userId = getCookie("user_id");
-    const response = await store.getTreatmentHistory(userId);
+    const userType = getCookie("user_type");
 
-    this.setState({ history: response.data });
+    let res = await store.GetNewMessages();
+    this.setState({ messages: res.data });
+
+    if (userType === "dentist") {
+      const response = await store.getDentistTreatmentHistory({
+        dentistId: userId,
+      });
+      this.setState({ history: response.data });
+    } else if (userType === "user") {
+      const response = await store.getUserTreatmentHistory({ userId: userId });
+      this.setState({ history: response.data });
+    }
   };
 
   renderMessages = () => {
     let { messages } = this.state;
 
-    return messages.map((message, i) => {
+    return messages?.map((message, i) => {
       return (
         <Message
-          image={message.image}
-          title={message.title}
-          content={message.content}
-          time={message.time}
+          image={message?.contact.avatar}
+          title={message?.contact.name}
+          content={message?.lastMessage.body}
+          time={message?.lastMessage.createdAt}
           key={i}
         />
       );
@@ -61,21 +72,27 @@ class RightMenu extends Component {
   renderHistory = () => {
     let { history } = this.state;
 
-    return history.map((record, i) => {
+    if (history.length < 0) return <div></div>;
+    return history?.map((record, i) => {
       return <Accordion record={record} key={i} />;
     });
   };
 
   render() {
+    let { history, messages } = this.state;
     return (
       <div className={styles.rightBar}>
         <div className={styles.sectionHeader}>Tedavi Geçmişi</div>
-        <div className={styles.treatmentHistory}>{this.renderHistory()}</div>
+        <div className={styles.treatmentHistory}>
+          {history.length > 0 && this.renderHistory()}
+        </div>
 
         <div className={styles.sectionHeader}>
           New Messages <span>(2)</span>
         </div>
-        <div className={styles.messages}>{this.renderMessages()}</div>
+        <div className={styles.messages}>
+          {messages.length > 0 && this.renderMessages()}
+        </div>
       </div>
     );
   }

@@ -10,6 +10,9 @@ import noQuestionIllustration from "../../icons/illustration_1.svg";
 import addFile from "../../icons/add-file.svg";
 import sendButton from "../../icons/send-button.svg";
 
+/*** Utils ***/
+import store from "../../store";
+
 /*** Components ***/
 import Message from "../../components/Message/Message";
 import MessageSingle from "../../components/MessageSingle/MessageSingle";
@@ -184,11 +187,12 @@ let SingleMessagesArray = [
 class Messages extends Component {
   state = {
     search: "",
-    messages: messagesArray,
+    messages: [],
     singleMessages: SingleMessagesArray,
     dentists: [],
     files: [],
     path: null,
+    conversationId: null,
     sender: {
       name: "Erhan Koca",
       clinic: "Medicana Hospitals Group",
@@ -198,9 +202,12 @@ class Messages extends Component {
     messageToSend: "",
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const path = this.props.location.pathname.split("/messages/");
     this.setState({ path: path[1] });
+
+    let res = await store.GetConversations();
+    this.setState({ messages: res.data });
   };
 
   onChange = (e) => {
@@ -275,70 +282,6 @@ class Messages extends Component {
     );
   };
 
-  renderMessageDetails = () => {
-    let { sender, singleMessages } = this.state;
-    return (
-      <div className={styles.messageDetailsContainer}>
-        <div className={styles.header}>
-          <div className={styles.avatar}>
-            <img src={sender.avatar} alt="" />
-            <div
-              className={sender.onlineStatus ? styles.online : styles.offline}
-            ></div>
-          </div>
-
-          <div className={styles.senderInfo}>
-            <div className={styles.name}>{sender.name}</div>
-            <div className={styles.clinicName}> {sender.clinic} </div>
-          </div>
-
-          <div className={styles.rightButtons}>
-            <div className={styles.backButton}>
-              <img src={backButton} alt="" />
-              <div className={styles.text}> Back </div>
-            </div>
-
-            <div className={styles.detailsButton}>
-              <img src={detailsIcon} alt="" />
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.messagesContainer}>
-          {singleMessages.map((message, i) => {
-            if (message.isMine)
-              return <MessageSingle message={message} key={i} />;
-            else
-              return (
-                <MessageSingle message={message} sender={sender} key={i} />
-              );
-          })}
-        </div>
-
-        <div className={styles.sendMessageContainer}>
-          <div className={`${styles.leftIcon} ${styles.icon}`}>
-            <img src={addFile} alt="" />
-          </div>
-          <div className={styles.inputContainer}>
-            <input
-              type="text"
-              name="messageToSend"
-              onChange={this.onChange}
-              value={this.state.messageToSend}
-            />
-          </div>
-
-          <div
-            className={`${styles.rightIcon} ${styles.icon}`}
-            onClick={this.onSendMessage}
-          >
-            <img src={sendButton} alt="" />
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   renderMainList = () => {
     let { search, messages } = this.state;
 
@@ -382,10 +325,10 @@ class Messages extends Component {
             {messages.map((message, i) => {
               return (
                 <Message
-                  image={message.sender.avatar}
-                  title={message.sender.name}
-                  content={message.content}
-                  time={message.time}
+                  image={message?.contact.avatar}
+                  title={message?.contact.name}
+                  content={message?.lastMessage.body}
+                  time={message?.lastMessage.createdAt}
                   key={i}
                 />
               );
@@ -399,7 +342,6 @@ class Messages extends Component {
   render() {
     let { messages, dentists, path } = this.state;
 
-    if (path === "details") return this.renderMessageDetails();
     if (path === "new") return this.renderNewQuestion();
 
     return (

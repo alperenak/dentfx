@@ -262,6 +262,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getAppointmentDetail({ appointmentId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = "token";
@@ -275,10 +276,22 @@ export default {
     );
   },
 
-  async getTreatmentHistory(userId) {
+  async getUserTreatmentHistory({ userId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = "token";
     let path = `/user/${userId}/treatment`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+  async getDentistTreatmentHistory({ dentistId }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/dentist/${dentistId}/treatment`;
 
     return await http.makeGetRequest(
       path,
@@ -330,6 +343,44 @@ export default {
     let path = `/appointment/${appointmentID}/cancel`;
 
     return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async GetConversations() {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/chat/conversation`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+  async GetNewMessages() {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/conversation/new`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async GetMessageDetails({ conversationID }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/chat/conversation/${conversationID}`;
+
+    return await http.makeGetRequest(
       path,
       baseUrl,
       tokenCookieName,

@@ -23,9 +23,11 @@ const MessageSingle = ({ message, sender }) => {
           message.isMine ? styles.isMine : styles.notMine
         }`}
       >
-        <div className={`${styles.message}`}>{message.message}</div>
+        <div className={`${styles.message}`}>{message.body}</div>
 
-        <div className={styles.time}>{message.time}</div>
+        <div className={styles.time}>{`${new Date(
+          message.createdAt
+        ).getHours()}:${new Date(message.createdAt).getMinutes()}`}</div>
       </div>
     </div>
   );

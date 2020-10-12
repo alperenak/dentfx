@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  & .backButton {
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    margin-left: auto;
+    margin: 25px unset;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  & button {
+    margin: 25px 0;
+    width: 570px;
+    height: 50px;
+    background-color: #1a5aff;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

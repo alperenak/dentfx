@@ -66,21 +66,35 @@ function RenderList() {
       icon: walletIcon,
       hoverIcon: walletIconBlue,
       href: `/wallet`,
-      not: ["dentist"],
+      not: ["dentist", "clinic"],
     },
     {
       title: "Kampanyalar",
       icon: kampanyaIcon,
       hoverIcon: kampanyaIconBlue,
       href: `/campaigns`,
-      not: ["dentist"],
+      not: ["dentist", "clinic"],
     },
     {
       title: "DentFX Social",
       icon: dentfxSocialIcon,
       hoverIcon: dentfxSocialIconBlue,
       href: `/social`,
-      not: ["dentist"],
+      not: ["dentist", "clinic"],
+    },
+    {
+      title: "Fatura ",
+      icon: dentfxSocialIcon,
+      hoverIcon: dentfxSocialIconBlue,
+      href: `/fatura`,
+      not: ["dentist", "user"],
+    },
+    {
+      title: "Klinisyen",
+      icon: dentfxSocialIcon,
+      hoverIcon: dentfxSocialIconBlue,
+      href: `/clinician`,
+      not: ["dentist", "user"],
     },
   ];
 

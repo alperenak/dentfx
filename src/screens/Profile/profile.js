@@ -25,6 +25,7 @@ import Switch from "react-input-switch";
 export default function Profile() {
   //#region General States
   const [user, setUser] = useState();
+  const [userType, setUserType] = useState();
   const [selectedTab, setSelectedTab] = useState(0);
   //#endregion
 
@@ -50,6 +51,7 @@ export default function Profile() {
 
   async function getUser() {
     let userType = getCookie("user_type");
+    setUserType(userType);
 
     if (userType === "dentist") {
       let res = await store.getDentistDetail({
@@ -62,7 +64,7 @@ export default function Profile() {
       setProfileEmail(res.data?.email);
       setProfileBirthday(new Date().toLocaleDateString());
       setProfilePhone(res.data?.phone);
-    } else {
+    } else if (userType === "user") {
       let res = await store.getUserDetail({ userId: getCookie("user_id") });
       setUser(res.data);
       setProfileName(res.data.name);
@@ -70,6 +72,15 @@ export default function Profile() {
       setProfileEmail(res.data.email);
       setProfileBirthday(new Date().toLocaleDateString());
       setProfilePhone(res.data.phone);
+    } else if (userType === "clinic") {
+      let res = await store.getClinicDetail({ clinicId: getCookie("user_id") });
+      setUser(res.data);
+      console.log(res.data);
+      /* setProfileName(res.data.name);
+      setProfileSurname(res.data.surname);
+      setProfileEmail(res.data.email);
+      setProfileBirthday(new Date().toLocaleDateString());
+      setProfilePhone(res.data.phone); */
     }
   }
 
@@ -85,10 +96,12 @@ export default function Profile() {
           <div className={styles.content}>17 September 1994</div>
         </div>
 
-        <div className={styles.card}>
-          <img src={emailIcon} className={styles.icon} />
-          <div className={styles.content}>{user?.email}</div>
-        </div>
+        {userType !== "clinic" && (
+          <div className={styles.card}>
+            <img src={emailIcon} className={styles.icon} />
+            <div className={styles.content}>{user?.email}</div>
+          </div>
+        )}
 
         <div className={styles.card}>
           <img src={phoneIcon} className={styles.icon} />
@@ -189,13 +202,15 @@ export default function Profile() {
             label="Ad"
             onChange={setProfileName}
           />
-          <Input
-            type={"text"}
-            defaultValue={user?.surname}
-            size={"full"}
-            label="Soyad"
-            onChange={setProfileSurname}
-          />
+          {userType !== "clinic" && (
+            <Input
+              type={"text"}
+              defaultValue={user?.surname}
+              size={"full"}
+              label="Soyad"
+              onChange={setProfileSurname}
+            />
+          )}
           <Input
             type={"text"}
             defaultValue={user?.email}
@@ -203,13 +218,15 @@ export default function Profile() {
             label="E-Posta"
             onChange={setProfileEmail}
           />
-          <Input
-            type={"date"}
-            defaultValue={new Date().toLocaleDateString()}
-            size={"full"}
-            label="Doğum Tarihi"
-            onChange={setProfileBirthday}
-          />
+          {userType !== "clinic" && (
+            <Input
+              type={"date"}
+              defaultValue={new Date().toLocaleDateString()}
+              size={"full"}
+              label="Doğum Tarihi"
+              onChange={setProfileBirthday}
+            />
+          )}
           <Input
             type={"text"}
             defaultValue={user?.phone}

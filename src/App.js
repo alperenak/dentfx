@@ -9,10 +9,12 @@ import SideBar from "./components/SideBar/sideBar";
 import Landing from "./screens/Landing/landing";
 import Login from "./screens/Login/login";
 import LoginDentist from "./screens/LoginDentist/LoginDentist";
+import LoginClinic from "./screens/LoginClinic/LoginClinic";
 import SignUp from "./screens/SignUp/signUp";
 import Home from "./screens/Home/home";
 import Messages from "./screens/Messages/Messages";
 import Appointment from "./screens/Appointment/Appointment";
+import MessageDetails from "./screens/Messages/MessageDetails";
 
 /*** Styles ***/
 import styles from "./App.scss";
@@ -25,6 +27,8 @@ import Footer from "./components/Footer/Footer";
 import SearchAppointment from "./screens/Appointment/SearchAppointment";
 import ClinicDetail from "./screens/ClinicDetails/ClinicDetail";
 import CreateAppointment from "./screens/CreateAppointment/CreateAppointment";
+import Clinician from "./screens/Clinician/Clinician";
+import NewClinician from "./screens/NewClinician/NewClinician";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -52,9 +56,19 @@ function App() {
             />
             <Route
               path="/login/dentist"
+              exact
               render={(props) => <LoginDentist {...props} />}
             />
-            <Route path="/login" render={(props) => <Login {...props} />} />
+            <Route
+              path="/login/clinic"
+              exact
+              render={(props) => <LoginClinic {...props} />}
+            />
+            <Route
+              path="/login"
+              exact
+              render={(props) => <Login {...props} />}
+            />
 
             <Route path="/signup" render={(props) => <SignUp {...props} />} />
             <div className={styles.screenContainer}>
@@ -78,8 +92,15 @@ function App() {
               />
               <Route
                 path="/profile/:id"
+                exact
                 render={(props) => <Profile {...props} />}
               />
+
+              <Route
+                path="/messages/details/:id"
+                render={(props) => <MessageDetails {...props} />}
+              />
+
               <Route
                 path="/messages"
                 render={(props) => <Messages {...props} />}
@@ -87,6 +108,7 @@ function App() {
 
               <Route
                 path="/clinic/:id"
+                exact
                 render={(props) => <ClinicDetail {...props} />}
               />
               <Route
@@ -94,6 +116,17 @@ function App() {
                 path="/appointment/create/:id"
                 exact
                 render={(props) => <CreateAppointment {...props} />}
+              />
+
+              <Route
+                path="/clinician"
+                exact
+                render={(props) => <Clinician {...props} />}
+              />
+              <Route
+                path="/clinician/new"
+                exact
+                render={(props) => <NewClinician {...props} />}
               />
             </div>
           </Switch>
