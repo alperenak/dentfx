@@ -66,12 +66,17 @@ class NewMessage extends Component {
               name="dentist"
               placeholder="Florya Hospi"
               value={dentist}
+              onChange={this.onChange}
             />
           </div>
 
           <div className={styles.inputWrapper}>
             <label htmlFor="dentist">Your Message</label>
-            <textarea name="message" value={message}></textarea>
+            <textarea
+              name="message"
+              value={message}
+              onChange={this.onChange}
+            ></textarea>
           </div>
 
           <DragDrop onFileChange={this.onFileChange} />
