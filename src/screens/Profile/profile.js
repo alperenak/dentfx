@@ -340,7 +340,7 @@ export default function Profile() {
         </div>
       </div>
       <div className={styles.profileName}>
-        {`${user?.name} ${user?.surname}`}
+        {`${user?.name} ${user?.surname? user.surname : ''}`}
       </div>
       <div className={styles.tabs}>
         <div
