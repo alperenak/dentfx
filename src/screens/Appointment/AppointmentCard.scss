@@ -1,18 +1,18 @@
 $completedBG: #e8fefa;
 $cancelledBG: #ffeaee;
 $activeBG: #f6f9ff;
-$pendingBG: #ffebcd;
+$pendingBG: #d8850638;
 
 $completedBadge: #00ebc7;
 $cancelledBadge: #ff5470;
 $activeBadge: #1a5aff;
-$pendingBadge: rgb(255, 241, 111);
+$pendingBadge: #7b700aa8;
 
 .cardWrapper {
   overflow: hidden;
   width: 100%;
   max-height: 175px;
-  min-height: 175px;
+  min-height: 150px;
   border-radius: 8px;
   margin: 25px 0;
   padding: 0 0 25px 0;
@@ -147,6 +147,7 @@ $pendingBadge: rgb(255, 241, 111);
           flex-direction: row;
           width: 60%;
           justify-content: space-between;
+          margin-top: 15px;
           & div:not(:first-child)::before {
             color: #909ab2;
             content: " •  ";

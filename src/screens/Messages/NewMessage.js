@@ -79,6 +79,7 @@ class NewMessage extends Component {
             ></textarea>
           </div>
 
+          <label htmlFor="dentist">Photo For Treatment (optional) </label>
           <DragDrop onFileChange={this.onFileChange} />
 
           <button className={styles.sendMessageButton} onClick={this.onSubmit}>

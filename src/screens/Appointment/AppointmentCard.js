@@ -5,7 +5,7 @@ import styles from "./AppointmentCard.scss";
 
 /*** Icons ***/
 import dropdownIcon from "../../icons/dropdown-disabled.svg";
-import dentHospitalIcon from "../../icons/dent-hospital-icon.svg";
+import dentHospitalIcon from "../../icons/dental-icon.png";
 
 /*** Utils ***/
 import store from "../../store";
@@ -83,7 +83,7 @@ class AppointmentCard extends Component {
 
     if (status === "completed") return <div>TAMAMLANDI</div>;
     else if (status === "active") return <div>SHOW ON MAP</div>;
-    else if (status === "pending") return <div>PENDING</div>;
+    else if (status === "pending") return <div>ONAY BEKLENİYOR</div>;
     else if (status === "cancelled") return <div>İPTAL EDİLDİ</div>;
   };
 
@@ -111,14 +111,15 @@ class AppointmentCard extends Component {
                 {`${data?.Dentist?.name} ${data?.Dentist?.surname}`}
               </div>
               <div className={`${styles.details} ${accordionActive}`}>
-                {data?.description}
+                Kanal Tedavisi / Diş Tedavisi Açıklaması & Consectetur elit pellentesque
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fringilla aliquet arcu.
                 {this.renderDetailsButton()}
               </div>
 
               <div className={styles.appointmentInfo}>
                 <div className={styles.date}>{data?.date}</div>
                 <div className={styles.time}>{data?.startTime}</div>
-                <div className={styles.price}>${data?.price}</div>
+                <div className={styles.price}>$70</div>
               </div>
             </div>
           </div>
