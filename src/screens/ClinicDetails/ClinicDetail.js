@@ -28,19 +28,19 @@ class ClinicDetail extends Component {
     let { clinic } = this.state;
     let clinics = [clinic];
     return (
-      <div className={styles.aboutTab}>
-        <div className={styles.item}>
-          <div className={styles.header}>About</div>
-          <div className={styles.content}>
+      <div className={"aboutTab"}>
+        <div className={"item"}>
+          <div className={"header"}>About</div>
+          <div className={"content"}>
             Congue eu consequat ac felis. Urna duis convallis convallis tellus.
             Ornare lectus sit amet est placerat in egestas erat. Consequat
             mauris nunc congue nisi vitae suscipit tellus mauris a.
           </div>
         </div>
 
-        <div className={styles.item}>
-          <div className={styles.header}>Location</div>
-          <div className={styles.content}>{clinic?.address}</div>
+        <div className={"item"}>
+          <div className={"header"}>Location</div>
+          <div className={"content"}>{clinic?.address}</div>
           {clinic && <Map clinics={clinics} />}
         </div>
       </div>
@@ -50,14 +50,14 @@ class ClinicDetail extends Component {
   renderTreatmentTab = () => {
     let { clinic } = this.state;
     return (
-      <div className={styles.tabWrapper}>
+      <div className={"tabWrapper"}>
         {clinic?.treatmentType?.map((treatment, i) => {
           return (
-            <div className={styles.card} key={i}>
-              <div className={styles.image}>
+            <div className={"card"} key={i}>
+              <div className={"image"}>
                 <img src="https://picsum.photos/200" alt="" />
               </div>
-              <div className={styles.name}>{treatment}</div>
+              <div className={"name"}>{treatment}</div>
             </div>
           );
         })}
@@ -68,18 +68,18 @@ class ClinicDetail extends Component {
   renderDentistTab = () => {
     let { clinic } = this.state;
     return (
-      <div className={styles.tabWrapper}>
+      <div className={"tabWrapper"}>
         {clinic?.Dentist.map((dentist, i) => {
           return (
-            <div className={styles.card} key={i}>
-              <div className={styles.image}>
+            <div className={"card"} key={i}>
+              <div className={"image"}>
                 <img src="https://picsum.photos/200" alt="" />
               </div>
               <div
-                className={styles.name}
+                className={"name"}
               >{`${dentist?.name} ${dentist?.surname}`}</div>
 
-              <div className={styles.rating}>
+              <div className={"rating"}>
                 <ReactStars value={dentist?.rate} size={16} edit={false} />
               </div>
             </div>
@@ -95,14 +95,14 @@ class ClinicDetail extends Component {
     let { clinic, selectedTab } = this.state;
 
     return (
-      <div className={styles.Profile}>
-        <div className={styles.profileCard}>
+      <div className={"Profile"}>
+        <div className={"profileCard"}>
           <img
-            className={styles.profileImage}
+            className={"profileImage"}
             src={clinic?.avatar}
             alt="avatar"
           />
-          <div className={styles.createAppointment}>
+          <div className={"createAppointment"}>
             <button
               onClick={() =>
                 (window.location = `/appointment/create/${clinic.id}`)
@@ -113,40 +113,40 @@ class ClinicDetail extends Component {
           </div>
         </div>
 
-        <div className={styles.profileName}>{clinic?.name}</div>
+        <div className={"profileName"}>{clinic?.name}</div>
         <div
-          className={styles.location}
+          className={"location"}
         >{`${clinic?.city}, ${clinic?.country}`}</div>
 
-        <div className={styles.tabs}>
+        <div className={"tabs"}>
           <div
             onClick={() => this.setSelectedTab(0)}
-            className={`${styles.tab} ${
-              selectedTab === 0 ? styles.selected : ""
+            className={`${"tab"} ${
+              selectedTab === 0 ? "selected" : ""
             }`}
           >
             Overview
           </div>
           <div
             onClick={() => this.setSelectedTab(1)}
-            className={`${styles.tab} ${
-              selectedTab === 1 ? styles.selected : ""
+            className={`${"tab"} ${
+              selectedTab === 1 ? "selected" : ""
             }`}
           >
             Treatment Types
           </div>
           <div
             onClick={() => this.setSelectedTab(2)}
-            className={`${styles.tab} ${
-              selectedTab === 2 ? styles.selected : ""
+            className={`${"tab"} ${
+              selectedTab === 2 ? "selected" : ""
             }`}
           >
             List Of Dentists
           </div>
           <div
             onClick={() => this.setSelectedTab(3)}
-            className={`${styles.tab} ${
-              selectedTab === 3 ? styles.selected : ""
+            className={`${"tab"} ${
+              selectedTab === 3 ? "selected" : ""
             }`}
           >
             Comments

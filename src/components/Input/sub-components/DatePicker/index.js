@@ -7,7 +7,7 @@ import Input from "../../index";
 
 /*** Styles ***/
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
+import './dateinput.scss';
 export default function DateInput({
     label,
     placeholder,
@@ -56,7 +56,7 @@ export default function DateInput({
 };
 
 /* export default class DateInput{
-    
+
     render(){
         const {
             label,

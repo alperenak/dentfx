@@ -5,7 +5,7 @@
   position: relative;
   cursor: text;
   margin: 8px 0;
-  width: fit-content;
+  width: 100%;
 
   &.disabled {
     cursor: not-allowed !important;
@@ -81,7 +81,7 @@
     }
 
     &.full {
-      width: 534px;
+      width: 100%;
     }
 
     &.medium {

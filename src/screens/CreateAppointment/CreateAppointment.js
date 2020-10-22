@@ -84,58 +84,65 @@ class CreateAppointment extends Component {
       startTime,
     } = this.state;
     return (
-      <div className={styles.createAppointmentWrapper}>
-        <div className={styles.header}>
-          <img src={illustration} alt="" />
-          <div className={styles.headerText}>
-            <div className={styles.title}>Hi Peter,</div>
-            <div className={styles.subtitle}>make an appointment easily!</div>
-          </div>
-        </div>
+		<div className={"createAppointmentWrapper"}>
+			<div className={"header"}>
+				<img src={illustration} alt="" />
+				<div className={"headerText"}>
+					<div className={"title"}>Hi Peter,</div>
+					<div className={"subtitle"}>make an appointment easily!</div>
+				</div>
+			</div>
 
-        <div className={styles.content}>
-          <Input
-            type={"select"}
-            size={"full"}
-            onChange={this.onChangeDentist}
-            externalSource={dentistData && dentistData}
-            label={"Select a dentist"}
-          />
-          <div style={{ marginBottom: "15px" }} />
-          <Input
-            type={"select"}
-            size={"full"}
-            onChange={this.onChangeTreatmentType}
-            externalSource={treatmentData && treatmentData}
-            label={"Select a treatment"}
-          />
-          <div style={{ marginBottom: "15px" }} />
-          <Input
-            type={"date"}
-            size={"half"}
-            onChange={this.onChangeDate}
-            label={"Select a date"}
-          />
-
-          {clinicData && user && dentist && treatmentType && startTime && (
-            <div className={styles.disclaimer}>
-              <div className={styles.textBlue}>
-                <span> {clinicData.name}</span> üzerinden <span>{dentist}</span>
-                'a <span>{startTime} </span>
-                tarihinde, 15:00 saatinde <span>{treatmentType}</span> için bir
-                randevu oluşturuyorsunuz.
-              </div>
-              <div className={styles.textRed}>
-                Randevunuzu <span>kontrol ettikten sonra </span> onaylamak için
-                aşağıdaki butona tıklayınız.
-              </div>
-            </div>
-          )}
-
-          <button className={styles.submitBtn} onClick={this.submitAppointment}>
-            Randevu Oluştur
-          </button>
-        </div>
+        	<div className={"content row"}>
+				<div class="col-md-12">
+					<Input
+						type={"select"}
+						size={"full"}
+						onChange={this.onChangeDentist}
+						externalSource={dentistData && dentistData}
+						label={"Select a dentist"}
+					/>
+					<div style={{ marginBottom: "15px" }} />
+				</div>
+				<div class="col-md-12">
+					<Input
+						type={"select"}
+						size={"full"}
+						onChange={this.onChangeTreatmentType}
+						externalSource={treatmentData && treatmentData}
+						label={"Select a treatment"}
+					/>
+	          		<div style={{ marginBottom: "15px" }} />
+				</div>
+				<div class="col-md-12">
+					<Input
+						type={"date"}
+						size={"full"}
+						onChange={this.onChangeDate}
+						label={"Select a date"}
+					/>
+				</div>
+				<div class="col-md-12">
+					{clinicData && user && dentist && treatmentType && startTime && (
+						<div className={"disclaimer"}>
+							<div className={"textBlue"}>
+								<span> {clinicData.name}</span> üzerinden <span>{dentist}</span>'a <span>{startTime} </span>
+								tarihinde, 15:00 saatinde <span>{treatmentType}</span> için bir
+								randevu oluşturuyorsunuz.
+							</div>
+							<div className={"textRed"}>
+								Randevunuzu <span>kontrol ettikten sonra </span> onaylamak için
+								aşağıdaki butona tıklayınız.
+							</div>
+						</div>
+					)}
+				</div>
+				<div class="col-md-12">
+          			<button className={"submitBtn"} onClick={this.submitAppointment}>
+            			Randevu Oluştur
+          			</button>
+				</div>
+        	</div>
       </div>
     );
   }

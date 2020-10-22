@@ -1,6 +1,6 @@
 .selectWrapper {
   position: relative;
-  width: fit-content;
+  width: 100%;
   margin: 8px 0;
   font-family: "SofiaRegular";
 
@@ -132,7 +132,8 @@
       border: 1px solid #2c3f58;
     }
     &.full {
-      width: 534px;
+      width: 100%;
+	  height:50px;
     }
     &.medium {
       width: 390px;

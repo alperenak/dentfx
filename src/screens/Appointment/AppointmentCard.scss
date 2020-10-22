@@ -60,7 +60,7 @@ $pendingBadge: #7b700aa8;
   	&__header {
 	    display: flex;
 	    flex-direction: row;
-	    justify-content: space-between;
+	    justify-content: flex-start!important;
 	    width: 100%;
 		align-items: center;
 		&__lefticon {
@@ -80,6 +80,7 @@ $pendingBadge: #7b700aa8;
 		&__clinicInfo {
 			display: flex;
 			flex-direction: row;
+			margin-left: 20px;
 			&__badge {
 				font-size: 12px;
 				position: relative;
@@ -91,6 +92,19 @@ $pendingBadge: #7b700aa8;
 				display: flex;
 				justify-content: center;
 				align-items: center;
+
+			}
+			.active {
+				background-color: $activeBadge;
+			}
+			.completed {
+				background-color: $completedBadge;
+			}
+			.cancelled {
+				background-color: $cancelledBadge;
+			}
+			.pending {
+				background-color: $pendingBadge;
 			}
 		}
 	}

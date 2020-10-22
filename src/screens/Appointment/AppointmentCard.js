@@ -81,10 +81,10 @@ class AppointmentCard extends Component {
   renderBadge = (data) => {
     let { status } = this.state;
 
-    if (status === "completed") return <div>TAMAMLANDI</div>;
-    	else if (status === "active") return <div>SHOW ON MAP</div>;
-    	else if (status === "pending") return <div>ONAY BEKLENİYOR</div>;
-    	else if (status === "cancelled") return <div>İPTAL EDİLDİ</div>;
+    if (status === "completed") return <div className={"cardWrapper__content__clinicInfo__badge completed"}>TAMAMLANDI</div>;
+    	else if (status === "active") return <div className={"cardWrapper__content__clinicInfo__badge active"}>HARİTADA GÖSTER</div>;
+    	else if (status === "pending") return <div className={"cardWrapper__content__clinicInfo__badge pending"}>ONAY BEKLENİYOR</div>;
+    	else if (status === "cancelled") return <div className={"cardWrapper__content__clinicInfo__badge cancelled"}>İPTAL EDİLDİ</div>;
   };
 
 	render() {
@@ -98,7 +98,8 @@ class AppointmentCard extends Component {
 					</div>
 					<div className="cardWrapper__content__clinicInfo">
 						<div className={styles.title}> {data?.Clinic?.name} </div>
-						<div className={styles.badge}>{this.renderBadge(data)}</div>
+						{this.renderBadge(data)}
+
 					</div>
 				</div>
 				<div className="cardWrapper__content">
