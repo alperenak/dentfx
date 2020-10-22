@@ -5,19 +5,19 @@ import styles from "./dentistSay.scss";
 export default function DentistSay(props) {
   let { name, starCount, content, avatar } = props;
   return (
-    <div className={styles.DentistSay}>
-      <div className={styles.Top}>
-        <div className={styles.avatar}>
+    <div className="dentistSay">
+      <div className="Top">
+        <div className="avatar">
           <img src={avatar} />
         </div>
-        <div className={styles.otherDetails}>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.star}>
+        <div className="otherDetails">
+          <div className="name">{name}</div>
+          <div className="star">
             <RenderStars starCount={starCount} />
           </div>
         </div>
       </div>
-      <div className={styles.Content}>{content}</div>
+      <div className="Content">{content}</div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 @import '../../../../helpers/variableBreakpoints.scss';
 
-.PackagesCard {
+.packagesCard {
     display: flex;
     width: 520px;
     height: 100px;
@@ -45,6 +45,6 @@
     }
 }
 
-.PackagesCard:hover {
+.packagesCard:hover {
     background-color: #fbfcff;
 }

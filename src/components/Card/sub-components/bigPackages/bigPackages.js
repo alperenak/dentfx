@@ -11,20 +11,20 @@ export default function BigPackages({
   buttonTitle,
 }) {
   return (
-    <div className={styles.PackagesContainer}>
-      <div className={styles.icon}>{children}</div>
-      <div className={styles.packageName}>{packageName}</div>
-      <div className={styles.packagePrice}>
+    <div className={"PackagesContainer"}>
+      <div className={"icon"}>{children}</div>
+      <div className={"packageName"}>{packageName}</div>
+      <div className={"packagePrice"}>
         {packagePrice}
-        <span className={styles.currency}>TL</span>
-        <span className={styles.slash}>/</span>
-        <span className={styles.year}>YILLIK</span>
+        <span className={"currency"}>TL</span>
+        <span className={"slash"}>/</span>
+        <span className={"year"}>YILLIK</span>
       </div>
-      <div className={styles.packageDescription}>{packageDescription}</div>
-      <div className={styles.packagesFeatures}>
+      <div className={"packageDescription"}>{packageDescription}</div>
+      <div className={"packagesFeatures"}>
         {packagesFeatures.map((item, i) => {
           return (
-            <div key={i} className={styles.PackagesFeaturesLabel}>
+            <div key={i} className={"PackagesFeaturesLabel"}>
               {item}
             </div>
           );

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 /*** Components ***/
 import Input from "../../components/Input";
 import Button from "../../components/Button/button";
-
+import { Link } from "react-router-dom";
 /*** Styles ***/
 import styles from './signup.scss';
 
@@ -19,119 +19,101 @@ import store from "../../store";
 import {setCookie} from "../../utils/cookie";
 
 async function signUp({name, surname, email, password, phone}) {
-  let res = await store.createUser({name, surname, email, password, phone});
-  if (res.status === 200) {
-    window.location.pathname = '/login';
-  } else {
-    //res.errorData.title
-    //res.errorData.message
-  }
+	let res = await store.createUser({name, surname, email, password, phone});
+	if (res.status === 200) {
+		window.location.pathname = '/login';
+	} else {
+		//res.errorData.title
+		//res.errorData.message
+	}
 }
 
 export default function SignUp() {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  return (
-    <div className={styles.SignUp}>
-      <div className={styles.Container}>
-        <div className={styles.image}>
-          <img className={styles.signUpImage} src={signUpImage} alt={'image'} />
-          <img className={styles.signUpIcon} src={dentfxIcon} alt={'icon'} />
-          <div className={styles.signUpText}>
-            <div className={styles.header}>Urna et pharetra</div>
-            <div className={styles.text}>Nunc congue nisi vitae suscipit tellus mauris. Laoreet non
-              curabitur gravida arcu ac tortor dignissim convallis aenean.
-              Ultrices eros in cursus massa tincidunt dui ut ornare.</div>
-          </div>
-        </div>
-        <div className={styles.formContainer}>
-          <div className={styles.buttonContainer}>
-            <Button className={styles.login} type={'ghost'} title={'Giriş Yap'} mission={'link'} to={'/login'} />
-          </div>
-          <div className={styles.welcomingSection}>
-            <img src={signUpIcon} alt={"signUpIcon"}/>
-            <div className={styles.textContainer}>
-              <span className={styles.header}>DentFX’e Kaydol!</span>
-              <span className={styles.text}>Hoşgeldin!</span>
-            </div>
-          </div>
-          <div className={styles.inputContainer}>
-            <Input
-              type={'text'}
-              size={'large'}
-              className={styles.input}
-              label={'Ad'}
-              placeholder={'ad'}
-              onChange={value => setName(value)}
-            />
-            <Input
-              type={'text'}
-              size={'large'}
-              className={styles.input}
-              label={'Soyad'}
-              placeholder={'soyad'}
-              onChange={value => setSurname(value)}
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <Input
-              type={'text'}
-              size={'large'}
-              className={styles.input}
-              label={'E-Posta'}
-              placeholder={'e-posta'}
-              onChange={value => setEmail(value)}
-            />
-            <Input
-              type={'password'}
-              size={'large'}
-              className={styles.input}
-              label={'Şifre'}
-              placeholder={'şifre'}
-              onChange={value => setPassword(value)}
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <Input
-              type={'text'}
-              className={styles.phone}
-              size={'large'}
-              label={'Telefon'}
-              placeholder={'0(000)-00-00'}
-              onChange={value => setPhone(value)}
-            />
-          </div>
-          <div className={styles.forgotPassword}>
-            <Button
-              type={'primary'}
-              title={'Şifreni mi Unuttun?'}
-            />
-          </div>
-          <div className={styles.signInButtons}>
-            <Button
-              type={'tertiary'}
-              title={'Kaydol'}
-              className={styles.signInButton}
-              onClick={() => signUp({name, surname, email, password, phone})}
-            />
-            <div className={styles.strokeContainer}>
-              <div className={styles.stroke} />
-              <div className={styles.strokeText}>veya</div>
-              <div className={styles.stroke} />
-            </div>
-            <Button
-              type={'ghost'}
-              title={'Facebook ile giriş yap?'}
-              className={styles.signInButton}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+	const [name, setName] = useState('');
+	const [surname, setSurname] = useState('');
+	const [phone, setPhone] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	return (
+		<div className={"login"}>
+			<div className={"container login__container"} style={{"height":"100vh"}}>
+				<div className={"login__inner"}>
+				<div className={"loginImageCol col-md-6"} style={{
+					  "background-image":"url("+signUpImage+")",
+					  "width":"auto!important",
+					  "height":"auto!important"
+				  }}>
+						<img className={"login__image__loginIcon"} src={dentfxIcon} alt={'icon'} />
+						<div className={"login__image__loginText"}>
+							<div className={"login__image__header"}>Urna et pharetra</div>
+							<div className={"login__image__text"}>Nunc congue nisi vitae suscipit tellus mauris. Laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean. Ultrices eros in cursus massa tincidunt dui ut ornare.</div>
+						</div>
+					</div>
+					<div className={"login__formContainer col-xl-6 col-lg-12"}>
+						<div className={"login__buttonContainer"}>
+							<Link to={'/login'} className={"login__buttonContainer__signUp"}>Giriş Yap</Link>
+						</div>
+						<div className={"login__welcomingSection"}>
+							<img src={signUpIcon} alt={"loginIcon"}/>
+							<div className={"login__welcomingSection__textContainer"}>
+								<span className={"login__welcomingSection__header"}>DentFX’e Kayıt Ol!</span>
+								<span className={"login__welcomingSection__text"}>Hoşgeldin!</span>
+							</div>
+						</div>
+						<div className={"login__inputContainer"}>
+							<div class="row">
+								<div class="col-md-6">
+									<div className={"login__inputContainer__input"}>
+										<label>Ad</label>
+										<input type="text" placeholder={'ad'} onChange={value => setName(value.target.value)} />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div className={"login__inputContainer__input"}>
+										<label>Soyad</label>
+										<input type="text"  placeholder={'soyad'} onChange={value => setSurname(value.target.value)} />
+									</div>
+								</div>
+							</div>
+				  	  	</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div className={"login__inputContainer__input"}>
+									<label>E-Posta</label>
+									<input type="text" placeholder={'e-posta'} onChange={value => setEmail(value.target.value)} />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div className={"login__inputContainer__input"}>
+									<label>Şifre</label>
+									<input type="text" placeholder={'şifre'} onChange={value => setPassword(value.target.value)} />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div className={"login__inputContainer__input"}>
+									<label>Telefon</label>
+									<input type="text"  placeholder={'0(000)-00-00'} onChange={value => setPhone(value.target.value)}/>
+								</div>
+							</div>
+						</div>
+						<div className={"login__signInButtons"}>
+							<div className={"login__signInButtons__signInButton"}>
+								<button className={"login__buttonContainer__tertiary"} onClick={() => signUp({name, surname, email, password, phone})}>Kaydol</button>
+							</div>
+							<div className={"login__signInButtons__strokeContainer"}>
+								<div className={"login__signInButtons__strokeContainer__stroke"}/>
+								<div className={"login__signInButtons__strokeContainer__strokeText"}>veya</div>
+								<div className={"login__signInButtons__strokeContainer__stroke"} />
+							</div>
+							<div className={"login__signInButtons__signInButton"}>
+								<button className={"login__buttonContainer__ghost"} onClick={() => null}>Facebook ile giriş yap?</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
-
-

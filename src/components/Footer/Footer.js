@@ -14,35 +14,37 @@ import locationIcon from "../../icons/location-icon.svg";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className={`${styles.section} ${styles.bulletPoints}`}>
-        <div className={styles.textBlue}>© DentFX</div>
-        <div className={styles.textMuted}>2020</div>
-        <div className={styles.textMuted}>All rights reserved</div>
-      </div>
-
-      <div className={styles.section}>
+    <footer class="row">
+      <div class="col-md-4">
+	  <div className={"section"}>
         <div>
           <img src={locationIcon} alt="" />
         </div>
-        <div className={styles.textBlue}>34734</div>
-        <div className={styles.textMuted}>
-          Kadıköy, <span className={styles.textBlue}>İstanbul</span>
+        <div className={"textBlue"}>34734</div>
+        <div className={"textMuted"}>
+          Kadıköy, <span className={"textBlue"}>İstanbul</span>
         </div>
       </div>
+	  </div>
 
-      <div className={styles.section}>
-        <div className={styles.textMuted}>Privacy</div>
-        <div className={styles.textMuted}>Terms</div>
-      </div>
 
-      <div className={styles.section}>
-        <img src={telegramIcon} alt="" className={styles.socialIcon} />
-        <img src={twitterIcon} alt="" className={styles.socialIcon} />
-        <img src={facebookIcon} alt="" className={styles.socialIcon} />
-        <img src={messengerIcon} alt="" className={styles.socialIcon} />
-        <img src={instagramIcon} alt="" className={styles.socialIcon} />
+	  <div class="col-md-4">
+	  <div className={"section"}>
+		<div className={"textMuted"}>Privacy</div>
+		<div className={"textMuted"}>Terms</div>
+	  </div>
+	  </div>
+
+	  <div class="col-md-4">
+	  <div className={"section"}>
+        <img src={telegramIcon} alt="" className={"socialIcon"} />
+        <img src={twitterIcon} alt="" className={"socialIcon"} />
+        <img src={facebookIcon} alt="" className={"socialIcon"} />
+        <img src={messengerIcon} alt="" className={"socialIcon"} />
+        <img src={instagramIcon} alt="" className={"socialIcon"} />
       </div>
+	  </div>
+
     </footer>
   );
 };

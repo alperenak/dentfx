@@ -1,25 +1,22 @@
-.container {
-  display: flex;
-  flex-direction: column;
+.cContainer {
+	display: flex;
+	flex-direction: column;
 
-  & .buttonWrapper {
-    height: 50px;
-    margin-left: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    & .icon {
-      margin-right: 15px;
-    }
-
-    & .title {
-      font-weight: bold;
-      color: #283b6a;
-    }
-  }
+	&__buttonWrapper {
+		height: 50px;
+		margin-left: auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		&:hover {
+			cursor: pointer;
+		}
+		&__icon {
+			margin-right: 15px;
+		}
+		&__title {
+			font-weight: bold;
+			color: #283b6a;
+		}
+	}
 }

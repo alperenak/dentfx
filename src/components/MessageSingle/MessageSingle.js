@@ -4,33 +4,21 @@ import React from "react";
 import styles from "./messagesingle.scss";
 
 const MessageSingle = ({ message, sender }) => {
-  return (
-    <div
-      className={`${styles.messageContainer} ${
-        message.isMine ? styles.isMine : styles.notMine
-      }`}
-    >
-      {!message.isMine ? (
-        <div className={styles.avatar}>
-          <img src={sender.avatar} alt="" />
-        </div>
-      ) : (
-        ""
-      )}
-
-      <div
-        className={`${styles.messageBody} ${
-          message.isMine ? styles.isMine : styles.notMine
-        }`}
-      >
-        <div className={`${styles.message}`}>{message.body}</div>
-
-        <div className={styles.time}>{`${new Date(
-          message.createdAt
-        ).getHours()}:${new Date(message.createdAt).getMinutes()}`}</div>
-      </div>
-    </div>
-  );
+	return (
+		<div className={`${"messageContainer"} ${message.isMine ? "messageContainer__isMine" : "messageContainer__notMine"}`}>
+			{!message.isMine ? (
+				<div className="messageContainer__avatar">
+					<img src={sender.avatar} alt="" />
+				</div>
+			) : (
+				""
+			)}
+			<div className={`${"messageContainer__messageBody"} ${ message.isMine ? "messageContainer__messageBody__isMine" : "messageContainer__messageBody__notMine"}`}>
+				<div className={`${"messageContainer__messageBody__message"}`}>{message.body}</div>
+				<div className={ message.isMine ? "messageContainer__messageBody__isMine__time":"messageContainer__messageBody__notMine__time"}>{`${new Date(message.createdAt).getHours()}:${new Date(message.createdAt).getMinutes()}`}</div>
+			</div>
+		</div>
+	);
 };
 
 export default MessageSingle;

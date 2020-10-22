@@ -41,54 +41,55 @@ class NewMessage extends Component {
     }
   };
 
-  render() {
-    let { dentist, message } = this.state;
-    return (
-      <div className={styles.newQuestionContainer}>
-        <div className={styles.headerSection}>
-          <div className={styles.icon}>
-            <img src={mailIcon} alt="" />
-          </div>
-          <div className={styles.header}>
-            Choose a dentist or clinic and send a message!
-          </div>
-          <div className={styles.content}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem illo debitis voluptatibus, sunt non nihil veniam
-            aperiam eligendi nesciunt libero iure aliquid magnam error!
-          </div>
-        </div>
-        <div className={styles.mainSection}>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="dentist">Dentist or Clinic</label>
-            <input
-              type="text"
-              name="dentist"
-              placeholder="Florya Hospi"
-              value={dentist}
-              onChange={this.onChange}
-            />
-          </div>
+	render() {
+		let { dentist, message } = this.state;
+		return (
+			<div className="newQuestionContainer">
+				<div className="newQuestionContainer__headerSection">
+					<div className="newQuestionContainer__headerSection__icon">
+						<img src={mailIcon} alt="" />
+					</div>
+					<div className="newQuestionContainer__headerSection__header">
+						Choose a dentist or clinic and send a message!
+					</div>
+					<div className="newQuestionContainer__headerSection__content">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Exercitationem illo debitis voluptatibus, sunt non nihil veniam
+						aperiam eligendi nesciunt libero iure aliquid magnam error!
+					</div>
+				</div>
+				<div className="newQuestionContainer__mainSection">
+					<div className="newQuestionContainer__mainSection__inputWrapper">
+						<label htmlFor="dentist">Dentist or Clinic</label>
+						<input
+							type="text"
+							name="dentist"
+							placeholder="Florya Hospi"
+							value={dentist}
+							onChange={this.onChange}
+						/>
+					</div>
 
-          <div className={styles.inputWrapper}>
-            <label htmlFor="dentist">Your Message</label>
-            <textarea
-              name="message"
-              value={message}
-              onChange={this.onChange}
-            ></textarea>
-          </div>
+					<div className="newQuestionContainer__mainSection__inputWrapper">
+						<label htmlFor="dentist">Your Message</label>
+						<textarea
+							name="message"
+							value={message}
+							onChange={this.onChange}
+						></textarea>
+					</div>
 
-          <label htmlFor="dentist">Photo For Treatment (optional) </label>
-          <DragDrop onFileChange={this.onFileChange} />
-
-          <button className={styles.sendMessageButton} onClick={this.onSubmit}>
-            Send message
-          </button>
-        </div>
-      </div>
-    );
-  }
+					<label htmlFor="dentist">Photo For Treatment (optional) </label>
+					<div className="dropDrag">
+						<DragDrop onFileChange={this.onFileChange} />
+					</div>
+					<button className="newQuestionContainer__mainSection__sendMessageButton" onClick={this.onSubmit}>
+						Send message
+					</button>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default NewMessage;

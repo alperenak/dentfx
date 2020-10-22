@@ -17,7 +17,7 @@ import languageSettingsIcon from "../../icons/language-settings-icon.svg";
 import notificationIcon from "../../icons/notification-settings-icon.svg";
 import profileSettingsIcon from "../../icons/profile-settings-icon.svg";
 import chevronRightIcon from "../../icons/Chevron-right.svg";
-
+import DatePicker from 'react-datepicker';
 //*** Components ***/
 import Input from "../../components/Input";
 import Switch from "react-input-switch";
@@ -88,286 +88,255 @@ export default function Profile() {
     getUser();
   }, []);
 
-  function overviewTab() {
-    return (
-      <div className={styles.overviewWrapper}>
-        <div className={styles.card}>
-          <img src={birthdayIcon} className={styles.icon} />
-          <div className={styles.content}>17 September 1994</div>
-        </div>
+	function overviewTab() {
+	return (
+		<div className="overviewWrapper">
+			<div class="row">
+				<div class="col-md-6">
+					<div className="overviewWrapper__card">
+						<img src={birthdayIcon} className="overviewWrapper__card__icon" />
+						<div className="overviewWrapper__card__content">17 September 1994</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					{userType !== "clinic" && (
+						<div className="overviewWrapper__card">
+							<img src={emailIcon} className="overviewWrapper__card__icon" />
+							<div className="overviewWrapper__card__content">{user?.email}</div>
+						</div>
+					)}
+				</div>
+				<div class="col-md-6">
+					<div className="overviewWrapper__card">
+						<img src={phoneIcon} className="overviewWrapper__card__icon" />
+						<div className="overviewWrapper__card__content">{user?.phone}</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+				<div className="overviewWrapper__card">
+					<img src={locationIcon} className="overviewWrapper__card__icon" />
+					<div className="overviewWrapper__card__content">
+						{user?.city}, {user?.country}
+					</div>
+				</div>
+				</div>
+			</div>
 
-        {userType !== "clinic" && (
-          <div className={styles.card}>
-            <img src={emailIcon} className={styles.icon} />
-            <div className={styles.content}>{user?.email}</div>
-          </div>
-        )}
+		</div>
+	);
+	}
 
-        <div className={styles.card}>
-          <img src={phoneIcon} className={styles.icon} />
-          <div className={styles.content}>{user?.phone}</div>
-        </div>
+	function settingsTab() {
+		return (
+		<div className="settingsWrapper">
+			<div className="settingsWrapper__tab" onClick={() => {setSelectedTab(2);}}>
+			<div className="settingsWrapper__tab__iconWrapper">
+				<img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
+			</div>
+			<div className="settingsWrapper__tab__text">Profile Settings</div>
+				<img src={chevronRightIcon} alt="" className="settingsWrapper__tab__rightIcon" />
+			</div>
 
-        <div className={styles.card}>
-          <img src={locationIcon} className={styles.icon} />
-          <div className={styles.content}>
-            {user?.city}, {user?.country}
-          </div>
-        </div>
-      </div>
-    );
-  }
+			<div className="settingsWrapper__tab" onClick={() => {setSelectedTab(3);}}>
+				<div className="settingsWrapper__tab__iconWrapper">
+					<img src={notificationIcon} alt="" className={styles.leftIcon} />
+				</div>
+				<div className="settingsWrapper__tab__text">Notification Settings</div>
+				<img src={chevronRightIcon} alt="" className="settingsWrapper__tab__rightIcon" />
+			</div>
 
-  function settingsTab() {
-    return (
-      <div className={styles.settingsWrapper}>
-        <div
-          className={styles.tab}
-          onClick={() => {
-            setSelectedTab(2);
-          }}
-        >
-          <div className={styles.iconWrapper}>
-            <img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
-          </div>
-          <div className={styles.text}>Profile Settings</div>
-          <img src={chevronRightIcon} alt="" className={styles.rightIcon} />
-        </div>
+			<div className="settingsWrapper__tab" onClick={() => {setSelectedTab(4);}}>
+				<div className="settingsWrapper__tab__iconWrapper">
+					<img src={languageSettingsIcon} alt="" className={styles.leftIcon} />
+				</div>
+				<div className="settingsWrapper__tab__text">Language Settings</div>
+				<img src={chevronRightIcon} alt="" className="settingsWrapper__tab__rightIcon" />
+			</div>
+		</div>
+		);
+	}
 
-        <div
-          className={styles.tab}
-          onClick={() => {
-            setSelectedTab(3);
-          }}
-        >
-          <div className={styles.iconWrapper}>
-            <img src={notificationIcon} alt="" className={styles.leftIcon} />
-          </div>
-          <div className={styles.text}>Notification Settings</div>
-          <img src={chevronRightIcon} alt="" className={styles.rightIcon} />
-        </div>
+	function profileSettings() {
+		const onClickSubmit = async () => {
+			await store.updateUserProfile({
+				userId: user.id,
+				name: profileName,
+				surname: profileSurname,
+				email: profileEmail,
+				phone: profilePhone,
+			});
+		};
 
-        <div
-          className={styles.tab}
-          onClick={() => {
-            setSelectedTab(4);
-          }}
-        >
-          <div className={styles.iconWrapper}>
-            <img
-              src={languageSettingsIcon}
-              alt=""
-              className={styles.leftIcon}
-            />
-          </div>
-          <div className={styles.text}>Language Settings</div>
-          <img src={chevronRightIcon} alt="" className={styles.rightIcon} />
-        </div>
-      </div>
-    );
-  }
+		return (
+			<div className={`${"settingsWrapper"} ${styles.profileSettings}`}>
+				<div className="settingsWrapper__header">
+					<div className="settingsWrapper__header__iconWrapper">
+						<img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
+					</div>
+					<div className="settingsWrapper__header__text">Profile Settings</div>
+					<img
+						src={chevronRightIcon}
+						alt=""
+						className="settingsWrapper__header__rightIcon"
+						onClick={() => setSelectedTab(1)}
+					/>
+				</div>
 
-  function profileSettings() {
-    const onClickSubmit = async () => {
-      await store.updateUserProfile({
-        userId: user.id,
-        name: profileName,
-        surname: profileSurname,
-        email: profileEmail,
-        phone: profilePhone,
-      });
-    };
+				<div className="settingsWrapper__inputs">
+					<div class="row">
+						<div class="col-md-6">
+							<div className={"settingsWrapper__inputContainer__input"}>
+								<label>Ad</label>
+								<input type="text" value={user?.name}  placeholder={'Ad'} onChange={value => setProfileName(value.target.value)} />
+							</div>
+						</div>
+						<div class="col-md-6">
+							{userType !== "clinic" && (
+								<div className={"settingsWrapper__inputContainer__input"}>
+									<label>Soyad</label>
+									<input type="text" value={user?.surname}  placeholder={'Soyad'} onChange={value => setProfileSurname(value.target.value)} />
+								</div>
+							)}
+						</div>
+						<div class="col-md-6">
+							<div className={"settingsWrapper__inputContainer__input"}>
+								<label>E-Posta</label>
+								<input type="text" value={user?.email}  placeholder={'E-Posta'} onChange={value => setProfileEmail(value.target.value)} />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div className={"settingsWrapper__inputContainer__input"}>
+								<label>Telefon</label>
+								<input type="text" value={user?.phone}  placeholder={'Telefon'} onChange={value => setProfilePhone(value.target.value)} />
+							</div>
+						</div>
+					</div>
+				</div>
+				<button className="settingsWrapper__submitButton" onClick={onClickSubmit}>
+					Kaydet
+				</button>
+			</div>
+		);
+	}
 
-    return (
-      <div className={`${styles.settingsWrapper} ${styles.profileSettings}`}>
-        <div className={styles.header}>
-          <div className={styles.iconWrapper}>
-            <img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
-          </div>
-          <div className={styles.text}>Profile Settings</div>
+	function notificationSettings() {
+		return (
+			<div className="settingsWrapper">
+				<div className="settingsWrapper__header">
+					<div className="settingsWrapper__header__iconWrapper">
+						<img src={notificationIcon} alt="" className={styles.leftIcon} />
+					</div>
+					<div className="settingsWrapper__header__text">Notification Settings</div>
 
-          <img
-            src={chevronRightIcon}
-            alt=""
-            className={styles.rightIcon}
-            onClick={() => setSelectedTab(1)}
-          />
-        </div>
+					<img
+						src={chevronRightIcon}
+						alt=""
+						className="settingsWrapper__header__rightIcon"
+						onClick={() => setSelectedTab(1)}
+					/>
+				</div>
 
-        <div className={styles.inputs}>
-          <Input
-            type={"text"}
-            defaultValue={user?.name}
-            size={"full"}
-            label="Ad"
-            onChange={setProfileName}
-          />
-          {userType !== "clinic" && (
-            <Input
-              type={"text"}
-              defaultValue={user?.surname}
-              size={"full"}
-              label="Soyad"
-              onChange={setProfileSurname}
-            />
-          )}
-          <Input
-            type={"text"}
-            defaultValue={user?.email}
-            size={"full"}
-            label="E-Posta"
-            onChange={setProfileEmail}
-          />
-          {userType !== "clinic" && (
-            <Input
-              type={"date"}
-              //defaultValue={new Date().toLocaleDateString()}
-              size={"full"}
-              label="Doğum Tarihi"
-              onChange={setProfileBirthday}
-            />
-          )}
-          <Input
-            type={"text"}
-            defaultValue={user?.phone}
-            size={"full"}
-            label="Telefon"
-            onChange={setProfilePhone}
-          />
-        </div>
+				<div className="settingsWrapper__inputs">
+					<div class="row">
+						<div class="col-md-6">
+							<div className="settingsWrapper__item">
+								<div className="settingsWrapper__header__text">Notification Setting 1</div>
+								<div className="settingsWrapper__item__switch">
+									<Switch
+										on={true}
+										off={false}
+										value={notification1}
+										onChange={setNotification1}
+									/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div className={styles.item}>
+								<div className="settingsWrapper__header__text">Notification Setting 1</div>
+								<div className="settingsWrapper__item__switch">
+									<Switch
+										on={true}
+										off={false}
+										value={notification2}
+										onChange={setNotification2}
+									/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div className={styles.item}>
+								<div className="settingsWrapper__header__text">Notification Setting 1</div>
+								<div className="settingsWrapper__item__switch">
+									<Switch
+										on={true}
+										off={false}
+										value={notification3}
+										onChange={setNotification3}
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button className="settingsWrapper__submitButton">Kaydet</button>
+			</div>
+		);
+	}
 
-        <button className={styles.submitButton} onClick={onClickSubmit}>
-          Kaydet
-        </button>
-      </div>
-    );
-  }
+	function languageSettings() {
+		return (
+			<div className="settingsWrapper">
+				<div className="settingsWrapper__header">
+					<div className="settingsWrapper__header__iconWrapper">
+						<img
+							src={languageSettingsIcon}
+							alt=""
+							className={styles.leftIcon}
+						/>
+					</div>
+					<div className="settingsWrapper__header__text">Language Settings</div>
+					<img
+						src={chevronRightIcon}
+						alt=""
+						className="settingsWrapper__header__rightIcon"
+						onClick={() => setSelectedTab(1)}
+					/>
+					</div>
+					<div className="settingsWrapper__inputs">
+						<Input type="select" size="full" />
+					</div>
+			</div>
+		);
+	}
 
-  function notificationSettings() {
-    return (
-      <div className={styles.settingsWrapper}>
-        <div className={styles.header}>
-          <div className={styles.iconWrapper}>
-            <img src={notificationIcon} alt="" className={styles.leftIcon} />
-          </div>
-          <div className={styles.text}>Notification Settings</div>
+	return (
+		<div className="profile">
+			<div className="profile__profileCard">
+				<img className="profile__profileCard__profileImage" src={user?.avatar} alt="avatar" />
+				<div className="profile__profileCard__editIcon">
+					<img src={editIcon} alt="" />
+				</div>
+			</div>
+			<div className="profile__profileName">
+				{`${user?.name} ${user?.surname? user.surname : ''}`}
+			</div>
+			<div className="profile__tabs">
+				<div onClick={() => setSelectedTab(0)} className={`${"profile__tabs__tab"} ${selectedTab === 0 ? "profile__tabs__selected" : ""}`}>
+					Overview
+				</div>
+				<div onClick={() => setSelectedTab(1)} className={`${"profile__tabs__tab"} ${selectedTab === 1 ? "profile__tabs__selected" : ""}`}>
+					Settings
+				</div>
+			</div>
 
-          <img
-            src={chevronRightIcon}
-            alt=""
-            className={styles.rightIcon}
-            onClick={() => setSelectedTab(1)}
-          />
-        </div>
-
-        <div className={styles.inputs}>
-          <div className={styles.item}>
-            <div className={styles.text}>Notification Setting 1</div>
-            <div className={styles.switch}>
-              <Switch
-                on={true}
-                off={false}
-                value={notification1}
-                onChange={setNotification1}
-              />
-            </div>
-          </div>
-
-          <div className={styles.item}>
-            <div className={styles.text}>Notification Setting 1</div>
-            <div className={styles.switch}>
-              <Switch
-                on={true}
-                off={false}
-                value={notification2}
-                onChange={setNotification2}
-              />
-            </div>
-          </div>
-
-          <div className={styles.item}>
-            <div className={styles.text}>Notification Setting 1</div>
-            <div className={styles.switch}>
-              <Switch
-                on={true}
-                off={false}
-                value={notification3}
-                onChange={setNotification3}
-              />
-            </div>
-          </div>
-        </div>
-
-        <button className={styles.submitButton}>Kaydet</button>
-      </div>
-    );
-  }
-
-  function languageSettings() {
-    return (
-      <div className={styles.settingsWrapper}>
-        <div className={styles.header}>
-          <div className={styles.iconWrapper}>
-            <img
-              src={languageSettingsIcon}
-              alt=""
-              className={styles.leftIcon}
-            />
-          </div>
-          <div className={styles.text}>Language Settings</div>
-
-          <img
-            src={chevronRightIcon}
-            alt=""
-            className={styles.rightIcon}
-            onClick={() => setSelectedTab(1)}
-          />
-        </div>
-
-        <div className={styles.inputs}>
-          <Input type="select" size="full" />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={styles.Profile}>
-      <div className={styles.profileCard}>
-        <img className={styles.profileImage} src={user?.avatar} alt="avatar" />
-        <div className={styles.editIcon}>
-          <img src={editIcon} alt="" />
-        </div>
-      </div>
-      <div className={styles.profileName}>
-        {`${user?.name} ${user?.surname? user.surname : ''}`}
-      </div>
-      <div className={styles.tabs}>
-        <div
-          onClick={() => setSelectedTab(0)}
-          className={`${styles.tab} ${
-            selectedTab === 0 ? styles.selected : ""
-          }`}
-        >
-          Overview
-        </div>
-        <div
-          onClick={() => setSelectedTab(1)}
-          className={`${styles.tab} ${
-            selectedTab === 1 ? styles.selected : ""
-          }`}
-        >
-          Settings
-        </div>
-      </div>
-
-      <div className={styles.tabContent}>
-        {selectedTab === 0 && overviewTab()}
-        {selectedTab === 1 && settingsTab()}
-        {selectedTab === 2 && profileSettings()}
-        {selectedTab === 3 && notificationSettings()}
-        {selectedTab === 4 && languageSettings()}
-      </div>
-    </div>
-  );
+			<div className={styles.tabContent}>
+				{selectedTab === 0 && overviewTab()}
+				{selectedTab === 1 && settingsTab()}
+				{selectedTab === 2 && profileSettings()}
+				{selectedTab === 3 && notificationSettings()}
+				{selectedTab === 4 && languageSettings()}
+			</div>
+	</div>
+	);
 }

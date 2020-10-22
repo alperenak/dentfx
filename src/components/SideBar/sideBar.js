@@ -61,6 +61,13 @@ function RenderList() {
       href: `/appointment`,
       not: [],
     },
+	{
+      title: "Takvim",
+      icon: randevuIcon,
+      hoverIcon: randevuIconBlue,
+      href: `/calendar`,
+      not: ['user'],
+    },
     {
       title: "Cüzdanım",
       icon: walletIcon,
@@ -128,28 +135,26 @@ function RenderList() {
   return list.map((item, i) => {
     if (item?.not.includes(getCookie("user_type"))) return <div></div>;
     return (
-      <Link
-        onMouseOver={() => setHoverItem(i)}
-        onMouseLeave={() => setHoverItem(-1)}
-        key={i}
-        to={item.href}
-        className={`${styles.listItem} ${item.selected ? styles.selected : ""}`}
-      >
-        {hoverItem !== i && !item.selected && (
-          <img src={item.icon} alt={"icon"} />
-        )}
-        {(hoverItem === i || item.selected) && (
-          <img src={item.hoverIcon} alt={"icon"} />
-        )}
-        <div className={styles.text}>{item.title}</div>
-      </Link>
+		<Link
+			key={i}
+			to={item.href}
+			className="list__listItem"
+		>
+			{hoverItem !== i && !item.selected && (
+				<img src={item.icon} alt={"icon"} />
+			)}
+			{(hoverItem === i || item.selected) && (
+				<img src={item.hoverIcon} alt={"icon"} />
+			)}
+			<div className={"list__listItem__text"}>{item.title}</div>
+		</Link>
     );
   });
 }
 
 export default function SideBar() {
   return (
-    <div className={styles.List}>
+    <div className="list">
       <RenderList />
     </div>
   );

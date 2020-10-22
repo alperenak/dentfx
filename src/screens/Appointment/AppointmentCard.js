@@ -29,9 +29,9 @@ class AppointmentCard extends Component {
   onExpandClick = () => {
     this.setState({
       accordionActive:
-        this.state.accordionActive === styles.accordionInactive
-          ? styles.accordionActive
-          : styles.accordionInactive,
+        this.state.accordionActive === "cardWrapper__accordionInactive"
+          ? "cardWrapper__accordionActive"
+          : "cardWrapper__accordionInactive",
     });
   };
 
@@ -60,7 +60,7 @@ class AppointmentCard extends Component {
     if (isDone) {
       return (
         <button
-          className={styles.positiveBtn}
+          className={"cardWrapper__positiveBtn"}
           onClick={this.onClickRandevuyaGit}
         >
           Randevuya Git
@@ -70,7 +70,7 @@ class AppointmentCard extends Component {
 
     return (
       <button
-        className={styles.negativeBtn}
+        className={"cardWrapper__negativeBtn"}
         onClick={this.onClickCancelAppointment}
       >
         Cancel Appointment
@@ -82,54 +82,46 @@ class AppointmentCard extends Component {
     let { status } = this.state;
 
     if (status === "completed") return <div>TAMAMLANDI</div>;
-    else if (status === "active") return <div>SHOW ON MAP</div>;
-    else if (status === "pending") return <div>ONAY BEKLENİYOR</div>;
-    else if (status === "cancelled") return <div>İPTAL EDİLDİ</div>;
+    	else if (status === "active") return <div>SHOW ON MAP</div>;
+    	else if (status === "pending") return <div>ONAY BEKLENİYOR</div>;
+    	else if (status === "cancelled") return <div>İPTAL EDİLDİ</div>;
   };
 
-  render() {
-    let { data } = this.props;
-    let { status, accordionActive } = this.state;
-    return (
-      <div
-        className={`${styles.cardWrapper} ${styles[status]} ${accordionActive}  `}
-      >
-        <div className={styles.header}>
-          <div className={styles.lefticon}>
-            <img src={dentHospitalIcon} alt="" />
-          </div>
+	render() {
+		let { data } = this.props;
+		let { status, accordionActive } = this.state;
+		return (
+			<div className={`${"cardWrapper"} ${status} ${accordionActive}  `}>
+				<div className="cardWrapper__header">
+					<div className="cardWrapper__header__leftIcon">
+						<img src={dentHospitalIcon} alt="" />
+					</div>
+					<div className="cardWrapper__content__clinicInfo">
+						<div className={styles.title}> {data?.Clinic?.name} </div>
+						<div className={styles.badge}>{this.renderBadge(data)}</div>
+					</div>
+				</div>
+				<div className="cardWrapper__content">
 
-          <div className={styles.content}>
-            <div className={styles.clinicInfo}>
-              <div className={styles.title}> {data?.Clinic?.name} </div>
-
-              <div className={styles.badge}>{this.renderBadge(data)}</div>
-            </div>
-
-            <div className={styles.appointmentInfoWrapper}>
-              <div className={styles.dentist}>
-                {`${data?.Dentist?.name} ${data?.Dentist?.surname}`}
-              </div>
-              <div className={`${styles.details} ${accordionActive}`}>
-                Kanal Tedavisi / Diş Tedavisi Açıklaması & Consectetur elit pellentesque
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fringilla aliquet arcu.
-                {this.renderDetailsButton()}
-              </div>
-
-              <div className={styles.appointmentInfo}>
-                <div className={styles.date}>{data?.date}</div>
-                <div className={styles.time}>{data?.startTime}</div>
-                <div className={styles.price}>$70</div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.righticon} onClick={this.onExpandClick}>
-            <img src={dropdownIcon} alt="" />
-          </div>
-        </div>
-      </div>
-    );
-  }
+					<div className={"cardWrapper__appointmentInfoWrapper"}>
+						<div className={"cardWrapper__appointmentInfoWrapper__dentist"}>
+							{`${data?.Dentist?.name} ${data?.Dentist?.surname}`}
+						</div>
+						<div className={`${"cardWrapper__appointmentInfoWrapper__details"} ${accordionActive}`}>
+							Kanal Tedavisi / Diş Tedavisi Açıklaması & Consectetur elit pellentesque
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fringilla aliquet arcu.
+							{this.renderDetailsButton()}
+						</div>
+						<div className="cardWrapper__appointmentInfoWrapper__appointmentInfo">
+							<div className="cardWrapper__appointmentInfoWrapper__appointmentInfo__date">{data?.date}</div>
+							<div className="cardWrapper__appointmentInfoWrapper__appointmentInfo__time">{data?.startTime}</div>
+							<div className="cardWrapper__appointmentInfoWrapper__appointmentInfo__price">$70</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default AppointmentCard;

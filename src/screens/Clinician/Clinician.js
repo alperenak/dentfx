@@ -21,35 +21,32 @@ class Clinician extends Component {
     this.setState({ clinicians: res.data.Dentist });
   };
 
-  renderClinicians = () => {
-    let { clinicians } = this.state;
-    return clinicians?.map((clinician, i) => {
-      return (
-        <ClinicianCard
-          name={clinician.name}
-          surname={clinician.surname}
-          avatar={clinician.avatar}
-          rate={clinician.rate}
-          key={i}
-        />
-      );
-    });
-  };
+	renderClinicians = () => {
+		let { clinicians } = this.state;
+		return clinicians?.map((clinician, i) => {
+			return (
+				<ClinicianCard
+					name={clinician.name}
+					surname={clinician.surname}
+					avatar={clinician.avatar}
+					rate={clinician.rate}
+					key={i}
+				/>
+			);
+		});
+	};
 
-  render() {
-    return (
-      <div className={styles.container}>
-        <div
-          className={styles.buttonWrapper}
-          onClick={() => (window.location = "/clinician/new")}
-        >
-          <img src={addCircle} className={styles.icon} />
-          <div className={styles.title}>Yeni Klinisyen</div>
-        </div>
-        {this.renderClinicians()}
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="cContainer">
+				<div className={"cContainer__buttonWrapper"} onClick={() => (window.location = "/clinician/new")}>
+					<img src={addCircle} className={"cContainer__buttonWrapper__icon"} />
+					<div className={"cContainer__buttonWrapper__title"}>Yeni Klinisyen</div>
+				</div>
+				{this.renderClinicians()}
+			</div>
+		);
+	}
 }
 
 export default Clinician;

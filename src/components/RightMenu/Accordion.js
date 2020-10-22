@@ -17,7 +17,7 @@ class Accordion extends Component {
 
   onClickExpand = () => {
     this.setState({
-      classname_open: this.state.classname_open === "" ? styles.open : "",
+      classname_open: this.state.classname_open === "" ? "open" : "",
     });
   };
 
@@ -26,74 +26,67 @@ class Accordion extends Component {
     let { classname_open } = this.state;
 
     return (
-      <div className={`${styles.accordion_container} ${classname_open}`}>
-        <div className={styles.header}>
-          <div className={styles.icon}>
-            <img src={dentalImplantIcon} alt="" />
-          </div>
+		<div className={`${"rightBar__treatmentHistory__accordionContainer"} ${classname_open}`}>
+			<div className="rightBar__treatmentHistory__accordionContainer__header">
+				<div className="rightBar__treatmentHistory__accordionContainer__icon">
+					<img src={dentalImplantIcon} alt="" />
+				</div>
 
-          <div className={styles.content}>
-            <div className={styles.title}>{record?.title}</div>
+				<div className="rightBar__treatmentHistory__accordionContainer__content">
+					<div className="rightBar__treatmentHistory__accordionContainer__content__title">{record?.title}</div>
+					<div className="rightBar__treatmentHistory__accordionContainer__content__extras">
+						<div className="date">{record?.date}</div>
+						<div className="price">{record?.price}</div>
+					</div>
+				</div>
+				<div className={`${"rightBar__treatmentHistory__accordionContainer__toggler"} ${classname_open}`} onClick={this.onClickExpand}>
+					<img src={dropdownIcon} alt="" />
+				</div>
+			</div>
 
-            <div className={styles.extras}>
-              <div className={styles.date}>{record?.date}</div>
-              <div className={styles.price}>{record?.price}</div>
-            </div>
-          </div>
+			<div className={`${"rightBar__treatmentHistory__accordionContainer__details"} ${classname_open}`}>
+				<div className={"rightBar__treatmentHistory__accordionContainer__details__clinicDetails"}>
+					<img src={dentHospitalIcon} alt="" />
+					<div className={"rightBar__treatmentHistory__accordionContainer__details__clinicDetails__metadata"}>
+						<div className={"clinic"}>{record.Clinic.name}</div>
+						<div
+						className={"dentist"}
+						>{`${record.Dentist.name} ${record.Dentist.surname}`}</div>
+						</div>
+					</div>
 
-          <div
-            className={`${styles.toggler} ${classname_open}`}
-            onClick={this.onClickExpand}
-          >
-            <img src={dropdownIcon} alt="" />
-          </div>
-        </div>
+					<div className={"rightBar__treatmentHistory__accordionContainer__details__header"}>
+						<img src={dentalAnalysisIcon} alt="" />
+						<div className={"headertitle"}>Dental Analysis</div>
+					</div>
 
-        <div className={`${styles.details} ${classname_open}`}>
-          <div className={styles.clinicDetails}>
-            <img src={dentHospitalIcon} alt="" />
+					<div className={"rightBar__treatmentHistory__accordionContainer__details_image"}>
+						<img src={record.analysis} alt="" />
+					</div>
 
-            <div className={styles.metadata}>
-              <div className={styles.clinic}>{record.Clinic.name}</div>
-              <div
-                className={styles.dentist}
-              >{`${record.Dentist.name} ${record.Dentist.surname}`}</div>
-            </div>
-          </div>
+					<div className={"rightBar__treatmentHistory__accordionContainer__title"}>Description</div>
 
-          <div className={styles.header}>
-            <img src={dentalAnalysisIcon} alt="" />
-            <div className={styles.title}>Dental Analysis</div>
-          </div>
+					<div className={"rightBar__treatmentHistory__accordionContainer__description"}>{record.description}</div>
 
-          <div className={styles.details_image}>
-            <img src={record.analysis} alt="" />
-          </div>
-
-          <div className={styles.title}>Description</div>
-
-          <div className={styles.description}>{record.description}</div>
-
-          {record.checkList.map((checkpoint, i) => {
-            return (
-              <div className={styles.checkpoint} key={i}>
-                <div>
-                  {checkpoint.isCheck && <img src={checkpointIcon} alt="" />}
-                  {!checkpoint.isCheck && (
-                    <img src={checkpointIcon_negative} alt="" />
-                  )}
-                </div>
-                <div>{checkpoint.text}</div>
-              </div>
-            );
-          })}
-
-          <button>
-            <img src={sendIcon} alt="" />
-            Send Message to Doctor
-          </button>
-        </div>
-      </div>
+					{record.checkList.map((checkpoint, i) => {
+						return (
+							<div className={"rightBar__treatmentHistory__accordionContainer__checkpoint"} key={i}>
+								<div>
+									{checkpoint.isCheck && <img src={checkpointIcon} alt="" />}
+									{!checkpoint.isCheck && (
+										<img src={checkpointIcon_negative} alt="" />
+									)}
+								</div>
+								<div>{checkpoint.text}</div>
+							</div>
+						);
+					})}
+					<button>
+						<img src={sendIcon} alt="" />
+						Send Message to Doctor
+					</button>
+				</div>
+		</div>
     );
   }
 }

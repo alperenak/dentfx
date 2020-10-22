@@ -8,7 +8,7 @@ import BigPackages from "./sub-components/bigPackages/bigPackages";
 
 export default function Card(props) {
   return (
-    <div className={styles.cardContainer}>
+    <div className="cardContainer">
       <RenderByTypes {...props} />
     </div>
   );

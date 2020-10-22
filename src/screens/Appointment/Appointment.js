@@ -83,78 +83,49 @@ class Appointment extends Component {
     console.log(this.state.completedAppointments);
   };
 
-  renderTopBar = () => {
-    let {
-      activeLink,
-      cancelledCount,
-      activeCount,
-      completedCount,
-      pendingCount,
-      userType,
-    } = this.state;
-    return (
-      <div className={styles.topbarContainer}>
-        <div className={styles.upper}>
-          <div className={styles.breadcrumbs}>
-            Randevularım / Tedavi Geçmişim
-          </div>
-          {userType === "user" && (
-            <div
-              className={styles.newAppointmentBtn}
-              onClick={() => this.props.history.push("/appointment/search")}
-            >
-              <img src={addCircle} alt="" />
-              <div>Yeni Randevu</div>
-            </div>
-          )}
-        </div>
+	renderTopBar = () => {
+		let {
+			activeLink,
+			cancelledCount,
+			activeCount,
+			completedCount,
+			pendingCount,
+			userType,
+		} = this.state;
+		return (
+			<div className="topbarContainer">
+				<div className="topbarContainer__upper">
+					<div className="topbarContainer__upper__breadcrumbs">
+						Randevularım / Tedavi Geçmişim
+					</div>
+					{userType === "user" && (
+						<div className="topbarContainer__upper__newAppointmentBtn" onClick={() => this.props.history.push("/appointment/search")}>
+							<img src={addCircle} alt="" />
+							<div>Yeni Randevu</div>
+						</div>
+					)}
+				</div>
 
-        <div className={styles.navbar}>
-          <div
-            className={`${styles.navLink} ${
-              activeLink === "all" && styles.active
-            }`}
-            onClick={() => this.onClickNav("all")}
-          >
-            TÜMÜ ({cancelledCount + activeCount + completedCount + pendingCount}
-            )
-          </div>
-          <div
-            className={`${styles.navLink} ${
-              activeLink === "active" && styles.active
-            }`}
-            onClick={() => this.onClickNav("active")}
-          >
-            AKTİF ({activeCount})
-          </div>
-          <div
-            className={`${styles.navLink} ${
-              activeLink === "completed" && styles.active
-            }`}
-            onClick={() => this.onClickNav("completed")}
-          >
-            TAMAMLANAN ({completedCount})
-          </div>
-          <div
-            className={`${styles.navLink} ${
-              activeLink === "cancelled" && styles.active
-            }`}
-            onClick={() => this.onClickNav("cancelled")}
-          >
-            İPTAL EDİLEN ({cancelledCount})
-          </div>
-          <div
-            className={`${styles.navLink} ${
-              activeLink === "pending" && styles.active
-            }`}
-            onClick={() => this.onClickNav("pending")}
-          >
-            BEKLEYEN ({pendingCount})
-          </div>
-        </div>
-      </div>
-    );
-  };
+				<div className="topbarContainer__navbar">
+					<div className={`${"topbarContainer__navbar__navLink"} ${activeLink === "all" && "topbarContainer__navbar__navLink__active"}`} onClick={() => this.onClickNav("all")}>
+						<div>TÜMÜ ({cancelledCount + activeCount + completedCount + pendingCount})</div>
+					</div>
+					<div className={`${"topbarContainer__navbar__navLink"} ${activeLink === "active" && "topbarContainer__navbar__navLink__active"}`} onClick={() => this.onClickNav("active")}>
+						<div>AKTİF ({activeCount})</div>
+					</div>
+					<div className={`${"topbarContainer__navbar__navLink"} ${activeLink === "completed" && "topbarContainer__navbar__navLink__active"}`} onClick={() => this.onClickNav("completed")}>
+						<div>TAMAMLANAN ({completedCount})</div>
+					</div>
+					<div className={`${"topbarContainer__navbar__navLink"} ${activeLink === "cancelled" && "topbarContainer__navbar__navLink__active"}`} onClick={() => this.onClickNav("cancelled")}>
+						<div>İPTAL EDİLEN ({cancelledCount})</div>
+					</div>
+					<div className={`${"topbarContainer__navbar__navLink"} ${ activeLink === "pending" && "topbarContainer__navbar__navLink__active"}`} onClick={() => this.onClickNav("pending")}>
+						<div>BEKLEYEN ({pendingCount})</div>
+					</div>
+				</div>
+			</div>
+		);
+	};
 
   renderAll = () => {
     let appointments = this.state.allAppointments;
@@ -198,20 +169,20 @@ class Appointment extends Component {
 
   renderClinic = () => {};
 
-  render() {
-    let { activeLink } = this.state;
+	render() {
+		let { activeLink } = this.state;
 
-    return (
-      <div>
-        {this.renderTopBar()}
-        {activeLink === "all" && this.renderAll()}
-        {activeLink === "active" && this.renderActive()}
-        {activeLink === "completed" && this.renderCompleted()}
-        {activeLink === "cancelled" && this.renderCancelled()}
-        {activeLink === "pending" && this.renderPending()}
-      </div>
-    );
-  }
+	return (
+		<div>
+			{this.renderTopBar()}
+			{activeLink === "all" && this.renderAll()}
+			{activeLink === "active" && this.renderActive()}
+			{activeLink === "completed" && this.renderCompleted()}
+			{activeLink === "cancelled" && this.renderCancelled()}
+			{activeLink === "pending" && this.renderPending()}
+		</div>
+	);
+	}
 }
 
 export default Appointment;

@@ -22,187 +22,193 @@ import {
 
 function RenderIcon({ type }) {
   if (type === "randevu") {
-    return <RandevuYonetimIcon className={styles.icons} />;
+    return <RandevuYonetimIcon className={"landingPageContainer__featuresCardContainer__featuresCard__icons"} />;
   } else if (type === "tedavi") {
-    return <TedaviPlanIcon className={styles.icons} />;
+    return <TedaviPlanIcon className={"landingPageContainer__featuresCardContainer__featuresCard__icons"} />;
   } else if (type === "hatirlatma") {
-    return <OtomatikHatirlatmaIcon className={styles.icons} />;
+    return <OtomatikHatirlatmaIcon className={"landingPageContainer__featuresCardContainer__featuresCard__icons"} />;
   } else if (type === "finansal") {
-    return <FinansalRaporlarIcon className={styles.icons} />;
+    return <FinansalRaporlarIcon className={"landingPageContainer__featuresCardContainer__featuresCard__icons"} />;
   } else if (type === "gelir") {
-    return <GelirGiderIcon className={styles.icons} />;
+    return <GelirGiderIcon className={"landingPageContainer__featuresCardContainer__featuresCard__icons"} />;
   } else if (type === "guvenlik") {
-    return <GuvenlikIcon className={styles.icons} />;
+    return <GuvenlikIcon className={"landingPageContainer__featuresCardContainer__featuresCard__icons"} />;
   } else return <div>hata</div>;
 }
 
 export default function Landing() {
-  return (
-    <div className={styles.LandingPageContainer}>
-      <TopBar />
-      <div className={styles.LandingPageMain}>
-        {/******* Introduction ********/}
+	return (
+		<div class="container">
+		<div className="landingPageContainer">
+    		<TopBar />
+  			<div className="landingPageContainer__landingPageMain">
+			<div className="landingPageContainer__introduction">
+				<div className="landingPageContainer__introduction__introductionText">
+					<div className="landingPageContainer__introduction__introductionTitle">
+						Diş hekimi, hasta takip ve randevu uygulaması.
+					</div>
+					<div className="landingPageContainer__introduction__introductionDescription">
+						Bilgisayar, tablet ve telefonlarda çalışan
+						<a> DentFX</a> ile işinize odaklanın!
+					</div>
+					<Button
+					ButtonStyle={"noPadding"}
+					className={styles.IntroductionButton}
+					title={"Hemen Başla!"}
+					type={"tertiary"}
+					to={"/login"}
+					mission={"link"}
+					/>
+				</div>
+				<div className="landingPageContainer__introduction__introductionImage">
+					<img src={Mobile} />
+				</div>
+			</div>
 
-        <div className={styles.Introduction}>
-          <div className={styles.IntroductionText}>
-            <div className={styles.IntroductionTitle}>
-              Diş hekimi, hasta takip ve randevu uygulaması.
-            </div>
-            <div className={styles.IntroductionDescription}>
-              Bilgisayar, tablet ve telefonlarda çalışan
-              <a> DentFX</a> ile işinize odaklanın!
-            </div>
-            <Button
-              ButtonStyle={"noPadding"}
-              className={styles.IntroductionButton}
-              title={"Hemen Başla!"}
-              type={"tertiary"}
-              to={"/login"}
-              mission={"link"}
-            />
-          </div>
-          <div className={styles.IntroductionImage}>
-            <img src={Mobile} />
-          </div>
-        </div>
+    {/******* Features DentFx ********/}
 
-        {/******* Features DentFx ********/}
+			<div className="landingPageContainer__features">
+				<div className="landingPageContainer__features__featuresTitle">Dent FX özellikleri</div>
+				<div className="landingPageContainer__features__featuresDescription">
+					Vitae turpis massa sed elementum tempus egestas sed laculis nunc sed
+					augue lacus viverra vitae congue.
+				</div>
+			</div>
 
-        <div className={styles.Features}>
-          <div className={styles.FeaturesTitle}>Dent FX özellikleri</div>
-          <div className={styles.FeaturesDescription}>
-            Vitae turpis massa sed elementum tempus egestas sed laculis nunc sed
-            augue lacus viverra vitae congue.
-          </div>
-        </div>
+    {/******* Features Card ********/}
 
-        {/******* Features Card ********/}
+			<div className="landingPageContainer__featuresCardContainer">
 
-        <div className={styles.FeaturesCardContainer}>
-          <div className={styles.FeaturesCard}>
-            {FeaturesCardsData.map((item, i) => {
-              return (
-                <Card key={i} type={"features"} title={item.title}>
-                  <RenderIcon type={item.type} />
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-        {/*******  Demtist Comments ********/}
-        <div className={styles.DentistCommentsContainer}>
-          <div className={styles.DentistCommentText}>
-            <div className={styles.DentistCommentMediumTitle}>
-              Senectus et netus et
-            </div>
-            <div className={styles.DentistCommentBoldTitle}>
-              et malesuada fames.
-            </div>
-            <div className={styles.DentistCommentDescription}>
-              Pharetra sit amet aliquam id diam maecenas ultricies ictum at
-              tempor.
-            </div>
-          </div>
-        </div>
+				<div className="landingPageContainer__featuresCardContainer__featuresCard">
+					<div class="row">
+					{FeaturesCardsData.map((item, i) => {
+						return (
+							<div class="col-md-4">
+							<Card key={i} type={"features"} title={item.title}>
+								<RenderIcon type={item.type} />
+							</Card>
+							</div>
+						);
+					})}
+					</div>
 
-        {/*******  Dentist Comments Card ********/}
-        <div className={styles.dentistCommentsCard}>
-          {DentistCommentsData.map((item, i) => {
-            return (
-              <Card
-                key={i}
-                type={item.type}
-                name={item.name}
-                content={item.content}
-                starCount={item.starCount}
-                avatar={item.avatar}
-              />
-            );
-          })}
-        </div>
+				</div>
+			</div>
+    {/*******  Demtist Comments ********/}
+			<div className="landingPageContainer__dentistCommentsContainer">
+				<div className="landingPageContainer__dentistCommentsContainer__dentistCommentText">
+					<div className="landingPageContainer__dentistCommentsContainer__dentistCommentMediumTitle">
+						Senectus et netus et
+					</div>
+					<div className="landingPageContainer__dentistCommentsContainer__dentistCommentBoldTitle">
+						et malesuada fames.
+					</div>
+					<div className="landingPageContainer__dentistCommentsContainer__dentistCommentDescription">
+						Pharetra sit amet aliquam id diam maecenas ultricies ictum at tempor.
+					</div>
+				</div>
+			</div>
 
-        <div className={styles.commentArrowButtonsContainer}>
-          <div className={styles.commentArrowButtons}>
-            <div className={styles.arrowCircle}>
-              <Arrow className={styles.arrow} />
-            </div>
-            <div className={styles.arrowCircle}>
-              <Arrow className={styles.reverseArrow} />
-            </div>
-          </div>
-        </div>
+    {/*******  Dentist Comments Card ********/}
+			<div className="landingPageContainer__dentistCommentsCard">
+				{DentistCommentsData.map((item, i) => {
+					return (
+						<Card
+							key={i}
+							type={item.type}
+							name={item.name}
+							content={item.content}
+							starCount={item.starCount}
+							avatar={item.avatar}
+						/>
+					);
+				})}
+			</div>
+
+			<div className="landingPageContainer__commentArrowButtonsContainer">
+				<div className="landingPageContainer__commentArrowButtonsContainer__commentArrowButtons">
+					<div className={"arrowCircle"}>
+						<Arrow className={"arrow"} />
+					</div>
+					<div className={"arrowCircle"}>
+						<Arrow className={"reverseArrow"} />
+					</div>
+				</div>
+			</div>
 
         {/*******  Dentfx Video ********/}
 
-        <div className={styles.videoContainer}>
-          <div className={styles.backgroundAbsolute}>
-            <div className={styles.fullAbsolute}></div>
-          </div>
-          <div className={styles.videoContainerText}>
-            <div className={styles.videoContainerMediumTitle}>Senectus et</div>
-            <div className={styles.videoContainerBlackTitle}>
-              malesuada fames.
-            </div>
-            <div className={styles.videoContainerDescription}>
-              Dolor magna eget est lorem ipsum dolor. Urna cursus eget nunc
-              scelerisque viverra mauris in aliquam. Leo vel orci porta non.
-            </div>
-          </div>
-          <div className={styles.videoCard}>
-            <div className={styles.rotatedCard} />
-            <div className={styles.videoImage}>
-              <img src={VideoImage} />
-            </div>
-          </div>
-        </div>
-      </div>
+			<div className="landingPageContainer__videoContainer">
+				<div className={styles.backgroundAbsolute}>
+					<div className={styles.fullAbsolute}></div>
+				</div>
+				<div className="landingPageContainer__videoContainer__videoContainerText">
+					<div className="landingPageContainer__videoContainer__videoContainerMediumTitle">Senectus et</div>
+					<div className="landingPageContainer__videoContainer__videoContainerBlackTitle">
+						malesuada fames.
+					</div>
+					<div className="landingPageContainer__videoContainer__videoContainerDescription">
+						Dolor magna eget est lorem ipsum dolor. Urna cursus eget nunc
+						scelerisque viverra mauris in aliquam. Leo vel orci porta non.
+					</div>
+				</div>
+				<div className="landingPageContainer__videoContainer__videoCard">
+					<div className={"landingPageContainer__videoContainer__videoCard__rotatedCard"} />
+					<div className={styles.videoImage}>
+						<img src={VideoImage} />
+					</div>
+				</div>
+			</div>
+  		</div>
 
       {/*******  Dentfx Packages ********/}
 
-      <div className={styles.packagesContainer}>
-        <div className={styles.packagesSection}>
-          <div className={styles.packagesText}>
-            <div className={styles.packagesMediumTitle}>frequently asked</div>
-            <div className={styles.packagesBlackTitle}>questions</div>
-          </div>
-          <div className={styles.packagesSmallCards}>
-            {packagesSmallCardData.map((item, i) => {
-              return (
-                <Card
-                  key={i}
-                  type={item.type}
-                  title={item.title}
-                  description={item.description}
-                >
-                  <OnerilenPaketIcon
-                    svgColor="#57658a"
-                    className={styles.packagesIcon}
-                  />
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-        <div className={styles.packagesCard}>
-          <Card
-            type={"bigPackages"}
-            packageName={"POLİKLİNİK PAKETİ"}
-            packagePrice={2000}
-            packageDescription={
-              "Klinik pakete göre daha ekonomik, daha uzun süreli kullanım."
-            }
-            packagesFeatures={[
-              "Sınırsız Kullanıcı",
-              "Sınırsız Doktor",
-              "Sınırsız Hasta",
-            ]}
-            buttonTitle={"Paket Seç"}
-          >
-            <img src={OnerilenPaket} />
-          </Card>
-        </div>
-      </div>
-    </div>
+		<div className="landingPageContainer__packagesContainer">
+			<div className="landingPageContainer__packagesContainer__packagesSection">
+				<div className={"landingPageContainer__packagesContainer__packagesText"}>
+					<div className="landingPageContainer__packagesContainer__packagesText__packagesMediumTitle">frequently asked</div>
+					<div className="landingPageContainer__packagesContainer__packagesText__packagesBlackTitle">questions</div>
+				</div>
+				<div className={"landingPageContainer__packagesSmallCards"}>
+					{packagesSmallCardData.map((item, i) => {
+						return (
+							<Card
+								key={i}
+								type={item.type}
+								title={item.title}
+								description={item.description}
+							>
+								<OnerilenPaketIcon
+									svgColor="#57658a"
+									className={"landingPageContainer__packagesContainer__packagesSmallCards__packagesIcon"}
+								/>
+							</Card>
+						);
+					})}
+				</div>
+			</div>
+			<div className={styles.packagesCard}>
+				<Card
+					type={"bigPackages"}
+					packageName={"POLİKLİNİK PAKETİ"}
+					packagePrice={2000}
+					packageDescription={
+						"Klinik pakete göre daha ekonomik, daha uzun süreli kullanım."
+					}
+					packagesFeatures={[
+						"Sınırsız Kullanıcı",
+						"Sınırsız Doktor",
+						"Sınırsız Hasta",
+					]}
+					buttonTitle={"Paket Seç"}
+				>
+					<img src={OnerilenPaket} />
+				</Card>
+			</div>
+		</div>
+		</div>
+	</div>
+
   );
 }
 

@@ -1,25 +1,33 @@
-.TopBarContainer {
+@import '../../helpers/responsiveBreakpointsMixins';
+@import '../../helpers/variableBreakpoints';
+
+.topBarContainer {
     display: flex;
     height: 100px;
-
-    & .logoContainer {
+    &__logoContainer {
         flex: 1;
         display: flex;
         justify-content: flex-start;
         align-items: center;
 
-        .logo {
+        &__logo {
             cursor: pointer;
             height: 50px;
             width: 160px;
         }
     }
-
-    & .links {
+    &__links {
         flex: 1;
         display: flex;
         justify-content: flex-end;
         font-family: 'SofiaMedium';
         align-items: center;
     }
+	&__buttonContainer {
+		display: flex;
+		justify-content: center;
+		&__menu{
+			margin-right: 30px;
+		}
+	}
 }
