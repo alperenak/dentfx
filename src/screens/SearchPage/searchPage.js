@@ -1,4 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
+import TopBar from "../../components/TopBar/topBar";
 
 /*** Components ***/
 import ClinicListItem from "../../components/ClinicListItem/clinicListItem";
@@ -21,6 +22,8 @@ export default function SearchPage() {
 		getClinics();
 	}, []);
 	return (
+		<div>
+		<TopBar />
 		<div className="home container">
 			<div className="home__mapContainer">
 				<Map clinics={clinics}/>
@@ -30,6 +33,7 @@ export default function SearchPage() {
 					<ClinicListItem key={i} clinic={clinic} />
 				);
 			})}
+		</div>
 		</div>
 	);
 };
