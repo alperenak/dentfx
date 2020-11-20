@@ -21,11 +21,11 @@ export default function SearchPage() {
 		getClinics();
 	}, []);
 	return (
-		<div className="home">
+		<div className="home container">
 			<div className="home__mapContainer">
 				<Map clinics={clinics}/>
 			</div>
-			{clinics.map((clinic, i) => {
+			{clinics && Array.isArray(clinics) && clinics.map((clinic, i) => {
 				return (
 					<ClinicListItem key={i} clinic={clinic} />
 				);

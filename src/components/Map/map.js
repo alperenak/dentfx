@@ -45,7 +45,7 @@ export default function Map({clinics}) {
 					defaultCenter={defaultProps.center}
 					defaultZoom={defaultProps.zoom}
 				>
-					{clinics.map((clinic, i)=> {
+					{clinics && Array.isArray(clinics) && clinics.map((clinic, i)=> {
 						return (
 							<Clinic
 								key={i}

@@ -131,7 +131,7 @@ class Appointment extends Component {
     let appointments = this.state.allAppointments;
 
     return appointments.map((record, i) => {
-      return <AppointmentCard data={record} key={i} />;
+      return <AppointmentCard data={record} key={i} userType={this.state.userType}/>;
     });
   };
 
@@ -147,7 +147,7 @@ class Appointment extends Component {
     let appointments = this.state.completedAppointments;
 
     return appointments.map((record, i) => {
-      return <AppointmentCard data={record} key={i} />;
+      return <AppointmentCard data={record} key={i} userType={this.state.userType}/>;
     });
   };
 
