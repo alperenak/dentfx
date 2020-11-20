@@ -5,7 +5,7 @@ class addTreatment extends Component {
     render() {
         return (
             <div>
-                DENEMEEKLNFENfneafnaefnaelknLKFNELKFN
+                FORM
             </div>
         );
     }
