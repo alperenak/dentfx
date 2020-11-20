@@ -15,6 +15,7 @@ import Home from "./screens/Home/home";
 import Messages from "./screens/Messages/Messages";
 import Appointment from "./screens/Appointment/Appointment";
 import ACalendar from "./screens/Appointment/calendar";
+import SearchPage from "./screens/SearchPage/searchPage"
 
 import MessageDetails from "./screens/Messages/MessageDetails";
 
@@ -161,8 +162,14 @@ function App() {
 					exact
 					render={(props) => <Login {...props} />}
 				/>
+				<Route
+					path="/searchPage"
+					exact
+					render={(props) => <SearchPage {...props} />}
+				/>
 				<Route path="/signup" render={(props) => <SignUp {...props} />} />
 				</Switch>
+
 			)}
         </Router>
 

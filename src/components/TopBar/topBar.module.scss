@@ -29,5 +29,14 @@
 		&__menu{
 			margin-right: 30px;
 		}
-	}
+    }
+    & .myInput{
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: 3rem;
+    }
 }
+
+
