@@ -5950,6 +5950,11 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
+goober@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.0.3.tgz#5069eb8b63644b9496dfd1662c6b31c2d3b22158"
+  integrity sha512-4CgkQXsNWlJiI2ckYde2JWhwli/MKYyVPwxj3WyCE0uEMjNhFyQcbCtvlmtSFAwkmTJda4y3Ujw2PdX/cDZfYg==
+
 google-map-react@latest:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/google-map-react/-/google-map-react-2.1.8.tgz#75dbde99e21a221f8131340ac390dd9db16dd2c5"
@@ -10185,6 +10190,13 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-multistep@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-multistep/-/react-multistep-5.1.0.tgz#4260731fe42097f7e3b6a11e2163cd3f1ed97eee"
+  integrity sha512-xYoDx8lsonmGsYlmqyH5x/CE95ZUTsDf7Sb7EAIX4Ggbr1XcIXeGFw4nr3BpOdDA/41mM5z8m6RPUxtiVgmlLA==
+  dependencies:
+    goober "2.0.3"
 
 react-onclickoutside@^6.9.0:
   version "6.9.0"
