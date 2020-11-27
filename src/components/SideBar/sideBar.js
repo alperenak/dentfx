@@ -19,6 +19,7 @@ import kampanyaIcon from "../../icons/kampanya-icon.svg";
 import kampanyaIconBlue from "../../icons/kampanya-icon-blue.svg";
 import dentfxSocialIcon from "../../icons/dentfx-social-icon.svg";
 import dentfxSocialIconBlue from "../../icons/dentfx-social-icon-blue.svg";
+import patientIcon from "../../icons/patientSmall.svg"
 import { getCookie } from "../../utils/cookie";
 
 function usePrevious(value) {
@@ -38,7 +39,14 @@ function RenderList() {
       icon: homeIcon,
       hoverIcon: homeIconBlue,
       href: `/`,
-      not: ["dentist"],
+      not: ["dentist", "clinic"],
+    },
+    {
+      title: "Hastalarim",
+      icon: patientIcon,
+      hoverIcon: patientIcon,
+      href: `/patients`,
+      not: ["user"],
     },
     {
       title: "Profilim",
@@ -154,7 +162,7 @@ function RenderList() {
 
 export default function SideBar() {
   return (
-    <div className="list">
+    <div className="list sideBarClass">
       <RenderList />
     </div>
   );

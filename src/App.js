@@ -33,6 +33,7 @@ import CreateAppointment from "./screens/CreateAppointment/CreateAppointment";
 import Clinician from "./screens/Clinician/Clinician";
 import NewClinician from "./screens/NewClinician/NewClinician";
 import NewMessage from "./screens/Messages/NewMessage";
+import Patients from "./screens/Patients/Patients"
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -57,7 +58,7 @@ function App() {
               <div class="col-md-2">
                 <SideBar v-if={authorized} />
               </div>
-              <div class="col-md-7">
+              <div class="col-md-7 middlePart">
                 <Switch>
 
 
@@ -89,6 +90,12 @@ function App() {
                     path="/profile/:id"
                     exact
                     render={(props) => <Profile {...props} />}
+                  />
+
+                  <Route
+                    path="/patients/"
+                    exact
+                    render={(props) => <Patients {...props} />}
                   />
 
                   <Route

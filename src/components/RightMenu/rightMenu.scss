@@ -1,6 +1,7 @@
 .rightBar {
 	width: "100%";
 	overflow: auto;
+	position: fixed;
 	&__sectionHeader{
 		color: #283b6a;
 	    font-size: 20px;
