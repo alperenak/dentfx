@@ -38,7 +38,7 @@ function RenderIcon({ type }) {
 
 export default function Landing() {
 	return (
-		<div class="container">
+		<div class="zeusContainer">
 		<div className="landingPageContainer">
     		<TopBar />
   			<div className="landingPageContainer__landingPageMain">

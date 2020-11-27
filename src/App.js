@@ -57,7 +57,7 @@ function App() {
               <div class="col-md-2">
                 <SideBar v-if={authorized} />
               </div>
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <Switch>
 
 
@@ -138,7 +138,7 @@ function App() {
                   />
                 </Switch>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <RightMenu v-if={authorized} />
               </div>
             </div>
