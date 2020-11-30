@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 /*** Components ***/
 import UserTopBar from "./components/UserTopBar/userTopBar";
 import SideBar from "./components/SideBar/sideBar";
+import TopBar from "./components/TopBar/topBar";
 
 /*** Screens ***/
 import Landing from "./screens/Landing/landing";
@@ -55,7 +56,7 @@ function App() {
         {authorized ? (
           <div class="zeusContainer">
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-2 leftPart">
                 <SideBar v-if={authorized} />
               </div>
               <div class="col-md-7 middlePart">
@@ -145,13 +146,16 @@ function App() {
                   />
                 </Switch>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 rightPart">
                 <RightMenu v-if={authorized} />
               </div>
             </div>
             <Footer />
           </div>
         ) : (
+          <div>
+            <TopBar/>
+            <div class="landingMain">
             <Switch>
               <Route
                 v-if={!authorized}
@@ -181,6 +185,8 @@ function App() {
               />
               <Route path="/signup" render={(props) => <SignUp {...props} />} />
             </Switch>
+            </div>
+          </div>
 
           )}
       </Router>

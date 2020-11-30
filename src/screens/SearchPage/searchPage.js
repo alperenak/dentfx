@@ -23,7 +23,6 @@ export default function SearchPage() {
 	}, []);
 	return (
 		<div>
-		<TopBar />
 		<div className="home container">
 			<div className="home__mapContainer">
 				<Map clinics={clinics}/>
