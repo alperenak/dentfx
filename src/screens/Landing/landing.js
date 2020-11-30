@@ -40,7 +40,6 @@ export default function Landing() {
 	return (
 		<div class="zeusContainer">
 		<div className="landingPageContainer">
-    		<TopBar />
   			<div className="landingPageContainer__landingPageMain">
 			<div className="landingPageContainer__introduction">
 				<div className="landingPageContainer__introduction__introductionText">
