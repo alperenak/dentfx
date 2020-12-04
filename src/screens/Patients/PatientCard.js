@@ -6,15 +6,26 @@ import styles from "./patientCard.scss";
 /*** Components ***/
 import ReactStars from "react-rating-stars-component";
 
+import myImage from "../../assets/images/man1.jpg"
+
 const PatientCard = ({ name, surname, avatar, rate }) => {
 	return (
 		<div className="cardWrapper">
-			<div className="cardWrapper__header">
-				<div className="cardWrapper__header__avatar">
-					<img src={avatar} alt="" />
-				</div>
-				<div className="cardWrapper__header__dentist">{`${name} ${surname}`}</div>
-				<ReactStars value={rate} size={20} edit={false} />
+			<div className="card patientCard">
+			<img src={myImage} className="card-img-top" alt="..."/>
+			<div className="card-body">
+				<h5 className="card-title">Card title</h5>
+				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			</div>
+			<ul className="list-group list-group-flush">
+				<li className="list-group-item">Cras justo odio</li>
+				<li className="list-group-item">Dapibus ac facilisis in</li>
+				<li className="list-group-item">Vestibulum at eros</li>
+			</ul>
+			<div className="card-body">
+				<a href="#" className="card-link">Card link</a>
+				<a href="#" className="card-link">Another link</a>
+			</div>
 			</div>
 		</div>
 	);
