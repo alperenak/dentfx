@@ -12,9 +12,12 @@ import { Link } from "react-router-dom";
 
 class Patients extends Component {
 
-  constructor(){
+  constructor() {
     super();
-    state = { clinicians: null, patientData: null };
+    this.state = {
+      clinicians: null,
+      patientData: null
+    };
   }
 
 
@@ -60,13 +63,13 @@ class Patients extends Component {
           },
         ],
         rows: res.data.map((patient) => {
-          return{
+          return {
             ...patient,
-            avatar: <div class="tableAvatar"><img src={patient.avatar}/></div>,
-            button:         
-            <Link to ={`/patients/${patient.id}`} className= "tableAvatar">
-            <button type="button" class="btn btn-secondary">View</button>
-            </Link>
+            avatar: <div class="tableAvatar"><img src={patient.avatar} /></div>,
+            button:
+              <Link to={`/patients/${patient.id}`} className="tableAvatar">
+                <button type="button" class="btn btn-secondary">View</button>
+              </Link>
           }
         })
 

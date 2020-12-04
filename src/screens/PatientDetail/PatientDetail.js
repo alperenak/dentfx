@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import store from "../../store";
+import { MDBDataTable } from 'mdbreact';
 
 /*** Styles ***/
 import styles from "./patientdetail.scss";
