@@ -35,6 +35,7 @@ import Clinician from "./screens/Clinician/Clinician";
 import NewClinician from "./screens/NewClinician/NewClinician";
 import NewMessage from "./screens/Messages/NewMessage";
 import Patients from "./screens/Patients/Patients"
+import PatientDetail from "./screens/PatientDetail/PatientDetail"
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -116,11 +117,15 @@ function App() {
                     exact
                     render={(props) => <NewMessage {...props} />}
                   />
-
                   <Route
                     path="/clinic/:id"
                     exact
                     render={(props) => <ClinicDetail {...props} />}
+                  />
+                  <Route
+                    path="/patients/:id"
+                    exact
+                    render={(props) => <PatientDetail {...props} />}
                   />
                   <Route
                     v-if={authorized}

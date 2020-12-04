@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { MDBDataTable, MDBBtn } from 'mdbreact';
-import { MDBDataTableV5 } from 'mdbreact';
+import { MDBDataTable } from 'mdbreact';
 
 /*** Styles ***/
 import styles from "./patients.scss";
@@ -12,14 +11,18 @@ import { Link } from "react-router-dom";
 
 
 class Patients extends Component {
-  state = { clinicians: null, patientData: null };
+
+  constructor(){
+    super();
+    state = { clinicians: null, patientData: null };
+  }
 
 
 
 
   componentDidMount = async () => {
     let clinicId = getCookie("user_id");
-    let res = await store.getClinicDetail({ clinicId });
+    let res = await store.getPatients({ clinicId });
     this.setState({ clinicians: res.data.Dentist });
     console.log(this.state.clinicians)
     this.setState({
@@ -44,8 +47,8 @@ class Patients extends Component {
             width: 150
           },
           {
-            label: 'Rate',
-            field: 'rate',
+            label: 'Phone',
+            field: 'phone',
             sort: 'asc',
             width: 150
           },
@@ -56,13 +59,13 @@ class Patients extends Component {
             width: 150
           },
         ],
-        rows: res.data.Dentist.map((dentist) => {
+        rows: res.data.map((patient) => {
           return{
-            ...dentist,
-            avatar: <div class="tableAvatar"><img src={dentist.avatar}/></div>,
+            ...patient,
+            avatar: <div class="tableAvatar"><img src={patient.avatar}/></div>,
             button:         
-            <Link to='#' className= "tableAvatar">
-            <button type="button" class="btn btn-secondary">Visit</button>
+            <Link to ={`/patients/${patient.id}`} className= "tableAvatar">
+            <button type="button" class="btn btn-secondary">View</button>
             </Link>
           }
         })
