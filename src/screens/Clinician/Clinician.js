@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { MDBDataTable, MDBBtn } from 'mdbreact';
+import { MDBDataTableV5 } from 'mdbreact';
 
 /*** Styles ***/
 import styles from "./clinician.scss";
@@ -6,47 +8,121 @@ import styles from "./clinician.scss";
 /*** Utils ***/
 import store from "../../store";
 import { getCookie } from "../../utils/cookie";
-import ClinicianCard from "./ClinicianCard";
+import { Link } from "react-router-dom";
 
-/*** Icons ***/
-import addCircle from "../../icons/Icons_add-circle.svg";
 
 class Clinician extends Component {
-  state = { clinicians: null };
+  state = { clinicians: null, patientData: null };
+
+
+
 
   componentDidMount = async () => {
     let clinicId = getCookie("user_id");
     let res = await store.getClinicDetail({ clinicId });
-
     this.setState({ clinicians: res.data.Dentist });
+    console.log(this.state.clinicians)
+    this.setState({
+      patientData: {
+        columns: [
+          {
+            label: 'Avatar',
+            field: 'avatar',
+            sort: 'asc',
+            width: 50
+          },
+          {
+            label: 'Name',
+            field: 'name',
+            sort: 'asc',
+            width: 150
+          },
+          {
+            label: 'Surname',
+            field: 'surname',
+            sort: 'asc',
+            width: 150
+          },
+          {
+            label: 'Rate',
+            field: 'rate',
+            sort: 'asc',
+            width: 150
+          },
+          {
+            label: 'Visit',
+            field: 'button',
+            sort: 'asc',
+            width: 150
+          },
+        ],
+        rows: res.data.Dentist.map((dentist) => {
+          return{
+            ...dentist,
+            avatar: <div class="tableAvatar"><img src={dentist.avatar}/></div>,
+            button:         
+            <Link to='#' className= "tableAvatar">
+            <button type="button" class="btn btn-secondary">Visit</button>
+            </Link>
+          }
+        })
+
+      }
+    })
+    console.log(this.state.patientData)
+
   };
 
-	renderClinicians = () => {
-		let { clinicians } = this.state;
-		return clinicians?.map((clinician, i) => {
-			return (
-				<ClinicianCard
-					name={clinician.name}
-					surname={clinician.surname}
-					avatar={clinician.avatar}
-					rate={clinician.rate}
-					key={i}
-				/>
-			);
-		});
-	};
+  render() {
 
-	render() {
-		return (
-			<div className="cContainer">
-				<div className={"cContainer__buttonWrapper"} onClick={() => (window.location = "/clinician/new")}>
-					<img src={addCircle} className={"cContainer__buttonWrapper__icon"} />
-					<div className={"cContainer__buttonWrapper__title"}>Yeni Klinisyen</div>
-				</div>
-				{this.renderClinicians()}
-			</div>
-		);
-	}
+    return (
+      <div>
+        {this.state.patientData !== null ? (
+          <MDBDataTable
+            striped
+            bordered
+            small
+            data={this.state.patientData}
+          />)
+          :
+          <p>YUKLENIYOR</p>
+        }
+
+
+
+
+        {/* 
+        {this.state.patientData !== null ? (
+          <MDBTable btn>
+            <MDBTableHead columns={patientData.columns} />
+            <MDBTableBody rows={patientData.rows} />
+          </MDBTable>
+        )
+          :
+          <p>YUKLENIYOR</p>
+        } */}
+
+
+        {/* Another data table example */}
+        {/* {this.state.patientData !== null ? (
+          <MDBDataTableV5
+            hover
+            entriesOptions={[5, 20, 25]}
+            entries={5}
+            pagesAmount={4}
+            data={this.state.patientData}
+            pagingTop
+            searchTop
+            searchBottom={false}
+          />
+        )
+          :
+          <p>YUKLENIYOR</p>
+        } */}
+
+      </div>
+    );
+  }
 }
 
 export default Clinician;

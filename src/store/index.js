@@ -238,6 +238,30 @@ export default {
       errorMessageBuilder
     );
   },
+  async getPatients({ clinicId }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/clinic/${clinicId}/patient`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+  async getPatientsDetail(userId) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/user/${userId}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
   async getDentistDetail({ dentistId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = "token";
