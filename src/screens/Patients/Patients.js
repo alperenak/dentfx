@@ -94,38 +94,6 @@ class Patients extends Component {
           <p>YUKLENIYOR</p>
         }
 
-
-
-
-        {/* 
-        {this.state.patientData !== null ? (
-          <MDBTable btn>
-            <MDBTableHead columns={patientData.columns} />
-            <MDBTableBody rows={patientData.rows} />
-          </MDBTable>
-        )
-          :
-          <p>YUKLENIYOR</p>
-        } */}
-
-
-        {/* Another data table example */}
-        {/* {this.state.patientData !== null ? (
-          <MDBDataTableV5
-            hover
-            entriesOptions={[5, 20, 25]}
-            entries={5}
-            pagesAmount={4}
-            data={this.state.patientData}
-            pagingTop
-            searchTop
-            searchBottom={false}
-          />
-        )
-          :
-          <p>YUKLENIYOR</p>
-        } */}
-
       </div>
     );
   }
