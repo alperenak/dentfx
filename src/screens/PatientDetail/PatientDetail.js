@@ -9,13 +9,50 @@ import styles from "./patientdetail.scss";
 import ReactStars from "react-rating-stars-component";
 import Map from "../../components/Map/map";
 
+/*** Teeth Images ***/
+import tooth1 from "../../assets/images/tooth/tooth-1.jpg"
+import tooth2 from "../../assets/images/tooth/tooth-2.jpg"
+import tooth3 from "../../assets/images/tooth/tooth-3.jpg"
+import tooth4 from "../../assets/images/tooth/tooth-4.jpg"
+import tooth5 from "../../assets/images/tooth/tooth-5.jpg"
+import tooth6 from "../../assets/images/tooth/tooth-6.jpg"
+import tooth7 from "../../assets/images/tooth/tooth-7.jpg"
+import tooth8 from "../../assets/images/tooth/tooth-8.jpg"
+import tooth9 from "../../assets/images/tooth/tooth-9.jpg"
+import tooth10 from "../../assets/images/tooth/tooth-10.jpg"
+import tooth11 from "../../assets/images/tooth/tooth-11.jpg"
+import tooth12 from "../../assets/images/tooth/tooth-12.jpg"
+import tooth13 from "../../assets/images/tooth/tooth-13.jpg"
+import tooth14 from "../../assets/images/tooth/tooth-14.jpg"
+import tooth15 from "../../assets/images/tooth/tooth-15.jpg"
+import tooth16 from "../../assets/images/tooth/tooth-16.jpg"
+import tooth17 from "../../assets/images/tooth/tooth-17.jpg"
+import tooth18 from "../../assets/images/tooth/tooth-18.jpg"
+import tooth19 from "../../assets/images/tooth/tooth-19.jpg"
+import tooth20 from "../../assets/images/tooth/tooth-20.jpg"
+import tooth21 from "../../assets/images/tooth/tooth-21.jpg"
+import tooth22 from "../../assets/images/tooth/tooth-22.jpg"
+import tooth23 from "../../assets/images/tooth/tooth-23.jpg"
+import tooth24 from "../../assets/images/tooth/tooth-24.jpg"
+import tooth25 from "../../assets/images/tooth/tooth-25.jpg"
+import tooth26 from "../../assets/images/tooth/tooth-26.jpg"
+import tooth27 from "../../assets/images/tooth/tooth-27.jpg"
+import tooth28 from "../../assets/images/tooth/tooth-28.jpg"
+import tooth29 from "../../assets/images/tooth/tooth-29.jpg"
+import tooth30 from "../../assets/images/tooth/tooth-30.jpg"
+import tooth31 from "../../assets/images/tooth/tooth-31.jpg"
+import tooth32 from "../../assets/images/tooth/tooth-32.jpg"
+import { Redirect } from "react-router-dom";
+
+
 class PatientDetail extends Component {
   constructor() {
     super();
     this.state = {
       patient: null,
       selectedTab: 0,
-      selectedPlan: "Tedavi veya Planlama Seçiniz"
+      selectedPlan: "Tedavi veya Planlama Seçiniz",
+      selectedTooth: "",
     };
 
 
@@ -98,15 +135,24 @@ class PatientDetail extends Component {
 
           {
             this.state.selectedPlan === "Planlama 0" &&
-            <div>PLANLAMA 0 HERE</div>
+            <div>            
+              {this.renderTeeth()}
+              {this.state.selectedTooth !== "" &&
+              <p>TOOTH SELECTED</p>
+              }
+            </div>
           }
           {
             this.state.selectedPlan === "Planlama 1" &&
-            <div>PLANLAMA 1 HERE</div>
+            <div>
+              {this.renderTeeth()}
+            </div>
           }
           {
             this.state.selectedPlan === "Tedavi" &&
-            <div>TEDAVI HERE</div>
+            <div>
+              {this.renderTeeth()}
+            </div>
           }
 
       </div>
@@ -121,7 +167,52 @@ class PatientDetail extends Component {
     );
   };
 
-  renderNotesTab = () => { };
+  renderNotesTab = () => {};
+
+  renderTeeth = () => {
+    return(
+      <div className={"row teeth"}>
+        <div className={"row teethrow"}>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth1"})}><img src={tooth1}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth2"})}><img src={tooth2}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth3"})}><img src={tooth3}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth4"})}><img src={tooth4}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth5"})}><img src={tooth5}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth6"})}><img src={tooth6}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth7"})}><img src={tooth7}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth8"})}><img src={tooth8}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth9"})}><img src={tooth9}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth10"})}><img src={tooth10}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth11"})}><img src={tooth11}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth12"})}><img src={tooth12}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth13"})}><img src={tooth13}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth14"})}><img src={tooth14}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth15"})}><img src={tooth15}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth16"})}><img src={tooth16}/></button>
+        </div>
+        <div className={"row teethrow"}>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth17"})}><img src={tooth17}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth18"})}><img src={tooth18}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth19"})}><img src={tooth19}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth20"})}><img src={tooth20}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth21"})}><img src={tooth21}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth22"})}><img src={tooth22}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth23"})}><img src={tooth23}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth24"})}><img src={tooth24}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth25"})}><img src={tooth25}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth26"})}><img src={tooth26}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth27"})}><img src={tooth27}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth28"})}><img src={tooth28}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth29"})}><img src={tooth29}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth30"})}><img src={tooth30}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth31"})}><img src={tooth31}/></button>
+          <button className={"teethClass"} onClick={() => this.setState({selectedTooth: "tooth32"})}><img src={tooth32}/></button>
+        </div>
+      </div>
+    );
+  };
+
+  
 
   render() {
     let { patient, selectedTab } = this.state;

@@ -155,3 +155,31 @@
     background-color: #1a5aff;
     border-radius: 12px;
   }
+
+.teeth{
+  margin-top: 3rem;
+  & .teethrow{
+    margin: 0 auto;
+
+    & .teethClass{
+      border-color: white;
+      border-style: solid;
+      padding: 2px;
+      background: transparent;
+      &:hover{
+        border-radius: 10px;
+        border-color: #EDD690;
+      }
+      &:active {
+        background-color: #EDD690;
+        box-shadow: 0 4px #ECD68B;
+        transform: translateY(4px);
+      }
+      &:focus{
+        outline: #ECD68B;
+        border-radius: 10px;
+        border-color: #ECD68B;
+      }
+    }
+  }
+}
