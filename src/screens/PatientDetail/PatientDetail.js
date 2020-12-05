@@ -106,12 +106,8 @@ class PatientDetail extends Component {
           }
           {
             this.state.selectedPlan === "Tedavi" &&
-            <div>TEDAVI</div>
+            <div>TEDAVI HERE</div>
           }
-
-
-
-
 
       </div>
     );
