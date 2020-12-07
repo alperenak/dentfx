@@ -51,7 +51,7 @@ class PatientDetail extends Component {
     this.state = {
       patient: null,
       selectedTab: 0,
-      selectedPlan: "Tedavi veya Planlama Seçiniz",
+      selectedPlan: "Planlama 0",
       selectedTooth: "",
       treatmentPlan0Data: null,
       treatmentPlan1Data: null,
@@ -450,6 +450,36 @@ class PatientDetail extends Component {
             para_birimi: 'TRY',
             button1: <button type="button" class="btn btn-success">Ekle</button>,
           },
+          {
+            tedavi: 'Botoks Uygulama 2',
+            toplam: '1400,00',
+            para_birimi: 'TRY',
+            button1: <button type="button" class="btn btn-success">Ekle</button>,
+          },
+          {
+            tedavi: 'Botoks Uygulama 3',
+            toplam: '1200,00',
+            para_birimi: 'TRY',
+            button1: <button type="button" class="btn btn-success">Ekle</button>,
+          },
+          {
+            tedavi: 'Botoks Uygulama 4',
+            toplam: '1500,00',
+            para_birimi: 'TRY',
+            button1: <button type="button" class="btn btn-success">Ekle</button>,
+          },
+          {
+            tedavi: 'Botoks Uygulama 5',
+            toplam: '1400,00',
+            para_birimi: 'TRY',
+            button1: <button type="button" class="btn btn-success">Ekle</button>,
+          },
+          {
+            tedavi: 'Botoks Uygulama 6',
+            toplam: '1200,00',
+            para_birimi: 'TRY',
+            button1: <button type="button" class="btn btn-success">Ekle</button>,
+          },
         ]
       }
     })
@@ -669,6 +699,9 @@ class PatientDetail extends Component {
         {this.state.patientData !== null ? (
           <MDBDataTable
             striped
+            paging={false}
+            scrollY
+            maxHeight="50vh"
             bordered
             small
             data={this.state.treatmentList}
