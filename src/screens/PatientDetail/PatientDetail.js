@@ -5,9 +5,6 @@ import { MDBDataTable } from 'mdbreact';
 /*** Styles ***/
 import styles from "./patientdetail.scss";
 
-/*** Components ***/
-import ReactStars from "react-rating-stars-component";
-import Map from "../../components/Map/map";
 
 /*** Teeth Images ***/
 import tooth1 from "../../assets/images/tooth/tooth-1.jpg"
@@ -42,7 +39,8 @@ import tooth29 from "../../assets/images/tooth/tooth-29.jpg"
 import tooth30 from "../../assets/images/tooth/tooth-30.jpg"
 import tooth31 from "../../assets/images/tooth/tooth-31.jpg"
 import tooth32 from "../../assets/images/tooth/tooth-32.jpg"
-import { Redirect } from "react-router-dom";
+import ContractIMG from "../../assets/icons/contract.svg"
+import ProformaIMG from "../../assets/icons/proforma.svg"
 
 
 class PatientDetail extends Component {
@@ -569,6 +567,7 @@ class PatientDetail extends Component {
             {this.renderTeeth()}
             {this.renderNewTreatmentButton(true)}
             {this.renderTreatmentPlan0Table()}
+            {this.renderUnderTablebuttons()}
           </div>
         }
         {
@@ -730,9 +729,9 @@ class PatientDetail extends Component {
           }</div>)
           :
           (
-        <span class="d-inline-block" data-toggle="popover" data-content="Lütfen, önce bir diş seçimi yapınız.">
-          <button class="btn btn-secondary addTreatmentButton" style={{pointerEvents: null}} type="button" disabled>Lütfen, önce diş seçiniz.</button>
-        </span>) 
+            <span class="d-inline-block" data-toggle="popover" data-content="Lütfen, önce bir diş seçimi yapınız.">
+              <button class="btn btn-secondary addTreatmentButton" style={{ pointerEvents: null }} type="button" disabled>Lütfen, önce diş seçiniz.</button>
+            </span>)
         }
 
 
@@ -754,6 +753,16 @@ class PatientDetail extends Component {
             </div>
           </div>
         </div>
+
+      </div>
+    )
+  }
+
+  renderUnderTablebuttons = () => {
+    return (
+      <div>
+        <a href= "#" className={"underTableIcon1"} data-toggle="tooltip" title="Make Contract"><img src={ContractIMG}></img></a>
+        <a href= "#" className={"underTableIcon2"} data-toggle="tooltip" title="Make Proforma"><img src={ProformaIMG}></img></a>
 
       </div>
     )
