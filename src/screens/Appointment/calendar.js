@@ -110,6 +110,9 @@ const resourceMap = [
     { resourceId: 1, resourceTitle: 'Dentist 1' },
     { resourceId: 2, resourceTitle: 'Dentist 2' },
     { resourceId: 3, resourceTitle: 'Dentist 3' },
+    { resourceId: 4, resourceTitle: 'Dentist 4' },
+    { resourceId: 5, resourceTitle: 'Dentist 5' },
+    { resourceId: 6, resourceTitle: 'Dentist 6' },
 ]
 const messages = {
     allDay: 'Tüm gün',
@@ -123,6 +126,9 @@ const messages = {
     date: 'Tarih',
     time: 'Saat',
     event: 'Kayıt',
+    yesterday: 'Dün',
+    tomorrow: 'Yarın',
+    noEventsInRange: 'Bu aralıkta bir kayıt bulunamadı',
     showMore: total => `+ daha gör (${total})`
 };
 class ACalendar extends Component {
@@ -173,7 +179,6 @@ class ACalendar extends Component {
             resources={resourceMap}
             resourceIdAccessor="resourceId"
             resourceTitleAccessor="resourceTitle"
-
         />
 		</div>
 	);
