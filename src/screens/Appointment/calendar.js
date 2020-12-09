@@ -13,8 +13,10 @@ import addCircle from "../../icons/Icons_add-circle.svg";
 
 import { Calendar, momentLocalizer,Views} from 'react-big-calendar';
 
-import moment from 'moment';
-import 'moment/locale/tr';
+import moment from "moment";
+import "moment/locale/tr";
+import { func } from "prop-types";
+import Modal from "../../components/Modal/modal";
 
 let events = [
     {
@@ -62,7 +64,6 @@ let events = [
         resourceId: 1
 
     },
-
     {
         id: 16,
         title: 'Appointment - James Fox',
@@ -133,56 +134,59 @@ const messages = {
 };
 class ACalendar extends Component {
   state = {
-    events
+    events,
+    modalType: "",
   };
 
-  componentDidMount = async () => {
+  componentDidMount = async () => {};
 
+  handleSelectOnCreateEvent = ({ start, end }) => {
+    console.log("deneme");
+    $("#createEventOnCalendar").modal("show");
   };
 
-    handleSelect = ({ start, end }) => {
-        console.log("deneme")
+  handleSelectOnEvent = () => {
+    $("#alp").modal("show");
+  };
+  render() {
+    let { activeLink } = this.state;
+    const localizer = momentLocalizer(moment);
 
-        const title = window.prompt('New Event name')
-        if (title)
-            this.setState({
-                events: [
-                    ...this.state.events,
-                    {
-                        start,
-                        end,
-                        title,
-                    },
-                ],
-            })
-    }
-
-	render() {
-		let { activeLink } = this.state;
-		const localizer = momentLocalizer(moment)
-
-	return (
-		<div>
-		<Calendar
-            selectable
-  			localizer={localizer}
-  			events= {this.state.events}
-  			startAccessor="start"
-  			endAccessor="end"
-  			style={{ height: 1000,
-            }}
-            culture = 'tr'
-            messages={messages}
-            defaultView={Views.WEEK}
-            onSelectEvent={event => alert(event.title)}
-            onSelectSlot={this.handleSelect}
-            resources={resourceMap}
-            resourceIdAccessor="resourceId"
-            resourceTitleAccessor="resourceTitle"
+    return (
+      <div>
+        <Calendar
+          selectable
+          localizer={localizer}
+          events={this.state.events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 1000 }}
+          culture="tr"
+          messages={messages}
+          defaultView={Views.WEEK}
+          onSelectEvent={this.handleSelectOnEvent}
+          onSelectSlot={this.handleSelectOnCreateEvent}
+          resources={resourceMap}
+          resourceIdAccessor="resourceId"
+          resourceTitleAccessor="resourceTitle"
         />
-		</div>
-	);
-	}
+        <Modal
+          modalTitle={"Birseyler sec"}
+          modalId="alp"
+          modalFooterButtonTitle={"Kapat"}
+        >
+          <div>Merhaba</div>
+        </Modal>
+        <Modal
+          modalTitle={"Birseyler sec"}
+          modalId="createEventOnCalendar"
+          modalFooterButtonTitle={"Kapat"}
+        >
+          <div>Create Event</div>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 export default ACalendar;
