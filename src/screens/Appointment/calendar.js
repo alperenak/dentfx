@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 
 /*** Styles ***/
 import styles from "./appointment.scss";
@@ -17,6 +17,43 @@ import moment from "moment";
 import "moment/locale/tr";
 import { func } from "prop-types";
 import Modal from "../../components/Modal/modal";
+
+function Event({ event }) {
+    return (
+        <span>
+      <strong>{event.title}</strong>
+            {event.desc && ':  ' + event.desc}
+    </span>
+    )
+}
+
+function EventAgenda({ event }) {
+    return (
+        <span>
+      <em style={{ color: 'magenta' }}>{event.title}</em>
+      <p>{event.desc}</p>
+    </span>
+    )
+}
+
+const customDayPropGetter = date => {
+    if (date.getDate() === 7 || date.getDate() === 15)
+        return {
+            className: 'special-day',
+            style: {
+                border: 'solid 3px ' + (date.getDate() === 7 ? '#faa' : '#afa'),
+            },
+        }
+    else return {}
+}
+
+const customSlotPropGetter = date => {
+    if (date.getDate() === 7 || date.getDate() === 15)
+        return {
+            className: 'special-day',
+        }
+    else return {}
+}
 
 let events = [
     {
@@ -107,7 +144,7 @@ let events = [
         resourceId: 2
     }
 ];
-const resourceMap = [
+let resourceMap = [
     { resourceId: 1, resourceTitle: 'Dentist 1' },
     { resourceId: 2, resourceTitle: 'Dentist 2' },
     { resourceId: 3, resourceTitle: 'Dentist 3' },
@@ -133,15 +170,57 @@ const messages = {
     showMore: total => `+ daha gör (${total})`
 };
 class ACalendar extends Component {
-  state = {
-    events,
-    modalType: "",
+
+
+    state = {
+      events,
+      calendarEvents: [],
+      modalType: "",
+      allAppointments: [],
+      userType: null,
   };
 
-  componentDidMount = async () => {};
+  componentDidMount = async () => {
+
+      let userId = getCookie("user_id");
+      let userType = getCookie("user_type");
+      this.setState({ userType });
+
+      const response = await store.getAppointments({ userId });
+      let clinicResponse = await store.getClinicDetail({ clinicId: getCookie("user_id") });
+      let clinicObject = clinicResponse.data;
+      resourceMap = clinicObject.Dentist.map(dentist =>{
+          return{
+              resourceId: dentist.id,
+              resourceTitle: `${dentist.name} ${dentist.surname} `
+          }
+      })
+
+      if (response.data) {
+          let _allAppointments = response.data.map(appointment => {
+
+              let title = `Randevu ${appointment.User.name} ${appointment.User.surname} \n${appointment.treatmentType}`
+              let dateArr = appointment.date.split('.');
+              let dateArsr = appointment.startTime.split('.');
+              let dateArrs= appointment.startTime.split('.');
+              let [day,month,year] = appointment.date.split('.');
+              let [startHour,startMinutes] = appointment.startTime.split(':');
+              let [endHour,endMinutes] = appointment.endTime.split(':');
+              return {
+                  id: appointment.id,
+                  title: title,
+                  start: new Date(year, month, day, startHour, startMinutes, 0),
+                  end: new Date(year, month, day, endHour, endMinutes, 0),
+                  resourceId: appointment.Dentist.id
+                  }
+              }
+          )
+          this.setState({ allAppointments: _allAppointments });
+      }
+  }
+
 
   handleSelectOnCreateEvent = ({ start, end }) => {
-    console.log("deneme");
     $("#createEventOnCalendar").modal("show");
   };
 
@@ -157,7 +236,7 @@ class ACalendar extends Component {
         <Calendar
           selectable
           localizer={localizer}
-          events={this.state.events}
+          events={this.state.allAppointments}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 1000 }}
@@ -169,6 +248,14 @@ class ACalendar extends Component {
           resources={resourceMap}
           resourceIdAccessor="resourceId"
           resourceTitleAccessor="resourceTitle"
+          dayPropGetter={customDayPropGetter}
+          slotPropGetter={customSlotPropGetter}
+          components={{
+              event: Event,
+              agenda: {
+                  event: EventAgenda,
+              },
+          }}
         />
         <Modal
           modalTitle={"Birseyler sec"}
