@@ -9,6 +9,9 @@ export default function Modal(props) {
     modalFooterButtonType,
     modalFooterButtonOnClick,
     modalFooterVisibility,
+    modalFooterSecondButtonTitle,
+    modalFooterSecondButtonType,
+    modalFooterSecondButtonOnClick,
   } = props;
   return (
     <div class="modal fade" id={modalId} tabindex="-1">
@@ -38,6 +41,20 @@ export default function Modal(props) {
               >
                 {modalFooterButtonTitle}
               </button>
+              {modalFooterSecondButtonTitle ? (
+                <button
+                  type="button"
+                  onClick={modalFooterSecondButtonOnClick}
+                  class={`btn ${
+                    !modalFooterSecondButtonType ? "btn-secondary" : ""
+                  } btn-${modalFooterSecondButtonType}`}
+                  data-dismiss="modal"
+                >
+                  {modalFooterSecondButtonTitle}
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           ) : (
             ""
