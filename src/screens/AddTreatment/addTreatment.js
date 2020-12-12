@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import styles from "./addTreatment.scss"
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
-import { Tick } from 'react-crude-animated-tick';
-import CheckMark from './checkMark'
+import CheckMark from '../../components/CheckMark/checkMark'
 
 const Step1 = () => {
   return (
