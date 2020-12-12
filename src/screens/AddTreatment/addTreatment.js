@@ -186,7 +186,7 @@ class AddTreatment extends Component {
     }
 
     return (
-      <div>8
+      <div>
         <StepProgressBar
           startingStep={0}
           onSubmit={onFormSubmit}
