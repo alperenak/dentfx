@@ -214,7 +214,7 @@ class Patients extends Component {
             avatar: <div class="tableAvatar"><img src={patient.avatar} /></div>,
             button:
               <Link to={`/patients/${patient.id}`} className="tableAvatar">
-                <button type="button" class="btn btn-secondary">View</button>
+                <button type="button" class="btn btn-secondary">İncele</button>
               </Link>
           }
         })
@@ -300,8 +300,8 @@ class Patients extends Component {
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary">Hasta Ekle</button>
               </div>
             </div>
           </div>
