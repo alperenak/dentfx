@@ -6,7 +6,9 @@ import Datetime from 'react-datetime';
 
 export default class DatePicker extends Component {
     render() {
-        return <Datetime />;
+        return <Datetime 
+        timeFormat= {false}
+        />;
     }
 }
 
