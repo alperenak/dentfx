@@ -175,10 +175,10 @@ class ACalendar extends Component {
     events,
     calendarEvents: [],
     modalType: "",
-    patientState: "",
+    patientState: "Gelmedi",
     patientName: "",
     appointmentNotes: "",
-    appointmentExplanation: "",
+    appointmentExplanation: "Acil",
     appointmentTimeMinute: "",
     appointmentDentist: "",
     selectedResourceId: false,
@@ -223,10 +223,19 @@ class ACalendar extends Component {
           resourceId: appointment.Dentist.id,
         };
       });
-      this.setState({ allAppointments: _allAppointments });
+      this.setState({
+        allAppointments: _allAppointments,
+        appointmentDentist: resourceMap[0].resourceTitle,
+      });
     }
   };
-
+  resetState = () => {
+    this.setState({
+      patientName: "",
+      appointmentExplanation: "",
+      appointmentNotes: "",
+    });
+  };
   handleSelectOnCreateEvent = (e) => {
     $("#createEventOnCalendar").modal("show");
     this.setState({
@@ -245,8 +254,16 @@ class ACalendar extends Component {
   };
   handleSelectOnEvent = (e) => {
     $("#createEventOnCalendar").modal("show");
-    console.log(e);
+    let event = e.title.split("-");
+
+    console.log(event);
     this.setState({
+      patientName: event[1],
+      patientState: event[2],
+      appointmentExplanation: event[3],
+      appointmentNotes: event[4],
+      appointmentDentist: event[5],
+      id: e.id,
       selectedResourceId: e.resourceId,
       mode: "select",
       start: e.start,
@@ -257,7 +274,7 @@ class ACalendar extends Component {
   render() {
     let { activeLink } = this.state;
     const localizer = momentLocalizer(moment);
-
+    console.log(this.state.patientState);
     return (
       <div>
         <Calendar
@@ -428,21 +445,46 @@ class ACalendar extends Component {
           modalFooterButtonTitle={"Kapat"}
           modalFooterSecondButtonTitle={"Kaydet"}
           modalFooterSecondButtonType={"primary"}
+          modalFooterButtonOnClick={() => {
+            this.resetState();
+          }}
           modalFooterSecondButtonOnClick={() => {
-            this.setState({
-              allAppointments: [
-                ...this.state.allAppointments,
-                {
-                  id: Math.random().toString(16),
-                  title: `Randevu ${this.state.patientName}-${this.state.patientState}-${this.state.appointmentExplanation}-${this.state.appointmentNotes}`,
-                  start: this.state.start,
-                  end: new Date(
-                    this.state.start.getTime() + this.state.minuteRange * 60000
-                  ),
-                  resourceId: this.state.selectedResourceId,
-                },
-              ],
-            });
+            if (this.state.mode === "create") {
+              this.setState({
+                allAppointments: [
+                  ...this.state.allAppointments,
+                  {
+                    id: Math.random().toString(16),
+                    title: `Randevu-${this.state.patientName}-${this.state.patientState}-${this.state.appointmentExplanation}-${this.state.appointmentNotes}-${this.state.appointmentDentist}`,
+                    start: this.state.start,
+                    end: new Date(
+                      this.state.start.getTime() +
+                        this.state.minuteRange * 60000
+                    ),
+                    resourceId: this.state.selectedResourceId,
+                  },
+                ],
+              });
+            } else if (this.state.mode === "select") {
+              let arr = this.state.allAppointments.filter((item) => {
+                return item.id !== this.state.id;
+              });
+              this.setState({
+                allAppointments: [
+                  ...arr,
+                  {
+                    id: this.state.id,
+                    title: `Randevu-${this.state.patientName}-${this.state.patientState}-${this.state.appointmentExplanation}-${this.state.appointmentNotes}-${this.state.appointmentDentist}`,
+                    start: this.state.start,
+                    end: new Date(
+                      this.state.start.getTime() +
+                        this.state.minuteRange * 60000
+                    ),
+                    resourceId: this.state.selectedResourceId,
+                  },
+                ],
+              });
+            }
           }}
         >
           <label className="mt-2" for="patientName">
