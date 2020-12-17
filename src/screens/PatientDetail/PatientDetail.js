@@ -57,6 +57,7 @@ class PatientDetail extends Component {
       treatmentPlan1Data: null,
       treatmentData: null,
       treatmentList: null,
+      paidTreatmentData: null,
     };
   }
 
@@ -68,13 +69,13 @@ class PatientDetail extends Component {
             label: "Tarih",
             field: "tarih",
             sort: "asc",
-            width: 50,
+            width: 150,
           },
           {
             label: "Dis",
             field: "dis",
             sort: "asc",
-            width: 150,
+            width: 100,
           },
           {
             label: "Tedavi",
@@ -86,13 +87,13 @@ class PatientDetail extends Component {
             label: "Dis Hekimi",
             field: "dis_hekimi",
             sort: "asc",
-            width: 150,
+            width: 70,
           },
           {
             label: "Toplam",
             field: "toplam",
             sort: "asc",
-            width: 150,
+            width: 80,
           },
           {
             label: "TRY/USD",
@@ -467,6 +468,87 @@ class PatientDetail extends Component {
           },
         ],
       },
+    });
+    this.setState({
+      paidTreatmentData: {
+        columns: [
+          {
+            label: "Tarih",
+            field: "tarih",
+            sort: "asc",
+            width: 170,
+          },
+          {
+            label: "Ödeme Tipi",
+            field: "odeme_tipi",
+            sort: "asc",
+            width: 150,
+          },
+          {
+            label: "Dis Hekimi",
+            field: "dis_hekimi",
+            sort: "asc",
+            width: 150,
+          },
+          {
+            label: "Tutar",
+            field: "tutar",
+            sort: "asc",
+            width: 150,
+          },
+          {
+            label: "TRY/USD",
+            field: "para_birimi",
+            sort: "asc",
+            width: 100,
+          },
+          {
+            label: "Yazdır",
+            field: "button_yazdir",
+            sort: "asc",
+            width:100,
+          },
+        ],
+        rows: [
+          {
+            tarih: "12.01.2020",
+            odeme_tipi: "Nakit",
+            dis_hekimi: "Fatih Atmaca",
+            tutar: 250,
+            para_birimi: "TRY",
+            button_yazdir: (
+              <button type="button" class="btn btn-secondary">
+                Yazdır
+              </button>
+            ),
+          },
+          {
+            tarih: "16.02.2020",
+            odeme_tipi: "Kredi Kartı",
+            dis_hekimi: "Fatih Atmaca",
+            tutar: 1350,
+            para_birimi: "TRY",
+            button_yazdir: (
+              <button type="button" class="btn btn-secondary">
+                Yazdır
+              </button>
+            ),
+          },
+          {
+            tarih: "22.03.2020",
+            odeme_tipi: "Nakit",
+            dis_hekimi: "Fatih Atmaca",
+            tutar: 1200,
+            para_birimi: "TRY",
+            button_yazdir: (
+              <button type="button" class="btn btn-secondary">
+                Yazdır
+              </button>
+            ),
+          },
+        ],
+      },
+      
     });
   };
 
@@ -903,8 +985,20 @@ class PatientDetail extends Component {
   };
 
   renderPaymentTab = () => {
-    let { patient } = this.state;
-    return <div className={"tabWrapper"}></div>;
+    return(
+      <div>
+        <div className={"row"}>
+          <div className={"paymentTreatmentTableWrapper"}>
+          <h2 className={"tableHeader"}>Tedaviler</h2>
+            {this.renderTreatmentTable()}
+          </div>
+          <div className={"paymentPaidTreatmentTableWrapper"}>
+            <h2 className={"tableHeader"}>Alınan Paralar</h2>
+            {this.renderPaidtreatmentsTable()}
+          </div>
+        </div>
+      </div>
+    )
   };
 
   renderNotesTab = () => { };
@@ -1180,6 +1274,25 @@ class PatientDetail extends Component {
     );
   };
 
+  renderPaidtreatmentsTable = () => {
+    return(
+      <div>
+        {this.state.paidTreatmentList !== null ? (
+          <MDBDataTable
+            striped
+            scrollY
+            maxHeight="50vh"
+            bordered 
+            small
+            data={this.state.paidTreatmentData}
+          />
+        ) : (
+            <p>YUKLENIYOR</p>
+          )}
+      </div>
+    )
+  }
+
   renderNewTreatmentButton = (isPlan) => {
     return (
       <div>
@@ -1228,42 +1341,6 @@ class PatientDetail extends Component {
         >
           {this.renderTreatmentList()}
         </Modal>
-
-        {/* <div
-          class="modal fade"
-          id="newTreatmentPlan"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Tedavi Plani Seciniz
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">{this.renderTreatmentList()}</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Kapat
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     );
   };
