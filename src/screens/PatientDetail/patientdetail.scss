@@ -93,6 +93,27 @@
         }
       }
     }
+
+    & .patientNotesWrapper{
+      border-top: 1px solid rgba(0, 0, 0, .15);
+      margin-top: 3rem;
+      & .tableHeader{
+        margin: 3rem 0rem 1rem 0rem;
+      }
+
+      & .addNotes{
+        background: #7bfc7b;
+        border-radius: 12px;
+        padding: 5px;
+        height: 2rem;
+        position: absolute;
+        right: 24px;
+        margin-top: 3rem;
+        & img{
+          width: 25px;
+        }
+      }
+    }
   }
   
   .tabWrapper {

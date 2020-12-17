@@ -5,6 +5,7 @@ import { MDBDataTable } from "mdbreact";
 /*** Styles ***/
 import styles from "./patientdetail.scss";
 import PaymentIcon from "../../icons/credit-cards-payment.svg"
+import NotesIcon from "../../icons/writing.svg"
 
 /*** Components ***/
 import DatePicker from "../../components/DatePicker/DatePicker"
@@ -61,6 +62,7 @@ class PatientDetail extends Component {
       treatmentData: null,
       treatmentList: null,
       paidTreatmentData: null,
+      notesForPatientData: null,
     };
   }
 
@@ -364,19 +366,19 @@ class PatientDetail extends Component {
             label: "Tarih",
             field: "tarih",
             sort: "asc",
-            width: 50,
+            width: 150,
           },
           {
             label: "Dis",
             field: "dis",
             sort: "asc",
-            width: 150,
+            width: 50,
           },
           {
             label: "Tedavi",
             field: "tedavi",
             sort: "asc",
-            width: 150,
+            width: 250,
           },
           {
             label: "Dis Hekimi",
@@ -388,19 +390,19 @@ class PatientDetail extends Component {
             label: "Toplam",
             field: "toplam",
             sort: "asc",
-            width: 150,
+            width: 100,
           },
           {
             label: "TRY/USD",
             field: "para_birimi",
             sort: "asc",
-            width: 150,
+            width: 100,
           },
           {
             label: "Sil",
             field: "button2",
             sort: "asc",
-            width: 150,
+            width: 50,
           },
         ],
         rows: [
@@ -546,6 +548,76 @@ class PatientDetail extends Component {
             button_yazdir: (
               <button type="button" class="btn btn-secondary">
                 Yazdır
+              </button>
+            ),
+          },
+        ],
+      },
+    });
+    this.setState({
+      notesForPatientData: {
+        columns: [
+          {
+            label: "Tarih",
+            field: "tarih",
+            sort: "asc",
+          },
+          {
+            label: "Dis Hekimi",
+            field: "dis_hekimi",
+            sort: "asc",
+          },
+          {
+            label: "Düzenle",
+            field: "button_düzenle",
+            sort: "asc",
+          },
+          {
+            label: "Sil",
+            field: "button_sil",
+            sort: "asc",
+          },
+        ],
+        rows: [
+          {
+            tarih: "12.01.2020",
+            dis_hekimi: "Fatih Atmaca",
+            button_düzenle: (
+              <button type="button" class="btn btn-secondary">
+                Düzenle
+              </button>
+            ),
+            button_sil: (
+              <button type="button" class="btn btn-danger">
+                Sil
+              </button>
+            ),
+          },
+          {
+            tarih: "12.02.2020",
+            dis_hekimi: "Hasan Demirkiran",
+            button_düzenle: (
+              <button type="button" class="btn btn-secondary">
+                Düzenle
+              </button>
+            ),
+            button_sil: (
+              <button type="button" class="btn btn-danger">
+                Sil
+              </button>
+            ),
+          },
+          {
+            tarih: "13.01.2020",
+            dis_hekimi: "Fatih Atmaca",
+            button_düzenle: (
+              <button type="button" class="btn btn-secondary">
+                Düzenle
+              </button>
+            ),
+            button_sil: (
+              <button type="button" class="btn btn-danger">
+                Sil
               </button>
             ),
           },
@@ -1030,7 +1102,52 @@ class PatientDetail extends Component {
     )
   };
 
-  renderNotesTab = () => { };
+  renderNotesTab = () => {
+    return (
+      <div>
+          <div className={"patientNotesWrapper"}>
+          {/* ADD payment Button */}
+          <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addNotes"}>Not Ekle<img src={NotesIcon}></img></a>
+
+            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Not Ekle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body container">
+                  
+                  <form>
+                  <div class="form-row" style={{ marginTop: "0" }}>
+                  <div class="col-md-6 mb-3">
+                    <label>Not Tarihi</label>
+                    <DatePicker />
+                  </div>
+                </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Lütfen Not Ekleyiniz.</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                  </div>
+                </form>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Not Ekle</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h2 className={"tableHeader"}>Alınan Paralar</h2>
+            {this.renderPatientsNotes()}
+          </div>
+      </div>
+    )
+   };
 
   renderTeeth = () => {
     return (
@@ -1273,7 +1390,9 @@ class PatientDetail extends Component {
         {this.state.treatmentData !== null ? (
           <MDBDataTable
             striped
-            bordered
+            scrollY
+            maxHeight="50vh"
+            bordered 
             small
             data={this.state.treatmentData}
           />
@@ -1286,7 +1405,7 @@ class PatientDetail extends Component {
   renderTreatmentList = () => {
     return (
       <div>
-        {this.state.patientData !== null ? (
+        {this.state.treatmentList !== null ? (
           <MDBDataTable
             striped
             paging={false}
@@ -1314,6 +1433,25 @@ class PatientDetail extends Component {
             bordered 
             small
             data={this.state.paidTreatmentData}
+          />
+        ) : (
+            <p>YUKLENIYOR</p>
+          )}
+      </div>
+    )
+  }
+
+  renderPatientsNotes = () => {
+    return(
+      <div>
+        {this.state.notesForPatientData !== null ? (
+          <MDBDataTable
+            striped
+            scrollY
+            maxHeight="50vh"
+            bordered 
+            small
+            data={this.state.notesForPatientData}
           />
         ) : (
             <p>YUKLENIYOR</p>
