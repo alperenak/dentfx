@@ -79,6 +79,19 @@
       & .tableHeader{
         margin: 3rem 0rem 1rem 0rem;
       }
+
+      & .addPayment{
+        background: #7bfc7b;
+        border-radius: 12px;
+        padding: 5px;
+        height: 2rem;
+        position: absolute;
+        right: 24px;
+        margin-top: 3rem;
+        & img{
+          width: 25px;
+        }
+      }
     }
   }
   

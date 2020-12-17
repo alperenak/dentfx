@@ -4,9 +4,12 @@ import { MDBDataTable } from "mdbreact";
 
 /*** Styles ***/
 import styles from "./patientdetail.scss";
+import PaymentIcon from "../../icons/credit-cards-payment.svg"
 
 /*** Components ***/
 import DatePicker from "../../components/DatePicker/DatePicker"
+import StepProgressBar from 'react-step-progress';
+
 
 /*** Teeth Images ***/
 import tooth1 from "../../assets/images/tooth/tooth-1.jpg";
@@ -993,6 +996,32 @@ class PatientDetail extends Component {
             {this.renderTreatmentTable()}
           </div>
           <div className={"paymentPaidTreatmentTableWrapper"}>
+
+          {/* ADD payment Button */}
+          <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addPayment"}>Ödeme Ekle<img src={PaymentIcon}></img></a>
+
+            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ödeme Ekle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+                  ÖDEME KISMI 
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Ödeme Ekle</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <h2 className={"tableHeader"}>Alınan Paralar</h2>
             {this.renderPaidtreatmentsTable()}
           </div>
