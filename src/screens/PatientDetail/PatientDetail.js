@@ -1207,7 +1207,7 @@ class PatientDetail extends Component {
             </div>
           </div>
 
-          <h2 className={"tableHeader"}>Alınan Paralar</h2>
+          <h2 className={"tableHeader"}>Notlar</h2>
           {this.renderPatientsNotes()}
         </div>
       </div>
