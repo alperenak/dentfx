@@ -511,7 +511,7 @@ class PatientDetail extends Component {
             label: "Yazdır",
             field: "button_yazdir",
             sort: "asc",
-            width:100,
+            width: 100,
           },
         ],
         rows: [
@@ -623,7 +623,7 @@ class PatientDetail extends Component {
           },
         ],
       },
-      
+
     });
   };
 
@@ -1060,17 +1060,17 @@ class PatientDetail extends Component {
   };
 
   renderPaymentTab = () => {
-    return(
+    return (
       <div>
         <div className={"row"}>
           <div className={"paymentTreatmentTableWrapper"}>
-          <h2 className={"tableHeader"}>Tedaviler</h2>
+            <h2 className={"tableHeader"}>Tedaviler</h2>
             {this.renderTreatmentTable()}
           </div>
           <div className={"paymentPaidTreatmentTableWrapper"}>
 
-          {/* ADD payment Button */}
-          <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addPayment"}>Ödeme Ekle<img src={PaymentIcon}></img></a>
+            {/* ADD payment Button */}
+            <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addPayment"}>Ödeme Ekle<img src={PaymentIcon}></img></a>
 
             <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -1083,7 +1083,72 @@ class PatientDetail extends Component {
                   </div>
                   <div class="modal-body">
 
-                  ÖDEME KISMI 
+                    <form>
+                      <div class="form-row" style={{ marginTop: "0" }}>
+                        <div class="col-md-6 mb-3">
+                          <label>Ödeme Tarihi</label>
+                          <DatePicker />
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                        <label for="exampleFormControlSelect1">Ödeme Tipi</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                          <option>Nakit</option>
+                          <option>Kredi Kartı</option>
+                          <option>Senet</option>
+                          <option>Havale</option>
+                        </select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-row" >
+                      <div class="col-md-6 mb-3">
+                        <label for="formGroupExampleInput">Tutar</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"/>
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                        <label for="exampleFormControlSelect2">Para Birimi</label>
+                        <select class="form-control" id="exampleFormControlSelect2">
+                          <option>TRY</option>
+                          <option>USD</option>
+                          <option>EUR</option>
+                          <option>GBP</option>
+                          <option>ALL</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                      <div class="col-md-12 mb-3">
+                        <label for="exampleFormControlTextarea1">Açıklama</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"/>
+                      </div>
+                      </div>
+                      <div class="form-row">
+                      <div class="form-group col-md-12 mb-3">
+                        <label for="exampleFormControlSelect2">Diş Hekimi</label>
+                        <select class="form-control">
+                          <option>Büşra DOLAŞ</option>
+                          <option>Elif ASAL</option>
+                          <option>Elif Merve MAVİ</option>
+                          <option>Fatih ATMACA</option>
+                          <option>Hatice AKALTIN</option>
+                          <option>Hazal ÖZCAN</option>
+                          <option>İbrahim CİHAT</option>
+                          <option>Abbascan KORTMAZ</option>
+                          <option>Abdullah YAĞIZ</option>
+                          <option>Aslı Betim ŞAHİN</option>
+                          <option>İbrahim JİHAD</option>
+                          <option>Meltem ALTUN</option>
+                          <option>Mustafa TAŞDEMİR</option>
+                          <option>Orçun ÖZAYDIN</option>
+                          <option>Osman ERCAL</option>
+                          <option>Safiye ÖZDEMİR</option>
+                          <option>Samet Fatih GÜCER</option>
+                          <option>Selin ÇOLAKOĞLU</option>
+                          <option>Suha ALPAY</option>
+                        </select>
+                        </div>
+                      </div>
+                    </form>
 
                   </div>
                   <div class="modal-footer">
@@ -1105,49 +1170,49 @@ class PatientDetail extends Component {
   renderNotesTab = () => {
     return (
       <div>
-          <div className={"patientNotesWrapper"}>
+        <div className={"patientNotesWrapper"}>
           {/* ADD payment Button */}
           <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addNotes"}>Not Ekle<img src={NotesIcon}></img></a>
 
-            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Not Ekle</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body container">
-                  
-                  <form>
-                  <div class="form-row" style={{ marginTop: "0" }}>
-                  <div class="col-md-6 mb-3">
-                    <label>Not Tarihi</label>
-                    <DatePicker />
-                  </div>
+          <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Not Ekle</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                  <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Lütfen Not Ekleyiniz.</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
-                  </div>
-                </form>
+                <div class="modal-body container">
 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                    <button type="button" class="btn btn-primary">Not Ekle</button>
-                  </div>
+                  <form>
+                    <div class="form-row" style={{ marginTop: "0" }}>
+                      <div class="col-md-6 mb-3">
+                        <label>Not Tarihi</label>
+                        <DatePicker />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Lütfen Not Ekleyiniz.</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                    </div>
+                  </form>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                  <button type="button" class="btn btn-primary">Not Ekle</button>
                 </div>
               </div>
             </div>
-
-            <h2 className={"tableHeader"}>Alınan Paralar</h2>
-            {this.renderPatientsNotes()}
           </div>
+
+          <h2 className={"tableHeader"}>Alınan Paralar</h2>
+          {this.renderPatientsNotes()}
+        </div>
       </div>
     )
-   };
+  };
 
   renderTeeth = () => {
     return (
@@ -1392,7 +1457,7 @@ class PatientDetail extends Component {
             striped
             scrollY
             maxHeight="50vh"
-            bordered 
+            bordered
             small
             data={this.state.treatmentData}
           />
@@ -1423,14 +1488,14 @@ class PatientDetail extends Component {
   };
 
   renderPaidtreatmentsTable = () => {
-    return(
+    return (
       <div>
         {this.state.paidTreatmentList !== null ? (
           <MDBDataTable
             striped
             scrollY
             maxHeight="50vh"
-            bordered 
+            bordered
             small
             data={this.state.paidTreatmentData}
           />
@@ -1442,14 +1507,14 @@ class PatientDetail extends Component {
   }
 
   renderPatientsNotes = () => {
-    return(
+    return (
       <div>
         {this.state.notesForPatientData !== null ? (
           <MDBDataTable
             striped
             scrollY
             maxHeight="50vh"
-            bordered 
+            bordered
             small
             data={this.state.notesForPatientData}
           />
