@@ -42,25 +42,11 @@ function RenderList() {
       not: ["dentist", "clinic"],
     },
     {
-      title: "Hastalarim",
-      icon: patientIcon,
-      hoverIcon: patientIcon,
-      href: `/patients`,
-      not: ["user"],
-    },
-    {
-      title: "Profilim",
-      icon: profileIcon,
-      hoverIcon: profileIconBlue,
-      href: `/profile/${getCookie("user_id")}`,
-      not: [],
-    },
-    {
-      title: "Sorularım",
-      icon: messageIcon,
-      hoverIcon: messageIconBlue,
-      href: `/messages`,
-      not: [],
+      title: "Takvim",
+      icon: randevuIcon,
+      hoverIcon: randevuIconBlue,
+      href: `/calendar`,
+      not: ['user'],
     },
     {
       title: "Randevularım",
@@ -69,12 +55,40 @@ function RenderList() {
       href: `/appointment`,
       not: [],
     },
-	{
-      title: "Takvim",
-      icon: randevuIcon,
-      hoverIcon: randevuIconBlue,
-      href: `/calendar`,
-      not: ['user'],
+    {
+      title: "Hastalar",
+      icon: patientIcon,
+      hoverIcon: patientIcon,
+      href: `/patients`,
+      not: ["user"],
+    },
+    {
+      title: "Klinisyen",
+      icon: dentfxSocialIcon,
+      hoverIcon: dentfxSocialIconBlue,
+      href: `/clinician`,
+      not: ["dentist", "user"],
+    },
+    {
+      title: "Fatura ",
+      icon: dentfxSocialIcon,
+      hoverIcon: dentfxSocialIconBlue,
+      href: `/fatura`,
+      not: ["dentist", "user"],
+    },
+    {
+      title: "Sorular",
+      icon: messageIcon,
+      hoverIcon: messageIconBlue,
+      href: `/messages`,
+      not: [],
+    },
+    {
+      title: "Profilim",
+      icon: profileIcon,
+      hoverIcon: profileIconBlue,
+      href: `/profile/${getCookie("user_id")}`,
+      not: [],
     },
     {
       title: "Cüzdanım",
@@ -97,20 +111,7 @@ function RenderList() {
       href: `/social`,
       not: ["dentist", "clinic"],
     },
-    {
-      title: "Fatura ",
-      icon: dentfxSocialIcon,
-      hoverIcon: dentfxSocialIconBlue,
-      href: `/fatura`,
-      not: ["dentist", "user"],
-    },
-    {
-      title: "Klinisyen",
-      icon: dentfxSocialIcon,
-      hoverIcon: dentfxSocialIconBlue,
-      href: `/clinician`,
-      not: ["dentist", "user"],
-    },
+
   ];
 
   const [list, setList] = useState(tempList);
