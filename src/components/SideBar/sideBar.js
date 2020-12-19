@@ -20,6 +20,14 @@ import kampanyaIconBlue from "../../icons/kampanya-icon-blue.svg";
 import dentfxSocialIcon from "../../icons/dentfx-social-icon.svg";
 import dentfxSocialIconBlue from "../../icons/dentfx-social-icon-blue.svg";
 import patientIcon from "../../icons/patientSmall.svg"
+import TakvimIcon from "../../icons/Takvim.svg"
+import RandevularIcon from "../../icons/Randevular.svg"
+import HastalarIcon from "../../icons/Hastalar.svg"
+import KlinisyenIcon from "../../icons/Klinisyen.svg"
+import FaturaIcon from "../../icons/Fatura.svg"
+import SorularIcon from "../../icons/Sorular.svg"
+import ProfilimIcon from "../../icons/Profilim.svg"
+
 import { getCookie } from "../../utils/cookie";
 
 function usePrevious(value) {
@@ -43,49 +51,49 @@ function RenderList() {
     },
     {
       title: "Takvim",
-      icon: randevuIcon,
+      icon: TakvimIcon,
       hoverIcon: randevuIconBlue,
       href: `/calendar`,
       not: ['user'],
     },
     {
       title: "Randevularım",
-      icon: randevuIcon,
+      icon: RandevularIcon,
       hoverIcon: randevuIconBlue,
       href: `/appointment`,
       not: [],
     },
     {
       title: "Hastalar",
-      icon: patientIcon,
+      icon: HastalarIcon,
       hoverIcon: patientIcon,
       href: `/patients`,
       not: ["user"],
     },
     {
       title: "Klinisyen",
-      icon: dentfxSocialIcon,
+      icon: KlinisyenIcon,
       hoverIcon: dentfxSocialIconBlue,
       href: `/clinician`,
       not: ["dentist", "user"],
     },
     {
       title: "Fatura ",
-      icon: dentfxSocialIcon,
+      icon: FaturaIcon,
       hoverIcon: dentfxSocialIconBlue,
       href: `/fatura`,
       not: ["dentist", "user"],
     },
     {
       title: "Sorular",
-      icon: messageIcon,
+      icon: SorularIcon,
       hoverIcon: messageIconBlue,
       href: `/messages`,
       not: [],
     },
     {
       title: "Profilim",
-      icon: profileIcon,
+      icon: ProfilimIcon,
       hoverIcon: profileIconBlue,
       href: `/profile/${getCookie("user_id")}`,
       not: [],
