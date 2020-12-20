@@ -317,6 +317,9 @@ export default function Profile() {
         <div className="profile__profileCard__editIcon">
           <img src={editIcon} alt="" />
         </div>
+        <div className="profile__profileCard__editIcon__2">
+          <img src={editIcon} alt="" />
+        </div>
       </div>
       <div className="profile__profileName">
         {`${user?.name} ${user?.surname ? user.surname : ''}`}
