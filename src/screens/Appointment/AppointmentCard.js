@@ -74,7 +74,7 @@ class AppointmentCard extends Component {
         className={"cardWrapper__negativeBtn"}
         onClick={this.onClickCancelAppointment}
       >
-        Cancel Appointment
+        Randevuyu İptal Et
       </button>
     );
   };

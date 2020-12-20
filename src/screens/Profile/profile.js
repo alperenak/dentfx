@@ -133,7 +133,7 @@ export default function Profile() {
 			<div className="settingsWrapper__tab__iconWrapper">
 				<img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
 			</div>
-			<div className="settingsWrapper__tab__text">Profile Settings</div>
+			<div className="settingsWrapper__tab__text">Profil Ayarları</div>
 				<img src={chevronRightIcon} alt="" className="settingsWrapper__tab__rightIcon" />
 			</div>
 
@@ -141,7 +141,7 @@ export default function Profile() {
 				<div className="settingsWrapper__tab__iconWrapper">
 					<img src={notificationIcon} alt="" className={styles.leftIcon} />
 				</div>
-				<div className="settingsWrapper__tab__text">Notification Settings</div>
+				<div className="settingsWrapper__tab__text">Bildirim Ayarları</div>
 				<img src={chevronRightIcon} alt="" className="settingsWrapper__tab__rightIcon" />
 			</div>
 
@@ -149,7 +149,7 @@ export default function Profile() {
 				<div className="settingsWrapper__tab__iconWrapper">
 					<img src={languageSettingsIcon} alt="" className={styles.leftIcon} />
 				</div>
-				<div className="settingsWrapper__tab__text">Language Settings</div>
+				<div className="settingsWrapper__tab__text">Dil Ayarları</div>
 				<img src={chevronRightIcon} alt="" className="settingsWrapper__tab__rightIcon" />
 			</div>
 		</div>
@@ -173,7 +173,7 @@ export default function Profile() {
 					<div className="settingsWrapper__header__iconWrapper">
 						<img src={profileSettingsIcon} alt="" className={styles.leftIcon} />
 					</div>
-					<div className="settingsWrapper__header__text">Profile Settings</div>
+					<div className="settingsWrapper__header__text">Profil Ayarları</div>
 					<img
 						src={chevronRightIcon}
 						alt=""
@@ -226,7 +226,7 @@ export default function Profile() {
 					<div className="settingsWrapper__header__iconWrapper">
 						<img src={notificationIcon} alt="" className={styles.leftIcon} />
 					</div>
-					<div className="settingsWrapper__header__text">Notification Settings</div>
+					<div className="settingsWrapper__header__text">Bildirim Ayarları</div>
 
 					<img
 						src={chevronRightIcon}
@@ -295,7 +295,7 @@ export default function Profile() {
 							className={styles.leftIcon}
 						/>
 					</div>
-					<div className="settingsWrapper__header__text">Language Settings</div>
+					<div className="settingsWrapper__header__text">Dil Ayarları</div>
 					<img
 						src={chevronRightIcon}
 						alt=""
@@ -323,10 +323,10 @@ export default function Profile() {
 			</div>
 			<div className="profile__tabs">
 				<div onClick={() => setSelectedTab(0)} className={`${"profile__tabs__tab"} ${selectedTab === 0 ? "profile__tabs__selected" : ""}`}>
-					Overview
+					Genel
 				</div>
 				<div onClick={() => setSelectedTab(1)} className={`${"profile__tabs__tab"} ${selectedTab === 1 ? "profile__tabs__selected" : ""}`}>
-					Settings
+					Ayarlar
 				</div>
 			</div>
 

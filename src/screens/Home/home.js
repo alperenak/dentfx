@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 
 /*** Components ***/
 import ClinicListItem from "../../components/ClinicListItem/clinicListItem";
+import RightMenu from "../../components/RightMenu/RightMenu"
 
 /*** Utils ***/
 import store from "../../store";

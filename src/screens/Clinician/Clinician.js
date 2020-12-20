@@ -50,7 +50,7 @@ class Clinician extends Component {
             width: 150
           },
           {
-            label: 'Visit',
+            label: 'İncele',
             field: 'button',
             sort: 'asc',
             width: 150
@@ -62,7 +62,7 @@ class Clinician extends Component {
             avatar: <div class="tableAvatar"><img src={dentist.avatar}/></div>,
             button:         
             <Link to='#' className= "tableAvatar">
-            <button type="button" class="btn btn-secondary">Visit</button>
+            <button type="button" class="btn btn-secondary">İncele</button>
             </Link>
           }
         })
@@ -83,6 +83,10 @@ class Clinician extends Component {
             bordered
             small
             data={this.state.patientData}
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            info={false}
+            paginationLabel={['Önceki', 'Sonraki']}
           />)
           :
           <p>YUKLENIYOR</p>

@@ -178,31 +178,31 @@ class Patients extends Component {
       patientData: {
         columns: [
           {
-            label: 'Avatar',
+            label: 'Fotoğraf',
             field: 'avatar',
             sort: 'asc',
             width: 50
           },
           {
-            label: 'Name',
+            label: 'İsim',
             field: 'name',
             sort: 'asc',
             width: 150
           },
           {
-            label: 'Surname',
+            label: 'Soyisim',
             field: 'surname',
             sort: 'asc',
             width: 150
           },
           {
-            label: 'Phone',
+            label: 'Telefon',
             field: 'phone',
             sort: 'asc',
             width: 150
           },
           {
-            label: 'Visit',
+            label: 'İncele',
             field: 'button',
             sort: 'asc',
             width: 150
@@ -273,6 +273,8 @@ class Patients extends Component {
                 <StepProgressBar
                   startingStep={0}
                   onSubmit={onFormSubmit}
+                  previousBtnName={'Önceki'}
+                  nextBtnName={'Sonraki'}
                   steps={[
                     {
                       label: 'Kişisel Bilgiler',
@@ -314,6 +316,10 @@ class Patients extends Component {
               bordered
               small
               data={this.state.patientData}
+              searchLabel={'Ara'}
+              entriesLabel={'Girdileri Göster'}
+              info={false}
+              paginationLabel={['Önceki', 'Sonraki']}
             />)
             :
             <p>YUKLENIYOR</p>
