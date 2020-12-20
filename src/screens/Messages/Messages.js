@@ -92,7 +92,7 @@ class Messages extends Component {
 				)}
 
 				<div className="messagesContainer__messagesSection">
-					<div className="messagesContainer__messagesSection__header">Messages</div>
+					<div className="messagesContainer__messagesSection__header">Mesajlar</div>
 					<div className={styles.messageContainer}>
 						{messages.map((message, i) => {
 							return (
