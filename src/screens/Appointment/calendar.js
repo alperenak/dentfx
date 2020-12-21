@@ -21,6 +21,7 @@ import { func } from "prop-types";
 import Modal from "../../components/Modal/modal";
 import Input from "../../components/Input";
 import Dropdown from "../../components/Dropdown/dropdown";
+import Tabs from "../../components/Tabs/tabs";
 
 function Event({ event }) {
   return (
@@ -182,6 +183,7 @@ class ACalendar extends Component {
     appointmentTimeMinute: "",
     appointmentDentist: "",
     selectedResourceId: false,
+    tabName: "normal",
     allAppointments: [],
     userType: null,
     start: "",
@@ -272,12 +274,26 @@ class ACalendar extends Component {
     });
   };
   render() {
-    let { activeLink } = this.state;
+    let { activeLink, tabName } = this.state;
     const localizer = momentLocalizer(moment);
     console.log(this.state.patientState);
     return (
       <div>
+        <Tabs
+          tabsData={[
+            {
+              tabName: "NORMAL GÖRÜNÜM",
+              onClick: () => this.setState({ tabName: "normal" }),
+            },
+            {
+              tabName: "DİŞ HEKİMLERİ",
+              onClick: () => this.setState({ tabName: "dentist" }),
+            },
+          ]}
+        />
+
         <Calendar
+          v-if={tabName === "normal"}
           selectable
           localizer={localizer}
           events={this.state.allAppointments}
@@ -289,9 +305,6 @@ class ACalendar extends Component {
           defaultView={Views.WEEK}
           onSelectEvent={(e) => this.handleSelectOnEvent(e)}
           onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
-          resources={resourceMap}
-          resourceIdAccessor="resourceId"
-          resourceTitleAccessor="resourceTitle"
           dayPropGetter={customDayPropGetter}
           slotPropGetter={customSlotPropGetter}
           components={{
@@ -301,142 +314,20 @@ class ACalendar extends Component {
             },
           }}
         />
-        {/* //SELECTED EXISTING EVENT MODAL*/}
-        {/* <Modal
-          modalTitle={"Randevuyu değiştir"}
-          modalId="selectOnExistedEvent"
-          modalFooterButtonTitle={"Kapat"}
-          modalFooterSecondButtonTitle={"Kaydet"}
-          modalFooterSecondButtonType={"primary"}
-        >
-          <label className="mt-2" for="patientName">
-            Hastanın Adı
-          </label>
-          <div class="input-group">
-            <input
-              type="text"
-              id="patientName"
-              class="form-control"
-              placeholder="Hastanın Adı"
-              aria-label="Hastanın Adı"
-              aria-describedby="basic-addon2"
-              onChange={(e) => this.setState({ patientName: e.target.value })}
-            />
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">
-                <img src={Search} width="20" />
-              </button>
-            </div>
-          </div>
-
-     
-          <Dropdown
-            id={"selectableDropdown"}
-            type={"selectable"}
-            labelName={"Açıklama"}
-            onChange={(e) => {
-              this.setState({ appointmentExplanation: e });
-            }}
-            selectableData={[
-              "Acil",
-              "Aparey",
-              "Apse",
-              "Band/Bond",
-              "Biyomateryal",
-              "Botoks",
-              "Cerrahi işlem",
-              "Detartraj",
-              "Diş beyazlatma",
-              "Diş çekimi",
-              "Dolgu",
-              "İmplant",
-              "Kanal",
-              "Kesim",
-              "Kontrol",
-              "Küretaj",
-              "Muayene",
-              "Ölçü",
-              "Ortodonti",
-              "Panoramik",
-              "Pansuman",
-              "Planlama",
-              "Protez",
-              "Protez prova",
-              "Yeni hasta",
-              "Yer tutucu",
-            ]}
-          />
-          <Dropdown
-            id={"selectableDropdown"}
-            type={"selectable"}
-            labelName={"Durum"}
-            onChange={(e) => {
-              this.setState({ patientState: e });
-            }}
-            selectableData={[
-              "Gelmedi",
-              "Ertelendi",
-              "Değiştirildi",
-              "Geldi",
-              "Bekliyor",
-              "Tedavide",
-              "Onaylandı",
-            ]}
-          />
-          <Dropdown
-            id={"selectableDropdown"}
-            type={"selectable"}
-            labelName={"Diş Hekimi seçiniz"}
-            onChange={(e) => {
-              this.setState({ appointmentDentist: e });
-            }}
-            defaultValue={getResources(
-              resourceMap,
-              this.state.selectedResourceId
-            )}
-            selectableData={resourceMap.map((item) => {
-              return item.resourceTitle;
-            })}
-          />
-          <div class="d-flex align-items-center justify-content-left">
-            <button
-              type="button"
-              class="btn border mt-2 mr-2 mb-2"
-              onClick={() => {
-                if (this.state.minuteRange > 15)
-                  this.setState({ minuteRange: this.state.minuteRange - 15 });
-              }}
-            >
-              <img style={{ width: 12.5, height: 12.5 }} src={LeftSolid} />
-            </button>
-            <input
-              type="text"
-              style={{ width: 60 }}
-              class="form-control"
-              value={this.state.minuteRange}
-            />
-            <button
-              type="button"
-              class="btn border m-2"
-              onClick={() =>
-                this.setState({ minuteRange: this.state.minuteRange + 15 })
-              }
-            >
-              <img style={{ width: 12.5, height: 12.5 }} src={RightSolid} />
-            </button>
-            dakika
-          </div>
-          <label for="exampleFormControlTextarea1">Notlar</label>
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-            onChange={(e) =>
-              this.setState({ appointmentNotes: e.target.value })
-            }
-          ></textarea>
-        </Modal> */}
-
+        <Calendar
+          v-if={tabName === "dentist"}
+          selectable
+          events={this.state.allAppointments}
+          resources={resourceMap}
+          resourceIdAccessor="resourceId"
+          onSelectEvent={(e) => this.handleSelectOnEvent(e)}
+          onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
+          resourceTitleAccessor="resourceTitle"
+          localizer={localizer}
+          defaultView={Views.DAY}
+          defaultDate={new Date(2015, 3, 1)}
+          views={["day"]}
+        />
         {/* CREATE APPOINTMENT MODAL */}
 
         <Modal
