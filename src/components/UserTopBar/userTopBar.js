@@ -107,7 +107,7 @@ export default function UserTopBar() {
 
 	return (
 		<div class="topbar">
-			<div class="container">
+			<div class="TopBarWrapper">
 				<div class="row mobile_row">
 					<div class="col-8" style={{"flex-direction":"row","display":"flex","align-items":"center"}}>
 						<div class="dropdown" style={{"margin-right":20}}>
@@ -213,7 +213,7 @@ export default function UserTopBar() {
 							<img src={logo} alt={"logo"} />
 						</div>
 					</div>
-					<div class="col-xl-4 col-lg-4 col-md-6 col-sm-1">
+					<div class="col-xl-5 col-lg-5 col-md-6 col-sm-1">
 						<div className="topbar__inputContainer">
 							<input type="text" placeholder={"Ara"}/>
 							<div className="topbar__inputContainer__filterIcon">
@@ -221,10 +221,7 @@ export default function UserTopBar() {
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-3 col-md-2 topbar__notifLabel">
-						<div className="topbar__label">
-							DentFX Puanı<span>{`: 2000`}</span>
-						</div>
+					<div class="col-xl-2 col-lg-2 col-md-2 topbar__notifLabel">
 						<div className="topbar__notificationWrapper">
 							<div class="dropdown">
 								<a href="javascript:void(0);" id="dropdownNotif" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

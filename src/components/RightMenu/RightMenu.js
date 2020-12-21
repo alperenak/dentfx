@@ -74,7 +74,7 @@ class RightMenu extends Component {
 				):(null)}
 
 				<div className="rightBar__sectionHeader">
-					New Messages <span>({totalMessage})</span>
+					Yeni Mesajlar <span>({totalMessage})</span>
 				</div>
 				<div className="rightBar__messages">
 					{messages.length > 0 && this.renderMessages()}

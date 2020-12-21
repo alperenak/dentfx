@@ -60,34 +60,37 @@ function App() {
               <div class="col-md-2 leftPart">
                 <SideBar v-if={authorized} />
               </div>
-              <div class="col-md-7 middlePart">
+              <div class="col-md-10 middlePart">
                 <Switch>
-
 
                   <Route
                     v-if={authorized}
                     path="/"
                     exact
-                    render={(props) => <Home {...props} />}
+                    render={(props) => <Ho-me {...props} />}
                   />
+
                   <Route
                     v-if={authorized}
                     path="/appointment"
                     exact
                     render={(props) => <Appointment {...props} />}
                   />
+
                   <Route
                     v-if={authorized}
                     path="/calendar"
                     exact
                     render={(props) => <ACalendar {...props} />}
                   />
+
                   <Route
                     v-if={authorized}
                     path="/appointment/search"
                     exact
                     render={(props) => <SearchAppointment {...props} />}
                   />
+
                   <Route
                     path="/profile/:id"
                     exact
@@ -117,16 +120,19 @@ function App() {
                     exact
                     render={(props) => <NewMessage {...props} />}
                   />
+
                   <Route
                     path="/clinic/:id"
                     exact
                     render={(props) => <ClinicDetail {...props} />}
                   />
+
                   <Route
                     path="/patients/:id"
                     exact
                     render={(props) => <PatientDetail {...props} />}
                   />
+
                   <Route
                     v-if={authorized}
                     path="/appointment/create/:id"
@@ -139,23 +145,23 @@ function App() {
                     exact
                     render={(props) => <Clinician {...props} />}
                   />
+
                   <Route
                     path="/clinician/new"
                     exact
                     render={(props) => <NewClinician {...props} />}
                   />
+
                   <Route
                     path="/addTreatment"
                     exact
                     render={(props) => <AddTreatment {...props} />}
                   />
+
                 </Switch>
               </div>
-              <div class="col-md-3 rightPart">
-                <RightMenu v-if={authorized} />
-              </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         ) : (
           <div>
