@@ -11,7 +11,7 @@ $mutedText: #909ab2;
 
 $headerBG: #fbfcff;
 
-.topbarContainer {
+.topbarContainerAppointment {
 	height: 90px;
 	display: flex;
 	flex-direction: column;
@@ -39,7 +39,7 @@ $headerBG: #fbfcff;
 			}
 		}
 	}
-	&__navbar {
+	&__navbarAppointment {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
