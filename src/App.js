@@ -67,7 +67,7 @@ function App() {
                     v-if={authorized}
                     path="/"
                     exact
-                    render={(props) => <Ho-me {...props} />}
+                    render={(props) => <Home {...props} />}
                   />
 
                   <Route
