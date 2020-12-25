@@ -12,48 +12,48 @@ $mutedText: #909ab2;
 $headerBG: #fbfcff;
 
 .topbarContainer {
-	height: 90px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
-	&__upper {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		&__breadcrumbs {
-			font-weight: bold;
-			color: #061b52;
-		}
+  &__upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__breadcrumbs {
+      font-weight: bold;
+      color: #061b52;
+    }
 
-		&__newAppointmentBtn {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-around;
-			align-items: center;
-			cursor: pointer;
-			& div {
-				color: $completedBadge;
-				font-weight: bold;
-				margin-left: 10px;
-			}
-		}
-	}
-	&__navbar {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		&__navLink {
-			margin-right: 30px;
-			color: #bec4d2;
-			font-size: 12px;
-			font-weight: 500;
-			cursor: pointer;
-			&__active {
-				color: $completedBadge;
-			}
-		}
-	}
+    &__newAppointmentBtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      cursor: pointer;
+      & div {
+        color: $completedBadge;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+    }
+  }
+  &__navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__navLink {
+      margin-right: 30px;
+      color: #bec4d2;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      &__active {
+        color: $completedBadge;
+      }
+    }
+  }
 }
 
 .newAppointment {

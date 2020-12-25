@@ -1,0 +1,14 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+  &__dropdownContent {
+    display: none;
+    width: 466px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &__dropdownActive {
+    display: block;
+  }
+}

@@ -22,6 +22,8 @@ import Modal from "../../components/Modal/modal";
 import Input from "../../components/Input";
 import Dropdown from "../../components/Dropdown/dropdown";
 import Tabs from "../../components/Tabs/tabs";
+import PatientSearch from "../../components/PatientSearch/patientSearch";
+import DropdownItem from "../../components/Dropdown/sub-components/DropdownItem/dropdownItem";
 
 function Event({ event }) {
   return (
@@ -176,6 +178,7 @@ class ACalendar extends Component {
     events,
     calendarEvents: [],
     modalType: "",
+    dropdownActive: false,
     patientState: "Gelmedi",
     patientName: "",
     appointmentNotes: "",
@@ -325,7 +328,7 @@ class ACalendar extends Component {
           resourceTitleAccessor="resourceTitle"
           localizer={localizer}
           defaultView={Views.DAY}
-          defaultDate={new Date(2015, 3, 1)}
+          defaultDate={new Date()}
           views={["day"]}
         />
         {/* CREATE APPOINTMENT MODAL */}
@@ -381,7 +384,7 @@ class ACalendar extends Component {
           <label className="mt-2" for="patientName">
             Hastanın Adı
           </label>
-          <div class="input-group">
+          {/* <div class="input-group">
             <input
               type="text"
               id="patientName"
@@ -396,7 +399,63 @@ class ACalendar extends Component {
                 <img src={Search} width="20" />
               </button>
             </div>
-          </div>
+          </div> */}
+          <DropdownItem
+            dropdownActive={this.state.dropdownActive}
+            parent={
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="patientName"
+                  class="form-control"
+                  placeholder="Hastanın Adı"
+                  aria-label="Hastanın Adı"
+                  aria-describedby="basic-addon2"
+                  onChange={(e) => {
+                    this.setState({ patientName: e.target.value });
+                    if (e.target.value.length > 2) {
+                      this.setState({ dropdownActive: true });
+                    } else this.setState({ dropdownActive: false });
+                  }}
+                />
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">
+                    <img src={Search} width="20" />
+                  </button>
+                </div>
+              </div>
+            }
+          >
+            <PatientSearch
+              patientData={[
+                {
+                  patientName: "alperen",
+                  birth: "1999",
+                  patientRecord: "2200",
+                },
+                {
+                  patientName: "alperen",
+                  birth: "1999",
+                  patientRecord: "2200",
+                },
+                {
+                  patientName: "alperen",
+                  birth: "1999",
+                  patientRecord: "2200",
+                },
+                {
+                  patientName: "alperen",
+                  birth: "1999",
+                  patientRecord: "2200",
+                },
+                {
+                  patientName: "alperen",
+                  birth: "1999",
+                  patientRecord: "2200",
+                },
+              ]}
+            />
+          </DropdownItem>
 
           {/* search section  */}
           {/* <Input
