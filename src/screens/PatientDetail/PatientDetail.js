@@ -960,7 +960,7 @@ class PatientDetail extends Component {
               {this.state.selectedPlan}
             </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-menu myDropdownMenu" aria-labelledby="dropdownMenuLink">
               {this.state.selectedPlan === "Planlama 0" ? (
                 <a
                   class="dropdown-item disabled"
@@ -1216,7 +1216,7 @@ class PatientDetail extends Component {
 
   renderTeeth = () => {
     return (
-      <div className={"row teeth"}>
+      <div className={"teeth"}>
         <div className={"row teethrow"}>
           <button
             className={"teethClass"}
@@ -1422,9 +1422,14 @@ class PatientDetail extends Component {
       <div>
         {this.state.treatmentPlan0Data !== null ? (
           <MDBDataTable
+          className={'myTableClass'}
             striped
             bordered
             small
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            info={false}
+            paginationLabel={['Önceki', 'Sonraki']}
             data={this.state.treatmentPlan0Data}
           />
         ) : (
@@ -1441,6 +1446,9 @@ class PatientDetail extends Component {
             striped
             bordered
             small
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            info={false}
             data={this.state.treatmentPlan1Data}
           />
         ) : (
@@ -1459,6 +1467,10 @@ class PatientDetail extends Component {
             maxHeight="50vh"
             bordered
             small
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            paginationLabel={['Önceki', 'Sonraki']}
+            info={false}
             data={this.state.treatmentData}
           />
         ) : (
@@ -1478,6 +1490,10 @@ class PatientDetail extends Component {
             maxHeight="50vh"
             bordered
             small
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            paginationLabel={['Önceki', 'Sonraki']}
+            info={false}
             data={this.state.treatmentList}
           />
         ) : (
@@ -1497,6 +1513,10 @@ class PatientDetail extends Component {
             maxHeight="50vh"
             bordered
             small
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            paginationLabel={['Önceki', 'Sonraki']}
+            info={false}
             data={this.state.paidTreatmentData}
           />
         ) : (
@@ -1516,6 +1536,10 @@ class PatientDetail extends Component {
             maxHeight="50vh"
             bordered
             small
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            paginationLabel={['Önceki', 'Sonraki']}
+            info={false}
             data={this.state.notesForPatientData}
           />
         ) : (
