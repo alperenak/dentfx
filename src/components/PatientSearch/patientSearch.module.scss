@@ -1,4 +1,7 @@
 .patientSearch {
   max-width: 100px;
   overflow-y: scroll;
+  &__patientWidth {
+    min-width: 466px;
+  }
 }

@@ -450,4 +450,16 @@ export default {
       errorMessageBuilder
     );
   },
+  async PatientSearch(clinicId, patientNameValue) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/clinic/${clinicId}/patient?fullName=${patientNameValue}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
 };

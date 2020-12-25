@@ -176,6 +176,7 @@ const messages = {
 class ACalendar extends Component {
   state = {
     events,
+    patientNameData: [],
     calendarEvents: [],
     modalType: "",
     dropdownActive: false,
@@ -411,10 +412,19 @@ class ACalendar extends Component {
                   placeholder="Hastanın Adı"
                   aria-label="Hastanın Adı"
                   aria-describedby="basic-addon2"
+                  value={this.state.patientName}
                   onChange={(e) => {
                     this.setState({ patientName: e.target.value });
                     if (e.target.value.length > 2) {
+                      let userId = getCookie("user_id");
+                      store
+                        .PatientSearch(userId, e.target.value)
+                        .then((e) =>
+                          this.setState({ patientNameData: e.data })
+                        );
+
                       this.setState({ dropdownActive: true });
+                      $("#patientSearchSpecific").modal("show");
                     } else this.setState({ dropdownActive: false });
                   }}
                 />
@@ -427,35 +437,27 @@ class ACalendar extends Component {
             }
           >
             <PatientSearch
-              patientData={[
-                {
-                  patientName: "alperen",
-                  birth: "1999",
-                  patientRecord: "2200",
-                },
-                {
-                  patientName: "alperen",
-                  birth: "1999",
-                  patientRecord: "2200",
-                },
-                {
-                  patientName: "alperen",
-                  birth: "1999",
-                  patientRecord: "2200",
-                },
-                {
-                  patientName: "alperen",
-                  birth: "1999",
-                  patientRecord: "2200",
-                },
-                {
-                  patientName: "alperen",
-                  birth: "1999",
-                  patientRecord: "2200",
-                },
-              ]}
+              onClick={(e) =>
+                this.setState({ patientName: e, dropdownActive: false })
+              }
+              patientData={this.state.patientNameData}
             />
           </DropdownItem>
+          {this.state.patientName.length !== 0 &&
+          this.state.patientName.length > 2 ? (
+            <div class="custom-control custom-checkbox mt-2">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customCheck1"
+              />
+              <label class="custom-control-label" for="customCheck1">
+                {"Hasta bulunamadı. Yeni hasta eklemek için tıklayın"}
+              </label>
+            </div>
+          ) : (
+            ""
+          )}
 
           {/* search section  */}
           {/* <Input

@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./patientSearch.module.scss";
+import "./patientSearch.module.scss";
 export default function PatientSearch({ patientData, onClick }) {
   return (
-    <div class={`list-group${styles.patientSearch}`}>
-      {patientData.map((item) => {
+    <div class={`list-group`}>
+      {patientData.slice(0, 3).map((item) => {
         return (
           <div
             class="list-group-item list-group-item-action"
@@ -13,10 +13,10 @@ export default function PatientSearch({ patientData, onClick }) {
             }}
           >
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{item.patientName}</h5>
-              <small>{item.patientRecord}</small>
+              <h5 class="mb-1">{`${item.name} ${item.surname}`}</h5>
+              <small>{item.country}</small>
             </div>
-            <p class="mb-1">{item.birth}</p>
+            <p class="mb-1">{item.phone}</p>
             {/* <small>Donec id elit non mi porta.</small> */}
           </div>
         );
