@@ -202,7 +202,7 @@ class Patients extends Component {
             width: 150
           },
           {
-            label: 'TC/Pasapot No',
+            label: 'TC/Pasaport No',
             field: 'passport_no',
             sort: 'asc',
             width: 150
