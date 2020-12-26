@@ -9,7 +9,10 @@ export default function PatientSearch({ patientData, onClick }) {
             class="list-group-item list-group-item-action"
             aria-current="true"
             onClick={() => {
-              onClick(item.patientName);
+              onClick({
+                fullname: `${item.name} ${item.surname}`,
+                id: item.id,
+              });
             }}
           >
             <div class="d-flex w-100 justify-content-between">

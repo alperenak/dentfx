@@ -12,6 +12,7 @@ import { getCookie } from "../../utils/cookie";
 import addCircle from "../../icons/Icons_add-circle.svg";
 import Search from "../../icons/search.svg";
 import RightSolid from "../../icons/chevron-right-solid.svg";
+import ExternalIcon from "../../assets/icons/external-link-alt-solid.svg";
 import LeftSolid from "../../icons/chevron-left-solid.svg";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 
@@ -24,6 +25,7 @@ import Dropdown from "../../components/Dropdown/dropdown";
 import Tabs from "../../components/Tabs/tabs";
 import PatientSearch from "../../components/PatientSearch/patientSearch";
 import DropdownItem from "../../components/Dropdown/sub-components/DropdownItem/dropdownItem";
+import { Link } from "react-router-dom";
 
 function Event({ event }) {
   return (
@@ -238,6 +240,7 @@ class ACalendar extends Component {
   resetState = () => {
     this.setState({
       patientName: "",
+      potientId: false,
       appointmentExplanation: "",
       appointmentNotes: "",
     });
@@ -383,7 +386,17 @@ class ACalendar extends Component {
           }}
         >
           <label className="mt-2" for="patientName">
-            Hastanın Adı
+            Hastanın Adı{"   "}
+            {this.state.patientId && (
+              <Link to={`patients/${this.state.patientId}`}>
+                <img
+                  src={ExternalIcon}
+                  width="15"
+                  height="15"
+                  style={{ cursor: "pointer" }}
+                />
+              </Link>
+            )}
           </label>
           {/* <div class="input-group">
             <input
@@ -438,12 +451,17 @@ class ACalendar extends Component {
           >
             <PatientSearch
               onClick={(e) =>
-                this.setState({ patientName: e, dropdownActive: false })
+                this.setState({
+                  patientName: e.fullname,
+                  patientId: e.id,
+                  dropdownActive: false,
+                })
               }
               patientData={this.state.patientNameData}
             />
           </DropdownItem>
-          {this.state.patientName.length !== 0 &&
+          {(!this.state.patientNameData ||
+            this.state.patientNameData.length == 0) &&
           this.state.patientName.length > 2 ? (
             <div class="custom-control custom-checkbox mt-2">
               <input
@@ -452,7 +470,7 @@ class ACalendar extends Component {
                 id="customCheck1"
               />
               <label class="custom-control-label" for="customCheck1">
-                {"Hasta bulunamadı. Yeni hasta eklemek için tıklayın"}
+                {"Yeni hastanın kaydını oluştur"}
               </label>
             </div>
           ) : (
