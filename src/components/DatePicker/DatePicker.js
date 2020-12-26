@@ -8,6 +8,7 @@ export default class DatePicker extends Component {
     render() {
         return <Datetime 
         timeFormat= {false}
+        {...this.props}         
         />;
     }
 }

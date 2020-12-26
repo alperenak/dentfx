@@ -250,10 +250,10 @@ export default {
       errorMessageBuilder
     );
   },
-  async getPatientsDetail(userId) {
+  async getPatientsDetail({ clinicId, patientId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = "token";
-    let path = `/user/${userId}`;
+    let path = `/clinic/${clinicId}/patient/${patientId}`;
 
     return await http.makeGetRequest(
       path,

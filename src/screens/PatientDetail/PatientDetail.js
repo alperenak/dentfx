@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import store from "../../store";
 import { MDBDataTable } from "mdbreact";
+import { getCookie } from "../../utils/cookie";
 
 /*** Styles ***/
 import styles from "./patientdetail.scss";
@@ -797,14 +798,15 @@ class PatientDetail extends Component {
     this.fillTreatmentList();
 
     let { match } = this.props;
-    console.log(match, "MATCH");
-
+    let clinicId = getCookie("user_id");
     let patientId = match.params.id;
-    console.log(patientId);
-    let res = await store.getPatientsDetail(patientId);
-    console.log(res.data, "RES>DATA");
+
+    let res = await store.getPatientsDetail({clinicId, patientId});
+    console.log(res, "RESPONSE")
     this.setState({ patient: res.data });
   };
+
+
 
   setSelectedTab = (index) => {
     this.setState({ selectedTab: index });
@@ -812,6 +814,9 @@ class PatientDetail extends Component {
 
   renderPatientInfoTab = () => {
     let { patient } = this.state;
+    console.log(patient)
+    console.log(patient?.birthDate)
+
     return (
       <div className={"aboutTab"}>
         <form>
@@ -822,15 +827,15 @@ class PatientDetail extends Component {
               <div class="form-row">
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault01">İsim</label>
-                  <input type="text" class="form-control" id="validationDefault01" placeholder="Hasan" required />
+                  <input type="text" class="form-control" id="validationDefault01" value={patient?.name} required />
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault02">Soyisim</label>
-                  <input type="text" class="form-control" id="validationDefault02" placeholder="Demirkıran" required />
+                  <input type="text" class="form-control" id="validationDefault02" value={patient?.surname} required />
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="inputTC">TC Kimlik No</label>
-                  <input type="text" class="form-control" id="inputTC" placeholder="000 0000 0000" />
+                  <input type="text" class="form-control" id="inputTC" value={patient?.tcNumber} />
                 </div>
               </div>
               <div className={"form-row"} style={{ marginBottom: "0" }}>
@@ -846,7 +851,7 @@ class PatientDetail extends Component {
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="sexRadio2" value="option2" />
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="sexRadio2" value="option2" disabled/>
                       <label class="form-check-label" for="exampleRadios2">
                         Kadın
                     </label>
@@ -857,24 +862,28 @@ class PatientDetail extends Component {
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault04">Uyruk</label>
                   <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value="">Seçiniz...</option>
+                    <option selected disabled value={patient?.nationality}>{patient?.nationality}</option>
                     <option>Türk</option>
                     <option>Yabancı</option>
                   </select>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="dentistName">Diş Hekimi</label>
-                  <input id="dentistName" type="text" class="form-control" placeholder="Diş Hekimi" />
+                  <input id="dentistName" type="text" class="form-control" value={patient?.Dentist.name} />
                 </div>
               </div>
               <div class="form-row" style={{ marginTop: "0" }}>
                 <div class="col-md-6 mb-3">
                   <label for="validationDefault01">Doğum Tarihi</label>
-                  <DatePicker />
+                  {patient?.birthDate && <DatePicker
+                    initialValue={patient?.birthDate}
+                  />}
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="validationDefault02">Kayıt Tarihi</label>
-                  <DatePicker />
+                <label for="validationDefault02">Kayıt Tarihi</label>
+                  {patient?.createdAt && <DatePicker
+                    initialValue={patient?.createdAt}
+                  />}
                 </div>
               </div>
             </div>
@@ -895,7 +904,7 @@ class PatientDetail extends Component {
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault04">Şehir</label>
                   <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value="">Seçiniz...</option>
+                    <option selected disabled value="">{patient?.city}</option>
                     <option>İstanbul</option>
                     <option>Ankara</option>
                     <option>Eskişehir</option>
@@ -905,7 +914,7 @@ class PatientDetail extends Component {
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault04">Ülke</label>
                   <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value="">Seçiniz...</option>
+                    <option selected disabled value="">{patient?.country}</option>
                     <option>Türkiye</option>
                     <option>USA</option>
                   </select>
@@ -918,21 +927,21 @@ class PatientDetail extends Component {
               <div class="form-row">
                 <div class="col-md-6 mb-3">
                   <label for="exampleFormControlInput1">E-mail adresi</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="hasan@gmail.com" />
+                  <input type="email" class="form-control" id="exampleFormControlInput1" value={patient?.email} />
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="inputAddress">Telefon1</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="+09 000 000 0000" />
+                  <input type="text" class="form-control" id="inputAddress" value={patient?.phone} />
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault05">Telefon2</label>
-                  <input type="text" class="form-control" id="validationDefault05" placeholder="+09 000 000 0000" />
+                  <input type="text" class="form-control" id="validationDefault05" value={patient?.phone} />
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12 mb-3">
                   <label for="exampleFormControlInput1">Adres</label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Rumeli Hisarüstü Mah..." />
+                  <input type="text" class="form-control" id="exampleFormControlInput1" value={patient?.address} />
                 </div>
               </div>
             </div>
