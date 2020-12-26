@@ -6,13 +6,13 @@ export default function Tabs({
   const [activeTabName, setActiveTabName] = useState(tabsData[0].tabName);
   return (
     <div className="topbarContainer">
-      <div className="topbarContainer__navbar">
+      <div className="profile__tabs">
         {tabsData.map((item) => {
           return (
             <div
-              className={`${"topbarContainer__navbar__navLink"} ${
+              className={`${"profile__tabs__tab"} ${
                 activeTabName === item.tabName &&
-                "topbarContainer__navbar__navLink__active"
+                "profile__tabs__selected"
               }`}
               onClick={() => {
                 item.onClick(activeTabName);
@@ -27,3 +27,4 @@ export default function Tabs({
     </div>
   );
 }
+
