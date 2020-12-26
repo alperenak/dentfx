@@ -129,13 +129,12 @@ class Appointment extends Component {
 
   renderAll = () => {
     let appointments = this.state.allAppointments;
-    console.log(appointments)
-      if ( appointments && appointments.length!==0 && typeof appointments !== "object" ){
+      if ( appointments && appointments.length!==0 ){
       return appointments.map((record, i) => {
         return <AppointmentCard data={record} key={i} userType={this.state.userType}/>;
       });
     }
-      else return 'Server hatası' 
+      else return 'Randevu Bulunamadı'
   };
 
   renderActive = () => {
