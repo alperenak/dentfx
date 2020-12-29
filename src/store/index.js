@@ -438,6 +438,19 @@ export default {
       errorMessageBuilder
     );
   },
+  async CreateAppointment(payload) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/appointment`;
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
   async SearchChat({ keyword }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = "token";

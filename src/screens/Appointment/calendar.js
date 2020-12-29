@@ -177,6 +177,7 @@ const messages = {
 };
 class ACalendar extends Component {
   state = {
+    appointmentDentistId: "",
     events,
     patientNameData: [],
     calendarEvents: [],
@@ -234,6 +235,7 @@ class ACalendar extends Component {
       this.setState({
         allAppointments: _allAppointments,
         appointmentDentist: resourceMap[0].resourceTitle,
+        appointmentDentistId: resourceMap[0].resourceId,
       });
     }
   };
@@ -348,21 +350,53 @@ class ACalendar extends Component {
           }}
           modalFooterSecondButtonOnClick={() => {
             if (this.state.mode === "create") {
-              this.setState({
-                allAppointments: [
-                  ...this.state.allAppointments,
-                  {
-                    id: Math.random().toString(16),
-                    title: `Randevu-${this.state.patientName}-${this.state.patientState}-${this.state.appointmentExplanation}-${this.state.appointmentNotes}-${this.state.appointmentDentist}`,
-                    start: this.state.start,
-                    end: new Date(
-                      this.state.start.getTime() +
-                        this.state.minuteRange * 60000
-                    ),
-                    resourceId: this.state.selectedResourceId,
-                  },
-                ],
-              });
+              // this.setState({
+              //   allAppointments: [
+              //     ...this.state.allAppointments,
+              //     {
+              //       id: Math.random().toString(16),
+              //       title: `Randevu-${this.state.patientName}-${this.state.patientState}-${this.state.appointmentExplanation}-${this.state.appointmentNotes}-${this.state.appointmentDentist}`,
+              //       start: this.state.start,
+              //       end: new Date(
+              //         this.state.start.getTime() +
+              //           this.state.minuteRange * 60000
+              //       ),
+              //       resourceId: this.state.selectedResourceId,
+              //     },
+              //   ],
+              // });
+              if (this.state.isNew) {
+                let startDate = this.state.start;
+                let payload = {
+                  isNew: true,
+                  name: this.state.patientName,
+                  dentist: this.state.appointmentDentistId,
+                  treatmentType: this.state.appointmentExplanation,
+                  date: `${startDate.getDate()}.${
+                    String(startDate.getMonth() + 1).length === 1 ? 0 : ""
+                  }${startDate.getMonth() + 1}.${startDate.getFullYear()}`,
+                  startTime: `${startDate.getHours()}:${startDate.getMinutes()}`,
+                  isCheckIn: false,
+                  paymentType: "onCheckIn",
+                };
+                store
+                  .CreateAppointment(payload)
+                  .then(() => this.componentDidMount());
+              } else if (!this.state.isNew) {
+                let startDate = this.state.start;
+                let payload = {
+                  user: "",
+                  dentist: this.state.appointmentDentistId,
+                  treatmentType: this.state.appointmentExplanation,
+                  date: `${startDate.getDate()}.${
+                    String(startDate.getMonth() + 1).length === 1 ? 0 : ""
+                  }${startDate.getMonth() + 1}.${startDate.getFullYear()}`,
+                  startTime: `${startDate.getHours()}:${startDate.getMinutes()}`,
+                  isCheckIn: false,
+                  paymentType: "onCheckIn",
+                };
+                store.CreateAppointment(payload);
+              }
             } else if (this.state.mode === "select") {
               let arr = this.state.allAppointments.filter((item) => {
                 return item.id !== this.state.id;
@@ -463,7 +497,13 @@ class ACalendar extends Component {
           {(!this.state.patientNameData ||
             this.state.patientNameData.length == 0) &&
           this.state.patientName.length > 2 ? (
-            <div class="custom-control custom-checkbox mt-2">
+            <div
+              class="custom-control custom-checkbox mt-2"
+              onClick={(e) => {
+                let checkbox = document.getElementById("customCheck1").checked;
+                this.setState({ isNew: checkbox });
+              }}
+            >
               <input
                 type="checkbox"
                 class="custom-control-input"
@@ -543,7 +583,11 @@ class ACalendar extends Component {
             type={"selectable"}
             labelName={"Diş Hekimi seçiniz"}
             onChange={(e) => {
-              this.setState({ appointmentDentist: e });
+              console.log("dentistId", getResourcesId(resourceMap, e));
+              this.setState({
+                appointmentDentist: e,
+                appointmentDentistId: getResourcesId(resourceMap, e),
+              });
             }}
             defaultValue={getResources(
               resourceMap,
@@ -618,6 +662,16 @@ function getResources(arr, resourceId) {
     }
   });
   return name;
+}
+function getResourcesId(arr, resourceName) {
+  let id = "";
+  console.log(resourceName);
+  arr.map((item) => {
+    if (item.resourceTitle.includes(resourceName)) {
+      id = item.resourceId;
+    }
+  });
+  return id;
 }
 
 export default ACalendar;
