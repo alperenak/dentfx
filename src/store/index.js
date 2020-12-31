@@ -462,4 +462,18 @@ export default {
       errorMessageBuilder
     );
   },
+  async AddPatient(clinicId, patient) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = "token";
+    let path = `/clinic/${clinicId}/patient`;
+    let payload = { patient };
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
 };

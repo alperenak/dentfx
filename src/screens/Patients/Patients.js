@@ -1,315 +1,427 @@
 import React, { Component } from "react";
-import { MDBDataTable } from 'mdbreact';
-import StepProgressBar from 'react-step-progress';
-import 'react-step-progress/dist/index.css';
-import CheckMark from '../../components/CheckMark/checkMark'
-import DatePicker from "../../components/DatePicker/DatePicker"
+import { MDBDataTable } from "mdbreact";
+import StepProgressBar from "react-step-progress";
+import "react-step-progress/dist/index.css";
+import CheckMark from "../../components/CheckMark/checkMark";
+import DatePicker from "../../components/DatePicker/DatePicker";
 
 /*** Styles ***/
 import styles from "./patients.scss";
-import AddUserIcon from "../../icons/add-user.svg"
+import AddUserIcon from "../../icons/add-user.svg";
 
 /*** Utils ***/
 import store from "../../store";
 import { getCookie } from "../../utils/cookie";
 import { Link } from "react-router-dom";
 
-const Step1 = () => {
-  return (
-    <div className="stepWrapper">
-      <form class="needs-validation" novalidate>
-
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault01">İsim</label>
-            <input type="text" class="form-control" id="validationDefault01" placeholder="Hasan" required />
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault02">Soyisim</label>
-            <input type="text" class="form-control" id="validationDefault02" placeholder="Demirkıran" required />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col-md-9 mb-3">
-            <label for="inputTC">TC Kimlik No</label>
-            <input type="text" class="form-control" id="inputTC" placeholder="000 0000 0000" />
-          </div>
-          <div className={"col-md-3 mb-3"} style={{paddingLeft: "2rem"}}>
-            <label for="sexRadio1">Cinsiyet</label>
-            <div className={"row"} style={{ marginTop: "0" }}>
-              <div class="form-check" style={{ marginRight: "5px" }}>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="sexRadio1" value="option1" checked />
-                <label class="form-check-label" for="exampleRadios1">
-                  Erkek
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="sexRadio2" value="option2" />
-                <label class="form-check-label" for="exampleRadios2">
-                  Kadın
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={"form-row"} style={{ marginBottom: "0" }}>
-          <div class="col-md-4 mb-3">
-            <label for="validationDefault04">Uyruk</label>
-            <select class="custom-select" id="validationDefault04" required>
-              <option selected disabled value="">Seçiniz...</option>
-              <option>Türk</option>
-              <option>Yabancı</option>
-            </select>
-          </div>
-          <div class="col-md-8 mb-3">
-            <label for="dentistName">Diş Hekimi</label>
-            <input id="dentistName" type="text" class="form-control" placeholder="Diş Hekimi" />
-          </div>
-        </div>
-        <div class="form-row" style={{ marginTop: "0" }}>
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault01">Doğum Tarihi</label>
-            <DatePicker />
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault02">Kayıt Tarihi</label>
-            <DatePicker />
-          </div>
-        </div>
-      </form>
-    </div>
-  );
-}
-const Step2 = () => {
-  return (
-    <div className="stepWrapper">
-      <form class="was-validated">
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault04">İlçe</label>
-            <select class="custom-select" id="validationDefault04" required>
-              <option selected disabled value="">Seçiniz...</option>
-              <option>Başakşehir</option>
-              <option>Sarıyer</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault04">Şehir</label>
-            <select class="custom-select" id="validationDefault04" required>
-              <option selected disabled value="">Seçiniz...</option>
-              <option>İstanbul</option>
-              <option>Ankara</option>
-              <option>Eskişehir</option>
-              <option>Çanakkale</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault04">Ülke</label>
-            <select class="custom-select" id="validationDefault04" required>
-              <option selected disabled value="">Seçiniz...</option>
-              <option>Türkiye</option>
-              <option>USA</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault05">Posta Kodu</label>
-            <input type="text" class="form-control" id="validationDefault05" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-12 mb-3">
-            <label for="exampleFormControlInput1">E-mail adresi</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="hasan@gmail.com" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="inputAddress">Telefon1</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="+09 000 000 0000" />
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault05">Telefon2</label>
-            <input type="text" class="form-control" id="validationDefault05" placeholder="+09 000 000 0000" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-12 mb-3">
-            <label for="exampleFormControlInput1">Adres</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Rumeli Hisarüstü Mah..." />
-          </div>
-        </div>
-      </form>
-    </div>
-  );
-}
-
-
-const Step3 = () => {
-  return (
-    <div className="stepWrapper">
-      <CheckMark />
-    </div>
-  );
-}
-
-
 class Patients extends Component {
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       clinicians: null,
-      patientData: null
+      patientData: null,
+      patient_name: "",
+      patient_surname: "",
+      patient_email: "",
+      patient_phone: "",
+      patient_nationality: "",
+      patient_tcNumber: "",
+      patient_birthDate: "",
+      patient_Dentist: "",
+      patient_tariff: "",
+      patient_currency: "",
+      patient_city: "",
+      patient_country: "",
+      patient_address: "",
     };
   }
+
+  handleChange = (event) => {
+    this.setState({ patient_name: event.target.value });
+  };
 
   componentDidMount = async () => {
     let clinicId = getCookie("user_id");
     let res = await store.getPatients({ clinicId });
     this.setState({ clinicians: res.data.Dentist });
-    console.log(this.state.clinicians)
+    console.log(this.state.clinicians);
     this.setState({
       patientData: {
         columns: [
           {
-            label: 'Fotoğraf',
-            field: 'avatar',
-            sort: 'asc',
-            width: 50
+            label: "Fotoğraf",
+            field: "avatar",
+            sort: "asc",
+            width: 50,
           },
           {
-            label: 'İsim',
-            field: 'name',
-            sort: 'asc',
-            width: 150
+            label: "İsim",
+            field: "name",
+            sort: "asc",
+            width: 150,
           },
           {
-            label: 'Soyisim',
-            field: 'surname',
-            sort: 'asc',
-            width: 150
+            label: "Soyisim",
+            field: "surname",
+            sort: "asc",
+            width: 150,
           },
           {
-            label: 'Telefon',
-            field: 'phone',
-            sort: 'asc',
-            width: 150
+            label: "Telefon",
+            field: "phone",
+            sort: "asc",
+            width: 150,
           },
           {
-            label: 'TC/Pasaport No',
-            field: 'passport_no',
-            sort: 'asc',
-            width: 150
+            label: "TC/Pasaport No",
+            field: "passport_no",
+            sort: "asc",
+            width: 150,
           },
           {
-            label: 'İncele',
-            field: 'button',
-            sort: 'asc',
-            width: 150
+            label: "İncele",
+            field: "button",
+            sort: "asc",
+            width: 150,
           },
         ],
         rows: res.data.map((patient) => {
           return {
             ...patient,
-            avatar: <div class="tableAvatar"><img src={patient.avatar} /></div>,
-            button:
+            avatar: (
+              <div class="tableAvatar">
+                <img src={patient.avatar} />
+              </div>
+            ),
+            button: (
               <Link to={`/patients/${patient.id}`} className="tableAvatar">
-                <button type="button" class="btn btn-secondary">İncele</button>
+                <button type="button" class="btn btn-secondary">
+                  İncele
+                </button>
               </Link>
-          }
-        })
-
-      }
-    })
-    console.log(this.state.patientData)
-
+            ),
+          };
+        }),
+      },
+    });
+    console.log(this.state.patientData);
   };
 
+  renderStep1 = () => {
+    return (
+      <div className="stepWrapper">
+        <form class="needs-validation" novalidate>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault01">İsim</label>
+              <input
+                type="text"
+                class="form-control"
+                id="validationDefault01"
+                placeholder="Hasan"
+                required
+                onChange={(event) =>
+                  this.setState({ patient_name: event.target.value })
+                }
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault02">Soyisim</label>
+              <input
+                type="text"
+                class="form-control"
+                id="validationDefault02"
+                placeholder="Demirkıran"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-9 mb-3">
+              <label for="inputTC">TC Kimlik No</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputTC"
+                placeholder="000 0000 0000"
+              />
+            </div>
+            <div className={"col-md-3 mb-3"} style={{ paddingLeft: "2rem" }}>
+              <label for="sexRadio1">Cinsiyet</label>
+              <div className={"row"} style={{ marginTop: "0" }}>
+                <div class="form-check" style={{ marginRight: "5px" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="exampleRadios"
+                    id="sexRadio1"
+                    value="option1"
+                    checked
+                  />
+                  <label class="form-check-label" for="exampleRadios1">
+                    Erkek
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="exampleRadios"
+                    id="sexRadio2"
+                    value="option2"
+                  />
+                  <label class="form-check-label" for="exampleRadios2">
+                    Kadın
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={"form-row"} style={{ marginBottom: "0" }}>
+            <div class="col-md-4 mb-3">
+              <label for="validationDefault04">Uyruk</label>
+              <select class="custom-select" id="validationDefault04" required>
+                <option selected disabled value="">
+                  Seçiniz...
+                </option>
+                <option>Türk</option>
+                <option>Yabancı</option>
+              </select>
+            </div>
+            <div class="col-md-8 mb-3">
+              <label for="dentistName">Diş Hekimi</label>
+              <input
+                id="dentistName"
+                type="text"
+                class="form-control"
+                placeholder="Diş Hekimi"
+              />
+            </div>
+          </div>
+          <div class="form-row" style={{ marginTop: "0" }}>
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault01">Doğum Tarihi</label>
+              <DatePicker />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault02">Kayıt Tarihi</label>
+              <DatePicker />
+            </div>
+          </div>
+        </form>
+      </div>
+    );
+  };
+
+  renderStep2 = () => {
+    return (
+      <div className="stepWrapper">
+        <form class="was-validated">
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault04">İlçe</label>
+              <select class="custom-select" id="validationDefault04" required>
+                <option selected disabled value="">
+                  Seçiniz...
+                </option>
+                <option>Başakşehir</option>
+                <option>Sarıyer</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault04">Şehir</label>
+              <select class="custom-select" id="validationDefault04" required>
+                <option selected disabled value="">
+                  Seçiniz...
+                </option>
+                <option>İstanbul</option>
+                <option>Ankara</option>
+                <option>Eskişehir</option>
+                <option>Çanakkale</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault04">Ülke</label>
+              <select class="custom-select" id="validationDefault04" required>
+                <option selected disabled value="">
+                  Seçiniz...
+                </option>
+                <option>Türkiye</option>
+                <option>USA</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault05">Posta Kodu</label>
+              <input
+                type="text"
+                class="form-control"
+                id="validationDefault05"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+              <label for="exampleFormControlInput1">E-mail adresi</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="hasan@gmail.com"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="inputAddress">Telefon1</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputAddress"
+                placeholder="+09 000 000 0000"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault05">Telefon2</label>
+              <input
+                type="text"
+                class="form-control"
+                id="validationDefault05"
+                placeholder="+09 000 000 0000"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+              <label for="exampleFormControlInput1">Adres</label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Rumeli Hisarüstü Mah..."
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    );
+  };
+
+  renderStep3 = () => {
+    return (
+      <div className="stepWrapper">
+        <CheckMark />
+      </div>
+    );
+  };
+
+  step1Validator() {
+    //return a boolean
+    return true;
+  }
+
+  step2Validator() {
+    // return a boolean
+    return true;
+  }
+
+  step3Validator() {
+    // return a boolean
+    return true;
+  }
+
+  onFormSubmit = () => {
+    // let clinicId = getCookie("user_id");
+    // let res = await store.AddPatients( clinicId, this.state.patient );
+
+    console.log(this.state.patient_name);
+  };
 
   render() {
-
-    const step1Content = <Step1 />;
-    const step2Content = <Step2 />;
-    const step3Content = <Step3 />;
-
-    function step1Validator() {
-      //return a boolean
-      return true;
-    }
-
-    function step2Validator() {
-      // return a boolean
-      return true;
-    }
-
-    function step3Validator() {
-      // return a boolean
-      return true;
-    }
-
-    function onFormSubmit() {
-      // handle the submit logic here
-      // This function will be executed at the last step
-      // when the submit button (next button in the previous steps) is pressed
-    }
+    const step1Content = this.renderStep1();
+    const step2Content = this.renderStep2();
+    const step3Content = this.renderStep3();
 
     return (
-
       <div>
-        <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addUser"}><img src={AddUserIcon}></img></a>
+        <a
+          type="button"
+          data-toggle="modal"
+          data-target="#addUserModal"
+          className={"addUser"}
+        >
+          <img src={AddUserIcon}></img>
+        </a>
 
-        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div
+          class="modal fade"
+          id="addUserModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hasta Ekle</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Hasta Ekle
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-
-
                 <StepProgressBar
                   startingStep={0}
-                  onSubmit={onFormSubmit}
-                  previousBtnName={'Önceki'}
-                  nextBtnName={'Sonraki'}
+                  onSubmit={this.onFormSubmit}
+                  previousBtnName={"Önceki"}
+                  nextBtnName={"Sonraki"}
                   steps={[
                     {
-                      label: 'Kişisel Bilgiler',
-                      subtitle: '0%',
-                      name: 'step 1',
-                      content: step1Content
+                      label: "Kişisel Bilgiler",
+                      subtitle: "0%",
+                      name: "step 1",
+                      content: step1Content,
                     },
                     {
-                      label: 'İletişim Bilgileri',
-                      subtitle: '50%',
-                      name: 'step 2',
+                      label: "İletişim Bilgileri",
+                      subtitle: "50%",
+                      name: "step 2",
                       content: step2Content,
-                      validator: step2Validator
+                      validator: this.step2Validator,
                     },
                     {
-                      label: 'Son',
-                      subtitle: '100%',
-                      name: 'step 3',
+                      label: "Son",
+                      subtitle: "100%",
+                      name: "step 3",
                       content: step3Content,
-                      validator: step3Validator
-                    }
+                      validator: this.step3Validator,
+                    },
                   ]}
                 />
-
-
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                <button type="button" class="btn btn-primary">Hasta Ekle</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Kapat
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Hasta Ekle
+                </button>
               </div>
             </div>
           </div>
@@ -322,16 +434,15 @@ class Patients extends Component {
               bordered
               small
               data={this.state.patientData}
-              searchLabel={'Ara'}
-              entriesLabel={'Girdileri Göster'}
+              searchLabel={"Ara"}
+              entriesLabel={"Girdileri Göster"}
               info={false}
-              paginationLabel={['Önceki', 'Sonraki']}
-            />)
-            :
+              paginationLabel={["Önceki", "Sonraki"]}
+            />
+          ) : (
             <p>YUKLENIYOR</p>
-          }
+          )}
         </div>
-
       </div>
     );
   }
