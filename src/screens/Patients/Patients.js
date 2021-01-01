@@ -30,9 +30,12 @@ class Patients extends Component {
       patient_Dentist: "",
       patient_tariff: "",
       patient_currency: "",
+      patient_district: "",
       patient_city: "",
       patient_country: "",
       patient_address: "",
+      patient_registryDate: "",
+      patient_postalCode: "",
     };
   }
 
@@ -133,6 +136,9 @@ class Patients extends Component {
                 id="validationDefault02"
                 placeholder="Demirkıran"
                 required
+                onChange={(event) =>
+                  this.setState({ patient_surname: event.target.value })
+                }
               />
             </div>
           </div>
@@ -144,6 +150,9 @@ class Patients extends Component {
                 class="form-control"
                 id="inputTC"
                 placeholder="000 0000 0000"
+                onChange={(event) =>
+                  this.setState({ patient_tcNumber: event.target.value })
+                }
               />
             </div>
             <div className={"col-md-3 mb-3"} style={{ paddingLeft: "2rem" }}>
@@ -180,7 +189,14 @@ class Patients extends Component {
           <div className={"form-row"} style={{ marginBottom: "0" }}>
             <div class="col-md-4 mb-3">
               <label for="validationDefault04">Uyruk</label>
-              <select class="custom-select" id="validationDefault04" required>
+              <select
+                class="custom-select"
+                id="validationDefault04"
+                onChange={(event) =>
+                  this.setState({ patient_nationality: event.target.value })
+                }
+                required
+              >
                 <option selected disabled value="">
                   Seçiniz...
                 </option>
@@ -195,17 +211,37 @@ class Patients extends Component {
                 type="text"
                 class="form-control"
                 placeholder="Diş Hekimi"
+                onChange={(event) =>
+                  this.setState({ patient_Dentist: event.target.value })
+                }
               />
             </div>
           </div>
           <div class="form-row" style={{ marginTop: "0" }}>
             <div class="col-md-6 mb-3">
               <label for="validationDefault01">Doğum Tarihi</label>
-              <DatePicker />
+              <DatePicker
+                onChange={(date) =>
+                  this.setState({ patient_birthDate: date._d })
+                }
+              />
             </div>
             <div class="col-md-6 mb-3">
-              <label for="validationDefault02">Kayıt Tarihi</label>
-              <DatePicker />
+              <label for="validationDefault04">Tarife</label>
+              <select
+                class="custom-select"
+                id="validationDefault04"
+                required
+                onChange={(event) =>
+                  this.setState({ patient_tariff: event.target.value })
+                }
+              >
+                <option selected disabled value="">
+                  Seçiniz...
+                </option>
+                <option>TDB 2020</option>
+                <option>TDB 2021</option>
+              </select>
             </div>
           </div>
         </form>
@@ -220,7 +256,14 @@ class Patients extends Component {
           <div class="form-row">
             <div class="col-md-6 mb-3">
               <label for="validationDefault04">İlçe</label>
-              <select class="custom-select" id="validationDefault04" required>
+              <select
+                class="custom-select"
+                id="validationDefault04"
+                required
+                onChange={(event) =>
+                  this.setState({ patient_district: event.target.value })
+                }
+              >
                 <option selected disabled value="">
                   Seçiniz...
                 </option>
@@ -230,7 +273,14 @@ class Patients extends Component {
             </div>
             <div class="col-md-6 mb-3">
               <label for="validationDefault04">Şehir</label>
-              <select class="custom-select" id="validationDefault04" required>
+              <select
+                class="custom-select"
+                id="validationDefault04"
+                required
+                onChange={(event) =>
+                  this.setState({ patient_city: event.target.value })
+                }
+              >
                 <option selected disabled value="">
                   Seçiniz...
                 </option>
@@ -245,11 +295,19 @@ class Patients extends Component {
           <div class="form-row">
             <div class="col-md-6 mb-3">
               <label for="validationDefault04">Ülke</label>
-              <select class="custom-select" id="validationDefault04" required>
+              <select
+                class="custom-select"
+                id="validationDefault04"
+                required
+                onChange={(event) =>
+                  this.setState({ patient_country: event.target.value })
+                }
+              >
                 <option selected disabled value="">
                   Seçiniz...
                 </option>
                 <option>Türkiye</option>
+                <option>UAE</option>
                 <option>USA</option>
               </select>
             </div>
@@ -260,6 +318,9 @@ class Patients extends Component {
                 class="form-control"
                 id="validationDefault05"
                 required
+                onChange={(event) =>
+                  this.setState({ patient_postalCode: event.target.value })
+                }
               />
             </div>
           </div>
@@ -272,6 +333,9 @@ class Patients extends Component {
                 class="form-control"
                 id="exampleFormControlInput1"
                 placeholder="hasan@gmail.com"
+                onChange={(event) =>
+                  this.setState({ patient_email: event.target.value })
+                }
               />
             </div>
           </div>
@@ -284,16 +348,28 @@ class Patients extends Component {
                 class="form-control"
                 id="inputAddress"
                 placeholder="+09 000 000 0000"
+                onChange={(event) =>
+                  this.setState({ patient_phone: event.target.value })
+                }
               />
             </div>
             <div class="col-md-6 mb-3">
-              <label for="validationDefault05">Telefon2</label>
-              <input
-                type="text"
-                class="form-control"
-                id="validationDefault05"
-                placeholder="+09 000 000 0000"
-              />
+              <label for="validationDefault04">Kur</label>
+              <select
+                class="custom-select"
+                id="validationDefault04"
+                required
+                onChange={(event) =>
+                  this.setState({ patient_currency: event.target.value })
+                }
+              >
+                <option selected disabled value="">
+                  Seçiniz...
+                </option>
+                <option>TRY</option>
+                <option>USD</option>
+                <option>EUR</option>
+              </select>
             </div>
           </div>
 
@@ -305,6 +381,9 @@ class Patients extends Component {
                 class="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Rumeli Hisarüstü Mah..."
+                onChange={(event) =>
+                  this.setState({ patient_address: event.target.value })
+                }
               />
             </div>
           </div>
@@ -340,7 +419,25 @@ class Patients extends Component {
     // let clinicId = getCookie("user_id");
     // let res = await store.AddPatients( clinicId, this.state.patient );
 
-    console.log(this.state.patient_name);
+    const patient = {
+      name: this.state.patient_name,
+      surname: this.state.patient_surname,
+      email: this.state.patient_email,
+      phone: this.state.patient_phone,
+      nationality: this.state.patient_nationality,
+      tcNumber: this.state.patient_tcNumber,
+      birthDate: this.state.patient_birthDate,
+      Dentist: this.state.patient_Dentist,
+      tariff: this.state.patient_tariff,
+      currency: this.state.patient_currency,
+      district: this.state.patient_district,
+      city: this.state.patient_city,
+      country: this.state.patient_country,
+      address: this.state.patient_address,
+      postalCode: this.state.patient_postalCode,
+    };
+
+    console.log(patient);
   };
 
   render() {
