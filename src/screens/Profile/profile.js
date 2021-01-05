@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 
 /*** Utils ***/
 import store from "../../store";
@@ -21,6 +21,17 @@ import DatePicker from 'react-datepicker';
 //*** Components ***/
 import Input from "../../components/Input";
 import Switch from "react-input-switch";
+import Dropzone, { useDropzone } from "react-dropzone";
+
+const dropzoneRef = createRef();
+
+const openDialog = () => {
+  // Note that the ref is set async,
+  // so it might be null at some point 
+  if (dropzoneRef.current) {
+    dropzoneRef.current.open()
+  }
+};
 
 export default function Profile() {
   //#region General States
@@ -314,12 +325,13 @@ export default function Profile() {
     <div className="profile">
       <div className="profile__profileCard">
         <img className="profile__profileCard__profileImage" src={user?.avatar} alt="avatar" />
-        <div className="profile__profileCard__editIcon">
+        <div className="profile__profileCard__editIcon" onClick={()=>alert('sfa')}>
           <img src={editIcon} alt="" />
         </div>
-        <div className="profile__profileCard__editIcon__2">
-          <img src={editIcon} alt="" />
-        </div>
+          {/* <div className="profile__profileCard__editIcon__2">
+            <img src={editIcon} alt="" />
+          </div> */}
+          <Dropzonesss/>
       </div>
       <div className="profile__profileName">
         {`${user?.name} ${user?.surname ? user.surname : ''}`}
@@ -340,6 +352,26 @@ export default function Profile() {
         {selectedTab === 3 && notificationSettings()}
         {selectedTab === 4 && languageSettings()}
       </div>
+    </div>
+  );
+}
+function Dropzonesss(props) {
+  const {getRootProps, getInputProps, open, acceptedFiles} = useDropzone({
+    // Disable click and keydown behavior
+    noClick: true,
+    noKeyboard: true
+  });
+
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
+  return (
+    <div className="profile__profileCard__editIcon__2" onClick={open}>
+      <input {...getInputProps()} />
+      <img src={editIcon} alt="" />
     </div>
   );
 }
