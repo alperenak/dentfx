@@ -19,14 +19,14 @@ import kampanyaIcon from "../../icons/kampanya-icon.svg";
 import kampanyaIconBlue from "../../icons/kampanya-icon-blue.svg";
 import dentfxSocialIcon from "../../icons/dentfx-social-icon.svg";
 import dentfxSocialIconBlue from "../../icons/dentfx-social-icon-blue.svg";
-import patientIcon from "../../icons/patientSmall.svg"
-import TakvimIcon from "../../icons/Takvim.svg"
-import RandevularIcon from "../../icons/Randevular.svg"
-import HastalarIcon from "../../icons/Hastalar.svg"
-import KlinisyenIcon from "../../icons/Klinisyen.svg"
-import FaturaIcon from "../../icons/Fatura.svg"
-import SorularIcon from "../../icons/Sorular.svg"
-import ProfilimIcon from "../../icons/Profilim.svg"
+import patientIcon from "../../icons/patientSmall.svg";
+import TakvimIcon from "../../icons/Takvim.svg";
+import RandevularIcon from "../../icons/Randevular.svg";
+import HastalarIcon from "../../icons/Hastalar.svg";
+import KlinisyenIcon from "../../icons/Klinisyen.svg";
+import FaturaIcon from "../../icons/Fatura.svg";
+import SorularIcon from "../../icons/Sorular.svg";
+import ProfilimIcon from "../../icons/Profilim.svg";
 
 import { getCookie } from "../../utils/cookie";
 
@@ -54,7 +54,7 @@ function RenderList() {
       icon: TakvimIcon,
       hoverIcon: randevuIconBlue,
       href: `/calendar`,
-      not: ['user'],
+      not: ["user"],
     },
     {
       title: "Randevularım",
@@ -92,6 +92,13 @@ function RenderList() {
       not: [],
     },
     {
+      title: "Tedavi Yönetimi",
+      icon: SorularIcon,
+      hoverIcon: messageIconBlue,
+      href: `/treatmentManagement`,
+      not: ["dentist"],
+    },
+    {
       title: "Profilim",
       icon: ProfilimIcon,
       hoverIcon: profileIconBlue,
@@ -119,7 +126,6 @@ function RenderList() {
       href: `/social`,
       not: ["dentist", "clinic"],
     },
-
   ];
 
   const [list, setList] = useState(tempList);
@@ -152,19 +158,15 @@ function RenderList() {
   return list.map((item, i) => {
     if (item?.not.includes(getCookie("user_type"))) return <div></div>;
     return (
-		<Link
-			key={i}
-			to={item.href}
-			className="list__listItem"
-		>
-			{hoverItem !== i && !item.selected && (
-				<img src={item.icon} alt={"icon"} />
-			)}
-			{(hoverItem === i || item.selected) && (
-				<img src={item.hoverIcon} alt={"icon"} />
-			)}
-			<div className={"list__listItem__text"}>{item.title}</div>
-		</Link>
+      <Link key={i} to={item.href} className="list__listItem">
+        {hoverItem !== i && !item.selected && (
+          <img src={item.icon} alt={"icon"} />
+        )}
+        {(hoverItem === i || item.selected) && (
+          <img src={item.hoverIcon} alt={"icon"} />
+        )}
+        <div className={"list__listItem__text"}>{item.title}</div>
+      </Link>
     );
   });
 }
