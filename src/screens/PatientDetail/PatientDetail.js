@@ -49,6 +49,7 @@ import tooth32 from "../../assets/images/tooth/tooth-32.jpg";
 import ContractIMG from "../../assets/icons/contract.svg";
 import ProformaIMG from "../../assets/icons/proforma.svg";
 import Modal from "../../components/Modal/modal";
+import Dropdown from "../../components/Dropdown/dropdown";
 
 class PatientDetail extends Component {
   constructor() {
@@ -1492,6 +1493,11 @@ class PatientDetail extends Component {
     return (
       <div>
         {this.state.treatmentList !== null ? (
+          <>
+          <Dropdown
+            type={"selectable"}
+            selectableData={['Tarife1','Tarife2','Tarife3','Tarife4']}
+          />
           <MDBDataTable
             striped
             paging={false}
@@ -1505,6 +1511,7 @@ class PatientDetail extends Component {
             info={false}
             data={this.state.treatmentList}
           />
+          </>
         ) : (
             <p>YUKLENIYOR</p>
           )}
