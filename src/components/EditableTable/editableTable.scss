@@ -1,0 +1,12 @@
+.treatmentManagement {
+  display: flex;
+  &__inputTable {
+    border: none;
+    color: #212529;
+    width: 100%;
+    background-color: transparent;
+  }
+  &__fontBold {
+    font-weight: bold;
+  }
+}
