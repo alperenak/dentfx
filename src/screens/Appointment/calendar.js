@@ -216,7 +216,7 @@ class ACalendar extends Component {
 
     if (response.data) {
       let _allAppointments = response.data.map((appointment) => {
-        let title = `Randevu ${appointment.User.name} ${appointment.User.surname} \n${appointment.treatmentType}`;
+        let title = `Randevu-${appointment.User.name} ${appointment.User.surname}--${appointment.treatmentType}--`;
         let dateArr = appointment.date.split(".");
         let dateArsr = appointment.startTime.split(".");
         let dateArrs = appointment.startTime.split(".");

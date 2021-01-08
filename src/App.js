@@ -37,6 +37,7 @@ import NewMessage from "./screens/Messages/NewMessage";
 import Patients from "./screens/Patients/Patients";
 import PatientDetail from "./screens/PatientDetail/PatientDetail";
 import TreatmentManagement from "./screens/TreatmentManagement/treatmentManagement";
+import DentistDetail from "./screens/DentistDetail/DentistDetail";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);
@@ -186,6 +187,12 @@ function App() {
                       path="/appointment"
                       exact
                       render={(props) => <Appointment {...props} />}
+                    />
+
+                    <Route
+                      path="/dentist/:id"
+                      exact
+                      render={(props) => <DentistDetail {...props} />}
                     />
 
                     <Route
