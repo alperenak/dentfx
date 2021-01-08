@@ -372,11 +372,18 @@ class ACalendar extends Component {
                   name: this.state.patientName,
                   dentist: this.state.appointmentDentistId,
                   treatmentType: this.state.appointmentExplanation,
-                  date: `${startDate.getDate()}.${
-                    String(startDate.getMonth() + 1).length === 1 ? 0 : ""
-                  }${startDate.getMonth() + 1}.${startDate.getFullYear()}`,
-                  startTime: `${startDate.getHours()}:${startDate.getMinutes()}`,
+                  date: `${
+                    String(startDate.getDate()).length === 1
+                      ? `0${startDate.getDate()}`
+                      : startDate.getDate()
+                  }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ""}${
+                    startDate.getMonth() + 1
+                  }.${startDate.getFullYear()}`,
+                  startTime: convertHourMinute(this.state.start),
+                  endTime: convertHourMinute(this.state.end),
                   isCheckIn: false,
+                  note: this.state.appointmentNotes,
+                  description: this.patientState,
                   paymentType: "onCheckIn",
                 };
                 store
@@ -388,12 +395,19 @@ class ACalendar extends Component {
                   user: "",
                   dentist: this.state.appointmentDentistId,
                   treatmentType: this.state.appointmentExplanation,
-                  date: `${startDate.getDate()}.${
-                    String(startDate.getMonth() + 1).length === 1 ? 0 : ""
-                  }${startDate.getMonth() + 1}.${startDate.getFullYear()}`,
-                  startTime: `${startDate.getHours()}:${startDate.getMinutes()}`,
+                  date: `${
+                    String(startDate.getDate()).length === 1
+                      ? `0${startDate.getDate()}`
+                      : startDate.getDate()
+                  }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ""}${
+                    startDate.getMonth() + 1
+                  }.${startDate.getFullYear()}`,
+                  startTime: convertHourMinute(this.state.start),
+                  endTime: convertHourMinute(this.state.end),
                   isCheckIn: false,
                   paymentType: "onCheckIn",
+                  note: this.state.appointmentNotes,
+                  description: this.patientState,
                 };
                 store.CreateAppointment(payload);
               }
@@ -420,9 +434,14 @@ class ACalendar extends Component {
           }}
         >
           <label className="mt-2" for="patientName">
-            Hastanın Adı{"   "}
+            Hastanın Adı
             {this.state.patientId && (
-              <Link to={`patients/${this.state.patientId}`}>
+              <Link
+                to={`patients/${this.state.patientId}`}
+                onClick={() => {
+                  $("#createEventOnCalendar").modal("hide");
+                }}
+              >
                 <img
                   src={ExternalIcon}
                   width="15"
@@ -672,6 +691,14 @@ function getResourcesId(arr, resourceName) {
     }
   });
   return id;
+}
+export function convertHourMinute(date) {
+  const d = new Date(date);
+  let minutes = `${d.getMinutes()}`;
+  let saat = `${d.getHours()}`;
+  return `${String(saat).length === 1 ? 0 : ""}${saat}:${
+    String(minutes).length === 1 ? 0 : ""
+  }${minutes}`;
 }
 
 export default ACalendar;
