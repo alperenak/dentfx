@@ -1,76 +1,73 @@
-.list-mobile{
-	display: none;
+.list-mobile {
+  display: none;
 }
-.list{
-	& a {
-		text-decoration: none;
-		&:hover{
-			color:#1a5aff;
-		}
-	}
-	&__listItem{
-		display: flex;
-	    align-items: center;
-	    justify-content: flex-start;
-	    cursor: pointer;
-	    margin-bottom: 40px;
-		color: #061b52;
-	    &__text {
-			margin-left: 20px;
-		}
-		
-		img{
-			width: 20px;
-		}
+.list {
+  & a {
+    text-decoration: none;
+    &:hover {
+      color: #1a5aff;
+    }
+  }
+  &__listItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    margin-bottom: 40px;
+    color: #061b52;
+    &__text {
+      margin-left: 20px;
+    }
 
-	}
+    img {
+      width: 20px;
+    }
+  }
+  &__listItemClicked {
+    color: #1a5aff;
+  }
 }
-.list2{
-	& a {
-		text-decoration: none;
-		&:hover{
-			color:#1a5aff;
-		}
-	}
-	&__listItem{
-		display: flex;
-	    align-items: center;
-	    justify-content: flex-start;
-	    cursor: pointer;
-	    margin-bottom: 40px;
-		color: #061b52;
-	    &__text {
-			margin-left: 20px;
-	    }
-
-	}
+.list2 {
+  & a {
+    text-decoration: none;
+    &:hover {
+      color: #1a5aff;
+    }
+  }
+  &__listItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    margin-bottom: 40px;
+    color: #061b52;
+    &__text {
+      margin-left: 20px;
+    }
+  }
 }
-.sideBarClass{
-	position: fixed;
+.sideBarClass {
+  position: fixed;
 }
 
-@media only screen and (max-width : 1200px) {
+@media only screen and (max-width: 1200px) {
+}
 
-    }
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
 
-    /* Medium Devices, Desktops */
-    @media only screen and (max-width : 992px) {
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  .list {
+    display: none;
+  }
+}
 
-    }
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 567px) {
+}
 
-    /* Small Devices, Tablets */
-    @media only screen and (max-width : 768px) {
-		.list{
-			display: none;
-		}
-    }
-
-    /* Extra Small Devices, Phones */
-    @media only screen and (max-width : 567px) {
-
-    }
-
-    /* Custom, iPhone Retina */
-    @media only screen and (max-width : 320px) {
-
-    }
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+}

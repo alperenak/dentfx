@@ -5,13 +5,12 @@ import { getCookie } from "../../utils/cookie";
 
 /*** Styles ***/
 import styles from "./patientdetail.scss";
-import PaymentIcon from "../../icons/credit-cards-payment.svg"
-import NotesIcon from "../../icons/writing.svg"
+import PaymentIcon from "../../icons/credit-cards-payment.svg";
+import NotesIcon from "../../icons/writing.svg";
 
 /*** Components ***/
-import DatePicker from "../../components/DatePicker/DatePicker"
-import StepProgressBar from 'react-step-progress';
-
+import DatePicker from "../../components/DatePicker/DatePicker";
+import StepProgressBar from "react-step-progress";
 
 /*** Teeth Images ***/
 import tooth1 from "../../assets/images/tooth/tooth-1.jpg";
@@ -625,7 +624,6 @@ class PatientDetail extends Component {
           },
         ],
       },
-
     });
   };
 
@@ -802,12 +800,10 @@ class PatientDetail extends Component {
     let clinicId = getCookie("user_id");
     let patientId = match.params.id;
 
-    let res = await store.getPatientsDetail({clinicId, patientId});
-    console.log(res, "RESPONSE")
+    let res = await store.getPatientsDetail({ clinicId, patientId });
+    console.log(res, "RESPONSE");
     this.setState({ patient: res.data });
   };
-
-
 
   setSelectedTab = (index) => {
     this.setState({ selectedTab: index });
@@ -815,8 +811,8 @@ class PatientDetail extends Component {
 
   renderPatientInfoTab = () => {
     let { patient } = this.state;
-    console.log(patient)
-    console.log(patient?.birthDate)
+    console.log(patient);
+    console.log(patient?.birthDate);
 
     return (
       <div className={"aboutTab"}>
@@ -824,19 +820,35 @@ class PatientDetail extends Component {
           <div className={"item patientInfoPart"}>
             <div className={"header"}>Kişisel Bilgiler</div>
             <div className={"content"}>
-
               <div class="form-row">
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault01">İsim</label>
-                  <input type="text" class="form-control" id="validationDefault01" value={patient?.name} required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefault01"
+                    value={patient?.name}
+                    required
+                  />
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault02">Soyisim</label>
-                  <input type="text" class="form-control" id="validationDefault02" value={patient?.surname} required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefault02"
+                    value={patient?.surname}
+                    required
+                  />
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="inputTC">TC Kimlik No</label>
-                  <input type="text" class="form-control" id="inputTC" value={patient?.tcNumber} />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputTC"
+                    value={patient?.tcNumber}
+                  />
                 </div>
               </div>
               <div className={"form-row"} style={{ marginBottom: "0" }}>
@@ -845,46 +857,70 @@ class PatientDetail extends Component {
 
                   <div className={"row"} style={{ marginTop: "0" }}>
                     <div class="form-check" style={{ marginRight: "5px" }}>
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="sexRadio1" value="option1" checked />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="exampleRadios"
+                        id="sexRadio1"
+                        value="option1"
+                        checked
+                      />
                       <label class="form-check-label" for="exampleRadios1">
                         Erkek
-                    </label>
+                      </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="sexRadio2" value="option2" disabled/>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="exampleRadios"
+                        id="sexRadio2"
+                        value="option2"
+                        disabled
+                      />
                       <label class="form-check-label" for="exampleRadios2">
                         Kadın
-                    </label>
+                      </label>
                     </div>
                   </div>
-
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault04">Uyruk</label>
-                  <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value={patient?.nationality}>{patient?.nationality}</option>
+                  <select
+                    class="custom-select"
+                    id="validationDefault04"
+                    required
+                  >
+                    <option selected disabled value={patient?.nationality}>
+                      {patient?.nationality}
+                    </option>
                     <option>Türk</option>
                     <option>Yabancı</option>
                   </select>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="dentistName">Diş Hekimi</label>
-                  <input id="dentistName" type="text" class="form-control" value={patient?.Dentist.name} />
+                  <input
+                    id="dentistName"
+                    type="text"
+                    class="form-control"
+                    value={patient?.Dentist.name}
+                  />
                 </div>
               </div>
               <div class="form-row" style={{ marginTop: "0" }}>
                 <div class="col-md-6 mb-3">
                   <label for="validationDefault01">Doğum Tarihi</label>
-                  {patient?.birthDate && <DatePicker
-                    initialValue={patient?.birthDate}
-                  />}
+                  {patient?.birthDate && (
+                    <DatePicker initialValue={patient?.birthDate} />
+                  )}
                 </div>
                 <div class="col-md-6 mb-3">
-                <label for="validationDefault02">Kayıt Tarihi</label>
-                  {patient?.createdAt && <DatePicker
-                    initialValue={patient?.createdAt}
-                  />}
+                  <label for="validationDefault02">Kayıt Tarihi</label>
+                  {patient?.createdAt && (
+                    <DatePicker initialValue={patient?.createdAt} />
+                  )}
                 </div>
               </div>
             </div>
@@ -896,16 +932,28 @@ class PatientDetail extends Component {
               <div class="form-row">
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault04">İlçe</label>
-                  <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value="">Seçiniz...</option>
+                  <select
+                    class="custom-select"
+                    id="validationDefault04"
+                    required
+                  >
+                    <option selected disabled value="">
+                      Seçiniz...
+                    </option>
                     <option>Başakşehir</option>
                     <option>Sarıyer</option>
                   </select>
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault04">Şehir</label>
-                  <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value="">{patient?.city}</option>
+                  <select
+                    class="custom-select"
+                    id="validationDefault04"
+                    required
+                  >
+                    <option selected disabled value="">
+                      {patient?.city}
+                    </option>
                     <option>İstanbul</option>
                     <option>Ankara</option>
                     <option>Eskişehir</option>
@@ -914,35 +962,66 @@ class PatientDetail extends Component {
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault04">Ülke</label>
-                  <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value="">{patient?.country}</option>
+                  <select
+                    class="custom-select"
+                    id="validationDefault04"
+                    required
+                  >
+                    <option selected disabled value="">
+                      {patient?.country}
+                    </option>
                     <option>Türkiye</option>
                     <option>USA</option>
                   </select>
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault05">Posta Kodu</label>
-                  <input type="text" class="form-control" id="validationDefault05" required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefault05"
+                    required
+                  />
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-6 mb-3">
                   <label for="exampleFormControlInput1">E-mail adresi</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" value={patient?.email} />
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                    value={patient?.email}
+                  />
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="inputAddress">Telefon1</label>
-                  <input type="text" class="form-control" id="inputAddress" value={patient?.phone} />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputAddress"
+                    value={patient?.phone}
+                  />
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationDefault05">Telefon2</label>
-                  <input type="text" class="form-control" id="validationDefault05" value={patient?.phone} />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefault05"
+                    value={patient?.phone}
+                  />
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12 mb-3">
                   <label for="exampleFormControlInput1">Adres</label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" value={patient?.address} />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                    value={patient?.address}
+                  />
                 </div>
               </div>
             </div>
@@ -970,7 +1049,10 @@ class PatientDetail extends Component {
               {this.state.selectedPlan}
             </a>
 
-            <div class="dropdown-menu myDropdownMenu" aria-labelledby="dropdownMenuLink">
+            <div
+              class="dropdown-menu myDropdownMenu"
+              aria-labelledby="dropdownMenuLink"
+            >
               {this.state.selectedPlan === "Planlama 0" ? (
                 <a
                   class="dropdown-item disabled"
@@ -983,16 +1065,16 @@ class PatientDetail extends Component {
                   Planlama 0
                 </a>
               ) : (
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onClick={() => {
-                      this.setState({ selectedPlan: "Planlama 0" });
-                    }}
-                  >
-                    Planlama 0
-                  </a>
-                )}
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  onClick={() => {
+                    this.setState({ selectedPlan: "Planlama 0" });
+                  }}
+                >
+                  Planlama 0
+                </a>
+              )}
 
               {this.state.selectedPlan === "Planlama 1" ? (
                 <a
@@ -1006,16 +1088,16 @@ class PatientDetail extends Component {
                   Planlama 1
                 </a>
               ) : (
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onClick={() => {
-                      this.setState({ selectedPlan: "Planlama 1" });
-                    }}
-                  >
-                    Planlama 1
-                  </a>
-                )}
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  onClick={() => {
+                    this.setState({ selectedPlan: "Planlama 1" });
+                  }}
+                >
+                  Planlama 1
+                </a>
+              )}
 
               {this.state.selectedPlan === "Tedavi" ? (
                 <a
@@ -1029,16 +1111,16 @@ class PatientDetail extends Component {
                   Tedavi
                 </a>
               ) : (
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onClick={() => {
-                      this.setState({ selectedPlan: "Tedavi" });
-                    }}
-                  >
-                    Tedavi
-                  </a>
-                )}
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  onClick={() => {
+                    this.setState({ selectedPlan: "Tedavi" });
+                  }}
+                >
+                  Tedavi
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -1078,21 +1160,39 @@ class PatientDetail extends Component {
             {this.renderTreatmentTable()}
           </div>
           <div className={"paymentPaidTreatmentTableWrapper"}>
-
             {/* ADD payment Button */}
-            <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addPayment"}>Ödeme Ekle<img src={PaymentIcon}></img></a>
+            <a
+              type="button"
+              data-toggle="modal"
+              data-target="#addUserModal"
+              className={"addPayment"}
+            >
+              Ödeme Ekle<img src={PaymentIcon}></img>
+            </a>
 
-            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div
+              class="modal fade"
+              id="addUserModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ödeme Ekle</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Ödeme Ekle
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-
                     <form>
                       <div class="form-row" style={{ marginTop: "0" }}>
                         <div class="col-md-6 mb-3">
@@ -1100,70 +1200,99 @@ class PatientDetail extends Component {
                           <DatePicker />
                         </div>
                         <div class="form-group col-md-6 mb-3">
-                        <label for="exampleFormControlSelect1">Ödeme Tipi</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option>Nakit</option>
-                          <option>Kredi Kartı</option>
-                          <option>Senet</option>
-                          <option>Havale</option>
-                        </select>
+                          <label for="exampleFormControlSelect1">
+                            Ödeme Tipi
+                          </label>
+                          <select
+                            class="form-control"
+                            id="exampleFormControlSelect1"
+                          >
+                            <option>Nakit</option>
+                            <option>Kredi Kartı</option>
+                            <option>Senet</option>
+                            <option>Havale</option>
+                          </select>
                         </div>
                       </div>
-                      
-                      <div class="form-row" >
-                      <div class="col-md-6 mb-3">
-                        <label for="formGroupExampleInput">Tutar</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput"/>
+
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                          <label for="formGroupExampleInput">Tutar</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="formGroupExampleInput"
+                          />
                         </div>
                         <div class="form-group col-md-6 mb-3">
-                        <label for="exampleFormControlSelect2">Para Birimi</label>
-                        <select class="form-control" id="exampleFormControlSelect2">
-                          <option>TRY</option>
-                          <option>USD</option>
-                          <option>EUR</option>
-                          <option>GBP</option>
-                          <option>ALL</option>
-                        </select>
+                          <label for="exampleFormControlSelect2">
+                            Para Birimi
+                          </label>
+                          <select
+                            class="form-control"
+                            id="exampleFormControlSelect2"
+                          >
+                            <option>TRY</option>
+                            <option>USD</option>
+                            <option>EUR</option>
+                            <option>GBP</option>
+                            <option>ALL</option>
+                          </select>
                         </div>
                       </div>
                       <div class="form-row">
-                      <div class="col-md-12 mb-3">
-                        <label for="exampleFormControlTextarea1">Açıklama</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput"/>
-                      </div>
+                        <div class="col-md-12 mb-3">
+                          <label for="exampleFormControlTextarea1">
+                            Açıklama
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="formGroupExampleInput"
+                          />
+                        </div>
                       </div>
                       <div class="form-row">
-                      <div class="form-group col-md-12 mb-3">
-                        <label for="exampleFormControlSelect2">Diş Hekimi</label>
-                        <select class="form-control">
-                          <option>Büşra DOLAŞ</option>
-                          <option>Elif ASAL</option>
-                          <option>Elif Merve MAVİ</option>
-                          <option>Fatih ATMACA</option>
-                          <option>Hatice AKALTIN</option>
-                          <option>Hazal ÖZCAN</option>
-                          <option>İbrahim CİHAT</option>
-                          <option>Abbascan KORTMAZ</option>
-                          <option>Abdullah YAĞIZ</option>
-                          <option>Aslı Betim ŞAHİN</option>
-                          <option>İbrahim JİHAD</option>
-                          <option>Meltem ALTUN</option>
-                          <option>Mustafa TAŞDEMİR</option>
-                          <option>Orçun ÖZAYDIN</option>
-                          <option>Osman ERCAL</option>
-                          <option>Safiye ÖZDEMİR</option>
-                          <option>Samet Fatih GÜCER</option>
-                          <option>Selin ÇOLAKOĞLU</option>
-                          <option>Suha ALPAY</option>
-                        </select>
+                        <div class="form-group col-md-12 mb-3">
+                          <label for="exampleFormControlSelect2">
+                            Diş Hekimi
+                          </label>
+                          <select class="form-control">
+                            <option>Büşra DOLAŞ</option>
+                            <option>Elif ASAL</option>
+                            <option>Elif Merve MAVİ</option>
+                            <option>Fatih ATMACA</option>
+                            <option>Hatice AKALTIN</option>
+                            <option>Hazal ÖZCAN</option>
+                            <option>İbrahim CİHAT</option>
+                            <option>Abbascan KORTMAZ</option>
+                            <option>Abdullah YAĞIZ</option>
+                            <option>Aslı Betim ŞAHİN</option>
+                            <option>İbrahim JİHAD</option>
+                            <option>Meltem ALTUN</option>
+                            <option>Mustafa TAŞDEMİR</option>
+                            <option>Orçun ÖZAYDIN</option>
+                            <option>Osman ERCAL</option>
+                            <option>Safiye ÖZDEMİR</option>
+                            <option>Samet Fatih GÜCER</option>
+                            <option>Selin ÇOLAKOĞLU</option>
+                            <option>Suha ALPAY</option>
+                          </select>
                         </div>
                       </div>
                     </form>
-
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                    <button type="button" class="btn btn-primary">Ödeme Ekle</button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Kapat
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Ödeme Ekle
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1174,7 +1303,7 @@ class PatientDetail extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   };
 
   renderNotesTab = () => {
@@ -1182,19 +1311,38 @@ class PatientDetail extends Component {
       <div>
         <div className={"patientNotesWrapper"}>
           {/* ADD payment Button */}
-          <a type="button" data-toggle="modal" data-target="#addUserModal" className={"addNotes"}>Not Ekle<img src={NotesIcon}></img></a>
+          <a
+            type="button"
+            data-toggle="modal"
+            data-target="#addUserModal"
+            className={"addNotes"}
+          >
+            Not Ekle<img src={NotesIcon}></img>
+          </a>
 
-          <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div
+            class="modal fade"
+            id="addUserModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Not Ekle</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Not Ekle
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body container">
-
                   <form>
                     <div class="form-row" style={{ marginTop: "0" }}>
                       <div class="col-md-6 mb-3">
@@ -1203,15 +1351,28 @@ class PatientDetail extends Component {
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="exampleFormControlTextarea1">Lütfen Not Ekleyiniz.</label>
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                      <label for="exampleFormControlTextarea1">
+                        Lütfen Not Ekleyiniz.
+                      </label>
+                      <textarea
+                        class="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="8"
+                      ></textarea>
                     </div>
                   </form>
-
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                  <button type="button" class="btn btn-primary">Not Ekle</button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Kapat
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Not Ekle
+                  </button>
                 </div>
               </div>
             </div>
@@ -1221,7 +1382,7 @@ class PatientDetail extends Component {
           {this.renderPatientsNotes()}
         </div>
       </div>
-    )
+    );
   };
 
   renderTeeth = () => {
@@ -1432,19 +1593,19 @@ class PatientDetail extends Component {
       <div>
         {this.state.treatmentPlan0Data !== null ? (
           <MDBDataTable
-          className={'myTableClass'}
+            className={"myTableClass"}
             striped
             bordered
             small
-            searchLabel={'Ara'}
-            entriesLabel={'Girdileri Göster'}
+            searchLabel={"Ara"}
+            entriesLabel={"Girdileri Göster"}
             info={false}
-            paginationLabel={['Önceki', 'Sonraki']}
+            paginationLabel={["Önceki", "Sonraki"]}
             data={this.state.treatmentPlan0Data}
           />
         ) : (
-            <p>YUKLENIYOR</p>
-          )}
+          <p>YUKLENIYOR</p>
+        )}
       </div>
     );
   };
@@ -1456,14 +1617,14 @@ class PatientDetail extends Component {
             striped
             bordered
             small
-            searchLabel={'Ara'}
-            entriesLabel={'Girdileri Göster'}
+            searchLabel={"Ara"}
+            entriesLabel={"Girdileri Göster"}
             info={false}
             data={this.state.treatmentPlan1Data}
           />
         ) : (
-            <p>YUKLENIYOR</p>
-          )}
+          <p>YUKLENIYOR</p>
+        )}
       </div>
     );
   };
@@ -1477,15 +1638,15 @@ class PatientDetail extends Component {
             maxHeight="50vh"
             bordered
             small
-            searchLabel={'Ara'}
-            entriesLabel={'Girdileri Göster'}
-            paginationLabel={['Önceki', 'Sonraki']}
+            searchLabel={"Ara"}
+            entriesLabel={"Girdileri Göster"}
+            paginationLabel={["Önceki", "Sonraki"]}
             info={false}
             data={this.state.treatmentData}
           />
         ) : (
-            <p>YUKLENIYOR</p>
-          )}
+          <p>YUKLENIYOR</p>
+        )}
       </div>
     );
   };
@@ -1494,27 +1655,27 @@ class PatientDetail extends Component {
       <div>
         {this.state.treatmentList !== null ? (
           <>
-          <Dropdown
-            type={"selectable"}
-            selectableData={['Tarife1','Tarife2','Tarife3','Tarife4']}
-          />
-          <MDBDataTable
-            striped
-            paging={false}
-            scrollY
-            maxHeight="50vh"
-            bordered
-            small
-            searchLabel={'Ara'}
-            entriesLabel={'Girdileri Göster'}
-            paginationLabel={['Önceki', 'Sonraki']}
-            info={false}
-            data={this.state.treatmentList}
-          />
+            <Dropdown
+              type={"selectable"}
+              selectableData={["Tarife1", "Tarife2", "Tarife3", "Tarife4"]}
+            />
+            <MDBDataTable
+              striped
+              paging={false}
+              scrollY
+              maxHeight="50vh"
+              bordered
+              small
+              searchLabel={"Ara"}
+              entriesLabel={"Girdileri Göster"}
+              paginationLabel={["Önceki", "Sonraki"]}
+              info={false}
+              data={this.state.treatmentList}
+            />
           </>
         ) : (
-            <p>YUKLENIYOR</p>
-          )}
+          <p>YUKLENIYOR</p>
+        )}
       </div>
     );
   };
@@ -1529,18 +1690,18 @@ class PatientDetail extends Component {
             maxHeight="50vh"
             bordered
             small
-            searchLabel={'Ara'}
-            entriesLabel={'Girdileri Göster'}
-            paginationLabel={['Önceki', 'Sonraki']}
+            searchLabel={"Ara"}
+            entriesLabel={"Girdileri Göster"}
+            paginationLabel={["Önceki", "Sonraki"]}
             info={false}
             data={this.state.paidTreatmentData}
           />
         ) : (
-            <p>YUKLENIYOR</p>
-          )}
+          <p>YUKLENIYOR</p>
+        )}
       </div>
-    )
-  }
+    );
+  };
 
   renderPatientsNotes = () => {
     return (
@@ -1552,18 +1713,18 @@ class PatientDetail extends Component {
             maxHeight="50vh"
             bordered
             small
-            searchLabel={'Ara'}
-            entriesLabel={'Girdileri Göster'}
-            paginationLabel={['Önceki', 'Sonraki']}
+            searchLabel={"Ara"}
+            entriesLabel={"Girdileri Göster"}
+            paginationLabel={["Önceki", "Sonraki"]}
             info={false}
             data={this.state.notesForPatientData}
           />
         ) : (
-            <p>YUKLENIYOR</p>
-          )}
+          <p>YUKLENIYOR</p>
+        )}
       </div>
-    )
-  }
+    );
+  };
 
   renderNewTreatmentButton = (isPlan) => {
     return (
@@ -1580,32 +1741,32 @@ class PatientDetail extends Component {
                 Yeni Tedavi Plani Ekle
               </button>
             ) : (
-                <button
-                  type="button"
-                  class="btn btn-success addTreatmentButton"
-                  data-toggle="modal"
-                  data-target="#newTreatmentPlan"
-                >
-                  Yeni Tedavi Ekle
-                </button>
-              )}
+              <button
+                type="button"
+                class="btn btn-success addTreatmentButton"
+                data-toggle="modal"
+                data-target="#newTreatmentPlan"
+              >
+                Yeni Tedavi Ekle
+              </button>
+            )}
           </div>
         ) : (
-            <span
-              class="d-inline-block"
-              data-toggle="popover"
-              data-content="Lütfen, önce bir diş seçimi yapınız."
+          <span
+            class="d-inline-block"
+            data-toggle="popover"
+            data-content="Lütfen, önce bir diş seçimi yapınız."
+          >
+            <button
+              class="btn btn-secondary addTreatmentButton"
+              style={{ pointerEvents: null }}
+              type="button"
+              disabled
             >
-              <button
-                class="btn btn-secondary addTreatmentButton"
-                style={{ pointerEvents: null }}
-                type="button"
-                disabled
-              >
-                Lütfen, önce diş seçiniz.
+              Lütfen, önce diş seçiniz.
             </button>
-            </span>
-          )}
+          </span>
+        )}
         <Modal
           modalId={"newTreatmentPlan"}
           modalFooterButtonTitle={"Kapat"}

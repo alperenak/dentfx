@@ -27,7 +27,14 @@ import KlinisyenIcon from "../../icons/Klinisyen.svg";
 import FaturaIcon from "../../icons/Fatura.svg";
 import SorularIcon from "../../icons/Sorular.svg";
 import ProfilimIcon from "../../icons/Profilim.svg";
-
+import patientIconBlue from "../../icons/patientSmallBlue.svg";
+import TakvimIconBlue from "../../icons/TakvimBlue.svg";
+import RandevularIconBlue from "../../icons/RandevularBlue.svg";
+import HastalarIconBlue from "../../icons/HastalarBlue.svg";
+import KlinisyenIconBlue from "../../icons/KlinisyenBlue.svg";
+import FaturaIconBlue from "../../icons/FaturaBlue.svg";
+import SorularIconBlue from "../../icons/SorularBlue.svg";
+import ProfilimIconBlue from "../../icons/ProfilimBlue.svg";
 import { getCookie } from "../../utils/cookie";
 
 function usePrevious(value) {
@@ -52,56 +59,56 @@ function RenderList() {
     {
       title: "Takvim",
       icon: TakvimIcon,
-      hoverIcon: randevuIconBlue,
+      hoverIcon: TakvimIconBlue,
       href: `/calendar`,
       not: ["user"],
     },
     {
       title: "Randevularım",
       icon: RandevularIcon,
-      hoverIcon: randevuIconBlue,
+      hoverIcon: RandevularIconBlue,
       href: `/appointment`,
       not: [],
     },
     {
       title: "Hastalar",
       icon: HastalarIcon,
-      hoverIcon: patientIcon,
+      hoverIcon: HastalarIconBlue,
       href: `/patients`,
       not: ["user"],
     },
     {
       title: "Klinisyen",
       icon: KlinisyenIcon,
-      hoverIcon: dentfxSocialIconBlue,
+      hoverIcon: KlinisyenIconBlue,
       href: `/clinician`,
       not: ["dentist", "user"],
     },
     {
       title: "Fatura ",
       icon: FaturaIcon,
-      hoverIcon: dentfxSocialIconBlue,
+      hoverIcon: FaturaIconBlue,
       href: `/fatura`,
       not: ["dentist", "user"],
     },
     {
       title: "Sorular",
       icon: SorularIcon,
-      hoverIcon: messageIconBlue,
+      hoverIcon: SorularIconBlue,
       href: `/messages`,
       not: [],
     },
     {
       title: "Tedavi Yönetimi",
       icon: SorularIcon,
-      hoverIcon: messageIconBlue,
+      hoverIcon: SorularIconBlue,
       href: `/treatmentManagement`,
       not: ["dentist"],
     },
     {
       title: "Profilim",
       icon: ProfilimIcon,
-      hoverIcon: profileIconBlue,
+      hoverIcon: ProfilimIconBlue,
       href: `/profile/${getCookie("user_id")}`,
       not: [],
     },
@@ -129,8 +136,8 @@ function RenderList() {
   ];
 
   const [list, setList] = useState(tempList);
-  const [hoverItem, setHoverItem] = useState(-1);
-
+  const [clickedLink, setClickedLink] = useState(false);
+  const pathnameNow = window.location.pathname;
   const mounted = useRef();
   const prevList = usePrevious(list);
 
@@ -157,13 +164,30 @@ function RenderList() {
 
   return list.map((item, i) => {
     if (item?.not.includes(getCookie("user_type"))) return <div></div>;
+    console.log(pathnameNow);
     return (
-      <Link key={i} to={item.href} className="list__listItem">
-        {hoverItem !== i && !item.selected && (
+      <Link
+        key={i}
+        to={item.href}
+        className={
+          item.href.includes(window.location.pathname) ||
+          item.href.includes(clickedLink)
+            ? "list__listItem list__listItemClicked"
+            : "list__listItem"
+        }
+        onClick={() => setClickedLink(item.href)}
+      >
+        {/* {hoverItem !== i && !item.selected && (
           <img src={item.icon} alt={"icon"} />
         )}
         {(hoverItem === i || item.selected) && (
           <img src={item.hoverIcon} alt={"icon"} />
+        )} */}
+        {item.href.includes(window.location.pathname) ||
+        item.href.includes(clickedLink) ? (
+          <img src={item.hoverIcon} alt={"icon"} style={{ color: "red" }} />
+        ) : (
+          <img src={item.icon} alt={"icon"} />
         )}
         <div className={"list__listItem__text"}>{item.title}</div>
       </Link>

@@ -1,9 +1,17 @@
 import React from "react";
 import Tabs from "../../components/Tabs/tabs";
-
+import "./DentistDetail.scss";
 export default function DentistDetail() {
   return (
     <>
+      <div className={"Profile"}>
+        <div className={"patientProfileCard"}>
+          <img className={"profileImage"} src={""} alt="avatar" />
+        </div>
+
+        <div className={"profileName"}>{"alper"}</div>
+        <div className={"location"}>{`test, test`}</div>
+      </div>
       <Tabs tabsData={[{ tabName: "Diş Hekimi bilgileri" }]} />
       <div className={"aboutTab"}>
         <form>
