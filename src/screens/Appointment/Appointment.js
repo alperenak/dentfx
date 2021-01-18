@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from "./appointment.scss";
+import styles from './appointment.scss';
 
 /*** Utils ***/
-import store from "../../store";
-import { getCookie } from "../../utils/cookie";
+import store from '../../store';
+import { getCookie } from '../../utils/cookie';
 
 //*** Icons ***/
-import addCircle from "../../icons/Icons_add-circle.svg";
+import addCircle from '../../icons/Icons_add-circle.svg';
 
 /*** Components ***/
-import AppointmentCard from "./AppointmentCard";
+import AppointmentCard from './AppointmentCard';
 
 class Appointment extends Component {
   state = {
@@ -21,7 +21,7 @@ class Appointment extends Component {
     completedAppointments: [],
     cancelledAppointments: [],
     pendingAppointments: [],
-    activeLink: "all" /*all, active, completed, cancelled, new*/,
+    activeLink: 'all' /*all, active, completed, cancelled, new*/,
     cancelledCount: 0,
     activeCount: 0,
     completedCount: 0,
@@ -30,8 +30,8 @@ class Appointment extends Component {
   };
 
   componentDidMount = async () => {
-    let userId = getCookie("user_id");
-    let userType = getCookie("user_type");
+    let userId = getCookie('user_id');
+    let userType = getCookie('user_type');
     this.setState({ userType });
 
     let completedCount = 0;
@@ -83,58 +83,99 @@ class Appointment extends Component {
     console.log(this.state.completedAppointments);
   };
 
-	renderTopBar = () => {
-		let {
-			activeLink,
-			cancelledCount,
-			activeCount,
-			completedCount,
-			pendingCount,
-			userType,
-		} = this.state;
-		return (
-			<div className="topbarContainerAppointment">
-				<div className="topbarContainerAppointment__upper">
-					<div className="topbarContainerAppointment__upper__breadcrumbs">
-						Randevularım / Tedavi Geçmişim
-					</div>
-					{userType === "user" && (
-						<div className="topbarContainerAppointment__upper__newAppointmentBtn" onClick={() => this.props.history.push("/appointment/search")}>
-							<img src={addCircle} alt="" />
-							<div>Yeni Randevu</div>
-						</div>
-					)}
-				</div>
+  renderTopBar = () => {
+    let {
+      activeLink,
+      cancelledCount,
+      activeCount,
+      completedCount,
+      pendingCount,
+      userType,
+    } = this.state;
+    return (
+      <div className='topbarContainerAppointment'>
+        <div className='topbarContainerAppointment__upper'>
+          <div className='topbarContainerAppointment__upper__breadcrumbs'>
+            Randevularım / Tedavi Geçmişim
+          </div>
+          {userType === 'user' && (
+            <div
+              className='topbarContainerAppointment__upper__newAppointmentBtn'
+              onClick={() => this.props.history.push('/')}
+            >
+              <img src={addCircle} alt='' />
+              <div>Yeni Randevu</div>
+            </div>
+          )}
+        </div>
 
-				<div className="topbarContainerAppointment__navbarAppointment">
-					<div className={`${"topbarContainerAppointment__navbarAppointment__navLink"} ${activeLink === "all" && "topbarContainerAppointment__navbarAppointment__navLink__active"}`} onClick={() => this.onClickNav("all")}>
-						<div>TÜMÜ ({cancelledCount + activeCount + completedCount + pendingCount})</div>
-					</div>
-					<div className={`${"topbarContainerAppointment__navbarAppointment__navLink"} ${activeLink === "active" && "topbarContainerAppointment__navbarAppointment__navLink__active"}`} onClick={() => this.onClickNav("active")}>
-						<div>AKTİF ({activeCount})</div>
-					</div>
-					<div className={`${"topbarContainerAppointment__navbarAppointment__navLink"} ${activeLink === "completed" && "topbarContainerAppointment__navbarAppointment__navLink__active"}`} onClick={() => this.onClickNav("completed")}>
-						<div>TAMAMLANAN ({completedCount})</div>
-					</div>
-					<div className={`${"topbarContainerAppointment__navbarAppointment__navLink"} ${activeLink === "cancelled" && "topbarContainerAppointment__navbarAppointment__navLink__active"}`} onClick={() => this.onClickNav("cancelled")}>
-						<div>İPTAL EDİLEN ({cancelledCount})</div>
-					</div>
-					<div className={`${"topbarContainerAppointment__navbarAppointment__navLink"} ${ activeLink === "pending" && "topbarContainerAppointment__navbarAppointment__navLink__active"}`} onClick={() => this.onClickNav("pending")}>
-						<div>BEKLEYEN ({pendingCount})</div>
-					</div>
-				</div>
-			</div>
-		);
-	};
+        <div className='topbarContainerAppointment__navbarAppointment'>
+          <div
+            className={`${'topbarContainerAppointment__navbarAppointment__navLink'} ${
+              activeLink === 'all' &&
+              'topbarContainerAppointment__navbarAppointment__navLink__active'
+            }`}
+            onClick={() => this.onClickNav('all')}
+          >
+            <div>
+              TÜMÜ (
+              {cancelledCount + activeCount + completedCount + pendingCount})
+            </div>
+          </div>
+          <div
+            className={`${'topbarContainerAppointment__navbarAppointment__navLink'} ${
+              activeLink === 'active' &&
+              'topbarContainerAppointment__navbarAppointment__navLink__active'
+            }`}
+            onClick={() => this.onClickNav('active')}
+          >
+            <div>AKTİF ({activeCount})</div>
+          </div>
+          <div
+            className={`${'topbarContainerAppointment__navbarAppointment__navLink'} ${
+              activeLink === 'completed' &&
+              'topbarContainerAppointment__navbarAppointment__navLink__active'
+            }`}
+            onClick={() => this.onClickNav('completed')}
+          >
+            <div>TAMAMLANAN ({completedCount})</div>
+          </div>
+          <div
+            className={`${'topbarContainerAppointment__navbarAppointment__navLink'} ${
+              activeLink === 'cancelled' &&
+              'topbarContainerAppointment__navbarAppointment__navLink__active'
+            }`}
+            onClick={() => this.onClickNav('cancelled')}
+          >
+            <div>İPTAL EDİLEN ({cancelledCount})</div>
+          </div>
+          <div
+            className={`${'topbarContainerAppointment__navbarAppointment__navLink'} ${
+              activeLink === 'pending' &&
+              'topbarContainerAppointment__navbarAppointment__navLink__active'
+            }`}
+            onClick={() => this.onClickNav('pending')}
+          >
+            <div>BEKLEYEN ({pendingCount})</div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   renderAll = () => {
     let appointments = this.state.allAppointments;
-      if ( appointments && appointments.length!==0 ){
+    if (appointments && appointments.length !== 0) {
       return appointments.map((record, i) => {
-        return <AppointmentCard data={record} key={i} userType={this.state.userType}/>;
+        return (
+          <AppointmentCard
+            data={record}
+            key={i}
+            userType={this.state.userType}
+          />
+        );
       });
-    }
-      else return 'Randevu Bulunamadı'
+    } else return 'Randevu Bulunamadı';
   };
 
   renderActive = () => {
@@ -149,7 +190,9 @@ class Appointment extends Component {
     let appointments = this.state.completedAppointments;
 
     return appointments.map((record, i) => {
-      return <AppointmentCard data={record} key={i} userType={this.state.userType}/>;
+      return (
+        <AppointmentCard data={record} key={i} userType={this.state.userType} />
+      );
     });
   };
 
@@ -165,26 +208,28 @@ class Appointment extends Component {
     let appointments = this.state.pendingAppointments;
 
     return appointments.map((record, i) => {
-      return <AppointmentCard data={record} key={i} />;
+      return (
+        <AppointmentCard data={record} key={i} userType={this.state.userType} />
+      );
     });
   };
 
   renderClinic = () => {};
 
-	render() {
-		let { activeLink } = this.state;
+  render() {
+    let { activeLink } = this.state;
 
-	return (
-		<div>
-			{this.renderTopBar()}
-			{activeLink === "all" && this.renderAll()}
-			{activeLink === "active" && this.renderActive()}
-			{activeLink === "completed" && this.renderCompleted()}
-			{activeLink === "cancelled" && this.renderCancelled()}
-			{activeLink === "pending" && this.renderPending()}
-		</div>
-	);
-	}
+    return (
+      <div>
+        {this.renderTopBar()}
+        {activeLink === 'all' && this.renderAll()}
+        {activeLink === 'active' && this.renderActive()}
+        {activeLink === 'completed' && this.renderCompleted()}
+        {activeLink === 'cancelled' && this.renderCancelled()}
+        {activeLink === 'pending' && this.renderPending()}
+      </div>
+    );
+  }
 }
 
 export default Appointment;

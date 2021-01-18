@@ -1,41 +1,41 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 /*** Styles ***/
-import styles from "./sidebar.scss";
+import styles from './sidebar.scss';
 
 /*** Icons ***/
-import homeIcon from "../../icons/home-icon.svg";
-import homeIconBlue from "../../icons/home-icon-blue.svg";
-import profileIcon from "../../icons/profile-icon.svg";
-import profileIconBlue from "../../icons/profile-icon-blue.svg";
-import messageIcon from "../../icons/messages-icon.svg";
-import messageIconBlue from "../../icons/messages-icon-blue.svg";
-import randevuIcon from "../../icons/randevu-icon.svg";
-import randevuIconBlue from "../../icons/randevu-icon-blue.svg";
-import walletIcon from "../../icons/wallet-icon.svg";
-import walletIconBlue from "../../icons/wallet-icon-blue.svg";
-import kampanyaIcon from "../../icons/kampanya-icon.svg";
-import kampanyaIconBlue from "../../icons/kampanya-icon-blue.svg";
-import dentfxSocialIcon from "../../icons/dentfx-social-icon.svg";
-import dentfxSocialIconBlue from "../../icons/dentfx-social-icon-blue.svg";
-import patientIcon from "../../icons/patientSmall.svg";
-import TakvimIcon from "../../icons/Takvim.svg";
-import RandevularIcon from "../../icons/Randevular.svg";
-import HastalarIcon from "../../icons/Hastalar.svg";
-import KlinisyenIcon from "../../icons/Klinisyen.svg";
-import FaturaIcon from "../../icons/Fatura.svg";
-import SorularIcon from "../../icons/Sorular.svg";
-import ProfilimIcon from "../../icons/Profilim.svg";
-import patientIconBlue from "../../icons/patientSmallBlue.svg";
-import TakvimIconBlue from "../../icons/TakvimBlue.svg";
-import RandevularIconBlue from "../../icons/RandevularBlue.svg";
-import HastalarIconBlue from "../../icons/HastalarBlue.svg";
-import KlinisyenIconBlue from "../../icons/KlinisyenBlue.svg";
-import FaturaIconBlue from "../../icons/FaturaBlue.svg";
-import SorularIconBlue from "../../icons/SorularBlue.svg";
-import ProfilimIconBlue from "../../icons/ProfilimBlue.svg";
-import { getCookie } from "../../utils/cookie";
+import homeIcon from '../../icons/home-icon.svg';
+import homeIconBlue from '../../icons/home-icon-blue.svg';
+import profileIcon from '../../icons/profile-icon.svg';
+import profileIconBlue from '../../icons/profile-icon-blue.svg';
+import messageIcon from '../../icons/messages-icon.svg';
+import messageIconBlue from '../../icons/messages-icon-blue.svg';
+import randevuIcon from '../../icons/randevu-icon.svg';
+import randevuIconBlue from '../../icons/randevu-icon-blue.svg';
+import walletIcon from '../../icons/wallet-icon.svg';
+import walletIconBlue from '../../icons/wallet-icon-blue.svg';
+import kampanyaIcon from '../../icons/kampanya-icon.svg';
+import kampanyaIconBlue from '../../icons/kampanya-icon-blue.svg';
+import dentfxSocialIcon from '../../icons/dentfx-social-icon.svg';
+import dentfxSocialIconBlue from '../../icons/dentfx-social-icon-blue.svg';
+import patientIcon from '../../icons/patientSmall.svg';
+import TakvimIcon from '../../icons/Takvim.svg';
+import RandevularIcon from '../../icons/Randevular.svg';
+import HastalarIcon from '../../icons/Hastalar.svg';
+import KlinisyenIcon from '../../icons/Klinisyen.svg';
+import FaturaIcon from '../../icons/Fatura.svg';
+import SorularIcon from '../../icons/Sorular.svg';
+import ProfilimIcon from '../../icons/Profilim.svg';
+import patientIconBlue from '../../icons/patientSmallBlue.svg';
+import TakvimIconBlue from '../../icons/TakvimBlue.svg';
+import RandevularIconBlue from '../../icons/RandevularBlue.svg';
+import HastalarIconBlue from '../../icons/HastalarBlue.svg';
+import KlinisyenIconBlue from '../../icons/KlinisyenBlue.svg';
+import FaturaIconBlue from '../../icons/FaturaBlue.svg';
+import SorularIconBlue from '../../icons/SorularBlue.svg';
+import ProfilimIconBlue from '../../icons/ProfilimBlue.svg';
+import { getCookie } from '../../utils/cookie';
 
 function usePrevious(value) {
   const ref = useRef();
@@ -50,89 +50,89 @@ function usePrevious(value) {
 function RenderList() {
   const tempList = [
     {
-      title: "Anasayfa",
+      title: 'Anasayfa',
       icon: homeIcon,
       hoverIcon: homeIconBlue,
       href: `/`,
-      not: ["dentist", "clinic"],
+      not: ['dentist', 'clinic'],
     },
     {
-      title: "Takvim",
+      title: 'Takvim',
       icon: TakvimIcon,
       hoverIcon: TakvimIconBlue,
       href: `/calendar`,
-      not: ["user"],
+      not: ['user'],
     },
     {
-      title: "Randevularım",
+      title: 'Randevularım',
       icon: RandevularIcon,
       hoverIcon: RandevularIconBlue,
       href: `/appointment`,
       not: [],
     },
     {
-      title: "Hastalar",
+      title: 'Hastalar',
       icon: HastalarIcon,
       hoverIcon: HastalarIconBlue,
       href: `/patients`,
-      not: ["user"],
+      not: ['user'],
     },
     {
-      title: "Klinisyen",
+      title: 'Klinisyen',
       icon: KlinisyenIcon,
       hoverIcon: KlinisyenIconBlue,
       href: `/clinician`,
-      not: ["dentist", "user"],
+      not: ['dentist', 'user'],
     },
     {
-      title: "Fatura ",
+      title: 'Raporlar ',
       icon: FaturaIcon,
       hoverIcon: FaturaIconBlue,
-      href: `/fatura`,
-      not: ["dentist", "user"],
+      href: `/reports`,
+      not: ['dentist', 'user'],
     },
     {
-      title: "Sorular",
+      title: 'Sorular',
       icon: SorularIcon,
       hoverIcon: SorularIconBlue,
       href: `/messages`,
       not: [],
     },
     {
-      title: "Tedavi Yönetimi",
+      title: 'Tedavi Yönetimi',
       icon: SorularIcon,
       hoverIcon: SorularIconBlue,
       href: `/treatmentManagement`,
-      not: ["dentist"],
+      not: ['dentist'],
     },
     {
-      title: "Profilim",
+      title: 'Profilim',
       icon: ProfilimIcon,
       hoverIcon: ProfilimIconBlue,
-      href: `/profile/${getCookie("user_id")}`,
+      href: `/profile/${getCookie('user_id')}`,
       not: [],
     },
     {
-      title: "Cüzdanım",
+      title: 'Tedavilerim/Odemelerim',
       icon: walletIcon,
       hoverIcon: walletIconBlue,
-      href: `/wallet`,
-      not: ["dentist", "clinic"],
+      href: `/paymenthistory`,
+      not: ['dentist', 'clinic'],
     },
-    {
-      title: "Kampanyalar",
-      icon: kampanyaIcon,
-      hoverIcon: kampanyaIconBlue,
-      href: `/campaigns`,
-      not: ["dentist", "clinic"],
-    },
-    {
-      title: "DentFX Social",
-      icon: dentfxSocialIcon,
-      hoverIcon: dentfxSocialIconBlue,
-      href: `/social`,
-      not: ["dentist", "clinic"],
-    },
+    // {
+    //   title: 'Kampanyalar',
+    //   icon: kampanyaIcon,
+    //   hoverIcon: kampanyaIconBlue,
+    //   href: `/campaigns`,
+    //   not: ['user'],
+    // },
+    // {
+    //   title: 'DentFX Social',
+    //   icon: dentfxSocialIcon,
+    //   hoverIcon: dentfxSocialIconBlue,
+    //   href: `/social`,
+    //   not: ['user'],
+    // },
   ];
 
   const [list, setList] = useState(tempList);
@@ -163,7 +163,7 @@ function RenderList() {
   });
 
   return list.map((item, i) => {
-    if (item?.not.includes(getCookie("user_type"))) return <div></div>;
+    if (item?.not.includes(getCookie('user_type'))) return <div></div>;
     console.log(pathnameNow);
     return (
       <Link
@@ -172,8 +172,8 @@ function RenderList() {
         className={
           item.href.includes(window.location.pathname) ||
           item.href.includes(clickedLink)
-            ? "list__listItem list__listItemClicked"
-            : "list__listItem"
+            ? 'list__listItem list__listItemClicked'
+            : 'list__listItem'
         }
         onClick={() => setClickedLink(item.href)}
       >
@@ -185,11 +185,11 @@ function RenderList() {
         )} */}
         {item.href.includes(window.location.pathname) ||
         item.href.includes(clickedLink) ? (
-          <img src={item.hoverIcon} alt={"icon"} style={{ color: "red" }} />
+          <img src={item.hoverIcon} alt={'icon'} style={{ color: 'red' }} />
         ) : (
-          <img src={item.icon} alt={"icon"} />
+          <img src={item.icon} alt={'icon'} />
         )}
-        <div className={"list__listItem__text"}>{item.title}</div>
+        <div className={'list__listItem__text'}>{item.title}</div>
       </Link>
     );
   });
@@ -197,7 +197,7 @@ function RenderList() {
 
 export default function SideBar() {
   return (
-    <div className="list sideBarClass">
+    <div className='list sideBarClass'>
       <RenderList />
     </div>
   );

@@ -1,0 +1,16 @@
+.treatmentTypeTable {
+  margin-top: 2rem;
+}
+
+.tableAvatar {
+  display: flex;
+  justify-content: start;
+  img {
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+  }
+  h2 {
+    margin-top: 20px;
+  }
+}

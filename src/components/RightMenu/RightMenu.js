@@ -1,15 +1,15 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component } from 'react';
 
 /*** Styles ***/
-import styles from "./rightMenu.scss";
+import styles from './rightMenu.scss';
 
 /*** Utils ***/
-import store from "../../store";
-import { getCookie } from "../../utils/cookie";
+import store from '../../store';
+import { getCookie } from '../../utils/cookie';
 
 /*** Components ***/
-import Message from "../Message/Message";
-import Accordion from "./Accordion";
+import Message from '../Message/Message';
+import Accordion from './Accordion';
 
 class RightMenu extends Component {
   state = {
@@ -19,20 +19,20 @@ class RightMenu extends Component {
   };
 
   componentDidMount = async () => {
-    const userId = getCookie("user_id");
-    const userType = getCookie("user_type");
+    const userId = getCookie('user_id');
+    const userType = getCookie('user_type');
 
     let res = await store.GetNewMessages();
     this.setState({
       messages: res.data.conversations,
       totalMessage: res.data.total,
     });
-    if (userType === "dentist") {
+    if (userType === 'dentist') {
       const response = await store.getDentistTreatmentHistory({
         dentistId: userId,
       });
       this.setState({ history: response.data });
-    } else if (userType === "user") {
+    } else if (userType === 'user') {
       const response = await store.getUserTreatmentHistory({ userId: userId });
       this.setState({ history: response.data });
     }
@@ -41,46 +41,59 @@ class RightMenu extends Component {
   renderMessages = () => {
     let { messages } = this.state;
 
-    return messages?.map((message, i) => {
-      return (
-        <Message
-          image={message?.contact.avatar}
-          title={message?.contact.name}
-          content={message?.lastMessage.body}
-          time={message?.lastMessage.createdAt}
-          id={message.id}
-          key={i}
-          unread={message.unread}
-        />
-      );
-    });
+    return messages ? (
+      messages.map((message, i) => {
+        return (
+          <Message
+            image={message?.contact.avatar}
+            title={message?.contact.name}
+            content={message?.lastMessage.body}
+            time={message?.lastMessage.createdAt}
+            id={message.id}
+            key={i}
+            unread={message.unread}
+          />
+        );
+      })
+    ) : (
+      <h6>yeni mesaj yoktur</h6>
+    );
   };
 
   renderHistory = () => {
     let { history } = this.state;
-    if (history.length < 0) return <div></div>;
-    return history?.map((record, i) => {
-      return <Accordion record={record} key={i} />;
-    });
+    if (history.length < 0)
+      return (
+        <div>
+          <h6>tedavi geçmişiniz yoktur</h6>
+        </div>
+      );
+    return history ? (
+      history.map((record, i) => {
+        return <Accordion record={record} key={i} />;
+      })
+    ) : (
+      <h6>tedavi geçmişiniz yoktur</h6>
+    );
   };
 
   render() {
     let { history, messages, totalMessage } = this.state;
     return (
-      <div className="rightBar">
-        {getCookie("user_type") == "user" ? (
+      <div className='rightBar'>
+        {getCookie('user_type') == 'user' ? (
           <>
-            <div className="rightBar__sectionHeader">Tedavi Geçmişi</div>
-            <div className="rightBar__treatmentHistory">
+            <div className='rightBar__sectionHeader'>Tedavi Geçmişi</div>
+            <div className='rightBar__treatmentHistory'>
               {history.length > 0 && this.renderHistory()}
             </div>
           </>
         ) : null}
 
-        <div className="rightBar__sectionHeader">
+        <div className='rightBar__sectionHeader'>
           Yeni Mesajlar <span>({totalMessage})</span>
         </div>
-        <div className="rightBar__messages">
+        <div className='rightBar__messages'>
           {messages.length > 0 && this.renderMessages()}
         </div>
       </div>

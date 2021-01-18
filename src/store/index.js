@@ -1,8 +1,8 @@
-import http from "../helpers/httpHelper";
-import config from "../../appConfig";
+import http from '../helpers/httpHelper';
+import config from '../../appConfig';
 
 const errorMessageBuilder = (response) => {
-  return (response.errorData && response.errorData.code) || "0";
+  return (response.errorData && response.errorData.code) || '0';
 };
 
 export default {
@@ -18,7 +18,7 @@ export default {
     loginType,
   }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/user`;
     let payload = {
       name,
@@ -54,7 +54,7 @@ export default {
     treatmentType,
   }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic`;
     let payload = {
       name,
@@ -88,7 +88,7 @@ export default {
     treatmentType,
   }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/dentist`;
     let payload = {
       name,
@@ -110,7 +110,7 @@ export default {
   },
   async userLogin({ email, password }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/login/user`;
     let payload = { email, password };
 
@@ -133,7 +133,7 @@ export default {
     paymentType,
   }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/dentist`;
     let payload = {
       user,
@@ -155,7 +155,7 @@ export default {
   },
   async clinicLogin({ email, password }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/login/clinic`;
     let payload = { email, password };
 
@@ -169,7 +169,7 @@ export default {
   },
   async dentistLogin({ email, password }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/login/dentist`;
     let payload = { email, password };
 
@@ -191,7 +191,7 @@ export default {
     city,
   }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/user/${userId}`;
     let payload = { userId, name, surname, email, phone, country, city };
     return await http.makePutRequest(
@@ -204,7 +204,7 @@ export default {
   },
   async getClinics({ latitude, longitude, range, city, rate }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic?latitude=${latitude}&longitude=${longitude}&range=${range}&city=${city}&rate=${rate}&treatment`;
 
     return await http.makeGetRequest(
@@ -216,7 +216,7 @@ export default {
   },
   async getUserDetail({ userId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/user/${userId}`;
 
     return await http.makeGetRequest(
@@ -228,7 +228,7 @@ export default {
   },
   async getClinicDetail({ clinicId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic/${clinicId}`;
 
     return await http.makeGetRequest(
@@ -238,9 +238,23 @@ export default {
       errorMessageBuilder
     );
   },
+
+  async getClinicTariffs({ clinicId }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicId}/tariff`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
   async getPatients({ clinicId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic/${clinicId}/patient`;
 
     return await http.makeGetRequest(
@@ -252,7 +266,7 @@ export default {
   },
   async getPatientsDetail({ clinicId, patientId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic/${clinicId}/patient/${patientId}`;
 
     return await http.makeGetRequest(
@@ -264,7 +278,7 @@ export default {
   },
   async getDentistDetail({ dentistId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/dentist/${dentistId}`;
 
     return await http.makeGetRequest(
@@ -276,7 +290,7 @@ export default {
   },
   async getAppointments({ userId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/appointment?userId=${userId}`;
 
     return await http.makeGetRequest(
@@ -289,7 +303,7 @@ export default {
 
   async getAppointmentDetail({ appointmentId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/appointment/${appointmentId}`;
 
     return await http.makeGetRequest(
@@ -302,7 +316,7 @@ export default {
 
   async getUserTreatmentHistory({ userId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/user/${userId}/treatment`;
 
     return await http.makeGetRequest(
@@ -314,7 +328,7 @@ export default {
   },
   async getDentistTreatmentHistory({ dentistId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/dentist/${dentistId}/treatment`;
 
     return await http.makeGetRequest(
@@ -326,7 +340,7 @@ export default {
   },
   async getNotifications({ userId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/notification?userId=${userId}`;
 
     return await http.makeGetRequest(
@@ -339,7 +353,7 @@ export default {
 
   async setNotificationRead({ notificationId }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/notification/${notificationId}`;
 
     return await http.makeGetRequest(
@@ -351,7 +365,7 @@ export default {
   },
   async SearchAppointment({ keyword, city, country, date }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic?keyword=${keyword}&city=${city}&country=${country}&date=${date}`;
 
     return await http.makeGetRequest(
@@ -361,9 +375,22 @@ export default {
       errorMessageBuilder
     );
   },
+
+  async approveAppointment({ appointmentID }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/appointment/${appointmentID}/confirm`;
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
   async CancelAppointment({ appointmentID }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/appointment/${appointmentID}/cancel`;
 
     return await http.makePostRequest(
@@ -376,7 +403,7 @@ export default {
 
   async GetConversations() {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/chat/conversation`;
 
     return await http.makeGetRequest(
@@ -388,7 +415,7 @@ export default {
   },
   async GetNewMessages() {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/chat/new`;
 
     return await http.makeGetRequest(
@@ -401,7 +428,7 @@ export default {
 
   async GetMessageDetails({ conversationID }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/chat/conversation/${conversationID}`;
 
     return await http.makeGetRequest(
@@ -413,7 +440,7 @@ export default {
   },
   async SendMessage({ conversationID, receiver, body, attachements }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/chat/conversation/${conversationID}`;
     let payload = { receiver, body, attachements };
 
@@ -427,7 +454,7 @@ export default {
   },
   async CreateNewChat(payload) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/chat/conversation`;
 
     return await http.makePostRequest(
@@ -440,7 +467,7 @@ export default {
   },
   async CreateAppointment(payload) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/appointment`;
 
     return await http.makePostRequest(
@@ -453,7 +480,7 @@ export default {
   },
   async SearchChat({ keyword }) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/chat/search?keyword=${keyword}`;
 
     return await http.makeGetRequest(
@@ -465,7 +492,7 @@ export default {
   },
   async PatientSearch(clinicId, patientNameValue) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic/${clinicId}/patient?fullName=${patientNameValue}`;
 
     return await http.makeGetRequest(
@@ -477,9 +504,9 @@ export default {
   },
   async AddPatient(clinicId, patient) {
     let baseUrl = config.baseUrl;
-    let tokenCookieName = "token";
+    let tokenCookieName = 'token';
     let path = `/clinic/${clinicId}/patient`;
-    let payload = { patient };
+    let payload = { ...patient };
 
     return await http.makePostRequest(
       path,
