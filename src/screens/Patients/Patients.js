@@ -287,6 +287,7 @@ class Patients extends Component {
                   Seçiniz...
                 </option>
                 <option>Türkiye</option>
+                <option>UAE</option>
                 <option>USA</option>
               </select>
             </div>
