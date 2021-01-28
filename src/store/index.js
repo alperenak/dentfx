@@ -40,6 +40,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async createClinic({
     name,
     email,
@@ -78,6 +79,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async createDentist({
     name,
     surname,
@@ -108,6 +110,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async userLogin({ email, password }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -122,26 +125,27 @@ export default {
       errorMessageBuilder
     );
   },
-  async createUserAppointment({
+
+  async createUserAppointment(
     user,
     clinic,
     dentist,
     treatmentType,
+    date,
     startTime,
-    endTime,
     isCheckIn,
-    paymentType,
-  }) {
+    paymentType
+  ) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/dentist`;
+    let path = `/appointment`;
     let payload = {
-      user,
-      clinic,
-      dentist,
+      User: user,
+      Clinic: clinic,
+      Dentist: dentist,
       treatmentType,
+      date,
       startTime,
-      endTime,
       isCheckIn,
       paymentType,
     };
@@ -153,6 +157,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async clinicLogin({ email, password }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -167,6 +172,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async dentistLogin({ email, password }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -181,6 +187,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async updateUserProfile({
     userId,
     name,
@@ -202,6 +209,21 @@ export default {
       errorMessageBuilder
     );
   },
+
+  async updateClinicProfile(clinicID, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}`;
+    let payload = { ...props };
+    return await http.makePutRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+
   async getClinics({ latitude, longitude, range, city, rate }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -214,6 +236,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getUserDetail({ userId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -226,6 +249,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getClinicDetail({ clinicId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -252,6 +276,106 @@ export default {
     );
   },
 
+  async createClinicTariff({ clinicId, tarifName }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicId}/tariff`;
+    let payload = { tariff: tarifName, list: [] };
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+
+  async deleteClinicTariff({ clinicId, tarifId }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicId}/tariff/${tarifId}`;
+
+    return await http.makeDeleteRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async deleteTedaviByID({ clinicId, tarifId, tedaviId }) {
+    const { data } = await this.getClinicTariffs({ clinicId });
+
+    const tarif = data.filter((item) => item._id === tarifId);
+
+    tarif[0].list.splice(
+      tarif[0].list.findIndex((item) => item._id === tedaviId),
+      1
+    );
+
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicId}/tariff/${tarifId}`;
+    let payload = tarif[0];
+
+    console.log(payload);
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+
+  async createNewTedavi({
+    clinicId,
+    tarifId,
+    tedaviName,
+    tedaviCurrency,
+    tedaviPrice,
+  }) {
+    const { data } = await this.getClinicTariffs({ clinicId });
+
+    const tarif = data.filter((item) => item._id === tarifId);
+
+    tarif[0].list.push({
+      treatment: tedaviName,
+      price: tedaviPrice,
+      currency: tedaviCurrency,
+    });
+
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicId}/tariff/${tarifId}`;
+    let payload = tarif[0];
+
+    console.log(payload);
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+
+  async getDoctorSchedule({ dentist, day }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/dentist/${dentist}/calendar?day=${day}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
   async getPatients({ clinicId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -264,6 +388,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getPatientsDetail({ clinicId, patientId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -276,6 +401,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getDentistDetail({ dentistId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -288,6 +414,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getAppointments({ userId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -326,6 +453,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getDentistTreatmentHistory({ dentistId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -338,6 +466,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async getNotifications({ userId }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -363,6 +492,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async SearchAppointment({ keyword, city, country, date }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -388,6 +518,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async CancelAppointment({ appointmentID }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -413,6 +544,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async GetNewMessages() {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -438,6 +570,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async SendMessage({ conversationID, receiver, body, attachements }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -452,6 +585,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async CreateNewChat(payload) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -465,6 +599,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async CreateAppointment(payload) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -478,6 +613,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async SearchChat({ keyword }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -490,6 +626,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async PatientSearch(clinicId, patientNameValue) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -502,6 +639,7 @@ export default {
       errorMessageBuilder
     );
   },
+
   async AddPatient(clinicId, patient) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -514,6 +652,42 @@ export default {
       tokenCookieName,
       payload,
       errorMessageBuilder
+    );
+  },
+
+  async getUploadURL({ fileType, user, whereTo }) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path;
+
+    whereTo === 'profile' && (path = `/upload/pp?${user._id}&${fileType}`);
+    whereTo === 'gallery' && (path = `/upload/gallery?${user._id}&${fileType}`);
+    whereTo === 'attachment' &&
+      (path = `/upload/attachment?${user._id}&${fileType}`);
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async uploadImage(url, file) {
+    let baseUrl = url;
+    let path = ``;
+    let tokenCookieName = 'token';
+    let additionHeaders = {
+      'Content-Type': file.type,
+    };
+
+    return await http.makePutRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      file,
+      errorMessageBuilder,
+      additionHeaders
     );
   },
 };

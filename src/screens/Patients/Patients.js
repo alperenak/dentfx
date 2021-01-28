@@ -42,7 +42,7 @@ class Patients extends Component {
     let tariffs = await store.getClinicTariffs({ clinicId });
     let res = await store.getPatients({ clinicId });
     let clinic = await store.getClinicDetail({ clinicId });
-    this.setState({ tariffs });
+    this.setState({ tariffs: tariffs.data });
     this.setState({ clinicians: clinic.data.Dentist });
     this.setState({
       patientData: {
@@ -233,10 +233,10 @@ class Patients extends Component {
                 <option selected disabled value=''>
                   Seçiniz...
                 </option>
+                {console.log(this.state.tariffs)}
                 {this.state.tariffs !== null &&
-                  this.state.tariffs.length > 0 &&
                   this.state.tariffs.map((tarif) => (
-                    <option value={tarif._id}>{doctor.tariff}</option>
+                    <option value={tarif._id}>{tarif.tariff}</option>
                   ))}
               </select>
             </div>

@@ -1,54 +1,54 @@
-import React, { Component } from "react";
-import store from "../../store";
-import { MDBDataTable } from "mdbreact";
-import { getCookie } from "../../utils/cookie";
+import React, { Component } from 'react';
+import store from '../../store';
+import { MDBDataTable } from 'mdbreact';
+import { getCookie } from '../../utils/cookie';
 
 /*** Styles ***/
-import styles from "./patientdetail.scss";
-import PaymentIcon from "../../icons/credit-cards-payment.svg";
-import NotesIcon from "../../icons/writing.svg";
+import styles from './patientdetail.scss';
+import PaymentIcon from '../../icons/credit-cards-payment.svg';
+import NotesIcon from '../../icons/writing.svg';
 
 /*** Components ***/
-import DatePicker from "../../components/DatePicker/DatePicker";
-import StepProgressBar from "react-step-progress";
+import DatePicker from '../../components/DatePicker/DatePicker';
+import StepProgressBar from 'react-step-progress';
 
 /*** Teeth Images ***/
-import tooth1 from "../../assets/images/tooth/tooth-1.jpg";
-import tooth2 from "../../assets/images/tooth/tooth-2.jpg";
-import tooth3 from "../../assets/images/tooth/tooth-3.jpg";
-import tooth4 from "../../assets/images/tooth/tooth-4.jpg";
-import tooth5 from "../../assets/images/tooth/tooth-5.jpg";
-import tooth6 from "../../assets/images/tooth/tooth-6.jpg";
-import tooth7 from "../../assets/images/tooth/tooth-7.jpg";
-import tooth8 from "../../assets/images/tooth/tooth-8.jpg";
-import tooth9 from "../../assets/images/tooth/tooth-9.jpg";
-import tooth10 from "../../assets/images/tooth/tooth-10.jpg";
-import tooth11 from "../../assets/images/tooth/tooth-11.jpg";
-import tooth12 from "../../assets/images/tooth/tooth-12.jpg";
-import tooth13 from "../../assets/images/tooth/tooth-13.jpg";
-import tooth14 from "../../assets/images/tooth/tooth-14.jpg";
-import tooth15 from "../../assets/images/tooth/tooth-15.jpg";
-import tooth16 from "../../assets/images/tooth/tooth-16.jpg";
-import tooth17 from "../../assets/images/tooth/tooth-17.jpg";
-import tooth18 from "../../assets/images/tooth/tooth-18.jpg";
-import tooth19 from "../../assets/images/tooth/tooth-19.jpg";
-import tooth20 from "../../assets/images/tooth/tooth-20.jpg";
-import tooth21 from "../../assets/images/tooth/tooth-21.jpg";
-import tooth22 from "../../assets/images/tooth/tooth-22.jpg";
-import tooth23 from "../../assets/images/tooth/tooth-23.jpg";
-import tooth24 from "../../assets/images/tooth/tooth-24.jpg";
-import tooth25 from "../../assets/images/tooth/tooth-25.jpg";
-import tooth26 from "../../assets/images/tooth/tooth-26.jpg";
-import tooth27 from "../../assets/images/tooth/tooth-27.jpg";
-import tooth28 from "../../assets/images/tooth/tooth-28.jpg";
-import tooth29 from "../../assets/images/tooth/tooth-29.jpg";
-import tooth30 from "../../assets/images/tooth/tooth-30.jpg";
-import tooth31 from "../../assets/images/tooth/tooth-31.jpg";
-import tooth32 from "../../assets/images/tooth/tooth-32.jpg";
-import ContractIMG from "../../assets/icons/contract.svg";
-import ProformaIMG from "../../assets/icons/proforma.svg";
-import Modal from "../../components/Modal/modal";
-import Dropdown from "../../components/Dropdown/dropdown";
+import tooth1 from '../../assets/images/tooth/tooth-1.jpg';
+import tooth2 from '../../assets/images/tooth/tooth-2.jpg';
+import tooth3 from '../../assets/images/tooth/tooth-3.jpg';
+import tooth4 from '../../assets/images/tooth/tooth-4.jpg';
+import tooth5 from '../../assets/images/tooth/tooth-5.jpg';
+import tooth6 from '../../assets/images/tooth/tooth-6.jpg';
+import tooth7 from '../../assets/images/tooth/tooth-7.jpg';
+import tooth8 from '../../assets/images/tooth/tooth-8.jpg';
+import tooth9 from '../../assets/images/tooth/tooth-9.jpg';
+import tooth10 from '../../assets/images/tooth/tooth-10.jpg';
+import tooth11 from '../../assets/images/tooth/tooth-11.jpg';
+import tooth12 from '../../assets/images/tooth/tooth-12.jpg';
+import tooth13 from '../../assets/images/tooth/tooth-13.jpg';
+import tooth14 from '../../assets/images/tooth/tooth-14.jpg';
+import tooth15 from '../../assets/images/tooth/tooth-15.jpg';
+import tooth16 from '../../assets/images/tooth/tooth-16.jpg';
+import tooth17 from '../../assets/images/tooth/tooth-17.jpg';
+import tooth18 from '../../assets/images/tooth/tooth-18.jpg';
+import tooth19 from '../../assets/images/tooth/tooth-19.jpg';
+import tooth20 from '../../assets/images/tooth/tooth-20.jpg';
+import tooth21 from '../../assets/images/tooth/tooth-21.jpg';
+import tooth22 from '../../assets/images/tooth/tooth-22.jpg';
+import tooth23 from '../../assets/images/tooth/tooth-23.jpg';
+import tooth24 from '../../assets/images/tooth/tooth-24.jpg';
+import tooth25 from '../../assets/images/tooth/tooth-25.jpg';
+import tooth26 from '../../assets/images/tooth/tooth-26.jpg';
+import tooth27 from '../../assets/images/tooth/tooth-27.jpg';
+import tooth28 from '../../assets/images/tooth/tooth-28.jpg';
+import tooth29 from '../../assets/images/tooth/tooth-29.jpg';
+import tooth30 from '../../assets/images/tooth/tooth-30.jpg';
+import tooth31 from '../../assets/images/tooth/tooth-31.jpg';
+import tooth32 from '../../assets/images/tooth/tooth-32.jpg';
+import ContractIMG from '../../assets/icons/contract.svg';
+import ProformaIMG from '../../assets/icons/proforma.svg';
+import Modal from '../../components/Modal/modal';
+import Dropdown from '../../components/Dropdown/dropdown';
 
 class PatientDetail extends Component {
   constructor() {
@@ -56,14 +56,17 @@ class PatientDetail extends Component {
     this.state = {
       patient: null,
       selectedTab: 0,
-      selectedPlan: "Planlama 0",
-      selectedTooth: "",
+      selectedPlan: 'Planlama 0',
+      selectedTooth: '',
       treatmentPlan0Data: null,
       treatmentPlan1Data: null,
       treatmentData: null,
       treatmentList: null,
       paidTreatmentData: null,
       notesForPatientData: null,
+      tariffs: null,
+      tarifList: null,
+      selectedTarif: null,
     };
   }
 
@@ -72,141 +75,141 @@ class PatientDetail extends Component {
       treatmentPlan0Data: {
         columns: [
           {
-            label: "Tarih",
-            field: "tarih",
-            sort: "asc",
+            label: 'Tarih',
+            field: 'tarih',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Dis",
-            field: "dis",
-            sort: "asc",
+            label: 'Dis',
+            field: 'dis',
+            sort: 'asc',
             width: 100,
           },
           {
-            label: "Tedavi",
-            field: "tedavi",
-            sort: "asc",
+            label: 'Tedavi',
+            field: 'tedavi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Dis Hekimi",
-            field: "dis_hekimi",
-            sort: "asc",
+            label: 'Dis Hekimi',
+            field: 'dis_hekimi',
+            sort: 'asc',
             width: 70,
           },
           {
-            label: "Toplam",
-            field: "toplam",
-            sort: "asc",
+            label: 'Toplam',
+            field: 'toplam',
+            sort: 'asc',
             width: 80,
           },
           {
-            label: "TRY/USD",
-            field: "para_birimi",
-            sort: "asc",
+            label: 'TRY/USD',
+            field: 'para_birimi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "T. Aktar",
-            field: "button1",
-            sort: "asc",
+            label: 'T. Aktar',
+            field: 'button1',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Sil",
-            field: "button2",
-            sort: "asc",
+            label: 'Sil',
+            field: 'button2',
+            sort: 'asc',
             width: 150,
           },
         ],
         rows: [
           {
-            tarih: "12.01.2020",
-            dis: "24",
-            tedavi: "Komposit Dolgu",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '12.01.2020',
+            dis: '24',
+            tedavi: 'Komposit Dolgu',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "24.03.2020",
-            dis: "12",
-            tedavi: "Kanal Tedavisi",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '24.03.2020',
+            dis: '12',
+            tedavi: 'Kanal Tedavisi',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "02.02.2020",
-            dis: "26",
-            tedavi: "Koplikasyonlu Dis cekimi",
-            dis_hekimi: "Hasan Demirkiran",
+            tarih: '02.02.2020',
+            dis: '26',
+            tedavi: 'Koplikasyonlu Dis cekimi',
+            dis_hekimi: 'Hasan Demirkiran',
             toplam: 450,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "16.03.2020",
-            dis: "31",
-            tedavi: "Implant",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '16.03.2020',
+            dis: '31',
+            tedavi: 'Implant',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 2500,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "08.08.2020",
-            dis: "05",
-            tedavi: "Komposit Dolgu",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '08.08.2020',
+            dis: '05',
+            tedavi: 'Komposit Dolgu',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
@@ -218,141 +221,141 @@ class PatientDetail extends Component {
       treatmentPlan1Data: {
         columns: [
           {
-            label: "Tarih",
-            field: "tarih",
-            sort: "asc",
+            label: 'Tarih',
+            field: 'tarih',
+            sort: 'asc',
             width: 50,
           },
           {
-            label: "Dis",
-            field: "dis",
-            sort: "asc",
+            label: 'Dis',
+            field: 'dis',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Tedavi",
-            field: "tedavi",
-            sort: "asc",
+            label: 'Tedavi',
+            field: 'tedavi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Dis Hekimi",
-            field: "dis_hekimi",
-            sort: "asc",
+            label: 'Dis Hekimi',
+            field: 'dis_hekimi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Toplam",
-            field: "toplam",
-            sort: "asc",
+            label: 'Toplam',
+            field: 'toplam',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "TRY/USD",
-            field: "para_birimi",
-            sort: "asc",
+            label: 'TRY/USD',
+            field: 'para_birimi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "T. Aktar",
-            field: "button1",
-            sort: "asc",
+            label: 'T. Aktar',
+            field: 'button1',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Sil",
-            field: "button2",
-            sort: "asc",
+            label: 'Sil',
+            field: 'button2',
+            sort: 'asc',
             width: 150,
           },
         ],
         rows: [
           {
-            tarih: "12.01.2020",
-            dis: "24",
-            tedavi: "Komposit Dolgu",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '12.01.2020',
+            dis: '24',
+            tedavi: 'Komposit Dolgu',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "24.03.2020",
-            dis: "12",
-            tedavi: "Kanal Tedavisi",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '24.03.2020',
+            dis: '12',
+            tedavi: 'Kanal Tedavisi',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "02.02.2020",
-            dis: "26",
-            tedavi: "Koplikasyonlu Dis cekimi",
-            dis_hekimi: "Hasan Demirkiran",
+            tarih: '02.02.2020',
+            dis: '26',
+            tedavi: 'Koplikasyonlu Dis cekimi',
+            dis_hekimi: 'Hasan Demirkiran',
             toplam: 450,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "16.03.2020",
-            dis: "31",
-            tedavi: "Implant",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '16.03.2020',
+            dis: '31',
+            tedavi: 'Implant',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 2500,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "08.08.2020",
-            dis: "05",
-            tedavi: "Komposit Dolgu",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '08.08.2020',
+            dis: '05',
+            tedavi: 'Komposit Dolgu',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button1: (
-              <button type="button" class="btn btn-success">
+              <button type='button' class='btn btn-success'>
                 Aktar
               </button>
             ),
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
@@ -364,110 +367,110 @@ class PatientDetail extends Component {
       treatmentData: {
         columns: [
           {
-            label: "Tarih",
-            field: "tarih",
-            sort: "asc",
+            label: 'Tarih',
+            field: 'tarih',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Dis",
-            field: "dis",
-            sort: "asc",
+            label: 'Dis',
+            field: 'dis',
+            sort: 'asc',
             width: 50,
           },
           {
-            label: "Tedavi",
-            field: "tedavi",
-            sort: "asc",
+            label: 'Tedavi',
+            field: 'tedavi',
+            sort: 'asc',
             width: 250,
           },
           {
-            label: "Dis Hekimi",
-            field: "dis_hekimi",
-            sort: "asc",
+            label: 'Dis Hekimi',
+            field: 'dis_hekimi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Toplam",
-            field: "toplam",
-            sort: "asc",
+            label: 'Toplam',
+            field: 'toplam',
+            sort: 'asc',
             width: 100,
           },
           {
-            label: "TRY/USD",
-            field: "para_birimi",
-            sort: "asc",
+            label: 'TRY/USD',
+            field: 'para_birimi',
+            sort: 'asc',
             width: 100,
           },
           {
-            label: "Sil",
-            field: "button2",
-            sort: "asc",
+            label: 'Sil',
+            field: 'button2',
+            sort: 'asc',
             width: 50,
           },
         ],
         rows: [
           {
-            tarih: "12.01.2020",
-            dis: "24",
-            tedavi: "Komposit Dolgu",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '12.01.2020',
+            dis: '24',
+            tedavi: 'Komposit Dolgu',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "24.03.2020",
-            dis: "12",
-            tedavi: "Kanal Tedavisi",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '24.03.2020',
+            dis: '12',
+            tedavi: 'Kanal Tedavisi',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "02.02.2020",
-            dis: "26",
-            tedavi: "Koplikasyonlu Dis cekimi",
-            dis_hekimi: "Hasan Demirkiran",
+            tarih: '02.02.2020',
+            dis: '26',
+            tedavi: 'Koplikasyonlu Dis cekimi',
+            dis_hekimi: 'Hasan Demirkiran',
             toplam: 450,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "16.03.2020",
-            dis: "31",
-            tedavi: "Implant",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '16.03.2020',
+            dis: '31',
+            tedavi: 'Implant',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 2500,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "08.08.2020",
-            dis: "05",
-            tedavi: "Komposit Dolgu",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '08.08.2020',
+            dis: '05',
+            tedavi: 'Komposit Dolgu',
+            dis_hekimi: 'Fatih Atmaca',
             toplam: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button2: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
@@ -479,75 +482,75 @@ class PatientDetail extends Component {
       paidTreatmentData: {
         columns: [
           {
-            label: "Tarih",
-            field: "tarih",
-            sort: "asc",
+            label: 'Tarih',
+            field: 'tarih',
+            sort: 'asc',
             width: 170,
           },
           {
-            label: "Ödeme Tipi",
-            field: "odeme_tipi",
-            sort: "asc",
+            label: 'Ödeme Tipi',
+            field: 'odeme_tipi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Dis Hekimi",
-            field: "dis_hekimi",
-            sort: "asc",
+            label: 'Dis Hekimi',
+            field: 'dis_hekimi',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "Tutar",
-            field: "tutar",
-            sort: "asc",
+            label: 'Tutar',
+            field: 'tutar',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "TRY/USD",
-            field: "para_birimi",
-            sort: "asc",
+            label: 'TRY/USD',
+            field: 'para_birimi',
+            sort: 'asc',
             width: 100,
           },
           {
-            label: "Yazdır",
-            field: "button_yazdir",
-            sort: "asc",
+            label: 'Yazdır',
+            field: 'button_yazdir',
+            sort: 'asc',
             width: 100,
           },
         ],
         rows: [
           {
-            tarih: "12.01.2020",
-            odeme_tipi: "Nakit",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '12.01.2020',
+            odeme_tipi: 'Nakit',
+            dis_hekimi: 'Fatih Atmaca',
             tutar: 250,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button_yazdir: (
-              <button type="button" class="btn btn-secondary">
+              <button type='button' class='btn btn-secondary'>
                 Yazdır
               </button>
             ),
           },
           {
-            tarih: "16.02.2020",
-            odeme_tipi: "Kredi Kartı",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '16.02.2020',
+            odeme_tipi: 'Kredi Kartı',
+            dis_hekimi: 'Fatih Atmaca',
             tutar: 1350,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button_yazdir: (
-              <button type="button" class="btn btn-secondary">
+              <button type='button' class='btn btn-secondary'>
                 Yazdır
               </button>
             ),
           },
           {
-            tarih: "22.03.2020",
-            odeme_tipi: "Nakit",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '22.03.2020',
+            odeme_tipi: 'Nakit',
+            dis_hekimi: 'Fatih Atmaca',
             tutar: 1200,
-            para_birimi: "TRY",
+            para_birimi: 'TRY',
             button_yazdir: (
-              <button type="button" class="btn btn-secondary">
+              <button type='button' class='btn btn-secondary'>
                 Yazdır
               </button>
             ),
@@ -559,65 +562,65 @@ class PatientDetail extends Component {
       notesForPatientData: {
         columns: [
           {
-            label: "Tarih",
-            field: "tarih",
-            sort: "asc",
+            label: 'Tarih',
+            field: 'tarih',
+            sort: 'asc',
           },
           {
-            label: "Dis Hekimi",
-            field: "dis_hekimi",
-            sort: "asc",
+            label: 'Dis Hekimi',
+            field: 'dis_hekimi',
+            sort: 'asc',
           },
           {
-            label: "Düzenle",
-            field: "button_düzenle",
-            sort: "asc",
+            label: 'Düzenle',
+            field: 'button_düzenle',
+            sort: 'asc',
           },
           {
-            label: "Sil",
-            field: "button_sil",
-            sort: "asc",
+            label: 'Sil',
+            field: 'button_sil',
+            sort: 'asc',
           },
         ],
         rows: [
           {
-            tarih: "12.01.2020",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '12.01.2020',
+            dis_hekimi: 'Fatih Atmaca',
             button_düzenle: (
-              <button type="button" class="btn btn-secondary">
+              <button type='button' class='btn btn-secondary'>
                 Düzenle
               </button>
             ),
             button_sil: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "12.02.2020",
-            dis_hekimi: "Hasan Demirkiran",
+            tarih: '12.02.2020',
+            dis_hekimi: 'Hasan Demirkiran',
             button_düzenle: (
-              <button type="button" class="btn btn-secondary">
+              <button type='button' class='btn btn-secondary'>
                 Düzenle
               </button>
             ),
             button_sil: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
           },
           {
-            tarih: "13.01.2020",
-            dis_hekimi: "Fatih Atmaca",
+            tarih: '13.01.2020',
+            dis_hekimi: 'Fatih Atmaca',
             button_düzenle: (
-              <button type="button" class="btn btn-secondary">
+              <button type='button' class='btn btn-secondary'>
                 Düzenle
               </button>
             ),
             button_sil: (
-              <button type="button" class="btn btn-danger">
+              <button type='button' class='btn btn-danger'>
                 Sil
               </button>
             ),
@@ -627,181 +630,70 @@ class PatientDetail extends Component {
     });
   };
 
-  fillTreatmentList = () => {
+  fillTreatmentList = (list) => {
+    console.log(list);
     this.setState({
       treatmentList: {
         columns: [
           {
-            label: "Tedavi",
-            field: "tedavi",
-            sort: "asc",
+            label: 'Tedavi',
+            field: 'treatment',
+            sort: 'asc',
             width: 270,
           },
           {
-            label: "Toplam",
-            field: "toplam",
-            sort: "asc",
+            label: 'Toplam',
+            field: 'price',
+            sort: 'asc',
             width: 150,
           },
           {
-            label: "P. Birimi",
-            field: "para_birimi",
-            sort: "asc",
+            label: 'P. Birimi',
+            field: 'currency',
+            sort: 'asc',
             width: 100,
           },
           {
-            label: "Ekle",
-            field: "button1",
-            sort: "asc",
+            label: 'Ekle',
+            field: 'button1',
+            sort: 'asc',
             width: 70,
           },
         ],
-        rows: [
-          {
-            tedavi: "Dis Cekimi",
-            toplam: "180,00",
-            para_birimi: "TRY",
+        rows: list.map((treatment) => {
+          return {
+            treatment: treatment.treatment,
+            price: treatment.price,
+            currency: treatment.currency,
             button1: (
-              <button type="button" class="btn btn-success">
+              <button
+                type='button'
+                class='btn btn-success'
+                onClick={() => {
+                  console.log(treatment._id);
+                }}
+              >
                 Ekle
               </button>
             ),
-          },
-          {
-            tedavi: "Gomulu Dis Operasyonu",
-            toplam: "600,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Implant(Standart-Alman)",
-            toplam: "2300,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Implant(Ekonomik-Yerli)",
-            toplam: "3200,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Frenektomi Operasyonu",
-            toplam: "1000,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Biyopsi",
-            toplam: "445,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Apse Drenaji ve tedavisi",
-            toplam: "180,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Botoks Uygulama",
-            toplam: "1500,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Botoks Uygulama 2",
-            toplam: "1400,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Botoks Uygulama 3",
-            toplam: "1200,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Botoks Uygulama 4",
-            toplam: "1500,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Botoks Uygulama 5",
-            toplam: "1400,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-          {
-            tedavi: "Botoks Uygulama 6",
-            toplam: "1200,00",
-            para_birimi: "TRY",
-            button1: (
-              <button type="button" class="btn btn-success">
-                Ekle
-              </button>
-            ),
-          },
-        ],
+          };
+        }),
       },
     });
   };
 
   componentDidMount = async () => {
     this.fillTreatmentTables();
-    this.fillTreatmentList();
 
     let { match } = this.props;
-    let clinicId = getCookie("user_id");
+    let clinicId = getCookie('user_id');
     let patientId = match.params.id;
 
+    let tariffs = await store.getClinicTariffs({ clinicId });
+    this.setState({ tariffs: tariffs.data });
+
     let res = await store.getPatientsDetail({ clinicId, patientId });
-    console.log(res, "RESPONSE");
+    console.log(res, 'RESPONSE');
     this.setState({ patient: res.data });
   };
 
@@ -815,81 +707,81 @@ class PatientDetail extends Component {
     console.log(patient?.birthDate);
 
     return (
-      <div className={"aboutTab"}>
+      <div className={'aboutTab'}>
         <form>
-          <div className={"item patientInfoPart"}>
-            <div className={"header"}>Kişisel Bilgiler</div>
-            <div className={"content"}>
-              <div class="form-row">
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault01">İsim</label>
+          <div className={'item patientInfoPart'}>
+            <div className={'header'}>Kişisel Bilgiler</div>
+            <div className={'content'}>
+              <div class='form-row'>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault01'>İsim</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="validationDefault01"
+                    type='text'
+                    class='form-control'
+                    id='validationDefault01'
                     value={patient?.name}
                     required
                   />
                 </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault02">Soyisim</label>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault02'>Soyisim</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="validationDefault02"
+                    type='text'
+                    class='form-control'
+                    id='validationDefault02'
                     value={patient?.surname}
                     required
                   />
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="inputTC">TC Kimlik No</label>
+                <div class='col-md-6 mb-3'>
+                  <label for='inputTC'>TC Kimlik No</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="inputTC"
+                    type='text'
+                    class='form-control'
+                    id='inputTC'
                     value={patient?.tcNumber}
                   />
                 </div>
               </div>
-              <div className={"form-row"} style={{ marginBottom: "0" }}>
-                <div className={"col-md-3 mb-3"}>
-                  <label for="sexRadio1">Cinsiyet</label>
+              <div className={'form-row'} style={{ marginBottom: '0' }}>
+                <div className={'col-md-3 mb-3'}>
+                  <label for='sexRadio1'>Cinsiyet</label>
 
-                  <div className={"row"} style={{ marginTop: "0" }}>
-                    <div class="form-check" style={{ marginRight: "5px" }}>
+                  <div className={'row'} style={{ marginTop: '0' }}>
+                    <div class='form-check' style={{ marginRight: '5px' }}>
                       <input
-                        class="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="sexRadio1"
-                        value="option1"
+                        class='form-check-input'
+                        type='radio'
+                        name='exampleRadios'
+                        id='sexRadio1'
+                        value='option1'
                         checked
                       />
-                      <label class="form-check-label" for="exampleRadios1">
+                      <label class='form-check-label' for='exampleRadios1'>
                         Erkek
                       </label>
                     </div>
 
-                    <div class="form-check">
+                    <div class='form-check'>
                       <input
-                        class="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="sexRadio2"
-                        value="option2"
+                        class='form-check-input'
+                        type='radio'
+                        name='exampleRadios'
+                        id='sexRadio2'
+                        value='option2'
                         disabled
                       />
-                      <label class="form-check-label" for="exampleRadios2">
+                      <label class='form-check-label' for='exampleRadios2'>
                         Kadın
                       </label>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault04">Uyruk</label>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault04'>Uyruk</label>
                   <select
-                    class="custom-select"
-                    id="validationDefault04"
+                    class='custom-select'
+                    id='validationDefault04'
                     required
                   >
                     <option selected disabled value={patient?.nationality}>
@@ -899,25 +791,25 @@ class PatientDetail extends Component {
                     <option>Yabancı</option>
                   </select>
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="dentistName">Diş Hekimi</label>
+                <div class='col-md-6 mb-3'>
+                  <label for='dentistName'>Diş Hekimi</label>
                   <input
-                    id="dentistName"
-                    type="text"
-                    class="form-control"
+                    id='dentistName'
+                    type='text'
+                    class='form-control'
                     value={patient?.Dentist.name}
                   />
                 </div>
               </div>
-              <div class="form-row" style={{ marginTop: "0" }}>
-                <div class="col-md-6 mb-3">
-                  <label for="validationDefault01">Doğum Tarihi</label>
+              <div class='form-row' style={{ marginTop: '0' }}>
+                <div class='col-md-6 mb-3'>
+                  <label for='validationDefault01'>Doğum Tarihi</label>
                   {patient?.birthDate && (
                     <DatePicker initialValue={patient?.birthDate} />
                   )}
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="validationDefault02">Kayıt Tarihi</label>
+                <div class='col-md-6 mb-3'>
+                  <label for='validationDefault02'>Kayıt Tarihi</label>
                   {patient?.createdAt && (
                     <DatePicker initialValue={patient?.createdAt} />
                   )}
@@ -926,32 +818,32 @@ class PatientDetail extends Component {
             </div>
           </div>
 
-          <div className={"item patientInfoPart"}>
-            <div className={"header"}>İletişim Bilgileri</div>
-            <div className={"content"}>
-              <div class="form-row">
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault04">İlçe</label>
+          <div className={'item patientInfoPart'}>
+            <div className={'header'}>İletişim Bilgileri</div>
+            <div className={'content'}>
+              <div class='form-row'>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault04'>İlçe</label>
                   <select
-                    class="custom-select"
-                    id="validationDefault04"
+                    class='custom-select'
+                    id='validationDefault04'
                     required
                   >
-                    <option selected disabled value="">
+                    <option selected disabled value=''>
                       Seçiniz...
                     </option>
                     <option>Başakşehir</option>
                     <option>Sarıyer</option>
                   </select>
                 </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault04">Şehir</label>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault04'>Şehir</label>
                   <select
-                    class="custom-select"
-                    id="validationDefault04"
+                    class='custom-select'
+                    id='validationDefault04'
                     required
                   >
-                    <option selected disabled value="">
+                    <option selected disabled value=''>
                       {patient?.city}
                     </option>
                     <option>İstanbul</option>
@@ -960,66 +852,66 @@ class PatientDetail extends Component {
                     <option>Çanakkale</option>
                   </select>
                 </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault04">Ülke</label>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault04'>Ülke</label>
                   <select
-                    class="custom-select"
-                    id="validationDefault04"
+                    class='custom-select'
+                    id='validationDefault04'
                     required
                   >
-                    <option selected disabled value="">
+                    <option selected disabled value=''>
                       {patient?.country}
                     </option>
                     <option>Türkiye</option>
                     <option>USA</option>
                   </select>
                 </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault05">Posta Kodu</label>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault05'>Posta Kodu</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="validationDefault05"
+                    type='text'
+                    class='form-control'
+                    id='validationDefault05'
                     required
                   />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-md-6 mb-3">
-                  <label for="exampleFormControlInput1">E-mail adresi</label>
+              <div class='form-row'>
+                <div class='col-md-6 mb-3'>
+                  <label for='exampleFormControlInput1'>E-mail adresi</label>
                   <input
-                    type="email"
-                    class="form-control"
-                    id="exampleFormControlInput1"
+                    type='email'
+                    class='form-control'
+                    id='exampleFormControlInput1'
                     value={patient?.email}
                   />
                 </div>
-                <div class="col-md-3 mb-3">
-                  <label for="inputAddress">Telefon1</label>
+                <div class='col-md-3 mb-3'>
+                  <label for='inputAddress'>Telefon1</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="inputAddress"
+                    type='text'
+                    class='form-control'
+                    id='inputAddress'
                     value={patient?.phone}
                   />
                 </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault05">Telefon2</label>
+                <div class='col-md-3 mb-3'>
+                  <label for='validationDefault05'>Telefon2</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="validationDefault05"
+                    type='text'
+                    class='form-control'
+                    id='validationDefault05'
                     value={patient?.phone}
                   />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-md-12 mb-3">
-                  <label for="exampleFormControlInput1">Adres</label>
+              <div class='form-row'>
+                <div class='col-md-12 mb-3'>
+                  <label for='exampleFormControlInput1'>Adres</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
+                    type='text'
+                    class='form-control'
+                    id='exampleFormControlInput1'
                     value={patient?.address}
                   />
                 </div>
@@ -1035,87 +927,87 @@ class PatientDetail extends Component {
     let { patient } = this.state;
     return (
       <div>
-        <div className={"createAppointment"}>
-          <div class="dropdown">
+        <div className={'createAppointment'}>
+          <div class='dropdown'>
             <a
-              class="btn btn-secondary dropdown-toggle plansDropdown"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
+              class='btn btn-secondary dropdown-toggle plansDropdown'
+              href='#'
+              role='button'
+              id='dropdownMenuLink'
+              data-toggle='dropdown'
+              aria-haspopup='true'
+              aria-expanded='false'
             >
               {this.state.selectedPlan}
             </a>
 
             <div
-              class="dropdown-menu myDropdownMenu"
-              aria-labelledby="dropdownMenuLink"
+              class='dropdown-menu myDropdownMenu'
+              aria-labelledby='dropdownMenuLink'
             >
-              {this.state.selectedPlan === "Planlama 0" ? (
+              {this.state.selectedPlan === 'Planlama 0' ? (
                 <a
-                  class="dropdown-item disabled"
-                  href="#"
+                  class='dropdown-item disabled'
+                  href='#'
                   onClick={() => {
-                    this.setState({ selectedPlan: "Planlama 0" });
+                    this.setState({ selectedPlan: 'Planlama 0' });
                   }}
-                  aria-disabled="true"
+                  aria-disabled='true'
                 >
                   Planlama 0
                 </a>
               ) : (
                 <a
-                  class="dropdown-item"
-                  href="#"
+                  class='dropdown-item'
+                  href='#'
                   onClick={() => {
-                    this.setState({ selectedPlan: "Planlama 0" });
+                    this.setState({ selectedPlan: 'Planlama 0' });
                   }}
                 >
                   Planlama 0
                 </a>
               )}
 
-              {this.state.selectedPlan === "Planlama 1" ? (
+              {this.state.selectedPlan === 'Planlama 1' ? (
                 <a
-                  class="dropdown-item disabled"
-                  href="#"
+                  class='dropdown-item disabled'
+                  href='#'
                   onClick={() => {
-                    this.setState({ selectedPlan: "Planlama 1" });
+                    this.setState({ selectedPlan: 'Planlama 1' });
                   }}
-                  aria-disabled="true"
+                  aria-disabled='true'
                 >
                   Planlama 1
                 </a>
               ) : (
                 <a
-                  class="dropdown-item"
-                  href="#"
+                  class='dropdown-item'
+                  href='#'
                   onClick={() => {
-                    this.setState({ selectedPlan: "Planlama 1" });
+                    this.setState({ selectedPlan: 'Planlama 1' });
                   }}
                 >
                   Planlama 1
                 </a>
               )}
 
-              {this.state.selectedPlan === "Tedavi" ? (
+              {this.state.selectedPlan === 'Tedavi' ? (
                 <a
-                  class="dropdown-item disabled"
-                  href="#"
+                  class='dropdown-item disabled'
+                  href='#'
                   onClick={() => {
-                    this.setState({ selectedPlan: "Tedavi" });
+                    this.setState({ selectedPlan: 'Tedavi' });
                   }}
-                  aria-disabled="true"
+                  aria-disabled='true'
                 >
                   Tedavi
                 </a>
               ) : (
                 <a
-                  class="dropdown-item"
-                  href="#"
+                  class='dropdown-item'
+                  href='#'
                   onClick={() => {
-                    this.setState({ selectedPlan: "Tedavi" });
+                    this.setState({ selectedPlan: 'Tedavi' });
                   }}
                 >
                   Tedavi
@@ -1125,7 +1017,7 @@ class PatientDetail extends Component {
           </div>
         </div>
 
-        {this.state.selectedPlan === "Planlama 0" && (
+        {this.state.selectedPlan === 'Planlama 0' && (
           <div>
             {this.renderTeeth()}
             {this.renderNewTreatmentButton(true)}
@@ -1133,14 +1025,14 @@ class PatientDetail extends Component {
             {this.renderUnderTablebuttons()}
           </div>
         )}
-        {this.state.selectedPlan === "Planlama 1" && (
+        {this.state.selectedPlan === 'Planlama 1' && (
           <div>
             {this.renderTeeth()}
             {this.renderNewTreatmentButton(true)}
             {this.renderTreatmentPlan1Table()}
           </div>
         )}
-        {this.state.selectedPlan === "Tedavi" && (
+        {this.state.selectedPlan === 'Tedavi' && (
           <div>
             {this.renderTeeth()}
             {this.renderNewTreatmentButton(false)}
@@ -1154,58 +1046,58 @@ class PatientDetail extends Component {
   renderPaymentTab = () => {
     return (
       <div>
-        <div className={"row"}>
-          <div className={"paymentTreatmentTableWrapper"}>
-            <h2 className={"tableHeader"}>Tedaviler</h2>
+        <div className={'row'}>
+          <div className={'paymentTreatmentTableWrapper'}>
+            <h2 className={'tableHeader'}>Tedaviler</h2>
             {this.renderTreatmentTable()}
           </div>
-          <div className={"paymentPaidTreatmentTableWrapper"}>
+          <div className={'paymentPaidTreatmentTableWrapper'}>
             {/* ADD payment Button */}
             <a
-              type="button"
-              data-toggle="modal"
-              data-target="#addUserModal"
-              className={"addPayment"}
+              type='button'
+              data-toggle='modal'
+              data-target='#addUserModal'
+              className={'addPayment'}
             >
               Ödeme Ekle<img src={PaymentIcon}></img>
             </a>
 
             <div
-              class="modal fade"
-              id="addUserModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
+              class='modal fade'
+              id='addUserModal'
+              tabindex='-1'
+              aria-labelledby='exampleModalLabel'
+              aria-hidden='true'
             >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
+              <div class='modal-dialog'>
+                <div class='modal-content'>
+                  <div class='modal-header'>
+                    <h5 class='modal-title' id='exampleModalLabel'>
                       Ödeme Ekle
                     </h5>
                     <button
-                      type="button"
-                      class="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
+                      type='button'
+                      class='close'
+                      data-dismiss='modal'
+                      aria-label='Close'
                     >
-                      <span aria-hidden="true">&times;</span>
+                      <span aria-hidden='true'>&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div class='modal-body'>
                     <form>
-                      <div class="form-row" style={{ marginTop: "0" }}>
-                        <div class="col-md-6 mb-3">
+                      <div class='form-row' style={{ marginTop: '0' }}>
+                        <div class='col-md-6 mb-3'>
                           <label>Ödeme Tarihi</label>
                           <DatePicker />
                         </div>
-                        <div class="form-group col-md-6 mb-3">
-                          <label for="exampleFormControlSelect1">
+                        <div class='form-group col-md-6 mb-3'>
+                          <label for='exampleFormControlSelect1'>
                             Ödeme Tipi
                           </label>
                           <select
-                            class="form-control"
-                            id="exampleFormControlSelect1"
+                            class='form-control'
+                            id='exampleFormControlSelect1'
                           >
                             <option>Nakit</option>
                             <option>Kredi Kartı</option>
@@ -1215,22 +1107,22 @@ class PatientDetail extends Component {
                         </div>
                       </div>
 
-                      <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                          <label for="formGroupExampleInput">Tutar</label>
+                      <div class='form-row'>
+                        <div class='col-md-6 mb-3'>
+                          <label for='formGroupExampleInput'>Tutar</label>
                           <input
-                            type="text"
-                            class="form-control"
-                            id="formGroupExampleInput"
+                            type='text'
+                            class='form-control'
+                            id='formGroupExampleInput'
                           />
                         </div>
-                        <div class="form-group col-md-6 mb-3">
-                          <label for="exampleFormControlSelect2">
+                        <div class='form-group col-md-6 mb-3'>
+                          <label for='exampleFormControlSelect2'>
                             Para Birimi
                           </label>
                           <select
-                            class="form-control"
-                            id="exampleFormControlSelect2"
+                            class='form-control'
+                            id='exampleFormControlSelect2'
                           >
                             <option>TRY</option>
                             <option>USD</option>
@@ -1240,24 +1132,24 @@ class PatientDetail extends Component {
                           </select>
                         </div>
                       </div>
-                      <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                          <label for="exampleFormControlTextarea1">
+                      <div class='form-row'>
+                        <div class='col-md-12 mb-3'>
+                          <label for='exampleFormControlTextarea1'>
                             Açıklama
                           </label>
                           <input
-                            type="text"
-                            class="form-control"
-                            id="formGroupExampleInput"
+                            type='text'
+                            class='form-control'
+                            id='formGroupExampleInput'
                           />
                         </div>
                       </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-12 mb-3">
-                          <label for="exampleFormControlSelect2">
+                      <div class='form-row'>
+                        <div class='form-group col-md-12 mb-3'>
+                          <label for='exampleFormControlSelect2'>
                             Diş Hekimi
                           </label>
-                          <select class="form-control">
+                          <select class='form-control'>
                             <option>Büşra DOLAŞ</option>
                             <option>Elif ASAL</option>
                             <option>Elif Merve MAVİ</option>
@@ -1282,15 +1174,15 @@ class PatientDetail extends Component {
                       </div>
                     </form>
                   </div>
-                  <div class="modal-footer">
+                  <div class='modal-footer'>
                     <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
+                      type='button'
+                      class='btn btn-secondary'
+                      data-dismiss='modal'
                     >
                       Kapat
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type='button' class='btn btn-primary'>
                       Ödeme Ekle
                     </button>
                   </div>
@@ -1298,7 +1190,7 @@ class PatientDetail extends Component {
               </div>
             </div>
 
-            <h2 className={"tableHeader"}>Alınan Paralar</h2>
+            <h2 className={'tableHeader'}>Alınan Paralar</h2>
             {this.renderPaidtreatmentsTable()}
           </div>
         </div>
@@ -1309,68 +1201,68 @@ class PatientDetail extends Component {
   renderNotesTab = () => {
     return (
       <div>
-        <div className={"patientNotesWrapper"}>
+        <div className={'patientNotesWrapper'}>
           {/* ADD payment Button */}
           <a
-            type="button"
-            data-toggle="modal"
-            data-target="#addUserModal"
-            className={"addNotes"}
+            type='button'
+            data-toggle='modal'
+            data-target='#addUserModal'
+            className={'addNotes'}
           >
             Not Ekle<img src={NotesIcon}></img>
           </a>
 
           <div
-            class="modal fade"
-            id="addUserModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
+            class='modal fade'
+            id='addUserModal'
+            tabindex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
           >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
+            <div class='modal-dialog'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h5 class='modal-title' id='exampleModalLabel'>
                     Not Ekle
                   </h5>
                   <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
+                    type='button'
+                    class='close'
+                    data-dismiss='modal'
+                    aria-label='Close'
                   >
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden='true'>&times;</span>
                   </button>
                 </div>
-                <div class="modal-body container">
+                <div class='modal-body container'>
                   <form>
-                    <div class="form-row" style={{ marginTop: "0" }}>
-                      <div class="col-md-6 mb-3">
+                    <div class='form-row' style={{ marginTop: '0' }}>
+                      <div class='col-md-6 mb-3'>
                         <label>Not Tarihi</label>
                         <DatePicker />
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlTextarea1">
+                    <div class='form-group'>
+                      <label for='exampleFormControlTextarea1'>
                         Lütfen Not Ekleyiniz.
                       </label>
                       <textarea
-                        class="form-control"
-                        id="exampleFormControlTextarea1"
-                        rows="8"
+                        class='form-control'
+                        id='exampleFormControlTextarea1'
+                        rows='8'
                       ></textarea>
                     </div>
                   </form>
                 </div>
-                <div class="modal-footer">
+                <div class='modal-footer'>
                   <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
+                    type='button'
+                    class='btn btn-secondary'
+                    data-dismiss='modal'
                   >
                     Kapat
                   </button>
-                  <button type="button" class="btn btn-primary">
+                  <button type='button' class='btn btn-primary'>
                     Not Ekle
                   </button>
                 </div>
@@ -1378,7 +1270,7 @@ class PatientDetail extends Component {
             </div>
           </div>
 
-          <h2 className={"tableHeader"}>Notlar</h2>
+          <h2 className={'tableHeader'}>Notlar</h2>
           {this.renderPatientsNotes()}
         </div>
       </div>
@@ -1387,199 +1279,199 @@ class PatientDetail extends Component {
 
   renderTeeth = () => {
     return (
-      <div className={"teeth"}>
-        <div className={"row teethrow"}>
+      <div className={'teeth'}>
+        <div className={'row teethrow'}>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth1" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth1' })}
           >
             <img src={tooth1} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth2" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth2' })}
           >
             <img src={tooth2} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth3" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth3' })}
           >
             <img src={tooth3} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth4" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth4' })}
           >
             <img src={tooth4} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth5" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth5' })}
           >
             <img src={tooth5} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth6" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth6' })}
           >
             <img src={tooth6} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth7" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth7' })}
           >
             <img src={tooth7} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth8" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth8' })}
           >
             <img src={tooth8} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth9" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth9' })}
           >
             <img src={tooth9} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth10" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth10' })}
           >
             <img src={tooth10} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth11" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth11' })}
           >
             <img src={tooth11} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth12" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth12' })}
           >
             <img src={tooth12} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth13" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth13' })}
           >
             <img src={tooth13} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth14" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth14' })}
           >
             <img src={tooth14} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth15" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth15' })}
           >
             <img src={tooth15} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth16" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth16' })}
           >
             <img src={tooth16} />
           </button>
         </div>
-        <div className={"row teethrow"}>
+        <div className={'row teethrow'}>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth17" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth17' })}
           >
             <img src={tooth17} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth18" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth18' })}
           >
             <img src={tooth18} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth19" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth19' })}
           >
             <img src={tooth19} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth20" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth20' })}
           >
             <img src={tooth20} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth21" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth21' })}
           >
             <img src={tooth21} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth22" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth22' })}
           >
             <img src={tooth22} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth23" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth23' })}
           >
             <img src={tooth23} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth24" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth24' })}
           >
             <img src={tooth24} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth25" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth25' })}
           >
             <img src={tooth25} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth26" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth26' })}
           >
             <img src={tooth26} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth27" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth27' })}
           >
             <img src={tooth27} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth28" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth28' })}
           >
             <img src={tooth28} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth29" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth29' })}
           >
             <img src={tooth29} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth30" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth30' })}
           >
             <img src={tooth30} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth31" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth31' })}
           >
             <img src={tooth31} />
           </button>
           <button
-            className={"teethClass"}
-            onClick={() => this.setState({ selectedTooth: "tooth32" })}
+            className={'teethClass'}
+            onClick={() => this.setState({ selectedTooth: 'tooth32' })}
           >
             <img src={tooth32} />
           </button>
@@ -1593,14 +1485,14 @@ class PatientDetail extends Component {
       <div>
         {this.state.treatmentPlan0Data !== null ? (
           <MDBDataTable
-            className={"myTableClass"}
+            className={'myTableClass'}
             striped
             bordered
             small
-            searchLabel={"Ara"}
-            entriesLabel={"Girdileri Göster"}
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
             info={false}
-            paginationLabel={["Önceki", "Sonraki"]}
+            paginationLabel={['Önceki', 'Sonraki']}
             data={this.state.treatmentPlan0Data}
           />
         ) : (
@@ -1617,8 +1509,8 @@ class PatientDetail extends Component {
             striped
             bordered
             small
-            searchLabel={"Ara"}
-            entriesLabel={"Girdileri Göster"}
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
             info={false}
             data={this.state.treatmentPlan1Data}
           />
@@ -1635,12 +1527,12 @@ class PatientDetail extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight="50vh"
+            maxHeight='50vh'
             bordered
             small
-            searchLabel={"Ara"}
-            entriesLabel={"Girdileri Göster"}
-            paginationLabel={["Önceki", "Sonraki"]}
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            paginationLabel={['Önceki', 'Sonraki']}
             info={false}
             data={this.state.treatmentData}
           />
@@ -1650,28 +1542,58 @@ class PatientDetail extends Component {
       </div>
     );
   };
+
   renderTreatmentList = () => {
     return (
       <div>
-        {this.state.treatmentList !== null ? (
+        {this.state.tariffs !== null ? (
           <>
-            <Dropdown
-              type={"selectable"}
-              selectableData={["Tarife1", "Tarife2", "Tarife3", "Tarife4"]}
-            />
-            <MDBDataTable
-              striped
-              paging={false}
-              scrollY
-              maxHeight="50vh"
-              bordered
-              small
-              searchLabel={"Ara"}
-              entriesLabel={"Girdileri Göster"}
-              paginationLabel={["Önceki", "Sonraki"]}
-              info={false}
-              data={this.state.treatmentList}
-            />
+            <div class='col-md-6 mb-3'>
+              <label for='tariffs'>Tarifler</label>
+              <select
+                class='custom-select'
+                id='tarifName'
+                required
+                onChange={(event) => {
+                  this.setState({ selectedTarif: event.target.value });
+                  this.setState({
+                    tarifList: this.state.tariffs.filter(
+                      (tarif) => tarif._id === event.target.value
+                    ),
+                  });
+                  this.fillTreatmentList(
+                    this.state.tariffs.filter(
+                      (tarif) => tarif._id === event.target.value
+                    )[0]?.list
+                  );
+                }}
+              >
+                <option selected disabled value=''>
+                  Seçiniz...
+                </option>
+                {this.state.tariffs !== null &&
+                  this.state.tariffs.map((tarif) => (
+                    <option value={tarif._id}>{tarif.tariff}</option>
+                  ))}
+              </select>
+            </div>
+            {this.state.tarifList !== null ? (
+              <MDBDataTable
+                striped
+                paging={false}
+                scrollY
+                maxHeight='50vh'
+                bordered
+                small
+                searchLabel={'Ara'}
+                entriesLabel={'Girdileri Göster'}
+                paginationLabel={['Önceki', 'Sonraki']}
+                info={false}
+                data={this.state.treatmentList}
+              />
+            ) : (
+              <p>Lutfen bir tarif seciniz</p>
+            )}
           </>
         ) : (
           <p>YUKLENIYOR</p>
@@ -1687,12 +1609,12 @@ class PatientDetail extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight="50vh"
+            maxHeight='50vh'
             bordered
             small
-            searchLabel={"Ara"}
-            entriesLabel={"Girdileri Göster"}
-            paginationLabel={["Önceki", "Sonraki"]}
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            paginationLabel={['Önceki', 'Sonraki']}
             info={false}
             data={this.state.paidTreatmentData}
           />
@@ -1710,12 +1632,12 @@ class PatientDetail extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight="50vh"
+            maxHeight='50vh'
             bordered
             small
-            searchLabel={"Ara"}
-            entriesLabel={"Girdileri Göster"}
-            paginationLabel={["Önceki", "Sonraki"]}
+            searchLabel={'Ara'}
+            entriesLabel={'Girdileri Göster'}
+            paginationLabel={['Önceki', 'Sonraki']}
             info={false}
             data={this.state.notesForPatientData}
           />
@@ -1729,23 +1651,23 @@ class PatientDetail extends Component {
   renderNewTreatmentButton = (isPlan) => {
     return (
       <div>
-        {this.state.selectedTooth !== "" ? (
+        {this.state.selectedTooth !== '' ? (
           <div>
             {isPlan ? (
               <button
-                type="button"
-                class="btn btn-success addTreatmentButton"
-                data-toggle="modal"
-                data-target="#newTreatmentPlan"
+                type='button'
+                class='btn btn-success addTreatmentButton'
+                data-toggle='modal'
+                data-target='#newTreatmentPlan'
               >
                 Yeni Tedavi Plani Ekle
               </button>
             ) : (
               <button
-                type="button"
-                class="btn btn-success addTreatmentButton"
-                data-toggle="modal"
-                data-target="#newTreatmentPlan"
+                type='button'
+                class='btn btn-success addTreatmentButton'
+                data-toggle='modal'
+                data-target='#newTreatmentPlan'
               >
                 Yeni Tedavi Ekle
               </button>
@@ -1753,14 +1675,14 @@ class PatientDetail extends Component {
           </div>
         ) : (
           <span
-            class="d-inline-block"
-            data-toggle="popover"
-            data-content="Lütfen, önce bir diş seçimi yapınız."
+            class='d-inline-block'
+            data-toggle='popover'
+            data-content='Lütfen, önce bir diş seçimi yapınız.'
           >
             <button
-              class="btn btn-secondary addTreatmentButton"
+              class='btn btn-secondary addTreatmentButton'
               style={{ pointerEvents: null }}
-              type="button"
+              type='button'
               disabled
             >
               Lütfen, önce diş seçiniz.
@@ -1768,9 +1690,9 @@ class PatientDetail extends Component {
           </span>
         )}
         <Modal
-          modalId={"newTreatmentPlan"}
-          modalFooterButtonTitle={"Kapat"}
-          modalTitle={"Tedavi Plani Seciniz"}
+          modalId={'newTreatmentPlan'}
+          modalFooterButtonTitle={'Kapat'}
+          modalTitle={'Tedavi Plani Seciniz'}
         >
           {this.renderTreatmentList()}
         </Modal>
@@ -1782,18 +1704,18 @@ class PatientDetail extends Component {
     return (
       <div>
         <a
-          href="#"
-          className={"underTableIcon1"}
-          data-toggle="tooltip"
-          title="Make Contract"
+          href='#'
+          className={'underTableIcon1'}
+          data-toggle='tooltip'
+          title='Make Contract'
         >
           <img src={ContractIMG}></img>
         </a>
         <a
-          href="#"
-          className={"underTableIcon2"}
-          data-toggle="tooltip"
-          title="Make Proforma"
+          href='#'
+          className={'underTableIcon2'}
+          data-toggle='tooltip'
+          title='Make Proforma'
         >
           <img src={ProformaIMG}></img>
         </a>
@@ -1805,38 +1727,38 @@ class PatientDetail extends Component {
     let { patient, selectedTab } = this.state;
 
     return (
-      <div className={"Profile"}>
-        <div className={"patientProfileCard"}>
-          <img className={"profileImage"} src={patient?.avatar} alt="avatar" />
+      <div className={'Profile'}>
+        <div className={'patientProfileCard'}>
+          <img className={'profileImage'} src={patient?.avatar} alt='avatar' />
         </div>
 
-        <div className={"profileName"}>{patient?.name}</div>
+        <div className={'profileName'}>{patient?.name}</div>
         <div
-          className={"location"}
+          className={'location'}
         >{`${patient?.city}, ${patient?.country}`}</div>
 
-        <div className={"tabs"}>
+        <div className={'tabs'}>
           <div
             onClick={() => this.setSelectedTab(0)}
-            className={`${"tab"} ${selectedTab === 0 ? "selected" : ""}`}
+            className={`${'tab'} ${selectedTab === 0 ? 'selected' : ''}`}
           >
             Hasta Bilgileri
           </div>
           <div
             onClick={() => this.setSelectedTab(1)}
-            className={`${"tab"} ${selectedTab === 1 ? "selected" : ""}`}
+            className={`${'tab'} ${selectedTab === 1 ? 'selected' : ''}`}
           >
             Tedavi ve Planlama
           </div>
           <div
             onClick={() => this.setSelectedTab(2)}
-            className={`${"tab"} ${selectedTab === 2 ? "selected" : ""}`}
+            className={`${'tab'} ${selectedTab === 2 ? 'selected' : ''}`}
           >
             Ödeme
           </div>
           <div
             onClick={() => this.setSelectedTab(3)}
-            className={`${"tab"} ${selectedTab === 3 ? "selected" : ""}`}
+            className={`${'tab'} ${selectedTab === 3 ? 'selected' : ''}`}
           >
             Not
           </div>
