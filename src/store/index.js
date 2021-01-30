@@ -190,6 +190,7 @@ export default {
 
   async updateUserProfile({
     userId,
+    avatar,
     name,
     surname,
     email,
@@ -200,7 +201,16 @@ export default {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
     let path = `/user/${userId}`;
-    let payload = { userId, name, surname, email, phone, country, city };
+    let payload = {
+      userId,
+      avatar,
+      name,
+      surname,
+      email,
+      phone,
+      country,
+      city,
+    };
     return await http.makePutRequest(
       path,
       baseUrl,
@@ -214,6 +224,20 @@ export default {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
     let path = `/clinic/${clinicID}`;
+    let payload = { ...props };
+    return await http.makePutRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+
+  async updateDentistProfile(dentistId, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${dentistId}`;
     let payload = { ...props };
     return await http.makePutRequest(
       path,
@@ -660,10 +684,12 @@ export default {
     let tokenCookieName = 'token';
     let path;
 
-    whereTo === 'profile' && (path = `/upload/pp?${user._id}&${fileType}`);
-    whereTo === 'gallery' && (path = `/upload/gallery?${user._id}&${fileType}`);
+    whereTo === 'profile' &&
+      (path = `/upload/pp?fileType=${fileType}&user=${user}`);
+    whereTo === 'gallery' &&
+      (path = `/upload/gallery?fileType=${fileType}&user=${user}`);
     whereTo === 'attachment' &&
-      (path = `/upload/attachment?${user._id}&${fileType}`);
+      (path = `/upload/attachment?fileType=${fileType}&user=${user}`);
 
     return await http.makeGetRequest(
       path,
@@ -678,7 +704,8 @@ export default {
     let path = ``;
     let tokenCookieName = 'token';
     let additionHeaders = {
-      'Content-Type': file.type,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'PUT',
     };
 
     return await http.makePutRequest(

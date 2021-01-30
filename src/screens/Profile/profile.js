@@ -28,6 +28,8 @@ import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const dropzoneRef = createRef();
 
@@ -112,7 +114,7 @@ export default function Profile() {
 
   function overviewTab() {
     return (
-      <div className='settingsWrapper'>
+      <div className='settingsWrapper' style={{ marginBottom: '-430px' }}>
         <div className='row'>
           <form>
             <div className={'item profileInfoPart'}>
@@ -198,10 +200,16 @@ export default function Profile() {
 
   function galleryTab() {
     return (
-      <div className='settingsWrapper'>
+      <div className='settingsWrapper' style={{ marginBottom: '-500px' }}>
         <div className='row'>
           <div>
-            <h2>Carousel to be</h2>
+            <Carousel style={{ width: '50%' }}>
+              {fakeImages.map((fakeImage) => (
+                <div>
+                  <img src={fakeImage.image} />
+                </div>
+              ))}
+            </Carousel>
           </div>
         </div>
       </div>
@@ -257,6 +265,32 @@ export default function Profile() {
   );
 }
 
+const getLinkUploadPicture = async (file) => {
+  const { data } = await store.getUploadURL({
+    fileType: file.type,
+    user: getCookie('user_id'),
+    whereTo: 'profile',
+  });
+
+  const res = await store.uploadImage(data.url, file);
+
+  const userType = getCookie('user_type');
+  if (userType === 'user') {
+    await store.updateUserProfile({
+      userId: getCookie('user_id'),
+      avatar: data.link,
+    });
+  } else if (userType === 'clinic') {
+    await store.updateClinicProfile(getCookie('user_id'), {
+      avatar: data.link,
+    });
+  } else if (userType === 'dentist') {
+    await store.updateDentistProfile(getCookie('user_id'), {
+      avatar: data.link,
+    });
+  }
+};
+
 function Dropzonesss(props) {
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
     // Disable click and keydown behavior
@@ -264,11 +298,9 @@ function Dropzonesss(props) {
     noKeyboard: true,
   });
 
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+  const files = acceptedFiles.map((file) => {
+    getLinkUploadPicture(file);
+  });
 
   return (
     <div className='profile__profileCard__editIcon__2' onClick={open}>
@@ -277,3 +309,22 @@ function Dropzonesss(props) {
     </div>
   );
 }
+
+//fakdata for gallery
+const fakeImages = [
+  {
+    image: 'https://picsum.photos/100/100',
+  },
+  {
+    image: 'https://picsum.photos/100/100',
+  },
+  {
+    image: 'https://picsum.photos/100/100',
+  },
+  {
+    image: 'https://picsum.photos/100/100',
+  },
+  {
+    image: 'https://picsum.photos/100/100',
+  },
+];

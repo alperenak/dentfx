@@ -43,6 +43,7 @@
     "react-pdf": "^5.0.0",
     "react-phone-number-input": "^3.0.25",
     "react-rating-stars-component": "^2.2.0",
+    "react-responsive-carousel": "^3.2.11",
     "react-scripts": "3.4.1",
     "react-step-progress": "^1.0.3",
     "react-youtube": "^7.12.0",

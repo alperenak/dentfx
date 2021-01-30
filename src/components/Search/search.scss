@@ -1,3 +1,36 @@
-.SearchContainer {
+.searchSectionWrapper {
+  background-color: white;
+}
+.searchSection {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 300px;
+  margin-left: -100px;
+
+  & .searchBars {
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+
+    & .keyword {
+      z-index: 1;
+      margin: 6px;
+    }
+
+    & .location {
+      z-index: 1;
+      margin: 6px;
+    }
+
+    & .findJob {
+      z-index: 1;
+      margin: 7px 0;
+      width: fit-content;
+    }
+  }
 }
