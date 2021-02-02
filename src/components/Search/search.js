@@ -24,7 +24,7 @@ export default function Search() {
               size={'responsive'}
               labelDescription={'Enter a word to search'}
               icon={{ src: searchIcon, position: 'right' }}
-              label={'Keyword'}
+              label={'Location'}
             />
           </div>
           <button

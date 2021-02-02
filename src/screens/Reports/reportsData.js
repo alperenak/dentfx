@@ -1,4 +1,4 @@
-export const data01 = [
+/*export const data01 = [
   { name: 'Group A', value: 400 },
   { name: 'Group B', value: 300 },
   { name: 'Group C', value: 300 },
@@ -184,4 +184,4 @@ export const composedData = [
     pv: 680,
     amt: 1700,
   },
-];
+]; */

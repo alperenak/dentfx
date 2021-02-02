@@ -234,6 +234,32 @@ export default {
     );
   },
 
+  async updateClinicGallery(clinicID, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/gallery`;
+    let payload = { ...props };
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+
+  async deleteCarouselImage(clinicID, itemID) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/gallery/${itemID}`;
+    return await http.makeDeleteRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
   async updateDentistProfile(dentistId, props) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
@@ -715,6 +741,21 @@ export default {
       file,
       errorMessageBuilder,
       additionHeaders
+    );
+  },
+
+  async getTreatmentReport(clinicID, props) {
+    const chart = props.chart || 'apex';
+    const { duration } = props;
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/report/treatment?duration=${duration}&chart=${chart}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
     );
   },
 };

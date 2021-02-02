@@ -43,9 +43,10 @@ const openDialog = () => {
 
 export default function Profile() {
   //#region General States
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [userType, setUserType] = useState();
   const [selectedTab, setSelectedTab] = useState(1);
+  const [carouselImages, setCarouselImages] = useState([]);
   //#endregion
 
   //#region Profile Settings States
@@ -104,7 +105,8 @@ export default function Profile() {
     } else if (userType === 'clinic') {
       let res = await store.getClinicDetail({ clinicId: getCookie('user_id') });
       setUser(res.data);
-      console.log(res.data);
+      setCarouselImages(res.data.gallery);
+      // console.log(res.data);
     }
   }
 
@@ -200,19 +202,39 @@ export default function Profile() {
 
   function galleryTab() {
     return (
-      <div className='settingsWrapper' style={{ marginBottom: '-500px' }}>
-        <div className='row'>
-          <div>
-            <Carousel style={{ width: '50%' }}>
-              {fakeImages.map((fakeImage) => (
-                <div>
-                  <img src={fakeImage.image} />
-                </div>
-              ))}
-            </Carousel>
+      <>
+        <div className='settingsWrapper' style={{ marginBottom: '-500px' }}>
+          <div className='row'>
+            <div style={{ width: '500px', height: '500px' }}>
+              <GalleryDropZone />
+              <Carousel>
+                {carouselImages.map((carouselImage) => {
+                  return (
+                    <>
+                      <button
+                        onClick={async () => {
+                          await store.deleteCarouselImage(
+                            getCookie('user_id'),
+                            carouselImage._id
+                          );
+                          window.location.reload();
+                        }}
+                        type='button'
+                        className='btn btn-primary'
+                      >
+                        Sil
+                      </button>
+                      <div key={carouselImage._id}>
+                        <img src={carouselImage.link} />
+                      </div>
+                    </>
+                  );
+                })}
+              </Carousel>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -265,30 +287,59 @@ export default function Profile() {
   );
 }
 
-const getLinkUploadPicture = async (file) => {
+const getProfileUploadLink = async (file) => {
   const { data } = await store.getUploadURL({
     fileType: file.type,
     user: getCookie('user_id'),
     whereTo: 'profile',
   });
 
-  const res = await store.uploadImage(data.url, file);
+  uploadProfileImage(data.url, data.link, file);
+};
+
+const uploadProfileImage = async (url, link, file) => {
+  const res = await store.uploadImage(url, file);
 
   const userType = getCookie('user_type');
   if (userType === 'user') {
     await store.updateUserProfile({
       userId: getCookie('user_id'),
-      avatar: data.link,
+      avatar: link,
     });
   } else if (userType === 'clinic') {
     await store.updateClinicProfile(getCookie('user_id'), {
-      avatar: data.link,
+      avatar: link,
     });
   } else if (userType === 'dentist') {
     await store.updateDentistProfile(getCookie('user_id'), {
-      avatar: data.link,
+      avatar: link,
     });
   }
+
+  window.location.reload();
+};
+
+const getGalleryUploadLink = async (file) => {
+  const { data } = await store.getUploadURL({
+    fileType: file.type,
+    user: getCookie('user_id'),
+    whereTo: 'gallery',
+  });
+
+  uploadGalleryImage(data.url, data.link, file);
+};
+
+const uploadGalleryImage = async (url, link, file) => {
+  const res = await store.uploadImage(url, file);
+
+  const userType = getCookie('user_type');
+  if (userType === 'clinic') {
+    await store.updateClinicGallery(getCookie('user_id'), {
+      link,
+    });
+  }
+
+  window.location.reload();
 };
 
 function Dropzonesss(props) {
@@ -299,7 +350,7 @@ function Dropzonesss(props) {
   });
 
   const files = acceptedFiles.map((file) => {
-    getLinkUploadPicture(file);
+    getProfileUploadLink(file);
   });
 
   return (
@@ -310,21 +361,22 @@ function Dropzonesss(props) {
   );
 }
 
-//fakdata for gallery
-const fakeImages = [
-  {
-    image: 'https://picsum.photos/100/100',
-  },
-  {
-    image: 'https://picsum.photos/100/100',
-  },
-  {
-    image: 'https://picsum.photos/100/100',
-  },
-  {
-    image: 'https://picsum.photos/100/100',
-  },
-  {
-    image: 'https://picsum.photos/100/100',
-  },
-];
+function GalleryDropZone(props) {
+  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
+    // Disable click and keydown behavior
+    noClick: true,
+    noKeyboard: true,
+  });
+
+  const files = acceptedFiles.map((file) => {
+    getGalleryUploadLink(file);
+  });
+
+  return (
+    <div {...getRootProps()} onClick={open}>
+      <input {...getInputProps()} />
+      <p>Drop the files here ...</p> :
+      <p>Drag 'n' drop some files here, or click to select files</p>
+    </div>
+  );
+}
