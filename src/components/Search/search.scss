@@ -1,5 +1,5 @@
 .searchSectionWrapper {
-  background-color: white;
+  background-color: black;
 }
 .searchSection {
   display: flex;
@@ -7,8 +7,11 @@
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 300px;
+  height: 550px;
   margin-left: -100px;
+  background-image: url('https://intclinics.com/uploads/images/intclinicsbackground.png');
+  background-size: cover;
+  background-position: center;
 
   & .searchBars {
     z-index: 1;

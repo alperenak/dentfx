@@ -274,10 +274,10 @@ export default {
     );
   },
 
-  async getClinics({ latitude, longitude, range, city, rate }) {
+  async getClinics({ keyword, latitude, longitude, range, city, rate }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/clinic?latitude=${latitude}&longitude=${longitude}&range=${range}&city=${city}&rate=${rate}&treatment`;
+    let path = `/clinic?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}&range=${range}&city=${city}&rate=${rate}&treatment`;
 
     return await http.makeGetRequest(
       path,
@@ -750,6 +750,36 @@ export default {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
     let path = `/clinic/${clinicID}/report/treatment?duration=${duration}&chart=${chart}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async getPaymentReport(clinicID, props) {
+    const chart = props.chart || 'apex';
+    const { duration } = props;
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/report/payment?duration=${duration}&chart=${chart}`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async getAppointmentReport(clinicID, props) {
+    const chart = props.chart || 'apex';
+    const { duration } = props;
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/report/appointment?chart=${chart}&duration=${duration}`;
 
     return await http.makeGetRequest(
       path,

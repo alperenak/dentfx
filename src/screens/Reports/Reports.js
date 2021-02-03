@@ -10,27 +10,63 @@ class Reports extends Component {
     super(props);
     this.state = {
       duration: '2week',
-      dates: null,
-      series: null,
-      options: {
+
+      datesTedavi: null,
+      optionsTedavi: {
         chart: {
           id: 'apexchart-example',
         },
         xaxis: {
-          dates: [] || this.state.dates,
+          categories: [] || this.state.datesTedavi,
         },
       },
-      series: [{ name: 'seri', data: [] }] || this.state.series,
+      seriesTedavi: [{ name: 'seri', data: [] }],
+
+      datesPayment: null,
+      optionsPayment: {
+        chart: {
+          id: 'apexchart-example',
+        },
+        xaxis: {
+          categories: [] || this.state.datesPayment,
+        },
+      },
+      seriesPayment: [{ name: 'seri', data: [] }],
+
+      datesAppointment: null,
+      optionsAppointment: {
+        chart: {
+          id: 'apexchart-example',
+        },
+        xaxis: {
+          categories: [] || this.state.datesAppointment,
+        },
+      },
+      seriesAppointment: [{ name: 'seri', data: [] }],
     };
   }
 
   componentDidMount = async () => {
     let clinicId = getCookie('user_id');
-    let reports = await store.getTreatmentReport(clinicId, {
+    let treatmentReports = await store.getTreatmentReport(clinicId, {
       duration: this.state.duration,
     });
-    this.setState({ dates: reports.data.date });
-    this.setState({ series: reports.data.series });
+
+    this.setState({ datesTedavi: treatmentReports.data.date });
+    this.setState({ seriesTedavi: treatmentReports.data.series });
+    console.log(this.state.datesTedavi);
+
+    let paymentReports = await store.getPaymentReport(clinicId, {
+      duration: this.state.duration,
+    });
+    this.setState({ datesPayment: paymentReports.data.date });
+    this.setState({ seriesPayment: paymentReports.data.series });
+
+    let appointmentReports = await store.getAppointmentReport(clinicId, {
+      duration: this.state.duration,
+    });
+    this.setState({ datesAppointment: appointmentReports.data.date });
+    this.setState({ seriesAppointment: appointmentReports.data.series });
   };
 
   renderGraph() {
@@ -39,16 +75,16 @@ class Reports extends Component {
         <row className='chart'>
           <h6>Tedavi & Hasta sayisi</h6>
           <Chart
-            options={this.state.options}
-            series={this.state.series}
+            options={this.state.optionsTedavi}
+            series={this.state.seriesTedavi}
             type='line'
             width={500}
             height={320}
           />
           <h6>Randevu sayisi</h6>
           <Chart
-            options={this.state.options}
-            series={this.state.series}
+            options={this.state.optionsAppointment}
+            series={this.state.seriesAppointment}
             type='line'
             width={500}
             height={320}
@@ -57,20 +93,20 @@ class Reports extends Component {
         <row className='chart'>
           <h6>Tedavi ucretleri</h6>
           <Chart
-            options={this.state.options}
-            series={this.state.series}
+            options={this.state.optionsPayment}
+            series={this.state.seriesPayment}
             type='line'
             width={500}
             height={320}
           />
-          <h6>Alinan toplam ucretler</h6>
+          {/* <h6>Alinan toplam ucretler</h6>
           <Chart
             options={this.state.options}
             series={this.state.series}
             type='line'
             width={500}
             height={320}
-          />
+          /> */}
         </row>
       </>
     );
