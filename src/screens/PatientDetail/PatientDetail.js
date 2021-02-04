@@ -67,6 +67,14 @@ class PatientDetail extends Component {
       tariffs: null,
       tarifList: null,
       selectedTarif: null,
+      payments: null,
+      clinicians: null,
+      modalPaymentDate: null,
+      modalPaymentType: null,
+      modalPrice: null,
+      modalCurrency: null,
+      modalDescription: null,
+      modalDentist: null,
     };
   }
 
@@ -364,121 +372,6 @@ class PatientDetail extends Component {
       },
     });
     this.setState({
-      treatmentData: {
-        columns: [
-          {
-            label: 'Tarih',
-            field: 'tarih',
-            sort: 'asc',
-            width: 150,
-          },
-          {
-            label: 'Dis',
-            field: 'dis',
-            sort: 'asc',
-            width: 50,
-          },
-          {
-            label: 'Tedavi',
-            field: 'tedavi',
-            sort: 'asc',
-            width: 250,
-          },
-          {
-            label: 'Dis Hekimi',
-            field: 'dis_hekimi',
-            sort: 'asc',
-            width: 150,
-          },
-          {
-            label: 'Toplam',
-            field: 'toplam',
-            sort: 'asc',
-            width: 100,
-          },
-          {
-            label: 'TRY/USD',
-            field: 'para_birimi',
-            sort: 'asc',
-            width: 100,
-          },
-          {
-            label: 'Sil',
-            field: 'button2',
-            sort: 'asc',
-            width: 50,
-          },
-        ],
-        rows: [
-          {
-            tarih: '12.01.2020',
-            dis: '24',
-            tedavi: 'Komposit Dolgu',
-            dis_hekimi: 'Fatih Atmaca',
-            toplam: 250,
-            para_birimi: 'TRY',
-            button2: (
-              <button type='button' class='btn btn-danger'>
-                Sil
-              </button>
-            ),
-          },
-          {
-            tarih: '24.03.2020',
-            dis: '12',
-            tedavi: 'Kanal Tedavisi',
-            dis_hekimi: 'Fatih Atmaca',
-            toplam: 250,
-            para_birimi: 'TRY',
-            button2: (
-              <button type='button' class='btn btn-danger'>
-                Sil
-              </button>
-            ),
-          },
-          {
-            tarih: '02.02.2020',
-            dis: '26',
-            tedavi: 'Koplikasyonlu Dis cekimi',
-            dis_hekimi: 'Hasan Demirkiran',
-            toplam: 450,
-            para_birimi: 'TRY',
-            button2: (
-              <button type='button' class='btn btn-danger'>
-                Sil
-              </button>
-            ),
-          },
-          {
-            tarih: '16.03.2020',
-            dis: '31',
-            tedavi: 'Implant',
-            dis_hekimi: 'Fatih Atmaca',
-            toplam: 2500,
-            para_birimi: 'TRY',
-            button2: (
-              <button type='button' class='btn btn-danger'>
-                Sil
-              </button>
-            ),
-          },
-          {
-            tarih: '08.08.2020',
-            dis: '05',
-            tedavi: 'Komposit Dolgu',
-            dis_hekimi: 'Fatih Atmaca',
-            toplam: 250,
-            para_birimi: 'TRY',
-            button2: (
-              <button type='button' class='btn btn-danger'>
-                Sil
-              </button>
-            ),
-          },
-        ],
-      },
-    });
-    this.setState({
       paidTreatmentData: {
         columns: [
           {
@@ -518,44 +411,26 @@ class PatientDetail extends Component {
             width: 100,
           },
         ],
-        rows: [
-          {
-            tarih: '12.01.2020',
-            odeme_tipi: 'Nakit',
-            dis_hekimi: 'Fatih Atmaca',
-            tutar: 250,
-            para_birimi: 'TRY',
+        rows: this.state.payments.map((payment) => {
+          return {
+            tarih: payment.paymentTime,
+            odeme_tipi: payment.paymentType,
+            dis_hekimi: `Dr. ${payment.Dentist.name} ${payment.Dentist.surname}`,
+            tutar: payment.amount,
+            para_birimi: payment.currency,
             button_yazdir: (
-              <button type='button' class='btn btn-secondary'>
-                Yazdır
+              <button
+                type='button'
+                class='btn btn-secondary'
+                onClick={() => {
+                  console.log(payment._id);
+                }}
+              >
+                Yazdir
               </button>
             ),
-          },
-          {
-            tarih: '16.02.2020',
-            odeme_tipi: 'Kredi Kartı',
-            dis_hekimi: 'Fatih Atmaca',
-            tutar: 1350,
-            para_birimi: 'TRY',
-            button_yazdir: (
-              <button type='button' class='btn btn-secondary'>
-                Yazdır
-              </button>
-            ),
-          },
-          {
-            tarih: '22.03.2020',
-            odeme_tipi: 'Nakit',
-            dis_hekimi: 'Fatih Atmaca',
-            tutar: 1200,
-            para_birimi: 'TRY',
-            button_yazdir: (
-              <button type='button' class='btn btn-secondary'>
-                Yazdır
-              </button>
-            ),
-          },
-        ],
+          };
+        }),
       },
     });
     this.setState({
@@ -628,6 +503,75 @@ class PatientDetail extends Component {
         ],
       },
     });
+    this.setState({
+      treatmentData: {
+        columns: [
+          {
+            label: 'Tarih',
+            field: 'tarih',
+            sort: 'asc',
+            width: 150,
+          },
+          {
+            label: 'Dis',
+            field: 'dis',
+            sort: 'asc',
+            width: 50,
+          },
+          {
+            label: 'Tedavi',
+            field: 'tedavi',
+            sort: 'asc',
+            width: 250,
+          },
+          {
+            label: 'Dis Hekimi',
+            field: 'dis_hekimi',
+            sort: 'asc',
+            width: 150,
+          },
+          {
+            label: 'Toplam',
+            field: 'toplam',
+            sort: 'asc',
+            width: 100,
+          },
+          {
+            label: 'TRY/USD',
+            field: 'para_birimi',
+            sort: 'asc',
+            width: 100,
+          },
+          {
+            label: 'Sil',
+            field: 'button2',
+            sort: 'asc',
+            width: 50,
+          },
+        ],
+        rows: this.state.patient.treatments.map((treatment) => {
+          return {
+            tarih: treatment.createdAt,
+            dis: treatment.teeth,
+            tedavi: treatment.treatment,
+            dis_hekimi: `Dr. ${treatment.Dentist.name} ${treatment.Dentist.surname}`,
+            toplam: treatment.price,
+            para_birimi: treatment.currency,
+            button2: (
+              <button
+                type='button'
+                class='btn btn-danger'
+                onClick={() => {
+                  console.log(treatment._id);
+                }}
+              >
+                Sil
+              </button>
+            ),
+          };
+        }),
+      },
+    });
   };
 
   fillTreatmentList = (list) => {
@@ -683,18 +627,23 @@ class PatientDetail extends Component {
   };
 
   componentDidMount = async () => {
-    this.fillTreatmentTables();
-
     let { match } = this.props;
     let clinicId = getCookie('user_id');
     let patientId = match.params.id;
-
     let tariffs = await store.getClinicTariffs({ clinicId });
-    this.setState({ tariffs: tariffs.data });
+    let clinic = await store.getClinicDetail({ clinicId });
 
-    let res = await store.getPatientsDetail({ clinicId, patientId });
-    console.log(res, 'RESPONSE');
-    this.setState({ patient: res.data });
+    this.setState({ tariffs: tariffs.data });
+    this.setState({ clinicians: clinic.data.Dentist });
+
+    let patientDetails = await store.getPatientsDetail({ clinicId, patientId });
+    let payments = await store.getPatientPayments(clinicId, patientId);
+
+    this.setState({ patient: patientDetails.data });
+    console.log(this.state.patient);
+    this.setState({ payments: payments.data });
+
+    this.fillTreatmentTables();
   };
 
   setSelectedTab = (index) => {
@@ -704,7 +653,6 @@ class PatientDetail extends Component {
   renderPatientInfoTab = () => {
     let { patient } = this.state;
     console.log(patient);
-    console.log(patient?.birthDate);
 
     return (
       <div className={'aboutTab'}>
@@ -1065,7 +1013,7 @@ class PatientDetail extends Component {
             <div
               class='modal fade'
               id='addUserModal'
-              tabindex='-1'
+              tabIndex='-1'
               aria-labelledby='exampleModalLabel'
               aria-hidden='true'
             >
@@ -1089,7 +1037,11 @@ class PatientDetail extends Component {
                       <div class='form-row' style={{ marginTop: '0' }}>
                         <div class='col-md-6 mb-3'>
                           <label>Ödeme Tarihi</label>
-                          <DatePicker />
+                          <DatePicker
+                            onChange={(event) => {
+                              this.setState({ modalPaymentDate: event._d });
+                            }}
+                          />
                         </div>
                         <div class='form-group col-md-6 mb-3'>
                           <label for='exampleFormControlSelect1'>
@@ -1098,11 +1050,19 @@ class PatientDetail extends Component {
                           <select
                             class='form-control'
                             id='exampleFormControlSelect1'
+                            required
+                            onChange={(event) =>
+                              this.setState({
+                                modalPaymentType: event.target.value,
+                              })
+                            }
                           >
-                            <option>Nakit</option>
-                            <option>Kredi Kartı</option>
-                            <option>Senet</option>
-                            <option>Havale</option>
+                            <option selected value='Nakit'>
+                              Nakit
+                            </option>
+                            <option value='Kredi Kartı'>Kredi Kartı</option>
+                            <option value='Senet'>Senet</option>
+                            <option value='Havale'>Havale</option>
                           </select>
                         </div>
                       </div>
@@ -1114,6 +1074,9 @@ class PatientDetail extends Component {
                             type='text'
                             class='form-control'
                             id='formGroupExampleInput'
+                            onChange={(event) =>
+                              this.setState({ modalPrice: event.target.value })
+                            }
                           />
                         </div>
                         <div class='form-group col-md-6 mb-3'>
@@ -1123,12 +1086,18 @@ class PatientDetail extends Component {
                           <select
                             class='form-control'
                             id='exampleFormControlSelect2'
+                            onChange={(event) =>
+                              this.setState({
+                                modalCurrency: event.target.value,
+                              })
+                            }
                           >
-                            <option>TRY</option>
-                            <option>USD</option>
-                            <option>EUR</option>
-                            <option>GBP</option>
-                            <option>ALL</option>
+                            <option selected value='TRY'>
+                              TRY
+                            </option>
+                            <option value='USD'>USD</option>
+                            <option value='EUR'>EUR</option>
+                            <option value='GBP'>GBP</option>
                           </select>
                         </div>
                       </div>
@@ -1141,6 +1110,11 @@ class PatientDetail extends Component {
                             type='text'
                             class='form-control'
                             id='formGroupExampleInput'
+                            onChange={(event) =>
+                              this.setState({
+                                modalDescription: event.target.value,
+                              })
+                            }
                           />
                         </div>
                       </div>
@@ -1149,26 +1123,24 @@ class PatientDetail extends Component {
                           <label for='exampleFormControlSelect2'>
                             Diş Hekimi
                           </label>
-                          <select class='form-control'>
-                            <option>Büşra DOLAŞ</option>
-                            <option>Elif ASAL</option>
-                            <option>Elif Merve MAVİ</option>
-                            <option>Fatih ATMACA</option>
-                            <option>Hatice AKALTIN</option>
-                            <option>Hazal ÖZCAN</option>
-                            <option>İbrahim CİHAT</option>
-                            <option>Abbascan KORTMAZ</option>
-                            <option>Abdullah YAĞIZ</option>
-                            <option>Aslı Betim ŞAHİN</option>
-                            <option>İbrahim JİHAD</option>
-                            <option>Meltem ALTUN</option>
-                            <option>Mustafa TAŞDEMİR</option>
-                            <option>Orçun ÖZAYDIN</option>
-                            <option>Osman ERCAL</option>
-                            <option>Safiye ÖZDEMİR</option>
-                            <option>Samet Fatih GÜCER</option>
-                            <option>Selin ÇOLAKOĞLU</option>
-                            <option>Suha ALPAY</option>
+                          <select
+                            class='form-control'
+                            reuired
+                            onChange={(event) =>
+                              this.setState({
+                                modalDentist: event.target.value,
+                              })
+                            }
+                          >
+                            <option selected disabled value=''>
+                              Seçiniz...
+                            </option>
+                            {this.state.clinicians !== null &&
+                              this.state.clinicians.map((clinician) => (
+                                <option key={clinician.id} value={clinician.id}>
+                                  {clinician.name} {clinician.surname}
+                                </option>
+                              ))}
                           </select>
                         </div>
                       </div>
@@ -1182,7 +1154,27 @@ class PatientDetail extends Component {
                     >
                       Kapat
                     </button>
-                    <button type='button' class='btn btn-primary'>
+                    <button
+                      type='button'
+                      class='btn btn-primary'
+                      onClick={async () => {
+                        await store.clinicAddPayment(
+                          getCookie('user_id'),
+                          this.state.patient.id,
+                          {
+                            paymentTime: this.getFormattedDate(
+                              this.state.modalPaymentDate
+                            ),
+                            paymentType: this.state.modalPaymentType,
+                            amount: this.state.modalPrice,
+                            currency: this.state.modalCurrency,
+                            description: this.state.modalDescription,
+                            Dentist: this.state.modalDentist,
+                          }
+                        );
+                        window.location.reload();
+                      }}
+                    >
                       Ödeme Ekle
                     </button>
                   </div>
@@ -1215,7 +1207,7 @@ class PatientDetail extends Component {
           <div
             class='modal fade'
             id='addUserModal'
-            tabindex='-1'
+            tabIndex='-1'
             aria-labelledby='exampleModalLabel'
             aria-hidden='true'
           >
@@ -1772,6 +1764,14 @@ class PatientDetail extends Component {
         </div>
       </div>
     );
+  }
+
+  getFormattedDate(date) {
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+
+    return day + '.' + month + '.' + year;
   }
 }
 

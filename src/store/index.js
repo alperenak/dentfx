@@ -788,4 +788,31 @@ export default {
       errorMessageBuilder
     );
   },
+
+  async getPatientPayments(clinicID, patientID) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientID}/payment`;
+
+    return await http.makeGetRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
+
+  async clinicAddPayment(clinicID, patientID, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientID}/payment`;
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      props,
+      errorMessageBuilder
+    );
+  },
 };

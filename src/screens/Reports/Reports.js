@@ -42,7 +42,7 @@ class Reports extends Component {
           size: 3,
         },
         xaxis: {
-          categories: [] ,
+          categories: [],
         },
       },
       seriesPayment: [{ name: 'seri', data: [] }],
@@ -90,51 +90,64 @@ class Reports extends Component {
       duration: this.state.duration,
     });
 
-    this.setState({ optionsTedavi: {
-      xaxis: {
-          categories: treatmentReports.data.date
-        }
-      }});
+    this.setState({
+      optionsTedavi: {
+        xaxis: {
+          categories: treatmentReports.data.date,
+        },
+      },
+    });
     this.setState({ seriesTedavi: treatmentReports.data.series });
 
     let paymentReports = await store.getPaymentReport(clinicId, {
       duration: this.state.duration,
     });
-    this.setState({ optionsPayment: {
+    this.setState({
+      optionsPayment: {
         xaxis: {
-          categories: paymentReports.data.date
-        }
-      }});
+          categories: paymentReports.data.date,
+        },
+      },
+    });
     this.setState({ seriesPayment: paymentReports.data.series });
 
     let appointmentReports = await store.getAppointmentReport(clinicId, {
       duration: this.state.duration,
-      show: 'byAppointment'
+      show: 'byAppointment',
     });
-    this.setState({ optionsAppointment: {
+    this.setState({
+      optionsAppointment: {
         xaxis: {
-          categories: appointmentReports.data.date
-        }
-      } });
+          categories: appointmentReports.data.date,
+        },
+      },
+    });
     this.setState({ seriesAppointment: appointmentReports.data.series });
 
-    let appointmentReportsByDentist = await store.getAppointmentReport(clinicId, {
-      duration: this.state.duration,
-      show: 'byDentist'
-    });
-    this.setState({ optionsAppointmentByDentist: {
-       xaxis: {
+    let appointmentReportsByDentist = await store.getAppointmentReport(
+      clinicId,
+      {
+        duration: this.state.duration,
+        show: 'byDentist',
+      }
+    );
+    this.setState({
+      optionsAppointmentByDentist: {
+        xaxis: {
           categories: appointmentReportsByDentist.data.date,
-        }
-      }});
-    this.setState({ seriesAppointmentByDentist: appointmentReportsByDentist.data.series });
+        },
+      },
+    });
+    this.setState({
+      seriesAppointmentByDentist: appointmentReportsByDentist.data.series,
+    });
   };
 
   renderGraph() {
     return (
-      <>
+      <div className='chartContainer'>
+        <h6>Tedavi & Hasta Sayısı</h6>
         <row className='chart'>
-          <h6>Tedavi & Hasta Sayısı</h6>
           <Chart
             options={this.state.optionsTedavi}
             series={this.state.seriesTedavi}
@@ -142,7 +155,9 @@ class Reports extends Component {
             width={700}
             height={350}
           />
-          <h6>Randevular</h6>
+        </row>
+        <h6>Randevular</h6>
+        <row className='chart'>
           <Chart
             options={this.state.optionsAppointment}
             series={this.state.seriesAppointment}
@@ -151,8 +166,8 @@ class Reports extends Component {
             height={350}
           />
         </row>
+        <h6>Tedavi & Ödeme Ücretleri</h6>
         <row className='chart'>
-          <h6>Tedavi & Ödeme Ücretleri</h6>
           <Chart
             options={this.state.optionsPayment}
             series={this.state.seriesPayment}
@@ -160,7 +175,9 @@ class Reports extends Component {
             width={700}
             height={350}
           />
-          <h6>Randevular - Diş Hekimleri</h6>
+        </row>
+        <h6>Randevular - Diş Hekimleri</h6>
+        <row className='chart'>
           <Chart
             options={this.state.optionsAppointmentByDentist}
             series={this.state.seriesAppointmentByDentist}
@@ -169,7 +186,7 @@ class Reports extends Component {
             height={350}
           />
         </row>
-      </>
+      </div>
     );
   }
 
