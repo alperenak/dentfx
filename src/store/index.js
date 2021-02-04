@@ -776,10 +776,10 @@ export default {
 
   async getAppointmentReport(clinicID, props) {
     const chart = props.chart || 'apex';
-    const { duration } = props;
+    const { duration, show } = props;
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/clinic/${clinicID}/report/appointment?chart=${chart}&duration=${duration}`;
+    let path = `/clinic/${clinicID}/report/appointment?chart=${chart}&duration=${duration}&show=${show}`;
 
     return await http.makeGetRequest(
       path,

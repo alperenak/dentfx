@@ -16,8 +16,15 @@ class Reports extends Component {
         chart: {
           id: 'apexchart-example',
         },
+        stroke: {
+          show: true,
+          curve: 'smooth',
+        },
+        markers: {
+          size: 3,
+        },
         xaxis: {
-          categories: [] || this.state.datesTedavi,
+          categories: [],
         },
       },
       seriesTedavi: [{ name: 'seri', data: [] }],
@@ -27,22 +34,53 @@ class Reports extends Component {
         chart: {
           id: 'apexchart-example',
         },
+        stroke: {
+          show: true,
+          curve: 'smooth',
+        },
+        markers: {
+          size: 3,
+        },
         xaxis: {
-          categories: [] || this.state.datesPayment,
+          categories: [] ,
         },
       },
       seriesPayment: [{ name: 'seri', data: [] }],
 
-      datesAppointment: null,
       optionsAppointment: {
         chart: {
           id: 'apexchart-example',
         },
+        stroke: {
+          show: true,
+          curve: 'smooth',
+        },
+        markers: {
+          size: 3,
+        },
         xaxis: {
-          categories: [] || this.state.datesAppointment,
+          categories: [],
         },
       },
       seriesAppointment: [{ name: 'seri', data: [] }],
+
+      datesAppointmentByDentist: [],
+      optionsAppointmentByDentist: {
+        chart: {
+          id: 'apexchart-example',
+        },
+        stroke: {
+          show: true,
+          curve: 'smooth',
+        },
+        markers: {
+          size: 3,
+        },
+        xaxis: {
+          categories: [],
+        },
+      },
+      seriesAppointmentByDentist: [{ name: 'seri', data: [] }],
     };
   }
 
@@ -52,61 +90,84 @@ class Reports extends Component {
       duration: this.state.duration,
     });
 
-    this.setState({ datesTedavi: treatmentReports.data.date });
+    this.setState({ optionsTedavi: {
+      xaxis: {
+          categories: treatmentReports.data.date
+        }
+      }});
     this.setState({ seriesTedavi: treatmentReports.data.series });
-    console.log(this.state.datesTedavi);
 
     let paymentReports = await store.getPaymentReport(clinicId, {
       duration: this.state.duration,
     });
-    this.setState({ datesPayment: paymentReports.data.date });
+    this.setState({ optionsPayment: {
+        xaxis: {
+          categories: paymentReports.data.date
+        }
+      }});
     this.setState({ seriesPayment: paymentReports.data.series });
 
     let appointmentReports = await store.getAppointmentReport(clinicId, {
       duration: this.state.duration,
+      show: 'byAppointment'
     });
-    this.setState({ datesAppointment: appointmentReports.data.date });
+    this.setState({ optionsAppointment: {
+        xaxis: {
+          categories: appointmentReports.data.date
+        }
+      } });
     this.setState({ seriesAppointment: appointmentReports.data.series });
+
+    let appointmentReportsByDentist = await store.getAppointmentReport(clinicId, {
+      duration: this.state.duration,
+      show: 'byDentist'
+    });
+    this.setState({ optionsAppointmentByDentist: {
+       xaxis: {
+          categories: appointmentReportsByDentist.data.date,
+        }
+      }});
+    this.setState({ seriesAppointmentByDentist: appointmentReportsByDentist.data.series });
   };
 
   renderGraph() {
     return (
       <>
         <row className='chart'>
-          <h6>Tedavi & Hasta sayisi</h6>
+          <h6>Tedavi & Hasta Sayısı</h6>
           <Chart
             options={this.state.optionsTedavi}
             series={this.state.seriesTedavi}
             type='line'
-            width={500}
-            height={320}
+            width={700}
+            height={350}
           />
-          <h6>Randevu sayisi</h6>
+          <h6>Randevular</h6>
           <Chart
             options={this.state.optionsAppointment}
             series={this.state.seriesAppointment}
             type='line'
-            width={500}
-            height={320}
+            width={700}
+            height={350}
           />
         </row>
         <row className='chart'>
-          <h6>Tedavi ucretleri</h6>
+          <h6>Tedavi & Ödeme Ücretleri</h6>
           <Chart
             options={this.state.optionsPayment}
             series={this.state.seriesPayment}
             type='line'
-            width={500}
-            height={320}
+            width={700}
+            height={350}
           />
-          {/* <h6>Alinan toplam ucretler</h6>
+          <h6>Randevular - Diş Hekimleri</h6>
           <Chart
-            options={this.state.options}
-            series={this.state.series}
+            options={this.state.optionsAppointmentByDentist}
+            series={this.state.seriesAppointmentByDentist}
             type='line'
-            width={500}
-            height={320}
-          /> */}
+            width={700}
+            height={350}
+          />
         </row>
       </>
     );
