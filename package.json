@@ -58,7 +58,7 @@
     "webpack-dev-middleware": "^3.7.2"
   },
   "scripts": {
-    "build": "webpack --display-error-details --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
     "serve": "node server.js",
     "watch": "NODE_ENV=development yarn serve",
     "watch_windows": "set NODE_ENV=development&&npm run serve",
