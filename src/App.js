@@ -62,18 +62,134 @@ function App() {
   return (
     <>
       <Router>
-        <div class='wrapper'>
-          <UserTopBar v-if={authorized} />
-        </div>
         {authorized ? (
-          <div class='zeusContainer'>
-            <div class='row'>
-              <div class='col-md-2 leftPart'>
-                <SideBar v-if={authorized} />
-              </div>
-              {isUser ? (
-                <>
-                  <div class='col-md-7 middlePart'>
+          <>
+            <div class='wrapper'>
+              <UserTopBar v-if={authorized} />
+            </div>
+            <div class='zeusContainer'>
+              <div class='row'>
+                <div class='col-md-2 leftPart'>
+                  <SideBar v-if={authorized} />
+                </div>
+                {isUser ? (
+                  <>
+                    <div class='col-md-7 middlePart'>
+                      <Switch>
+                        <Route
+                          v-if={authorized}
+                          path='/'
+                          exact
+                          render={(props) => <Home {...props} />}
+                        />
+
+                        <Route
+                          v-if={authorized}
+                          path='/appointment'
+                          exact
+                          render={(props) => <Appointment {...props} />}
+                        />
+
+                        <Route
+                          v-if={authorized}
+                          path='/calendar'
+                          exact
+                          render={(props) => <ACalendar {...props} />}
+                        />
+
+                        <Route
+                          v-if={authorized}
+                          path='/appointment/search'
+                          exact
+                          render={(props) => <SearchAppointment {...props} />}
+                        />
+
+                        <Route
+                          path='/profile/:id'
+                          exact
+                          render={(props) => <Profile {...props} />}
+                        />
+
+                        <Route
+                          path='/patients/'
+                          exact
+                          render={(props) => <Patients {...props} />}
+                        />
+
+                        <Route
+                          path='/messages/details/:id'
+                          exact
+                          render={(props) => <MessageDetails {...props} />}
+                        />
+
+                        <Route
+                          path='/messages'
+                          exact
+                          render={(props) => <Messages {...props} />}
+                        />
+
+                        <Route
+                          path='/messages/new'
+                          exact
+                          render={(props) => <NewMessage {...props} />}
+                        />
+
+                        <Route
+                          path='/clinic/:id'
+                          exact
+                          render={(props) => <ClinicDetail {...props} />}
+                        />
+
+                        <Route
+                          path='/patients/:id'
+                          exact
+                          render={(props) => <PatientDetail {...props} />}
+                        />
+
+                        <Route
+                          v-if={authorized}
+                          path='/appointment/create/:id'
+                          exact
+                          render={(props) => <CreateAppointment {...props} />}
+                        />
+                        <Route
+                          v-if={authorized}
+                          path='/paymenthistory'
+                          exact
+                          render={(props) => <PaymentHistory {...props} />}
+                        />
+
+                        <Route
+                          path='/clinician'
+                          exact
+                          render={(props) => <Clinician {...props} />}
+                        />
+
+                        <Route
+                          path='/clinician/:id'
+                          exact
+                          render={(props) => <ClinicianDetails {...props} />}
+                        />
+
+                        <Route
+                          path='/clinician/new'
+                          exact
+                          render={(props) => <NewClinician {...props} />}
+                        />
+
+                        <Route
+                          path='/addTreatment'
+                          exact
+                          render={(props) => <AddTreatment {...props} />}
+                        />
+                      </Switch>
+                    </div>
+                    <div className={'col-md-3 rightPart'}>
+                      <RightMenu />
+                    </div>
+                  </>
+                ) : (
+                  <div class='col-md-10 middlePart'>
                     <Switch>
                       <Route
                         v-if={authorized}
@@ -87,6 +203,12 @@ function App() {
                         path='/appointment'
                         exact
                         render={(props) => <Appointment {...props} />}
+                      />
+
+                      <Route
+                        path='/dentist/:id'
+                        exact
+                        render={(props) => <DentistDetail {...props} />}
                       />
 
                       <Route
@@ -151,23 +273,21 @@ function App() {
                         exact
                         render={(props) => <CreateAppointment {...props} />}
                       />
-                      <Route
-                        v-if={authorized}
-                        path='/paymenthistory'
-                        exact
-                        render={(props) => <PaymentHistory {...props} />}
-                      />
 
                       <Route
                         path='/clinician'
                         exact
                         render={(props) => <Clinician {...props} />}
                       />
-
                       <Route
                         path='/clinician/:id'
                         exact
                         render={(props) => <ClinicianDetails {...props} />}
+                      />
+                      <Route
+                        path='/treatmentManagement'
+                        exact
+                        render={(props) => <TreatmentManagement {...props} />}
                       />
 
                       <Route
@@ -181,140 +301,22 @@ function App() {
                         exact
                         render={(props) => <AddTreatment {...props} />}
                       />
+
+                      <Route
+                        path='/reports'
+                        exact
+                        render={(props) => <Reports {...props} />}
+                      />
                     </Switch>
                   </div>
-                  <div className={'col-md-3 rightPart'}>
-                    <RightMenu />
-                  </div>
-                </>
-              ) : (
-                <div class='col-md-10 middlePart'>
-                  <Switch>
-                    <Route
-                      v-if={authorized}
-                      path='/'
-                      exact
-                      render={(props) => <Home {...props} />}
-                    />
-
-                    <Route
-                      v-if={authorized}
-                      path='/appointment'
-                      exact
-                      render={(props) => <Appointment {...props} />}
-                    />
-
-                    <Route
-                      path='/dentist/:id'
-                      exact
-                      render={(props) => <DentistDetail {...props} />}
-                    />
-
-                    <Route
-                      v-if={authorized}
-                      path='/calendar'
-                      exact
-                      render={(props) => <ACalendar {...props} />}
-                    />
-
-                    <Route
-                      v-if={authorized}
-                      path='/appointment/search'
-                      exact
-                      render={(props) => <SearchAppointment {...props} />}
-                    />
-
-                    <Route
-                      path='/profile/:id'
-                      exact
-                      render={(props) => <Profile {...props} />}
-                    />
-
-                    <Route
-                      path='/patients/'
-                      exact
-                      render={(props) => <Patients {...props} />}
-                    />
-
-                    <Route
-                      path='/messages/details/:id'
-                      exact
-                      render={(props) => <MessageDetails {...props} />}
-                    />
-
-                    <Route
-                      path='/messages'
-                      exact
-                      render={(props) => <Messages {...props} />}
-                    />
-
-                    <Route
-                      path='/messages/new'
-                      exact
-                      render={(props) => <NewMessage {...props} />}
-                    />
-
-                    <Route
-                      path='/clinic/:id'
-                      exact
-                      render={(props) => <ClinicDetail {...props} />}
-                    />
-
-                    <Route
-                      path='/patients/:id'
-                      exact
-                      render={(props) => <PatientDetail {...props} />}
-                    />
-
-                    <Route
-                      v-if={authorized}
-                      path='/appointment/create/:id'
-                      exact
-                      render={(props) => <CreateAppointment {...props} />}
-                    />
-
-                    <Route
-                      path='/clinician'
-                      exact
-                      render={(props) => <Clinician {...props} />}
-                    />
-                    <Route
-                      path='/clinician/:id'
-                      exact
-                      render={(props) => <ClinicianDetails {...props} />}
-                    />
-                    <Route
-                      path='/treatmentManagement'
-                      exact
-                      render={(props) => <TreatmentManagement {...props} />}
-                    />
-
-                    <Route
-                      path='/clinician/new'
-                      exact
-                      render={(props) => <NewClinician {...props} />}
-                    />
-
-                    <Route
-                      path='/addTreatment'
-                      exact
-                      render={(props) => <AddTreatment {...props} />}
-                    />
-
-                    <Route
-                      path='/reports'
-                      exact
-                      render={(props) => <Reports {...props} />}
-                    />
-                  </Switch>
-                </div>
-              )}
+                )}
+              </div>
+              {/* <Footer /> */}
             </div>
-            {/* <Footer /> */}
-          </div>
+          </>
         ) : (
           <div>
-            <TopBar />
+            {/* <TopBar /> */}
             <div class='landingMain'>
               <Switch>
                 <Route

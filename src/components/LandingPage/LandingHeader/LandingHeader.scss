@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  height: 103px;
+  background-color: white;
+  top: 0;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  &__logoContainer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__logo {
+      cursor: pointer;
+      height: 50px;
+      width: 160px;
+    }
+  }
+
+  &__links {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'SofiaMedium';
+    align-items: center;
+  }
+  &__buttonContainer {
+    display: flex;
+    justify-content: center;
+    &__menu {
+      color: #a12b70;
+      margin-right: 30px;
+    }
+    &__menu:hover {
+      color: #3e0f66;
+    }
+  }
+  &__rectangle {
+    margin-right: 1rem;
+    background-color: #3e0f66;
+    height: 43px;
+    width: 141px;
+
+    * {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: white;
+    }
+
+    &__appleLogo {
+      color: white;
+      width: 22px;
+      height: 20px;
+    }
+  }
+}
