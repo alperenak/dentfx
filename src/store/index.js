@@ -815,4 +815,31 @@ export default {
       errorMessageBuilder
     );
   },
+
+  async clinicAddNote(clinicID, patientID, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientID}/note`;
+
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      props,
+      errorMessageBuilder
+    );
+  },
+
+  async clinicDeleteNote(clinicID, patientID, noteID) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientID}/note/${noteID}`;
+
+    return await http.makeDeleteRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      errorMessageBuilder
+    );
+  },
 };

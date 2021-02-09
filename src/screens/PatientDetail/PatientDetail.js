@@ -75,6 +75,7 @@ class PatientDetail extends Component {
       modalCurrency: null,
       modalDescription: null,
       modalDentist: null,
+      newNote: null,
     };
   }
 
@@ -442,8 +443,8 @@ class PatientDetail extends Component {
             sort: 'asc',
           },
           {
-            label: 'Dis Hekimi',
-            field: 'dis_hekimi',
+            label: 'Not',
+            field: 'not',
             sort: 'asc',
           },
           {
@@ -457,50 +458,39 @@ class PatientDetail extends Component {
             sort: 'asc',
           },
         ],
-        rows: [
-          {
-            tarih: '12.01.2020',
-            dis_hekimi: 'Fatih Atmaca',
+        rows: this.state.patient.notes.map((note) => {
+          return {
+            tarih: note.created.substr(1, 10),
+            not: note.body,
             button_düzenle: (
-              <button type='button' class='btn btn-secondary'>
-                Düzenle
+              <button
+                type='button'
+                class='btn btn-secondary'
+                onClick={() => {
+                  console.log(note._id);
+                }}
+              >
+                Duzenle
               </button>
             ),
             button_sil: (
-              <button type='button' class='btn btn-danger'>
+              <button
+                type='button'
+                class='btn btn-danger'
+                onClick={async () => {
+                  await store.clinicDeleteNote(
+                    getCookie('user_id'),
+                    this.state.patient.id,
+                    note._id
+                  );
+                  window.location.reload();
+                }}
+              >
                 Sil
               </button>
             ),
-          },
-          {
-            tarih: '12.02.2020',
-            dis_hekimi: 'Hasan Demirkiran',
-            button_düzenle: (
-              <button type='button' class='btn btn-secondary'>
-                Düzenle
-              </button>
-            ),
-            button_sil: (
-              <button type='button' class='btn btn-danger'>
-                Sil
-              </button>
-            ),
-          },
-          {
-            tarih: '13.01.2020',
-            dis_hekimi: 'Fatih Atmaca',
-            button_düzenle: (
-              <button type='button' class='btn btn-secondary'>
-                Düzenle
-              </button>
-            ),
-            button_sil: (
-              <button type='button' class='btn btn-danger'>
-                Sil
-              </button>
-            ),
-          },
-        ],
+          };
+        }),
       },
     });
     this.setState({
@@ -1228,17 +1218,15 @@ class PatientDetail extends Component {
                 </div>
                 <div class='modal-body container'>
                   <form>
-                    <div class='form-row' style={{ marginTop: '0' }}>
-                      <div class='col-md-6 mb-3'>
-                        <label>Not Tarihi</label>
-                        <DatePicker />
-                      </div>
-                    </div>
+                    <div class='form-row' style={{ marginTop: '0' }}></div>
                     <div class='form-group'>
                       <label for='exampleFormControlTextarea1'>
                         Lütfen Not Ekleyiniz.
                       </label>
                       <textarea
+                        onChange={(e) => {
+                          this.setState({ newNote: e.target.value });
+                        }}
                         class='form-control'
                         id='exampleFormControlTextarea1'
                         rows='8'
@@ -1254,7 +1242,18 @@ class PatientDetail extends Component {
                   >
                     Kapat
                   </button>
-                  <button type='button' class='btn btn-primary'>
+                  <button
+                    type='button'
+                    class='btn btn-primary'
+                    onClick={async () => {
+                      await store.clinicAddNote(
+                        getCookie('user_id'),
+                        this.state.patient.id,
+                        { body: this.state.newNote }
+                      );
+                      window.location.reload();
+                    }}
+                  >
                     Not Ekle
                   </button>
                 </div>
