@@ -6,7 +6,7 @@ const LandingFooter = () => {
   return (
     <>
       <div className='footer'>
-        <div className='__top__items'>
+        <div className='footer__top__items'>
           <p style={{ fontSize: '20px', color: 'white' }}>
             <span
               style={{ fontWeight: 'bold', fontSize: '24px', color: '#25f2ff' }}
@@ -19,8 +19,9 @@ const LandingFooter = () => {
             Yeni kliniklerden haberdar olmak ister misiniz? Sadece kaydolun.
           </p>
         </div>
-        <div className='__top__items'>
+        <div className='footer__top__items'>
           <TextField
+            className='footer__top__items__text'
             id='input-with-icon-grid'
             placeholder='mailadresim@gmail.com '
             inputProps={{

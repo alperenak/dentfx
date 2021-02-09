@@ -17,6 +17,16 @@ import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { usePushingGutterStyles } from '@mui-treasury/styles/gutter/pushing';
 import Slider from 'react-slick';
 import './LandingBody.scss';
+import doctor from '../../../assets/images/you-doctor.jpg';
+import chair from '../../../assets/images/dentist-chair.jpg';
+import nurse from '../../../assets/images/dentist-nurse-patient.jpg';
+import dentalcabinet from '../../../assets/images/dental-cabinet.jpg';
+import medicalcabinet from '../../../assets/images/medical-cabinet.jpg';
+import equipments from '../../../assets/images/dentist-equipment.jpg';
+
+import implantIcon from '../../../assets/icons/implant.svg';
+import ortodonti from '../../../assets/icons/ortodonti.svg';
+import gulusTasarimi from '../../../assets/icons/gulusTasarimi.svg';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -35,7 +45,9 @@ const useStyles = makeStyles(() => ({
     maxWidth: 400,
   },
   title: {
+    color: '#a12b70',
     marginBottom: 0,
+    fontSize: '14px',
   },
   rateValue: {
     fontWeight: 'bold',
@@ -154,18 +166,9 @@ const LandingBody = () => {
             Uzmanlığa göre hızlı aramayı deneyin:
           </p>
           <div className='body__banner__icons'>
-            <img
-              className='body__banner__icons__icon'
-              src='https://picsum.photos/100/100'
-            />
-            <img
-              className='body__banner__icons__icon'
-              src='https://picsum.photos/100/100'
-            />
-            <img
-              className='body__banner__icons__icon'
-              src='https://picsum.photos/100/100'
-            />
+            <img className='body__banner__icons__icon' src={implantIcon} />
+            <img className='body__banner__icons__icon' src={ortodonti} />
+            <img className='body__banner__icons__icon' src={gulusTasarimi} />
           </div>
         </div>
 
@@ -174,19 +177,19 @@ const LandingBody = () => {
           <div>
             <Slider {...settings}>
               <div>
-                <img src='https://picsum.photos/400/400' />
+                <img style={{ width: '450px', height: '300px' }} src={doctor} />
               </div>
               <div>
-                <img src='https://picsum.photos/400/400' />
+                <img style={{ width: '450px', height: '300px' }} src={chair} />
               </div>
               <div>
-                <img src='https://picsum.photos/400/400' />
+                <img style={{ width: '450px', height: '300px' }} src={nurse} />
               </div>
               <div>
-                <img src='https://picsum.photos/400/400' />
+                <img style={{ width: '450px', height: '300px' }} src={doctor} />
               </div>
               <div>
-                <img src='https://picsum.photos/400/400' />
+                <img style={{ width: '450px', height: '300px' }} src={chair} />
               </div>
             </Slider>
             <div className='body__popular__button'>
@@ -210,61 +213,25 @@ const LandingBody = () => {
           <div className='body__stats__words'>
             <Grid container spacing={10} alignItems='flex-end'>
               <Grid item>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    padding: '50px',
-                    alignContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
+                <div className='body__stats__words__items'>
                   <h1>3</h1>
                   <h6>SehirI</h6>
                 </div>
               </Grid>
               <Grid item>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    padding: '50px',
-                    alignContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
+                <div className='body__stats__words__items'>
                   <h1>121</h1>
                   <h6>Klinik</h6>
                 </div>
               </Grid>
               <Grid item>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    padding: '50px',
-                    alignContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
+                <div className='body__stats__words__items'>
                   <h1>423</h1>
                   <h6>Doktor</h6>
                 </div>
               </Grid>
               <Grid item>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    padding: '50px',
-                    alignContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
+                <div className='body__stats__words__items'>
                   <h1>10.521</h1>
                   <h6>Hasta</h6>
                 </div>
@@ -276,17 +243,14 @@ const LandingBody = () => {
         <div className='body__clinics'>
           <p className='body__clinics__title'>Bölümlere Göre Klinikler</p>
           <div className='body__clinics__cards'>
-            <Grid container spacing={10} alignItems='flex-end'>
+            <Grid container spacing={2} alignItems='flex-end'>
               <Grid item>
                 <Card elevation={0} className={styles.root}>
-                  <CardMedia
-                    classes={mediaStyles}
-                    image={
-                      'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'
-                    }
-                  />
+                  <CardMedia classes={mediaStyles} image={dentalcabinet} />
                   <CardContent className={(shadowStyles.root, styles.content)}>
-                    <h3 className={styles.title}>Colloseo</h3>
+                    <h3 className={styles.title}>
+                      Angora Ağız ve Diş Sağlığı Merkezi
+                    </h3>
                     <Box
                       color={'grey.500'}
                       display={'flex'}
@@ -294,7 +258,7 @@ const LandingBody = () => {
                       mb={1}
                     >
                       <LocationOn className={styles.locationIcon} />
-                      <span>Rome</span>
+                      <span style={{ fontSize: '12px' }}>Rome</span>
                     </Box>
                     <Box
                       display={'flex'}
@@ -310,22 +274,25 @@ const LandingBody = () => {
                       </Typography>
                     </Box>
                     <Typography color={'textSecondary'} variant={'body2'}>
-                      Talking about travelling or new jobs, many people often
-                      think of change of environment...
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Quis consequat netus nec dui netus orci senectus egestas.
+                      Sit maecenas sit viverra adipiscing ac faucibus eu et
+                      urna. Ullamcorper enim cursus amet, feugiat praesent
+                      varius. Ultrices non tempor libero, vulputate dui
+                      elementum. Pulvinar venenatis, et pellentesque sed sed
+                      viverra eu metus. Arcu justo, facilisis vel diam pulvinar.
+                      Praesent duis varius vitae,
                     </Typography>
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item>
                 <Card elevation={0} className={styles.root}>
-                  <CardMedia
-                    classes={mediaStyles}
-                    image={
-                      'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'
-                    }
-                  />
+                  <CardMedia classes={mediaStyles} image={medicalcabinet} />
                   <CardContent className={(shadowStyles.root, styles.content)}>
-                    <h3 className={styles.title}>Colloseo</h3>
+                    <h3 className={styles.title}>
+                      Angora Ağız ve Diş Sağlığı Merkezi
+                    </h3>
                     <Box
                       color={'grey.500'}
                       display={'flex'}
@@ -333,7 +300,7 @@ const LandingBody = () => {
                       mb={1}
                     >
                       <LocationOn className={styles.locationIcon} />
-                      <span>Rome</span>
+                      <span style={{ fontSize: '12px' }}>Rome</span>
                     </Box>
                     <Box
                       display={'flex'}
@@ -349,22 +316,25 @@ const LandingBody = () => {
                       </Typography>
                     </Box>
                     <Typography color={'textSecondary'} variant={'body2'}>
-                      Talking about travelling or new jobs, many people often
-                      think of change of environment...
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Quis consequat netus nec dui netus orci senectus egestas.
+                      Sit maecenas sit viverra adipiscing ac faucibus eu et
+                      urna. Ullamcorper enim cursus amet, feugiat praesent
+                      varius. Ultrices non tempor libero, vulputate dui
+                      elementum. Pulvinar venenatis, et pellentesque sed sed
+                      viverra eu metus. Arcu justo, facilisis vel diam pulvinar.
+                      Praesent duis varius vitae,
                     </Typography>
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item>
                 <Card elevation={0} className={styles.root}>
-                  <CardMedia
-                    classes={mediaStyles}
-                    image={
-                      'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'
-                    }
-                  />
+                  <CardMedia classes={mediaStyles} image={equipments} />
                   <CardContent className={(shadowStyles.root, styles.content)}>
-                    <h3 className={styles.title}>Colloseo</h3>
+                    <h3 className={styles.title}>
+                      Angora Ağız ve Diş Sağlığı Merkezi
+                    </h3>
                     <Box
                       color={'grey.500'}
                       display={'flex'}
@@ -372,7 +342,7 @@ const LandingBody = () => {
                       mb={1}
                     >
                       <LocationOn className={styles.locationIcon} />
-                      <span>Rome</span>
+                      <span style={{ fontSize: '12px' }}>Rome</span>
                     </Box>
                     <Box
                       display={'flex'}
@@ -388,8 +358,14 @@ const LandingBody = () => {
                       </Typography>
                     </Box>
                     <Typography color={'textSecondary'} variant={'body2'}>
-                      Talking about travelling or new jobs, many people often
-                      think of change of environment...
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Quis consequat netus nec dui netus orci senectus egestas.
+                      Sit maecenas sit viverra adipiscing ac faucibus eu et
+                      urna. Ullamcorper enim cursus amet, feugiat praesent
+                      varius. Ultrices non tempor libero, vulputate dui
+                      elementum. Pulvinar venenatis, et pellentesque sed sed
+                      viverra eu metus. Arcu justo, facilisis vel diam pulvinar.
+                      Praesent duis varius vitae,
                     </Typography>
                   </CardContent>
                 </Card>
@@ -422,9 +398,9 @@ const LandingBody = () => {
           </div>
         </div>
 
-        <div className='body__clinics'>
-          <p className='body__clinics__title'>Nasıl Çalışır?</p>
-          <div className='body__clinics__cards'>
+        <div className='body__nasil'>
+          <p className='body__nasil__title'>Nasıl Çalışır?</p>
+          <div className='body__nasil__cards'>
             <Grid container spacing={10} alignItems='flex-end'>
               <Grid item>
                 <Card className={styles.roott} variant='outlined'>
@@ -485,7 +461,15 @@ const LandingBody = () => {
               <Grid item>
                 <Card className={styles.roottt} variant='outlined'>
                   <CardContent>
-                    <img src='https://picsum.photos/350/100' />
+                    <p style={{ fontSize: '12px' }}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Lectus penatibus cras senectus eros, et auctor ornare
+                      rhoncus, tristique. Accumsan, elit gravida cursus nunc
+                      nunc platea in elit. Sit facilisis feugiat velit eget
+                      nulla. Viverra et sit est habitant arcu. Tristique eu
+                      porttitor lectus mattis. Diam eu in amet, arcu enim donec
+                      imperdiet.
+                    </p>
                     <Typography variant='h5' component='h2'>
                       İhtiyacınız olan Kliniği bulun
                     </Typography>
@@ -501,7 +485,15 @@ const LandingBody = () => {
               <Grid item>
                 <Card className={styles.roottt} variant='outlined'>
                   <CardContent>
-                    <img src='https://picsum.photos/350/100' />
+                    <p style={{ fontSize: '12px' }}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Lectus penatibus cras senectus eros, et auctor ornare
+                      rhoncus, tristique. Accumsan, elit gravida cursus nunc
+                      nunc platea in elit. Sit facilisis feugiat velit eget
+                      nulla. Viverra et sit est habitant arcu. Tristique eu
+                      porttitor lectus mattis. Diam eu in amet, arcu enim donec
+                      imperdiet.
+                    </p>
                     <Typography variant='h5' component='h2'>
                       İhtiyacınız olan Kliniği bulun
                     </Typography>
@@ -517,7 +509,15 @@ const LandingBody = () => {
               <Grid item>
                 <Card className={styles.roottt} variant='outlined'>
                   <CardContent>
-                    <img src='https://picsum.photos/350/100' />
+                    <p style={{ fontSize: '12px' }}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Lectus penatibus cras senectus eros, et auctor ornare
+                      rhoncus, tristique. Accumsan, elit gravida cursus nunc
+                      nunc platea in elit. Sit facilisis feugiat velit eget
+                      nulla. Viverra et sit est habitant arcu. Tristique eu
+                      porttitor lectus mattis. Diam eu in amet, arcu enim donec
+                      imperdiet.
+                    </p>
                     <Typography variant='h5' component='h2'>
                       İhtiyacınız olan Kliniği bulun
                     </Typography>

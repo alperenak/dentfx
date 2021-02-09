@@ -1,4 +1,10 @@
+@font-face {
+  font-family: sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500&display=swap');
+}
+
 .footer {
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -17,6 +23,8 @@
 }
 
 .footer2 {
+  font-family: 'Montserrat', sans-serif;
+
   padding-top: 20px;
   display: flex;
   justify-content: space-evenly;
@@ -40,6 +48,8 @@
 }
 
 .footer3 {
+  font-family: 'Montserrat', sans-serif;
+
   padding-top: 20px;
   display: flex;
   justify-content: space-evenly;
@@ -49,5 +59,82 @@
   & p {
     font-size: 22px;
     color: white;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #a12b70;
+    border-bottom: 1px solid white;
+
+    &__top {
+      justify-content: space-between;
+      align-self: center;
+
+      &__items {
+        flex-grow: 4;
+        align-self: center;
+
+        & p {
+          font-size: 10px;
+        }
+
+        & span {
+          font-size: 12px;
+        }
+
+        &__text {
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  .footer2 {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    background-color: #a12b70;
+    border-bottom: 1px solid white;
+    text-align: center;
+    & p {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
+
+    & ul {
+      margin: 5px 0 15px;
+      list-style-type: none;
+      color: white;
+    }
+
+    & li {
+      padding: 5px 0px 0px;
+    }
+  }
+
+  .footer3 {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #a12b70;
+    border-bottom: 1px solid white;
+    & p {
+      font-size: 12px;
+      color: white;
+    }
   }
 }
