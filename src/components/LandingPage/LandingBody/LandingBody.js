@@ -42,7 +42,7 @@ const useStyles = makeStyles(() => ({
   },
   roottt: {
     overflow: 'initial',
-    maxWidth: 400,
+    maxWidth: 300,
   },
   title: {
     color: '#a12b70',

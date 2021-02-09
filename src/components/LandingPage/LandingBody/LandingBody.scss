@@ -461,3 +461,47 @@
     }
   }
 }
+
+@media (max-width: 1300px) {
+  .body {
+    &__banner {
+      &__search {
+        padding: 0px;
+        width: 70%;
+        height: 45px;
+      }
+    }
+
+    &__gorusler {
+      margin-top: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: center;
+      align-items: center;
+      height: 430px;
+      width: 100%;
+      background-image: url('../../../assets/images/dar-purple-shade.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 80%;
+      // box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+
+      &__title {
+        text-align: center;
+        width: 100%;
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+      }
+
+      &__cards {
+        color: white;
+      }
+
+      &__cards {
+        color: white;
+      }
+    }
+  }
+}
