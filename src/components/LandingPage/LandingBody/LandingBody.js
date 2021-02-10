@@ -212,6 +212,7 @@ const LandingBody = () => {
                   height: '30px',
                   fontSize: '12px',
                 }}
+                href='/searchPage'
               >
                 Tumunu gor
               </Button>
