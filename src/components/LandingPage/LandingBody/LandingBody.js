@@ -28,6 +28,10 @@ import implantIcon from '../../../assets/icons/implant.svg';
 import ortodonti from '../../../assets/icons/ortodonti.svg';
 import gulusTasarimi from '../../../assets/icons/gulusTasarimi.svg';
 
+import klinik from '../../../icons/Klinik.svg';
+import randevu from '../../../icons/Randevu.svg';
+import searchMap from '../../../icons/SearchMap.svg';
+
 const useStyles = makeStyles(() => ({
   root: {
     overflow: 'initial',
@@ -38,7 +42,8 @@ const useStyles = makeStyles(() => ({
   roott: {
     overflow: 'initial',
     maxWidth: 304,
-    backgroundColor: 'transparent',
+    height: 350,
+    backgroundColor: '#f9f9f9',
   },
   roottt: {
     overflow: 'initial',
@@ -400,16 +405,34 @@ const LandingBody = () => {
 
         <div className='body__nasil'>
           <p className='body__nasil__title'>Nasıl Çalışır?</p>
+          <p className='body__nasil__description'>
+            Nerden başlayacağınızdan emin değilseniz aşağıdaki adımları izleyin.
+          </p>
           <div className='body__nasil__cards'>
             <Grid container spacing={10} alignItems='flex-end'>
               <Grid item>
                 <Card className={styles.roott} variant='outlined'>
-                  <CardContent>
-                    <img src='https://picsum.photos/275/150' />
-                    <Typography variant='h5' component='h2'>
+                  <CardContent style={{ textAlign: 'center' }}>
+                    <img
+                      src={searchMap}
+                      style={{ textAlign: 'center', marginBottom: '10px' }}
+                    />
+                    <Typography
+                      variant='h5'
+                      component='h2'
+                      style={{
+                        textAlign: 'center',
+                        color: '#a12b70',
+                        marginBottom: '10px',
+                      }}
+                    >
                       İhtiyacınız olan Kliniği bulun
                     </Typography>
-                    <Typography variant='body2' component='p'>
+                    <Typography
+                      variant='body2'
+                      component='p'
+                      style={{ color: '#7c7c7c', marginBottom: '10px' }}
+                    >
                       Tam olarak istediğinizi elde etmek için şehiri veya
                       departmanı seçerek aramanızı filtrelerle kişiselleştirin.
                       Hatta bunları sağlanan hizmetlere göre
@@ -420,32 +443,64 @@ const LandingBody = () => {
               </Grid>
               <Grid item>
                 <Card className={styles.roott} variant='outlined'>
-                  <CardContent>
-                    <img src='https://picsum.photos/275/150' />
-                    <Typography variant='h5' component='h2'>
-                      İhtiyacınız olan Kliniği bulun
+                  <CardContent style={{ textAlign: 'center' }}>
+                    <img
+                      src={randevu}
+                      style={{ textAlign: 'center', marginBottom: '10px' }}
+                    />
+                    <Typography
+                      variant='h5'
+                      component='h2'
+                      style={{
+                        textAlign: 'center',
+                        color: '#a12b70',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      Randevu isteği gönderin
                     </Typography>
-                    <Typography variant='body2' component='p'>
-                      Tam olarak istediğinizi elde etmek için şehiri veya
-                      departmanı seçerek aramanızı filtrelerle kişiselleştirin.
-                      Hatta bunları sağlanan hizmetlere göre
-                      filtreleyebilirsiniz.
+                    <Typography
+                      variant='body2'
+                      component='p'
+                      style={{ color: '#7c7c7c' }}
+                    >
+                      Kliniklere bakın. Kliniğin sayfasında kliniğin
+                      ayrıntılarını, sağlanan hizmetleri, incelemeleri, sağlık
+                      personelini ve daha fazlasını görün. Klinik ihtiyacınız
+                      olanı sunuyorsa randevu formunu doldurun.
                     </Typography>
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item>
                 <Card className={styles.roott} variant='outlined'>
-                  <CardContent>
-                    <img src='https://picsum.photos/275/150' />
-                    <Typography variant='h5' component='h2'>
-                      İhtiyacınız olan Kliniği bulun
+                  <CardContent
+                    style={{ textAlign: 'center', marginBottom: '10px' }}
+                  >
+                    <img
+                      src={klinik}
+                      style={{ textAlign: 'center', marginBottom: '10px' }}
+                    />
+                    <Typography
+                      variant='h5'
+                      component='h2'
+                      style={{
+                        textAlign: 'center',
+                        color: '#a12b70',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      Kliniğin sizinle iletişime geçmesini isteyin
                     </Typography>
-                    <Typography variant='body2' component='p'>
-                      Tam olarak istediğinizi elde etmek için şehiri veya
-                      departmanı seçerek aramanızı filtrelerle kişiselleştirin.
-                      Hatta bunları sağlanan hizmetlere göre
-                      filtreleyebilirsiniz.
+                    <Typography
+                      variant='body2'
+                      component='p'
+                      style={{ color: '#7c7c7c' }}
+                    >
+                      Yolculuğunuz hakkında herhangi bir sorunuz varsa,
+                      kliniğiniz yalnızca bir mesaj uzağınızda. Ayrıca yerel
+                      ipuçları ve tavsiyeler de sunabilirler. İsteğinize cevap
+                      vermelerini bekleyin.
                     </Typography>
                   </CardContent>
                 </Card>
