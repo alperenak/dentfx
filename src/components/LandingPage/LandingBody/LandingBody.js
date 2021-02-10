@@ -28,6 +28,11 @@ import implantIcon from '../../../assets/icons/implant.svg';
 import ortodonti from '../../../assets/icons/ortodonti.svg';
 import gulusTasarimi from '../../../assets/icons/gulusTasarimi.svg';
 
+import ref1 from '../../../assets/images/ref1.jpeg';
+import ref2 from '../../../assets/images/ref2.jpeg';
+import ref3 from '../../../assets/images/ref3.jpeg';
+import ref4 from '../../../assets/images/ref4.jpeg';
+
 import klinik from '../../../icons/Klinik.svg';
 import randevu from '../../../icons/Randevu.svg';
 import searchMap from '../../../icons/SearchMap.svg';
@@ -594,22 +599,16 @@ const LandingBody = () => {
           <div className='body__references__cards'>
             <Grid container spacing={10} alignItems='flex-end'>
               <Grid item>
-                <img src='https://picsum.photos/60/60' />
+                <img src={ref1} />
               </Grid>
               <Grid item>
-                <img src='https://picsum.photos/60/60' />
+                <img src={ref2} />
               </Grid>
               <Grid item>
-                <img src='https://picsum.photos/60/60' />
+                <img src={ref3} />
               </Grid>
               <Grid item>
-                <img src='https://picsum.photos/60/60' />
-              </Grid>
-              <Grid item>
-                <img src='https://picsum.photos/60/60' />
-              </Grid>
-              <Grid item>
-                <img src='https://picsum.photos/60/60' />
+                <img src={ref4} />
               </Grid>
             </Grid>
           </div>

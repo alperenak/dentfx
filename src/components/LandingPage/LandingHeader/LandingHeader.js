@@ -2,7 +2,8 @@ import React from 'react';
 import './LandingHeader.scss';
 import { Logo } from '../../../icons/index';
 import { Link } from 'react-router-dom';
-import AppleLogo from '../../../assets/images/apple-logo.png';
+import appstore from '../../../assets/images/appstore.jpeg';
+import googleplay from '../../../assets/images/googleplay.jpeg';
 
 const LandingHeader = () => {
   return (
@@ -19,8 +20,12 @@ const LandingHeader = () => {
           >
             Giris yap
           </Link>
-          <div className='header__rectangle'></div>
-          <div className='header__rectangle'></div>
+          <div className='header__rectangle'>
+            <img src={appstore} />
+          </div>
+          <div className='header__rectangle'>
+            <img src={googleplay} />
+          </div>
         </div>
       </div>
     </>

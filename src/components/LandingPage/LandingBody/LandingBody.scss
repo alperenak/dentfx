@@ -240,6 +240,10 @@
     &__cards {
       margin-top: 50px;
       color: white;
+
+      & img {
+        height: 50px;
+      }
     }
   }
 }
