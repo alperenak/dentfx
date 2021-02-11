@@ -8,7 +8,7 @@ let port = process.env.PORT || 8091;
 let contentPath = path.resolve(__dirname + '/dist');
 let compiler;
 let corsOptions = {
-  origin: ['http://localhost:8091', 'http://127.0.0.1:8091'],
+  origin: ['http://localhost:8091', 'https://dentfx.netlify.app' ,'http://127.0.0.1:8091'],
 };
 let config = require('./appConfig');
 
@@ -51,14 +51,14 @@ app.get('*', function (req, res) {
       res.set('content-type', 'text/html');
       res.send(result);
       res.end();
-      console.log('DentFX app loaded');
+      console.log('DentFX app loaded development mode');
     });
   } else {
     let indexHtml = fs.readFileSync(
       path.join(contentPath, 'index.html'),
       'utf8'
     );
-    console.log('DentFX app loaded');
+    console.log('DentFX app loaded production mode');
     res.send(indexHtml);
   }
 });
