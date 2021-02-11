@@ -54,22 +54,22 @@ const LandingFooter = () => {
             <li>Yardim</li>
           </ul>
         </div>
-        <di>
+        <div>
           <p>Hizmetler</p>
           <ul>
             <li>Implant</li>
             <li>Ortodonti</li>
             <li>Gulus Tasarimi</li>
           </ul>
-        </di>
-        <di>
+        </div>
+        <div>
           <p>Şehirler</p>
           <ul>
             <li>Ankara</li>
             <li>Istanbul</li>
             <li>Izmir</li>
           </ul>
-        </di>
+        </div>
       </div>
 
       <div className='footer3'>
@@ -79,12 +79,12 @@ const LandingFooter = () => {
         <div>
           <p>destek@dentfx.com</p>
         </div>
-        <di>
+        <div>
           <p>+90 262 427 99 99</p>
-        </di>
-        <di>
+        </div>
+        <div>
           <p>social icons</p>
-        </di>
+        </div>
       </div>
     </>
   );
