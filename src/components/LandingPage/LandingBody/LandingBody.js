@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   TextField,
@@ -87,6 +88,14 @@ const LandingBody = () => {
   const shadowStyles = useFadedShadowStyles();
   const gutterStyles = usePushingGutterStyles({ firstExcluded: true });
 
+  const history = useHistory();
+  const [keyword, setKeyword] = useState('');
+  const [location, setLocation] = useState('');
+
+  const submitSearch = () => {
+    history.push(`searchPage?keyword=${keyword}&city=${location}`);
+  };
+
   let settings = {
     dots: true,
     infinite: true,
@@ -128,6 +137,9 @@ const LandingBody = () => {
                   id='input-with-icon-grid'
                   placeholder='Arama adı, konum, uzmanlık alanı'
                   inputProps={{ style: { fontSize: 12, width: 200 } }}
+                  onChange={(e) => {
+                    setKeyword(e.target.value);
+                  }}
                 />
               </Grid>
               <hr
@@ -146,6 +158,9 @@ const LandingBody = () => {
                   id='input-with-icon-grid'
                   placeholder='Sehire gore arama'
                   inputProps={{ style: { fontSize: 12, width: 200 } }}
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
                 />
               </Grid>
               <hr
@@ -166,6 +181,7 @@ const LandingBody = () => {
                     width: '200px',
                     fontSize: '12px',
                   }}
+                  onClick={submitSearch}
                 >
                   Arama yap
                 </Button>
