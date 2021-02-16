@@ -31,3 +31,5 @@ export { default as Sorular } from "./Sorular";
 export { default as Takvim } from "./Takvim";
 export { default as Anasayfa } from "./Anasayfa";
 export { default as TedaviYonetim } from "./TedaviYonetim";
+export { default as Raporlar } from "./Raporlar";
+export { default as TedaviGecmisi } from "./TedaviGecmisi";

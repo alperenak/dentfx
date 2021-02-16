@@ -1,111 +1,88 @@
-import React, { Component, createRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 /*** Utils ***/
-import store from '../../store';
-import { getCookie } from '../../utils/cookie';
+import store from "../../store";
+import { getCookie } from "../../utils/cookie";
 
 /*** Styles ***/
-import styles from './profile.scss';
+import "./profile.scss";
 
 /*** Icons ***/
-import editIcon from '../../icons/edit-icon.svg';
-import birthdayIcon from '../../icons/birthday-icon.svg';
-import phoneIcon from '../../icons/phone-icon.svg';
-import emailIcon from '../../icons/email-icon.svg';
-import locationIcon from '../../icons/location-icon_1.svg';
-import languageSettingsIcon from '../../icons/language-settings-icon.svg';
-import notificationIcon from '../../icons/notification-settings-icon.svg';
-import profileSettingsIcon from '../../icons/profile-settings-icon.svg';
-import chevronRightIcon from '../../icons/Chevron-right.svg';
-import DatePicker from 'react-datepicker';
-//*** Components ***/
-import Input from '../../components/Input';
-import Switch from 'react-input-switch';
-import Dropzone, { useDropzone } from 'react-dropzone';
-import Map from '../../components/Map/map';
-import { EditorState, convertToRaw } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
-import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
-
-const dropzoneRef = createRef();
-
-const openDialog = () => {
-  // Note that the ref is set async,
-  // so it might be null at some point
-  if (dropzoneRef.current) {
-    dropzoneRef.current.open();
-  }
-};
+import editIcon from "../../icons/edit-icon.svg";
+// import birthdayIcon from "../../icons/birthday-icon.svg";
+// import phoneIcon from "../../icons/phone-icon.svg";
+// import emailIcon from "../../icons/email-icon.svg";
+// import locationIcon from "../../icons/location-icon_1.svg";
+// import languageSettingsIcon from "../../icons/language-settings-icon.svg";
+// import notificationIcon from "../../icons/notification-settings-icon.svg";
+// import profileSettingsIcon from "../../icons/profile-settings-icon.svg";
+// import chevronRightIcon from "../../icons/Chevron-right.svg";
+// import DatePicker from "react-datepicker";
+// //*** Components ***/
+// import Input from "../../components/Input";
+// import Switch from "react-input-switch";
+import StaticProfile from "../../assets/images/profile.png";
+import { useDropzone } from "react-dropzone";
+// import Map from "../../components/Map/map";
+// import { EditorState } from "draft-js";
+// import { Editor } from "react-draft-wysiwyg";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import { Carousel } from "react-responsive-carousel";
 
 export default function Profile() {
   //#region General States
   const [user, setUser] = useState(null);
-  const [userType, setUserType] = useState();
-  const [selectedTab, setSelectedTab] = useState(1);
-  const [carouselImages, setCarouselImages] = useState([]);
+  const [selectedTab, setSelectedTab] = useState(0);
   //#endregion
 
   //#region Profile Settings States
-  const [profileName, setProfileName] = useState(user?.name);
-  const [profileSurname, setProfileSurname] = useState(user?.surname);
-  const [profileEmail, setProfileEmail] = useState(user?.email);
-  const [profileBirthday, setProfileBirthday] = useState(
-    new Date().toLocaleDateString()
-  );
-  const [profilePhone, setProfilePhone] = useState(user?.phone);
+  const [profileFullName, setProfileFullName] = useState("");
+  const [profileCountry, setProfileCountry] = useState("");
+  const [profileCity, setProfileCity] = useState("");
+  const [profileAddress, setProfileAddress] = useState("");
+
+  const [profilePhone, setProfilePhone] = useState("");
   //#endregion
 
   //#region Notifications States
-  const [notification1, setNotification1] = useState(false);
-  const [notification2, setNotification2] = useState(false);
-  const [notification3, setNotification3] = useState(false);
   //#endregion
 
   //#region Language Settings States
-  const [selectedLanguage, setSelectedLanguage] = useState('Türkçe');
   //#endregion
 
   //#WYSIWYG
   // const state = {
   //   editorState: EditorState.createEmpty(),
   // };
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-  const onEditorStateChange = (editorStatee) => {
-    setEditorState(editorStatee);
-  };
+  // const onEditorStateChange = (editorStatee) => {
+  //   setEditorState(editorStatee);
+  // };
 
   async function getUser() {
-    let userType = getCookie('user_type');
-    setUserType(userType);
+    let userType = getCookie("user_type");
 
-    if (userType === 'dentist') {
+    if (userType === "dentist") {
       let res = await store.getDentistDetail({
-        dentistId: getCookie('user_id'),
+        dentistId: getCookie("user_id"),
       });
 
       setUser(res.data);
-      setProfileName(res.data?.name);
-      setProfileSurname(res.data?.surname);
-      setProfileEmail(res.data?.email);
-      setProfileBirthday(new Date().toLocaleDateString());
+      setProfileFullName(`${res.data?.name} ${res.data?.surname}`);
       setProfilePhone(res.data?.phone);
-    } else if (userType === 'user') {
-      let res = await store.getUserDetail({ userId: getCookie('user_id') });
+    } else if (userType === "user") {
+      let res = await store.getUserDetail({ userId: getCookie("user_id") });
       setUser(res.data);
-      setProfileName(res.data.name);
-      setProfileSurname(res.data.surname);
-      setProfileEmail(res.data.email);
-      setProfileBirthday(new Date().toLocaleDateString());
+      setProfileFullName(`${res.data?.name} ${res.data?.surname}`);
+      setProfileCountry(res.data?.country);
+      setProfileAddress(res.data?.address);
+      setProfileCity(res.data?.city);
       setProfilePhone(res.data.phone);
-    } else if (userType === 'clinic') {
-      let res = await store.getClinicDetail({ clinicId: getCookie('user_id') });
+    } else if (userType === "clinic") {
+      let res = await store.getClinicDetail({ clinicId: getCookie("user_id") });
       setUser(res.data);
-      setCarouselImages(res.data.gallery);
       // console.log(res.data);
     }
   }
@@ -116,64 +93,74 @@ export default function Profile() {
 
   function overviewTab() {
     return (
-      <div className='settingsWrapper' style={{ marginBottom: '-430px' }}>
-        <div className='row'>
+      <div className="settingsWrapper" style={{ marginBottom: "-430px" }}>
+        <div className="row">
           <form>
-            <div className={'item profileInfoPart'}>
-              <div className={'content'}>
-                <div className='form-row'>
-                  <div className='col-md-4 mb-3'>
-                    <label for='validationDefault01'>İsim</label>
+            <div className={"item profileInfoPart"}>
+              <div className={"content"}>
+                <div className="form-row">
+                  <div className="col-md-4 mb-3">
+                    <label htmlFor="validationDefault01">İsim</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      id='validationDefault01'
-                      value={`${user?.name} ${
-                        user?.surname ? user.surname : ''
-                      }`}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault01"
+                      value={profileFullName}
+                      onChange={(e) => setProfileFullName(e.target.value)}
                       required
                     />
                   </div>
-                  <div className='col-md-4 mb-3'>
-                    <label for='validationDefault02'>Telefon Numarasi</label>
+                  <div className="col-md-4 mb-3">
+                    <label htmlFor="validationDefault02">
+                      Telefon Numarası
+                    </label>
                     <input
-                      type='text'
-                      className='form-control'
-                      id='validationDefault02'
-                      value={user?.phone}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault02"
+                      onChange={(e) => setProfilePhone(e.target.value)}
+                      value={profilePhone}
                       required
                     />
                   </div>
-                  <div className='col-md-4 mb-3'>
-                    <label for='inputTC'>Country</label>
+                  <div className="col-md-4 mb-3">
+                    <label htmlFor="inputTC">Ülke</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      id='inputCountry'
-                      value={user?.country}
+                      type="text"
+                      onChange={(e) => setProfileCountry(e.target.value)}
+                      className="form-control"
+                      id="inputCountry"
+                      value={profileCountry}
                     />
                   </div>
-                  <div className='col-md-4 mb-3'>
-                    <label for='inputTC'>City</label>
+                  <div className="col-md-4 mb-3">
+                    <label htmlFor="inputTC">Şehir</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      id='inputCity'
-                      value={user?.city}
+                      type="text"
+                      onChange={(e) => setProfileCity(e.target.value)}
+                      className="form-control"
+                      id="inputCity"
+                      value={profileCity}
                     />
                   </div>
-                  <div className='col-md-4 mb-3'>
-                    <label for='inputTC'>Address</label>
+                  <div className="col-md-4 mb-3">
+                    <label htmlFor="inputTC">Adres</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      id='inputAddress'
-                      value={user?.address}
+                      onChange={(e) => setProfileAddress(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="inputAddress"
+                      value={profileAddress}
                     />
                   </div>
-                  <div className='col-md-12 mb-3'>
+                  <div className="d-flex align-items-end justify-content-center col-md-4 mb-3">
+                    <button className="btn btn-primary" id="profileSaveButton">
+                      Kaydet
+                    </button>
+                  </div>
+                  {/* <div className="col-md-12 mb-3">
                     <Map clinics={user} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -183,200 +170,177 @@ export default function Profile() {
     );
   }
 
-  function aboutUsTab() {
-    return (
-      <div className='settingsWrapper'>
-        <div className='row'>
-          <div>
-            <Editor
-              editorState={editorState}
-              wrapperClassName='demo-wrapper'
-              editorClassName='demo-editor'
-              onEditorStateChange={onEditorStateChange}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // function aboutUsTab() {
+  //   return (
+  //     <div className="settingsWrapper">
+  //       <div className="row">
+  //         <div>
+  //           <Editor
+  //             editorState={editorState}
+  //             wrapperClassName="demo-wrapper"
+  //             editorClassName="demo-editor"
+  //             onEditorStateChange={onEditorStateChange}
+  //           />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
-  function galleryTab() {
-    return (
-      <>
-        <div className='settingsWrapper' style={{ marginBottom: '-500px' }}>
-          <div className='row'>
-            <div style={{ width: '500px', height: '500px' }}>
-              <GalleryDropZone />
-              <Carousel>
-                {carouselImages.map((carouselImage) => {
-                  return (
-                    <>
-                      <button
-                        onClick={async () => {
-                          await store.deleteCarouselImage(
-                            getCookie('user_id'),
-                            carouselImage._id
-                          );
-                          window.location.reload();
-                        }}
-                        type='button'
-                        className='btn btn-primary'
-                      >
-                        Sil
-                      </button>
-                      <div key={carouselImage._id}>
-                        <img src={carouselImage.link} />
-                      </div>
-                    </>
-                  );
-                })}
-              </Carousel>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
+  // function galleryTab() {
+  //   return (
+  //     <>
+  //       <div className="settingsWrapper" style={{ marginBottom: "-500px" }}>
+  //         <div className="row">
+  //           <div style={{ width: "500px", height: "500px" }}>
+  //             <GalleryDropZone />
+  //             <Carousel>
+  //               {carouselImages.map((carouselImage) => {
+  //                 return (
+  //                   <>
+  //                     <button
+  //                       onClick={async () => {
+  //                         await store.deleteCarouselImage(
+  //                           getCookie("user_id"),
+  //                           carouselImage._id
+  //                         );
+  //                         window.location.reload();
+  //                       }}
+  //                       type="button"
+  //                       className="btn btn-primary"
+  //                     >
+  //                       Sil
+  //                     </button>
+  //                     <div key={carouselImage._id}>
+  //                       <img src={carouselImage.link} />
+  //                     </div>
+  //                   </>
+  //                 );
+  //               })}
+  //             </Carousel>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   return (
-    <div className='profile'>
-      <div className='profile__profileCard'>
-        <img
-          className='profile__profileCard__profileImage'
-          src={user?.avatar}
-          alt='avatar'
-        />
-        <Dropzonesss />
+    <div className={"ProfileContainer"}>
+      <div className={"profileCard"}>
+        <div className={"profileAvatar"}>
+          <div className={"profilImageWrapper"}>
+            <img
+              className={"profileImage"}
+              src={user ? StaticProfile : StaticProfile}
+              alt="avatar"
+            />
+            <Dropzonesss />
+          </div>
+        </div>
       </div>
-      <div className='profile__profileName'>
-        {`${user?.name} ${user?.surname ? user.surname : ''}`}
-      </div>
-      <div className='profile__tabs'>
+
+      <div className={"profileName"}>{profileFullName}</div>
+      <div className={"location"}>{`${profileCity}, ${profileCountry}`}</div>
+
+      <div className={"tabs"}>
         <div
-          onClick={() => setSelectedTab(0)}
-          className={`${'profile__tabs__tab'} ${
-            selectedTab === 0 ? 'profile__tabs__selected' : ''
-          }`}
+          onClick={() => this.setSelectedTab(0)}
+          className={`${"tab"} ${selectedTab === 0 ? "selected" : ""}`}
         >
           Genel
         </div>
-        <div
-          onClick={() => setSelectedTab(1)}
-          className={`${'profile__tabs__tab'} ${
-            selectedTab === 1 ? 'profile__tabs__selected' : ''
-          }`}
-        >
-          Hakkimizda
-        </div>
-        <div
-          onClick={() => setSelectedTab(2)}
-          className={`${'profile__tabs__tab'} ${
-            selectedTab === 2 ? 'profile__tabs__selected' : ''
-          }`}
-        >
-          Gallery
-        </div>
       </div>
 
-      <div className={styles.tabContent}>
-        {selectedTab === 0 && overviewTab()}
-        {selectedTab === 1 && aboutUsTab()}
-        {selectedTab === 2 && galleryTab()}
-      </div>
+      <div>{selectedTab === 0 && overviewTab()}</div>
     </div>
   );
 }
 
-const getProfileUploadLink = async (file) => {
-  const { data } = await store.getUploadURL({
-    fileType: file.type,
-    user: getCookie('user_id'),
-    whereTo: 'profile',
-  });
+// const getProfileUploadLink = async (file) => {
+//   const { data } = await store.getUploadURL({
+//     fileType: file.type,
+//     user: getCookie("user_id"),
+//     whereTo: "profile",
+//   });
 
-  uploadProfileImage(data.url, data.link, file);
-};
+//   uploadProfileImage(data.url, data.link, file);
+// };
 
-const uploadProfileImage = async (url, link, file) => {
-  const res = await store.uploadImage(url, file);
+// const uploadProfileImage = async (_url, link) => {
+//   // const res = await store.uploadImage(url, file);
 
-  const userType = getCookie('user_type');
-  if (userType === 'user') {
-    await store.updateUserProfile({
-      userId: getCookie('user_id'),
-      avatar: link,
-    });
-  } else if (userType === 'clinic') {
-    await store.updateClinicProfile(getCookie('user_id'), {
-      avatar: link,
-    });
-  } else if (userType === 'dentist') {
-    await store.updateDentistProfile(getCookie('user_id'), {
-      avatar: link,
-    });
-  }
+//   const userType = getCookie("user_type");
+//   if (userType === "user") {
+//     await store.updateUserProfile({
+//       userId: getCookie("user_id"),
+//       avatar: link,
+//     });
+//   } else if (userType === "clinic") {
+//     await store.updateClinicProfile(getCookie("user_id"), {
+//       avatar: link,
+//     });
+//   } else if (userType === "dentist") {
+//     await store.updateDentistProfile(getCookie("user_id"), {
+//       avatar: link,
+//     });
+//   }
 
-  window.location.reload();
-};
+//   window.location.reload();
+// };
 
-const getGalleryUploadLink = async (file) => {
-  const { data } = await store.getUploadURL({
-    fileType: file.type,
-    user: getCookie('user_id'),
-    whereTo: 'gallery',
-  });
+// const getGalleryUploadLink = async (file) => {
+//   const { data } = await store.getUploadURL({
+//     fileType: file.type,
+//     user: getCookie("user_id"),
+//     whereTo: "gallery",
+//   });
 
-  uploadGalleryImage(data.url, data.link, file);
-};
+//   uploadGalleryImage(data.url, data.link, file);
+// };
 
-const uploadGalleryImage = async (url, link, file) => {
-  const res = await store.uploadImage(url, file);
+// const uploadGalleryImage = async (url, link, file) => {
+//   const userType = getCookie("user_type");
+//   if (userType === "clinic") {
+//     await store.updateClinicGallery(getCookie("user_id"), {
+//       link,
+//     });
+//   }
 
-  const userType = getCookie('user_type');
-  if (userType === 'clinic') {
-    await store.updateClinicGallery(getCookie('user_id'), {
-      link,
-    });
-  }
+//   window.location.reload();
+// };
 
-  window.location.reload();
-};
-
-function Dropzonesss(props) {
-  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
+function Dropzonesss() {
+  const { getInputProps, open } = useDropzone({
     // Disable click and keydown behavior
     noClick: true,
     noKeyboard: true,
   });
 
-  const files = acceptedFiles.map((file) => {
-    getProfileUploadLink(file);
-  });
+  // const files = acceptedFiles.map((file) => {
+  //   getProfileUploadLink(file);
+  // });
 
   return (
-    <div className='profile__profileCard__editIcon__2' onClick={open}>
+    <div className="profile__profileCard__editIcon__2" onClick={open}>
       <input {...getInputProps()} />
-      <img src={editIcon} alt='' />
+      <img src={editIcon} alt="" />
     </div>
   );
 }
 
-function GalleryDropZone(props) {
-  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
-    // Disable click and keydown behavior
-    noClick: true,
-    noKeyboard: true,
-  });
+// function GalleryDropZone(_props) {
+//   const { getRootProps, getInputProps, open } = useDropzone({
+//     // Disable click and keydown behavior
+//     noClick: true,
+//     noKeyboard: true,
+//   });
 
-  const files = acceptedFiles.map((file) => {
-    getGalleryUploadLink(file);
-  });
-
-  return (
-    <div {...getRootProps()} onClick={open}>
-      <input {...getInputProps()} />
-      <p>Drop the files here ...</p> :
-      <p>Drag 'n' drop some files here, or click to select files</p>
-    </div>
-  );
-}
+//   return (
+//     <div {...getRootProps()} onClick={open}>
+//       <input {...getInputProps()} />
+//       <p>Drop the files here ...</p> :
+//       <p>Drag drop some files here, or click to select files</p>
+//     </div>
+//   );
+// }

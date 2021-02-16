@@ -48,6 +48,7 @@ import {
   Randevular,
   Sorular,
   Takvim,
+  TedaviGecmisi,
   TedaviYonetim,
 } from "../../icons";
 
@@ -125,7 +126,7 @@ function RenderList() {
       hoverIcon: TedaviYonetimBlue,
       MenuIcon: <TedaviYonetim className={"list__listItem__menuIcon"} />,
       href: `/treatmentManagement`,
-      not: ["dentist"],
+      not: ["user"],
     },
     {
       title: "Profilim",
@@ -136,10 +137,10 @@ function RenderList() {
       not: [],
     },
     {
-      title: "Tedavilerim / Ödemelerim",
+      title: "Tedavi Geçmişi",
       icon: MoneyIcon,
       hoverIcon: MoneyIconBlue,
-      MenuIcon: <Odemelerim className={"list__listItem__menuIcon"} />,
+      MenuIcon: <TedaviGecmisi className={"list__listItem__menuIcon"} />,
       href: `/paymenthistory`,
       not: ["dentist", "clinic"],
     },

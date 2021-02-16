@@ -1,22 +1,186 @@
-@import '../../helpers/responsiveBreakpointsMixins';
-@import '../../helpers/variableBreakpoints';
+@import "../../helpers/responsiveBreakpointsMixins";
+@import "../../helpers/variableBreakpoints";
+.ProfileContainer {
+  width: 100%;
+
+  & .profileCard {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    background-color: #360d57;
+    background-image: url("../../assets/images/profile-cover-photo.png");
+    background-size: cover;
+    border-radius: 12px;
+    & .profileAvatar {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      bottom: -54px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      & .profilImageWrapper {
+        width: 100%;
+        position: relative;
+        height: 100%;
+        & .profileImage {
+          border-radius: 50%;
+          width: 100%;
+        }
+      }
+    }
+    & .createAppointment {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: absolute;
+      width: 178px;
+      height: 36px;
+      top: 142px;
+      right: 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 3px 0 rgba(6, 27, 82, 0.35);
+      background-color: #1a5aff;
+      &:hover {
+        cursor: pointer;
+      }
+      & button {
+        color: white;
+        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+  & .profileName {
+    margin: 30px 130px 10px;
+    font-family: "SofiaBold";
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #061b52;
+  }
+  & .location {
+    margin: 10px 130px 30px;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #909ab2;
+  }
+
+  & .tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1px;
+    border-bottom: solid 1px #f6f9ff;
+    width: 100%;
+    & .tab {
+      padding: 20px;
+      font-family: "SofiaRegular";
+      font-size: 14px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: 0.1px;
+      color: #909ab2;
+      text-align: center;
+      cursor: pointer;
+      width: 50%;
+
+      &.selected {
+        padding: 20px 20px 19px;
+        color: #1a5aff;
+        max-width: 300px;
+        border-radius: 1px;
+        border-bottom: solid 1px #1a5aff;
+      }
+    }
+  }
+}
+
+.tabWrapper {
+  display: flex;
+  flex-direction: column;
+  & .card {
+    height: 70px;
+    margin: 25px 0 7.5px;
+    border-radius: 12px;
+    border: solid 1px #e7eeff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & .image {
+      margin: 0 15px 0 20px;
+      width: 40px;
+      height: 40px;
+
+      & img {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+      }
+    }
+
+    & .name {
+      color: #061b52;
+      font-weight: bold;
+    }
+
+    & .rating {
+      margin-left: auto;
+      margin-right: 25px;
+    }
+  }
+}
+
+.aboutTab {
+  display: flex;
+  flex-direction: column;
+
+  & .item {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    & div {
+      margin: 10px 0;
+    }
+    & .header {
+      font-weight: bold;
+      color: #061b52;
+    }
+
+    & .content {
+      color: #061b52;
+    }
+  }
+}
 
 .profile {
   width: 100%;
   display: flex;
 
   &__profileCard {
-    margin-top: 350px;
+    margin-top: 250px;
     position: relative;
     width: 100%;
     height: 160px;
     background-color: #360d57;
-    background-image: url('../../assets/images/profile-cover-photo.png');
+    background-image: url("../../assets/images/profile-cover-photo.png");
     border-radius: 12px;
     &__profileImage {
-      position: absolute;
-      bottom: -54px;
-      left: 20px;
       width: 100px;
       height: 100px;
       border: 2px solid #fff;
@@ -52,8 +216,9 @@
       position: absolute;
       width: 24px;
       height: 24px;
-      bottom: -54px;
-      left: 33px;
+      top: 65px;
+      left: -2px;
+      z-index: 99;
       border-radius: 12px;
       box-shadow: 0 2px 3px 0 rgba(6, 27, 82, 0.35);
       background-color: rgba(#ffffff, 0.7);
@@ -68,7 +233,7 @@
   }
   &__profileName {
     margin: 10px 130px 40px;
-    font-family: 'SofiaBold';
+    font-family: "SofiaBold";
     font-size: 16px;
     font-weight: bold;
     font-stretch: normal;
@@ -86,7 +251,7 @@
     width: 100%;
     &__tab {
       padding: 20px;
-      font-family: 'SofiaRegular';
+      font-family: "SofiaRegular";
       font-size: 14px;
       font-weight: 500;
       font-stretch: normal;
@@ -107,6 +272,7 @@
 }
 
 .profileInfoPart {
+  margin-top: 50px;
   padding: 1.5rem;
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   border-radius: 10px;
@@ -245,7 +411,7 @@
       margin-bottom: 20px;
       width: 100%;
       label {
-        font-family: 'SofiaBold';
+        font-family: "SofiaBold";
         font-size: 18px;
         font-weight: bold;
         font-stretch: normal;
