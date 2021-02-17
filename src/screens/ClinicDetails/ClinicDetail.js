@@ -169,7 +169,7 @@ class ClinicDetail extends Component {
           </div>
           <div
             onClick={() => this.setSelectedTab(4)}
-            className={`${'tab'} ${selectedTab === 3 ? 'selected' : ''}`}
+            className={`${'tab'} ${selectedTab === 4 ? 'selected' : ''}`}
           >
             Galeri
           </div>
