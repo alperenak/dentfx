@@ -2,24 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 /*** Styles ***/
-import styles from './sidebar.scss';
+import './sidebar.scss';
 
 /*** Icons ***/
-import homeIcon from '../../icons/home-icon.svg';
-import homeIconBlue from '../../icons/home-icon-blue.svg';
-import profileIcon from '../../icons/profile-icon.svg';
-import profileIconBlue from '../../icons/profile-icon-blue.svg';
-import messageIcon from '../../icons/messages-icon.svg';
-import messageIconBlue from '../../icons/messages-icon-blue.svg';
-import randevuIcon from '../../icons/randevu-icon.svg';
-import randevuIconBlue from '../../icons/randevu-icon-blue.svg';
-import walletIcon from '../../icons/wallet-icon.svg';
-import walletIconBlue from '../../icons/wallet-icon-blue.svg';
-import kampanyaIcon from '../../icons/kampanya-icon.svg';
-import kampanyaIconBlue from '../../icons/kampanya-icon-blue.svg';
-import dentfxSocialIcon from '../../icons/dentfx-social-icon.svg';
-import dentfxSocialIconBlue from '../../icons/dentfx-social-icon-blue.svg';
-import patientIcon from '../../icons/patientSmall.svg';
 import TakvimIcon from '../../icons/Takvim.svg';
 import RandevularIcon from '../../icons/Randevular.svg';
 import HastalarIcon from '../../icons/Hastalar.svg';
@@ -43,7 +28,6 @@ import {
   Fatura,
   Hastalar,
   Klinisyen,
-  Odemelerim,
   Profilim,
   Randevular,
   Sorular,
@@ -77,7 +61,7 @@ function RenderList() {
       icon: TakvimIcon,
       hoverIcon: TakvimIconBlue,
       MenuIcon: <Takvim className={'list__listItem__menuIcon'} />,
-      href: `/calendar`,
+      href: '/calendar',
       not: ['user'],
     },
     {
@@ -85,14 +69,14 @@ function RenderList() {
       icon: RandevularIcon,
       MenuIcon: <Randevular className={'list__listItem__menuIcon'} />,
       hoverIcon: RandevularIconBlue,
-      href: `/appointment`,
+      href: '/appointment',
       not: [],
     },
     {
       title: 'Hastalar',
       icon: HastalarIcon,
       hoverIcon: HastalarIconBlue,
-      href: `/patients`,
+      href: '/patients',
       MenuIcon: <Hastalar className={'list__listItem__menuIcon'} />,
       not: ['user'],
     },
@@ -100,7 +84,7 @@ function RenderList() {
       title: 'Klinisyen',
       icon: KlinisyenIcon,
       hoverIcon: KlinisyenIconBlue,
-      href: `/clinician`,
+      href: '/clinician',
       MenuIcon: <Klinisyen className={'list__listItem__menuIcon'} />,
       not: ['dentist', 'user'],
     },
@@ -108,7 +92,7 @@ function RenderList() {
       title: 'Raporlar ',
       icon: FaturaIcon,
       hoverIcon: FaturaIconBlue,
-      href: `/reports`,
+      href: '/reports',
       MenuIcon: <Fatura className={'list__listItem__menuIcon'} />,
       not: ['dentist', 'user'],
     },
@@ -117,7 +101,7 @@ function RenderList() {
       icon: SorularIcon,
       hoverIcon: SorularIconBlue,
       MenuIcon: <Sorular className={'list__listItem__menuIcon'} />,
-      href: `/messages`,
+      href: '/messages',
       not: [],
     },
     {
@@ -125,7 +109,7 @@ function RenderList() {
       icon: TedaviYonetimBlue,
       hoverIcon: TedaviYonetimBlue,
       MenuIcon: <TedaviYonetim className={'list__listItem__menuIcon'} />,
-      href: `/treatmentManagement`,
+      href: '/treatmentManagement',
       not: ['user'],
     },
     {
@@ -141,7 +125,7 @@ function RenderList() {
       icon: MoneyIcon,
       hoverIcon: MoneyIconBlue,
       MenuIcon: <TedaviGecmisi className={'list__listItem__menuIcon'} />,
-      href: `/paymenthistory`,
+      href: '/paymenthistory',
       not: ['dentist', 'clinic'],
     },
     // {
@@ -162,7 +146,6 @@ function RenderList() {
 
   const [list, setList] = useState(tempList);
   const [clickedLink, setClickedLink] = useState(false);
-  const pathnameNow = window.location.pathname;
   const mounted = useRef();
   const prevList = usePrevious(list);
 
@@ -197,13 +180,6 @@ function RenderList() {
         className={returnClassName(item.href, clickedLink)}
         onClick={() => setClickedLink(item.href)}
       >
-        {/* <RenderMenu
-          icon={item.icon}
-          hoverIcon={item.hoverIcon}
-          clickedLink={clickedLink}
-          hrefName={item.href}
-        /> */}
-
         {item.MenuIcon}
         <div className={'list__listItem__text'}>{item.title}</div>
       </Link>
@@ -218,32 +194,7 @@ export default function SideBar() {
     </div>
   );
 }
-function RenderMenu({ hrefName, clickedLink, icon, hoverIcon }) {
-  let pathname = window.location.pathname;
 
-  if (pathname === '/') {
-    return (
-      <>
-        {hrefName === '/' &&
-        (hrefName === pathname || hrefName.includes(clickedLink)) ? (
-          <img src={hoverIcon} alt={'icon'} />
-        ) : (
-          <img src={icon} alt={'icon'} />
-        )}
-      </>
-    );
-  } else
-    return (
-      <>
-        {hrefName.includes(window.location.pathname) ||
-        hrefName.includes(clickedLink) ? (
-          <img src={hoverIcon} alt={'icon'} />
-        ) : (
-          <img src={icon} alt={'icon'} />
-        )}
-      </>
-    );
-}
 function returnClassName(hrefName, clickedLink) {
   let pathname = window.location.pathname;
   if (pathname === '/') {

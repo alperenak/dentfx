@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from './style.scss';
+import './style.scss';
 
 /*** Utils ***/
 import store from '../../store';
@@ -58,7 +58,7 @@ class CreateAppointment extends Component {
   };
 
   componentDidMount = async () => {
-    let clinicResponse = await store
+    store
       .getClinicDetail({
         clinicId: this.props.match.params.id,
       })
@@ -78,7 +78,6 @@ class CreateAppointment extends Component {
 
     let resClinic = await store.getClinicDetail({ clinicId: clinic });
     this.setState({ clinicData: resClinic.data });
-    console.log(resClinic.data);
 
     let userId = getCookie('user_id');
     let responseUser = await store.getUserDetail({ userId });
@@ -87,7 +86,7 @@ class CreateAppointment extends Component {
 
   onClickCreate = async () => {
     //user, clinic, dentist, treatmentType, startTime, endTime, isCheckIn, paymentType
-    let res = await store.createUserAppointment(
+    store.createUserAppointment(
       this.state.user.id,
       this.state.clinic,
       this.state.dentist,
@@ -109,14 +108,11 @@ class CreateAppointment extends Component {
 
   onChangeDate = async (value) => {
     this.setState({ date: this.getFormattedDate(new Date(value)) });
-    console.log(this.getFormattedDate(new Date(value)));
     let schedule = await store.getDoctorSchedule({
       dentist: this.state.dentist,
       day: this.getFormattedDate(new Date(value)),
     });
     this.setState({ doctorSchedule: schedule.data });
-    console.log(this.state.dentist);
-    console.log(this.state.doctorSchedule);
   };
 
   getFormattedDate(date) {
@@ -165,7 +161,7 @@ class CreateAppointment extends Component {
             />
             <div style={{ marginBottom: '15px' }} />
           </div>
-          <div class="col-md-12">
+          <div className="col-md-12">
             <Input
               type={'select'}
               size={'full'}
@@ -293,7 +289,7 @@ class CreateAppointment extends Component {
               </div>
             </div>
           </div>
-          <div class="col-md-12">
+          <div className="col-md-12">
             {clinicData && user && dentist && treatmentType && startTime && (
               <div className={'disclaimer'}>
                 <div className={'textBlue'}>
@@ -309,7 +305,7 @@ class CreateAppointment extends Component {
               </div>
             )}
           </div>
-          <div class="col-md-12">
+          <div className="col-md-12">
             <button className={'submitBtn'} onClick={this.onClickCreate}>
               Randevu Oluştur
             </button>
