@@ -63,7 +63,6 @@ class CreateAppointment extends Component {
         clinicId: this.props.match.params.id,
       })
       .then((data) => {
-        console.log('data datad data ', data.data);
         this.setState({
           dentistData: data.data.Dentist.map((dentist) => {
             return {
@@ -146,15 +145,17 @@ class CreateAppointment extends Component {
     return (
       <div className={'createAppointmentWrapper'}>
         <div className={'header'}>
-          <img src={illustration} alt='' />
+          <img src={illustration} alt="" />
           <div className={'headerText'}>
-            <div className={'title'}>Hi Peter,</div>
-            <div className={'subtitle'}>make an appointment easily!</div>
+            <div className={'title'}>Merhaba!,</div>
+            <div className={'subtitle'}>
+              Kolay bir şekilde randevunu oluştur!
+            </div>
           </div>
         </div>
 
         <div className={'content row'}>
-          <div class='col-md-12'>
+          <div className="col-md-12">
             <Input
               type={'select'}
               size={'full'}
@@ -164,7 +165,7 @@ class CreateAppointment extends Component {
             />
             <div style={{ marginBottom: '15px' }} />
           </div>
-          <div class='col-md-12'>
+          <div class="col-md-12">
             <Input
               type={'select'}
               size={'full'}
@@ -174,7 +175,7 @@ class CreateAppointment extends Component {
             />
             <div style={{ marginBottom: '15px' }} />
           </div>
-          <div class='col-md-12'>
+          <div className="col-md-12">
             <Input
               type={'date'}
               size={'full'}
@@ -182,38 +183,117 @@ class CreateAppointment extends Component {
               label={'Select a date'}
             />
           </div>
-          <div class='col-md-2'>
-            <div className='col-md-2'>
-              <div className='col-md-8'>
+          <div className="col-md-2 d-flex">
+            <div className="col-md-2 d-flex">
+              <div className="col-md-8">
                 <ToggleButtonGroup
                   value={this.state.startTime}
+                  className="d-flex"
                   exclusive
-                  orientation='vertical'
+                  orientation="horizontal"
                   onChange={(e, value) => {
-                    console.log(e);
-                    console.log(value);
                     this.setState({ startTime: value });
                   }}
-                  aria-label='start date'
+                  aria-label="start date"
                 >
                   {this.state.doctorSchedule &&
-                    this.state.doctorSchedule.calendar.map((item) => {
-                      return (
-                        <ToggleButton
-                          key={i++}
-                          value={item.time}
-                          disabled={item.busy}
-                          aria-label='time'
-                        >
-                          {item.time}
-                        </ToggleButton>
-                      );
-                    })}
+                    this.state.doctorSchedule.calendar
+                      .slice(0, 6)
+                      .map((item) => {
+                        return (
+                          <ToggleButton
+                            key={i++}
+                            value={item.time}
+                            disabled={item.busy}
+                            aria-label="time"
+                          >
+                            {item.time}
+                          </ToggleButton>
+                        );
+                      })}
+                </ToggleButtonGroup>
+                <ToggleButtonGroup
+                  value={this.state.startTime}
+                  className="d-flex"
+                  exclusive
+                  orientation="horizontal"
+                  onChange={(e, value) => {
+                    this.setState({ startTime: value });
+                  }}
+                  aria-label="start date"
+                >
+                  {this.state.doctorSchedule &&
+                    this.state.doctorSchedule.calendar
+                      .slice(6, 12)
+                      .map((item) => {
+                        return (
+                          <ToggleButton
+                            key={i++}
+                            value={item.time}
+                            disabled={item.busy}
+                            aria-label="time"
+                          >
+                            {item.time}
+                          </ToggleButton>
+                        );
+                      })}
+                </ToggleButtonGroup>
+                <ToggleButtonGroup
+                  value={this.state.startTime}
+                  className="d-flex"
+                  exclusive
+                  orientation="horizontal"
+                  onChange={(e, value) => {
+                    this.setState({ startTime: value });
+                  }}
+                  aria-label="start date"
+                >
+                  {this.state.doctorSchedule &&
+                    this.state.doctorSchedule.calendar
+                      .slice(12, 18)
+                      .map((item) => {
+                        return (
+                          <ToggleButton
+                            key={i++}
+                            value={item.time}
+                            disabled={item.busy}
+                            aria-label="time"
+                          >
+                            {item.time}
+                          </ToggleButton>
+                        );
+                      })}
+                </ToggleButtonGroup>
+                <ToggleButtonGroup
+                  value={this.state.startTime}
+                  className="d-flex"
+                  exclusive
+                  orientation="horizontal"
+                  onChange={(e, value) => {
+                    this.setState({ startTime: value });
+                  }}
+                  aria-label="start date"
+                >
+                  {this.state.doctorSchedule &&
+                    this.state.doctorSchedule.calendar
+                      .slice(18, 24)
+                      .map((item) => {
+                        return (
+                          <ToggleButton
+                            key={i++}
+                            value={item.time}
+                            disabled={item.busy}
+                            aria-label="time"
+                          >
+                            {item.time}
+                          </ToggleButton>
+                        );
+                      })}
                 </ToggleButtonGroup>
               </div>
             </div>
           </div>
-          <div class='col-md-12'>
+          <div class="col-md-12">
             {clinicData && user && dentist && treatmentType && startTime && (
               <div className={'disclaimer'}>
                 <div className={'textBlue'}>
@@ -229,7 +309,7 @@ class CreateAppointment extends Component {
               </div>
             )}
           </div>
-          <div class='col-md-12'>
+          <div class="col-md-12">
             <button className={'submitBtn'} onClick={this.onClickCreate}>
               Randevu Oluştur
             </button>

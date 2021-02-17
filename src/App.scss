@@ -1,18 +1,34 @@
-.zeusContainer {
-  width: 90%;
-  margin: 0 auto;
-}
+.AppWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
 
-.middlePart {
-  min-height: 65vh;
-  margin-top: 8rem;
-  padding-right: 4rem;
-}
+  & .topBarWrapper {
+    flex: 1;
+  }
 
-.leftPart {
-  margin-top: 10rem;
-}
+  & .zeusContainer {
+    display: flex;
+    flex: 7;
+    max-width: 1300px;
+  }
 
-.rightPart {
-  margin-top: 10rem;
+  & .middlePart {
+    min-height: 65vh;
+    padding-top: 4rem;
+    padding-right: 4rem;
+  }
+
+  & .leftPart {
+    display: flex;
+    margin-left: 1rem;
+    height: 100vh !important;
+    margin-top: 5rem;
+  }
+
+  & .rightPart {
+    margin-top: 10rem;
+    overflow-y: scroll;
+  }
 }

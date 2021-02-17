@@ -57,61 +57,68 @@ class Messages extends Component {
     });
   };
 
-	renderNoQuestion = () => {
-		return (
-			<div className="noQuestionContainer">
-				<img src={noQuestionIllustration} alt="" />
-				<div className="noQuestionContainer__title"> There is no question.</div>
-				<button>Ask questions now!</button>
-			</div>
-		);
-	};
+  renderNoQuestion = () => {
+    return (
+      <div className="noQuestionContainer">
+        <img src={noQuestionIllustration} alt="" />
+        <div className="noQuestionContainer__title">
+          Burada hiç bir soru yok
+        </div>
+        <button>Hadi soru sor!</button>
+      </div>
+    );
+  };
 
   renderNewQuestion = () => {};
 
-	renderMainList = () => {
-		let { search, messages } = this.state;
+  renderMainList = () => {
+    let { search, messages } = this.state;
 
-		return (
-			<div className="messagesContainer">
-				<div className="messagesContainer__searchSection">
-					<input
-						type="text"
-						name="search"
-						value={search}
-						onChange={this.onChange}
-						placeholder="Search messages or user"
-					/>
-				</div>
+    return (
+      <div className="messagesContainer">
+        <div className="messagesContainer__searchSection">
+          <input
+            type="text"
+            name="search"
+            value={search}
+            onChange={this.onChange}
+            placeholder="Search messages or user"
+          />
+        </div>
 
-				{getCookie("user_type") === "user" && (
-					<div className="messagesContainer__newMessageBtn" onClick={() => (window.location = "/messages/new")}>
-						<img src={addCircle} alt="" />
-						<div>Yeni Mesaj</div>
-					</div>
-				)}
+        {getCookie("user_type") === "user" && (
+          <div
+            className="messagesContainer__newMessageBtn"
+            onClick={() => (window.location = "/messages/new")}
+          >
+            <img src={addCircle} alt="" />
+            <div>Yeni Mesaj</div>
+          </div>
+        )}
 
-				<div className="messagesContainer__messagesSection">
-					<div className="messagesContainer__messagesSection__header">Mesajlar</div>
-					<div className={styles.messageContainer}>
-						{messages.map((message, i) => {
-							return (
-								<Message
-									image={message?.contact.avatar}
-									title={message?.contact.name}
-									content={message?.lastMessage.body}
-									time={message?.lastMessage.createdAt}
-									key={i}
-									id={message.id}
-									unread={message.unread}
-								/>
-							);
-						})}
-					</div>
-				</div>
-			</div>
-		);
-	};
+        <div className="messagesContainer__messagesSection">
+          <div className="messagesContainer__messagesSection__header">
+            Mesajlar
+          </div>
+          <div className={styles.messageContainer}>
+            {messages.map((message, i) => {
+              return (
+                <Message
+                  image={message?.contact.avatar}
+                  title={message?.contact.name}
+                  content={message?.lastMessage.body}
+                  time={message?.lastMessage.createdAt}
+                  key={i}
+                  id={message.id}
+                  unread={message.unread}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   render() {
     let { messages } = this.state;

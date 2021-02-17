@@ -190,7 +190,7 @@ class PaymentHistory extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight='50vh'
+            maxHeight="50vh"
             bordered
             small
             searchLabel={'Ara'}
@@ -213,7 +213,7 @@ class PaymentHistory extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight='50vh'
+            maxHeight="50vh"
             bordered
             small
             searchLabel={'Ara'}
@@ -233,8 +233,10 @@ class PaymentHistory extends Component {
     return (
       <div className={'Profile'}>
         <div>
-          <div className={'row'}>
-            <div className={'paymentTreatmentTableWrapper'}>
+          <div
+            className={'row d-flex justify-content-center align-items-center'}
+          >
+            <div className={'paymentTreatmentTableWrapperr'}>
               <h2 className={'tableHeader'}>Tedaviler</h2>
               {this.renderTreatmentTable()}
             </div>

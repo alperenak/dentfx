@@ -12,6 +12,7 @@ import addCircle from '../../icons/Icons_add-circle.svg';
 
 /*** Components ***/
 import AppointmentCard from './AppointmentCard';
+import Loading from '../../components/Loading';
 
 class Appointment extends Component {
   state = {
@@ -27,6 +28,7 @@ class Appointment extends Component {
     completedCount: 0,
     pendingCount: 0,
     userType: null,
+    loading: true,
   };
 
   componentDidMount = async () => {
@@ -43,12 +45,11 @@ class Appointment extends Component {
     let activeAppointments = [];
     let cancelledAppointments = [];
     let pendingAppointments = [];
-
+    this.setState({ loading: true });
     const response = await store.getAppointments({ userId });
 
     if (response.data) {
-      this.setState({ allAppointments: response.data });
-
+      this.setState({ allAppointments: response.data, loading: false });
       response.data.map((record) => {
         if (record.isCancelledByDentist || record.isCancelledByUser) {
           cancelledAppointments.push(record);
@@ -93,23 +94,23 @@ class Appointment extends Component {
       userType,
     } = this.state;
     return (
-      <div className='topbarContainerAppointment'>
-        <div className='topbarContainerAppointment__upper'>
-          <div className='topbarContainerAppointment__upper__breadcrumbs'>
+      <div className="topbarContainerAppointment">
+        <div className="topbarContainerAppointment__upper">
+          <div className="topbarContainerAppointment__upper__breadcrumbs">
             Randevularım / Tedavi Geçmişim
           </div>
           {userType === 'user' && (
             <div
-              className='topbarContainerAppointment__upper__newAppointmentBtn'
+              className="topbarContainerAppointment__upper__newAppointmentBtn"
               onClick={() => this.props.history.push('/')}
             >
-              <img src={addCircle} alt='' />
+              <img src={addCircle} alt="" />
               <div>Yeni Randevu</div>
             </div>
           )}
         </div>
 
-        <div className='topbarContainerAppointment__navbarAppointment'>
+        <div className="topbarContainerAppointment__navbarAppointment">
           <div
             className={`${'topbarContainerAppointment__navbarAppointment__navLink'} ${
               activeLink === 'all' &&
@@ -217,17 +218,23 @@ class Appointment extends Component {
   renderClinic = () => {};
 
   render() {
-    let { activeLink } = this.state;
+    let { activeLink, loading } = this.state;
 
     return (
-      <div>
-        {this.renderTopBar()}
-        {activeLink === 'all' && this.renderAll()}
-        {activeLink === 'active' && this.renderActive()}
-        {activeLink === 'completed' && this.renderCompleted()}
-        {activeLink === 'cancelled' && this.renderCancelled()}
-        {activeLink === 'pending' && this.renderPending()}
-      </div>
+      <>
+        {loading ? (
+          <Loading noBackground fullscreen />
+        ) : (
+          <div>
+            {this.renderTopBar()}
+            {activeLink === 'all' && this.renderAll()}
+            {activeLink === 'active' && this.renderActive()}
+            {activeLink === 'completed' && this.renderCompleted()}
+            {activeLink === 'cancelled' && this.renderCancelled()}
+            {activeLink === 'pending' && this.renderPending()}
+          </div>
+        )}
+      </>
     );
   }
 }
