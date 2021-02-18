@@ -311,7 +311,7 @@ export default function UserTopBar() {
                     </span>
                     <img
                       className="topbar__user__avatarContainer"
-                      src={user ? StaticAvatar : StaticAvatar}
+                      src={user ? user.avatar : StaticAvatar}
                       alt={'notification'}
                     />
                   </a>

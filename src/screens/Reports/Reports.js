@@ -145,43 +145,43 @@ class Reports extends Component {
 
   renderGraph() {
     return (
-      <div className='chartContainer'>
+      <div className="chartContainer">
         <h6>Tedavi & Hasta Sayısı</h6>
-        <row className='chart'>
+        <row className="chart">
           <Chart
             options={this.state.optionsTedavi}
             series={this.state.seriesTedavi}
-            type='line'
+            type="line"
             width={700}
             height={350}
           />
         </row>
         <h6>Randevular</h6>
-        <row className='chart'>
+        <row className="chart">
           <Chart
             options={this.state.optionsAppointment}
             series={this.state.seriesAppointment}
-            type='line'
+            type="line"
             width={700}
             height={350}
           />
         </row>
         <h6>Tedavi & Ödeme Ücretleri</h6>
-        <row className='chart'>
+        <row className="chart">
           <Chart
             options={this.state.optionsPayment}
             series={this.state.seriesPayment}
-            type='line'
+            type="line"
             width={700}
             height={350}
           />
         </row>
         <h6>Randevular - Diş Hekimleri</h6>
-        <row className='chart'>
+        <row className="chart">
           <Chart
             options={this.state.optionsAppointmentByDentist}
             series={this.state.seriesAppointmentByDentist}
-            type='line'
+            type="line"
             width={700}
             height={350}
           />
@@ -193,8 +193,8 @@ class Reports extends Component {
   render() {
     return (
       <>
-        <h2>Reports</h2>
-        <div className='main_container'>{this.renderGraph()}</div>
+        <h2>Raporlar</h2>
+        <div className="main_container">{this.renderGraph()}</div>
       </>
     );
   }

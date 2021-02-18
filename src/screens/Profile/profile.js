@@ -5,7 +5,7 @@ import store from '../../store';
 import { getCookie } from '../../utils/cookie';
 
 /*** Styles ***/
-import './profile.scss';
+import styles from './profile.scss';
 
 /*** Icons ***/
 import editIcon from '../../icons/edit-icon.svg';
@@ -31,23 +31,34 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a lo
 import { AlertContext } from '../../context/alertContext';
 import { MainLoadingContext } from '../../context/loadingContext';
 import Loading from '../../components/Loading';
+import Map from '../../components/Map/map';
+import { Editor } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 // import { Carousel } from "react-responsive-carousel";
 
 export default function Profile() {
   //#region General States
   const [user, setUser] = useState(null);
   // eslint-disable-next-line no-unused-vars
-  const [selectedTab, s] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(0);
   //#endregion
 
   //#region Profile Settings States
   const [profileFullName, setProfileFullName] = useState('');
-  const [loading, setLoading] = useContext(MainLoadingContext);
+  const [loading, setLoading] = useState(true);
   const [profileCountry, setProfileCountry] = useState('');
   const [profileCity, setProfileCity] = useState('');
   const [profileAddress, setProfileAddress] = useState('');
   const [setAlertboxActive, setAlertData] = useContext(AlertContext);
   const [profilePhone, setProfilePhone] = useState('');
+  const [profilePhoto, setProfilePhoto] = useState(false);
+  const [carouselImages, setCarouselImages] = useState([]);
   //#endregion
 
   //#region Notifications States
@@ -60,11 +71,11 @@ export default function Profile() {
   // const state = {
   //   editorState: EditorState.createEmpty(),
   // };
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-  // const onEditorStateChange = (editorStatee) => {
-  //   setEditorState(editorStatee);
-  // };
+  const onEditorStateChange = (editorStatee) => {
+    setEditorState(editorStatee);
+  };
 
   async function getUser() {
     let userType = getCookie('user_type');
@@ -85,12 +96,22 @@ export default function Profile() {
         setProfileFullName(`${data.data?.name} ${data.data?.surname}`);
         setProfileCountry(data.data?.country);
         setProfileAddress(data.data?.address);
+        setProfilePhoto(data.data?.avatar);
         setProfileCity(data.data?.city);
         setProfilePhone(data.data.phone);
       });
     } else if (userType === 'clinic') {
-      let res = await store.getClinicDetail({ clinicId: getCookie('user_id') });
-      setUser(res.data);
+      setLoading(true);
+      store.getClinicDetail({ clinicId: getCookie('user_id') }).then((data) => {
+        setLoading(false);
+        setProfileFullName(data.data?.name);
+        setProfileCountry(data.data?.country);
+        setProfileAddress(data.data?.address);
+        setProfileCity(data.data?.city);
+        setProfilePhoto(data.data?.avatar);
+        setProfilePhone(data.data.phone);
+        setCarouselImages(data.data?.gallery);
+      });
       // console.log(res.data);
     }
   }
@@ -178,9 +199,11 @@ export default function Profile() {
                         Kaydet
                       </button>
                     </div>
-                    {/* <div className="col-md-12 mb-3">
-                  <Map clinics={user} />
-                </div> */}
+                    {getCookie('user_type') === 'clinic' && (
+                      <div className="col-md-12 mb-3">
+                        <Map clinics={user} />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -191,60 +214,60 @@ export default function Profile() {
     );
   }
 
-  // function aboutUsTab() {
-  //   return (
-  //     <div className="settingsWrapper">
-  //       <div className="row">
-  //         <div>
-  //           <Editor
-  //             editorState={editorState}
-  //             wrapperClassName="demo-wrapper"
-  //             editorClassName="demo-editor"
-  //             onEditorStateChange={onEditorStateChange}
-  //           />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  function aboutUsTab() {
+    return (
+      <div className="settingsWrapper">
+        <div className="row">
+          <div>
+            <Editor
+              editorState={editorState}
+              wrapperClassName="demo-wrapper"
+              editorClassName="demo-editor"
+              onEditorStateChange={onEditorStateChange}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-  // function galleryTab() {
-  //   return (
-  //     <>
-  //       <div className="settingsWrapper" style={{ marginBottom: "-500px" }}>
-  //         <div className="row">
-  //           <div style={{ width: "500px", height: "500px" }}>
-  //             <GalleryDropZone />
-  //             <Carousel>
-  //               {carouselImages.map((carouselImage) => {
-  //                 return (
-  //                   <>
-  //                     <button
-  //                       onClick={async () => {
-  //                         await store.deleteCarouselImage(
-  //                           getCookie("user_id"),
-  //                           carouselImage._id
-  //                         );
-  //                         window.location.reload();
-  //                       }}
-  //                       type="button"
-  //                       className="btn btn-primary"
-  //                     >
-  //                       Sil
-  //                     </button>
-  //                     <div key={carouselImage._id}>
-  //                       <img src={carouselImage.link} />
-  //                     </div>
-  //                   </>
-  //                 );
-  //               })}
-  //             </Carousel>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // }
+  function galleryTab() {
+    return (
+      <>
+        <div className="settingsWrapper" style={{ marginBottom: '-500px' }}>
+          <div className="row">
+            <div style={{ width: '500px', height: '500px' }}>
+              <GalleryDropZone />
+              <Carousel>
+                {carouselImages.map((carouselImage) => {
+                  return (
+                    <>
+                      <button
+                        onClick={async () => {
+                          await store.deleteCarouselImage(
+                            getCookie('user_id'),
+                            carouselImage._id
+                          );
+                          window.location.reload();
+                        }}
+                        type="button"
+                        className="btn btn-primary"
+                      >
+                        Sil
+                      </button>
+                      <div key={carouselImage._id}>
+                        <img src={carouselImage.link} />
+                      </div>
+                    </>
+                  );
+                })}
+              </Carousel>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -257,11 +280,11 @@ export default function Profile() {
               <div className={'profilImageWrapper'}>
                 <img
                   className={'profileImage'}
-                  src={user ? StaticProfile : StaticProfile}
+                  src={profilePhoto ? profilePhoto : ''}
                   alt="avatar"
                 />
-                <Dropzonesss />
               </div>
+              <Dropzonesss />
             </div>
           </div>
 
@@ -272,72 +295,98 @@ export default function Profile() {
 
           <div className={'tabs'}>
             <div
-              onClick={() => this.setSelectedTab(0)}
-              className={`${'tab'} ${selectedTab === 0 ? 'selected' : ''}`}
+              onClick={() => setSelectedTab(0)}
+              className={`${'profile__tabs__tab'} ${
+                selectedTab === 0 ? 'profile__tabs__selected' : ''
+              }`}
             >
               Genel
             </div>
+            {getCookie('user_type') === 'clinic' && (
+              <>
+                <div
+                  onClick={() => setSelectedTab(1)}
+                  className={`${'profile__tabs__tab'} ${
+                    selectedTab === 1 ? 'profile__tabs__selected' : ''
+                  }`}
+                >
+                  Hakkimizda
+                </div>
+                <div
+                  onClick={() => setSelectedTab(2)}
+                  className={`${'profile__tabs__tab'} ${
+                    selectedTab === 2 ? 'profile__tabs__selected' : ''
+                  }`}
+                >
+                  Gallery
+                </div>
+              </>
+            )}
           </div>
 
-          <div>{selectedTab === 0 && overviewTab()}</div>
+          <div className={styles.tabContent}>
+            {selectedTab === 0 && overviewTab()}
+            {selectedTab === 1 && aboutUsTab()}
+            {selectedTab === 2 && galleryTab()}
+          </div>
         </div>
       )}
     </>
   );
 }
 
-// const getProfileUploadLink = async (file) => {
-//   const { data } = await store.getUploadURL({
-//     fileType: file.type,
-//     user: getCookie("user_id"),
-//     whereTo: "profile",
-//   });
+const getProfileUploadLink = async (file) => {
+  const { data } = await store.getUploadURL({
+    fileType: file.type,
+    user: getCookie('user_id'),
+    whereTo: 'profile',
+  });
 
-//   uploadProfileImage(data.url, data.link, file);
-// };
+  uploadProfileImage(data.url, data.link, file);
+};
 
-// const uploadProfileImage = async (_url, link) => {
-//   // const res = await store.uploadImage(url, file);
+const uploadProfileImage = async (_url, link) => {
+  // const res = await store.uploadImage(url, file);
 
-//   const userType = getCookie("user_type");
-//   if (userType === "user") {
-//     await store.updateUserProfile({
-//       userId: getCookie("user_id"),
-//       avatar: link,
-//     });
-//   } else if (userType === "clinic") {
-//     await store.updateClinicProfile(getCookie("user_id"), {
-//       avatar: link,
-//     });
-//   } else if (userType === "dentist") {
-//     await store.updateDentistProfile(getCookie("user_id"), {
-//       avatar: link,
-//     });
-//   }
+  const userType = getCookie('user_type');
+  if (userType === 'user') {
+    await store.updateUserProfile({
+      userId: getCookie('user_id'),
+      avatar: link,
+    });
+  } else if (userType === 'clinic') {
+    await store.updateClinicProfile(getCookie('user_id'), {
+      avatar: link,
+    });
+  } else if (userType === 'dentist') {
+    await store.updateDentistProfile(getCookie('user_id'), {
+      avatar: link,
+    });
+  }
 
-//   window.location.reload();
-// };
+  window.location.reload();
+};
 
-// const getGalleryUploadLink = async (file) => {
-//   const { data } = await store.getUploadURL({
-//     fileType: file.type,
-//     user: getCookie("user_id"),
-//     whereTo: "gallery",
-//   });
+const getGalleryUploadLink = async (file) => {
+  const { data } = await store.getUploadURL({
+    fileType: file.type,
+    user: getCookie('user_id'),
+    whereTo: 'gallery',
+  });
 
-//   uploadGalleryImage(data.url, data.link, file);
-// };
+  uploadGalleryImage(data.url, data.link, file);
+};
 
-// const uploadGalleryImage = async (url, link, file) => {
-//   const userType = getCookie("user_type");
-//   if (userType === "clinic") {
-//     await store.updateClinicGallery(getCookie("user_id"), {
-//       link,
-//     });
-//   }
+const uploadGalleryImage = async (url, link, file) => {
+  const userType = getCookie('user_type');
+  if (userType === 'clinic') {
+    await store.updateClinicGallery(getCookie('user_id'), {
+      link,
+    });
+  }
 
-//   window.location.reload();
-// };
+  window.location.reload();
+};
 
 function Dropzonesss() {
   const { getInputProps, open } = useDropzone({
@@ -358,18 +407,18 @@ function Dropzonesss() {
   );
 }
 
-// function GalleryDropZone(_props) {
-//   const { getRootProps, getInputProps, open } = useDropzone({
-//     // Disable click and keydown behavior
-//     noClick: true,
-//     noKeyboard: true,
-//   });
+function GalleryDropZone(_props) {
+  const { getRootProps, getInputProps, open } = useDropzone({
+    // Disable click and keydown behavior
+    noClick: true,
+    noKeyboard: true,
+  });
 
-//   return (
-//     <div {...getRootProps()} onClick={open}>
-//       <input {...getInputProps()} />
-//       <p>Drop the files here ...</p> :
-//       <p>Drag drop some files here, or click to select files</p>
-//     </div>
-//   );
-// }
+  return (
+    <div {...getRootProps()} onClick={open}>
+      <input {...getInputProps()} />
+      <p>Drop the files here ...</p> :
+      <p>Drag drop some files here, or click to select files</p>
+    </div>
+  );
+}

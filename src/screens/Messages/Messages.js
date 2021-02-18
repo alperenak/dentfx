@@ -1,38 +1,38 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from "./messages.scss";
+import styles from './messages.scss';
 
 /*** Icons ***/
-import noQuestionIllustration from "../../icons/illustration_1.svg";
-import addCircle from "../../icons/Icons_add-circle.svg";
+import noQuestionIllustration from '../../icons/illustration_1.svg';
+import addCircle from '../../icons/Icons_add-circle.svg';
 
 /*** Utils ***/
-import store from "../../store";
+import store from '../../store';
 
 /*** Components ***/
-import Message from "../../components/Message/Message";
-import { getCookie } from "../../utils/cookie";
+import Message from '../../components/Message/Message';
+import { getCookie } from '../../utils/cookie';
 
 class Messages extends Component {
   state = {
-    search: "",
+    search: '',
     messages: [],
     dentists: [],
     files: [],
     path: null,
     conversationId: null,
     sender: {
-      name: "Erhan Koca",
-      clinic: "Medicana Hospitals Group",
-      avatar: "https://picsum.photos/200",
+      name: 'Erhan Koca',
+      clinic: 'Medicana Hospitals Group',
+      avatar: 'https://picsum.photos/200',
       onlineStatus: false,
     },
-    messageToSend: "",
+    messageToSend: '',
   };
 
   componentDidMount = async () => {
-    const path = this.props.location.pathname.split("/messages/");
+    const path = this.props.location.pathname.split('/messages/');
     this.setState({ path: path[1] });
 
     let res = await store.GetConversations();
@@ -46,14 +46,14 @@ class Messages extends Component {
   onSendMessage = () => {
     let message = {
       isMine: true,
-      time: new Date().getHours() + ":" + new Date().getMinutes(),
-      date: "07.10.2020",
+      time: new Date().getHours() + ':' + new Date().getMinutes(),
+      date: '07.10.2020',
       message: this.state.messageToSend,
     };
 
     this.setState({
       singleMessages: [...this.state.singleMessages, message],
-      messageToSend: "",
+      messageToSend: '',
     });
   };
 
@@ -64,7 +64,13 @@ class Messages extends Component {
         <div className="noQuestionContainer__title">
           Burada hiç bir soru yok
         </div>
-        <button>Hadi soru sor!</button>
+        <button
+          onClick={() => {
+            this.props.history.push('/messages/new');
+          }}
+        >
+          Hadi soru sor!
+        </button>
       </div>
     );
   };
@@ -86,10 +92,10 @@ class Messages extends Component {
           />
         </div>
 
-        {getCookie("user_type") === "user" && (
+        {getCookie('user_type') === 'user' && (
           <div
             className="messagesContainer__newMessageBtn"
-            onClick={() => (window.location = "/messages/new")}
+            onClick={() => (window.location = '/messages/new')}
           >
             <img src={addCircle} alt="" />
             <div>Yeni Mesaj</div>

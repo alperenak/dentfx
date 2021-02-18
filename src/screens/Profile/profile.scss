@@ -3,6 +3,7 @@
 .ProfileContainer {
   width: 100%;
   transition: all 0.3s;
+  position: relative;
 
   & .profileCard {
     position: relative;
@@ -25,9 +26,10 @@
         width: 100%;
         position: relative;
         height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
         & .profileImage {
-          border-radius: 50%;
-          width: 100%;
+          width: 150%;
         }
       }
     }
