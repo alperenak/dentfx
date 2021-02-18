@@ -37,6 +37,12 @@ function RenderList() {
       not: ['dentist', 'clinic'],
     },
     {
+      title: 'Profilim',
+      href: `/profile/${getCookie('user_id')}`,
+      MenuIcon: <Profilim className={'list__listItem__menuIcon'} />,
+      not: ['user'],
+    },
+    {
       title: 'Takvim',
       MenuIcon: <Takvim className={'list__listItem__menuIcon'} />,
       href: '/calendar',
@@ -78,16 +84,17 @@ function RenderList() {
       href: '/treatmentManagement',
       not: ['user'],
     },
-    {
-      title: 'Profilim',
-      href: `/profile/${getCookie('user_id')}`,
-      MenuIcon: <Profilim className={'list__listItem__menuIcon'} />,
-      not: [],
-    },
+
     {
       title: 'Tedavi Geçmişi',
       MenuIcon: <TedaviGecmisi className={'list__listItem__menuIcon'} />,
       href: '/paymenthistory',
+      not: ['dentist', 'clinic'],
+    },
+    {
+      title: 'Profilim',
+      href: `/profile/${getCookie('user_id')}`,
+      MenuIcon: <Profilim className={'list__listItem__menuIcon'} />,
       not: ['dentist', 'clinic'],
     },
     // {
