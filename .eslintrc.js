@@ -12,7 +12,6 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  parser: 'babel-eslint',
   plugins: ['react'],
   rules: {
     quotes: ['error', 'single'],
