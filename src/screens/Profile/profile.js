@@ -21,7 +21,6 @@ import editIcon from '../../icons/edit-icon.svg';
 // //*** Components ***/
 // import Input from "../../components/Input";
 // import Switch from "react-input-switch";
-import StaticProfile from '../../assets/images/profile.png';
 import { useDropzone } from 'react-dropzone';
 // import Map from "../../components/Map/map";
 // import { EditorState } from "draft-js";
@@ -29,13 +28,12 @@ import { useDropzone } from 'react-dropzone';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { AlertContext } from '../../context/alertContext';
-import { MainLoadingContext } from '../../context/loadingContext';
 import Loading from '../../components/Loading';
 import Map from '../../components/Map/map';
 import { Editor } from 'draft-js';
-import { EditorState, convertToRaw } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+import { EditorState } from 'draft-js';
+// import draftToHtml from 'draftjs-to-html';
+// import htmlToDraft from 'html-to-draftjs';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
@@ -335,6 +333,9 @@ export default function Profile() {
   );
 }
 
+// ! burasi cokomelli
+
+// eslint-disable-next-line no-unused-vars
 const getProfileUploadLink = async (file) => {
   const { data } = await store.getUploadURL({
     fileType: file.type,
@@ -366,7 +367,8 @@ const uploadProfileImage = async (_url, link) => {
 
   window.location.reload();
 };
-
+// ! burasi cokomelli
+// eslint-disable-next-line no-unused-vars
 const getGalleryUploadLink = async (file) => {
   const { data } = await store.getUploadURL({
     fileType: file.type,
@@ -377,7 +379,7 @@ const getGalleryUploadLink = async (file) => {
   uploadGalleryImage(data.url, data.link, file);
 };
 
-const uploadGalleryImage = async (url, link, file) => {
+const uploadGalleryImage = async (url, link) => {
   const userType = getCookie('user_type');
   if (userType === 'clinic') {
     await store.updateClinicGallery(getCookie('user_id'), {
@@ -407,7 +409,7 @@ function Dropzonesss() {
   );
 }
 
-function GalleryDropZone(_props) {
+function GalleryDropZone() {
   const { getRootProps, getInputProps, open } = useDropzone({
     // Disable click and keydown behavior
     noClick: true,

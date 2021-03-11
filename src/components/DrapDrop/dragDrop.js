@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import styles from './dragDrop.module.scss';
 import { useDropzone } from 'react-dropzone';
 /* import Button from "../../Button/button";

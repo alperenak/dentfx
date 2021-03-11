@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*** Utils ***/
-import validation from "../../../../utils/validations";
-import errorTexts from "../../../../utils/errorTexts";
+import validation from '../../../../utils/validations';
+import errorTexts from '../../../../utils/errorTexts';
 
 /*** Styles ***/
-import styles from "./input.scss";
+import './input.scss';
 
 /*** Icons ***/
-import checkmarkIcon from "../../../../icons/checkmark-verify-interface-symbol-button.svg";
-import closeIcon from "../../../../icons/close-circular-button-symbol.svg";
+import checkmarkIcon from '../../../../icons/checkmark-verify-interface-symbol-button.svg';
+import closeIcon from '../../../../icons/close-circular-button-symbol.svg';
 
 class PlainInput extends Component {
   state = {
-    value: "",
+    value: '',
     errorList: [],
     valid: true,
   };
@@ -70,24 +70,24 @@ class PlainInput extends Component {
     return (
       <div
         onClick={onClick}
-        className={`${"inputWrapper"} ${
-          disabled ? "disabled" : ""
+        className={`${'inputWrapper'} ${
+          disabled ? 'disabled' : ''
         } ${className}`}
       >
         <label v-if={label} htmlFor={name}>
           {label}
         </label>
-        <div v-if={labelDescription} className={"labelDescription"}>
+        <div v-if={labelDescription} className={'labelDescription'}>
           {labelDescription}
         </div>
         <textarea
-          v-if={type === "textarea"}
+          v-if={type === 'textarea'}
           className={`
-                        ${"inputContainer"}
-                        ${type === "textarea" ? "textarea" : ""}
-                        ${size} ${!valid ? "error" : ""}`}
+                        ${'inputContainer'}
+                        ${type === 'textarea' ? 'textarea' : ''}
+                        ${size} ${!valid ? 'error' : ''}`}
           name={name}
-          autoComplete={"off"}
+          autoComplete={'off'}
           autoFocus={false}
           onKeyDown={onKeyDown}
           type={type}
@@ -99,24 +99,24 @@ class PlainInput extends Component {
         <div
           v-else
           className={`
-                        ${"inputContainer"}
-                        ${type === "textarea" ? "textArea" : ""}
-                      ${!valid ? "error" : ""}
+                        ${'inputContainer'}
+                        ${type === 'textarea' ? 'textArea' : ''}
+                      ${!valid ? 'error' : ''}
                         ${this.props.className}
                         ${size}`}
         >
           <img
-            v-if={icon && icon.position === "left"}
+            v-if={icon && icon.position === 'left'}
             src={icon.src}
-            alt={"icon"}
-            className={`${"icon"} ${position}`}
+            alt={'icon'}
+            className={`${'icon'} ${icon.position}`}
           />
           <input
             name={name}
-            autoComplete={"off"}
+            autoComplete={'off'}
             autoFocus={false}
             type={type}
-            className={size === "compose" ? "composeInput" : ""}
+            className={size === 'compose' ? 'composeInput' : ''}
             onKeyDown={onKeyDown}
             disabled={disabled}
             onChange={(e) => this.onChange(e)}
@@ -124,41 +124,38 @@ class PlainInput extends Component {
             placeholder={placeholder}
           />
           <img
-            v-if={icon && icon.position === "right"}
+            v-if={icon && icon.position === 'right'}
             src={icon.src}
-            alt={"icon"}
-            className={`${"icon"} ${icon.position}`}
+            alt={'icon'}
+            className={`${'icon'} ${icon.position}`}
           />
         </div>
-        <div
-          v-if={errorList.length === 1 && !valid}
-          className={"errorMessage"}
-        >
+        <div v-if={errorList.length === 1 && !valid} className={'errorMessage'}>
           {errorList[0].text}
         </div>
 
-        <ul v-if={errorList.length > 1 && !valid} className={"tooltip"}>
+        <ul v-if={errorList.length > 1 && !valid} className={'tooltip'}>
           {errorList.map((err, i) => {
             return (
-              <li className={err.valid ? "validText" : ""} key={i}>
+              <li className={err.valid ? 'validText' : ''} key={i}>
                 <img
                   v-if={!err.valid}
                   width={10}
                   src={closeIcon}
-                  alt={"icon"}
+                  alt={'icon'}
                 />
                 <img
                   v-if={err.valid}
                   width={10}
                   src={checkmarkIcon}
-                  alt={"icon"}
+                  alt={'icon'}
                 />
                 {err.text}
               </li>
             );
           })}
         </ul>
-        {disclaimer && <div className={"disclaimer"}> {disclaimer} </div>}
+        {disclaimer && <div className={'disclaimer'}> {disclaimer} </div>}
       </div>
     );
   }
@@ -185,16 +182,15 @@ PlainInput.propTypes = {
   priorValue: PropTypes.string,
   priority: PropTypes.bool,
 };
-
 PlainInput.defaultProps = {
   disabled: false,
   priority: false,
-  label: "",
-  name: "",
-  type: "text",
-  defaultValue: "",
-  placeholder: "placeholder",
-  size: "half",
+  label: '',
+  name: '',
+  type: 'text',
+  defaultValue: '',
+  placeholder: 'placeholder',
+  size: 'half',
   errorList: [],
-  className: "",
+  className: '',
 };

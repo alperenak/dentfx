@@ -1,7 +1,13 @@
 .list-mobile {
   display: none;
 }
+.listWrapper {
+  padding: 20px 0;
+}
 .list {
+  height: calc(100vh - 84px);
+  background: white;
+  padding: 48px;
   & a {
     text-decoration: none;
     &:hover {
@@ -18,7 +24,6 @@
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
-    margin-bottom: 40px;
     color: #061b52;
     &__text {
       margin-left: 20px;

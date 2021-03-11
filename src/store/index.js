@@ -1,5 +1,5 @@
 import http from '../helpers/httpHelper';
-import config from '../../appConfig';
+import config from '../appConfig';
 
 const errorMessageBuilder = (response) => {
   return (response.errorData && response.errorData.code) || '0';
@@ -19,7 +19,7 @@ export default {
   }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/user`;
+    let path = '/user';
     let payload = {
       name,
       surname,
@@ -56,7 +56,7 @@ export default {
   }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/clinic`;
+    let path = '/clinic';
     let payload = {
       name,
       email,
@@ -91,7 +91,7 @@ export default {
   }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/dentist`;
+    let path = '/dentist';
     let payload = {
       name,
       surname,
@@ -114,7 +114,7 @@ export default {
   async userLogin({ email, password }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/login/user`;
+    let path = '/login/user';
     let payload = { email, password };
 
     return await http.makePostRequest(
@@ -138,7 +138,7 @@ export default {
   ) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/appointment`;
+    let path = '/appointment';
     let payload = {
       User: user,
       Clinic: clinic,
@@ -161,7 +161,7 @@ export default {
   async clinicLogin({ email, password }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/login/clinic`;
+    let path = '/login/clinic';
     let payload = { email, password };
 
     return await http.makePostRequest(
@@ -176,7 +176,7 @@ export default {
   async dentistLogin({ email, password }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/login/dentist`;
+    let path = '/login/dentist';
     let payload = { email, password };
 
     return await http.makePostRequest(
@@ -369,8 +369,6 @@ export default {
     let path = `/clinic/${clinicId}/tariff/${tarifId}`;
     let payload = tarif[0];
 
-    console.log(payload);
-
     return await http.makePostRequest(
       path,
       baseUrl,
@@ -401,8 +399,6 @@ export default {
     let tokenCookieName = 'token';
     let path = `/clinic/${clinicId}/tariff/${tarifId}`;
     let payload = tarif[0];
-
-    console.log(payload);
 
     return await http.makePostRequest(
       path,
@@ -585,7 +581,7 @@ export default {
   async GetConversations() {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/chat/conversation`;
+    let path = '/chat/conversation';
 
     return await http.makeGetRequest(
       path,
@@ -598,7 +594,7 @@ export default {
   async GetNewMessages() {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/chat/new`;
+    let path = '/chat/new';
 
     return await http.makeGetRequest(
       path,
@@ -639,7 +635,7 @@ export default {
   async CreateNewChat(payload) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/chat/conversation`;
+    let path = '/chat/conversation';
 
     return await http.makePostRequest(
       path,
@@ -653,7 +649,7 @@ export default {
   async CreateAppointment(payload) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
-    let path = `/appointment`;
+    let path = '/appointment';
 
     return await http.makePostRequest(
       path,
@@ -727,7 +723,7 @@ export default {
 
   async uploadImage(url, file) {
     let baseUrl = url;
-    let path = ``;
+    let path = '';
     let tokenCookieName = 'token';
     let additionHeaders = {
       'Access-Control-Allow-Origin': '*',

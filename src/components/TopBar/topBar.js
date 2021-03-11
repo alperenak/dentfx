@@ -1,9 +1,7 @@
 import React from 'react';
-import Button from '../Button/button';
-import styles from './topBar.module.scss';
+import './topBar.module.scss';
 import { Logo } from '../../icons/index';
 import { Link } from 'react-router-dom';
-import filterIcon from '../../icons/filter-icon.svg';
 import searchIcon from '../../icons/loupe.svg';
 const ButtonData = [
   { type: 'primary', title: 'Özelikler' },

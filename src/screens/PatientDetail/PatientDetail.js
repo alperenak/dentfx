@@ -4,13 +4,12 @@ import { MDBDataTable } from 'mdbreact';
 import { getCookie } from '../../utils/cookie';
 
 /*** Styles ***/
-import styles from './patientdetail.scss';
+import './patientdetail.scss';
 import PaymentIcon from '../../icons/credit-cards-payment.svg';
 import NotesIcon from '../../icons/writing.svg';
 
 /*** Components ***/
 import DatePicker from '../../components/DatePicker/DatePicker';
-import StepProgressBar from 'react-step-progress';
 
 /*** Teeth Images ***/
 import tooth1 from '../../assets/images/tooth/tooth-1.jpg';
@@ -48,7 +47,6 @@ import tooth32 from '../../assets/images/tooth/tooth-32.jpg';
 import ContractIMG from '../../assets/icons/contract.svg';
 import ProformaIMG from '../../assets/icons/proforma.svg';
 import Modal from '../../components/Modal/modal';
-import Dropdown from '../../components/Dropdown/dropdown';
 
 class PatientDetail extends Component {
   constructor() {
@@ -141,12 +139,12 @@ class PatientDetail extends Component {
             toplam: 250,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -159,12 +157,12 @@ class PatientDetail extends Component {
             toplam: 250,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -177,12 +175,12 @@ class PatientDetail extends Component {
             toplam: 450,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -195,12 +193,12 @@ class PatientDetail extends Component {
             toplam: 2500,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -213,12 +211,12 @@ class PatientDetail extends Component {
             toplam: 250,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -287,12 +285,12 @@ class PatientDetail extends Component {
             toplam: 250,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -305,12 +303,12 @@ class PatientDetail extends Component {
             toplam: 250,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -323,12 +321,12 @@ class PatientDetail extends Component {
             toplam: 450,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -341,12 +339,12 @@ class PatientDetail extends Component {
             toplam: 2500,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -359,12 +357,12 @@ class PatientDetail extends Component {
             toplam: 250,
             para_birimi: 'TRY',
             button1: (
-              <button type='button' class='btn btn-success'>
+              <button type="button" className="btn btn-success">
                 Aktar
               </button>
             ),
             button2: (
-              <button type='button' class='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -420,13 +418,7 @@ class PatientDetail extends Component {
             tutar: payment.amount,
             para_birimi: payment.currency,
             button_yazdir: (
-              <button
-                type='button'
-                class='btn btn-secondary'
-                onClick={() => {
-                  console.log(payment._id);
-                }}
-              >
+              <button type="button" className="btn btn-secondary">
                 Yazdir
               </button>
             ),
@@ -463,20 +455,14 @@ class PatientDetail extends Component {
             tarih: note.created.substr(1, 10),
             not: note.body,
             button_düzenle: (
-              <button
-                type='button'
-                class='btn btn-secondary'
-                onClick={() => {
-                  console.log(note._id);
-                }}
-              >
+              <button type="button" className="btn btn-secondary">
                 Duzenle
               </button>
             ),
             button_sil: (
               <button
-                type='button'
-                class='btn btn-danger'
+                type="button"
+                className="btn btn-danger"
                 onClick={async () => {
                   await store.clinicDeleteNote(
                     getCookie('user_id'),
@@ -548,13 +534,7 @@ class PatientDetail extends Component {
             toplam: treatment.price,
             para_birimi: treatment.currency,
             button2: (
-              <button
-                type='button'
-                class='btn btn-danger'
-                onClick={() => {
-                  console.log(treatment._id);
-                }}
-              >
+              <button type="button" className="btn btn-danger">
                 Sil
               </button>
             ),
@@ -565,7 +545,6 @@ class PatientDetail extends Component {
   };
 
   fillTreatmentList = (list) => {
-    console.log(list);
     this.setState({
       treatmentList: {
         columns: [
@@ -600,13 +579,7 @@ class PatientDetail extends Component {
             price: treatment.price,
             currency: treatment.currency,
             button1: (
-              <button
-                type='button'
-                class='btn btn-success'
-                onClick={() => {
-                  console.log(treatment._id);
-                }}
-              >
+              <button type="button" className="btn btn-success">
                 Ekle
               </button>
             ),
@@ -630,7 +603,6 @@ class PatientDetail extends Component {
     let payments = await store.getPatientPayments(clinicId, patientId);
 
     this.setState({ patient: patientDetails.data });
-    console.log(this.state.patient);
     this.setState({ payments: payments.data });
 
     this.fillTreatmentTables();
@@ -642,7 +614,6 @@ class PatientDetail extends Component {
 
   renderPatientInfoTab = () => {
     let { patient } = this.state;
-    console.log(patient);
 
     return (
       <div className={'aboutTab'}>
@@ -650,76 +621,82 @@ class PatientDetail extends Component {
           <div className={'item patientInfoPart'}>
             <div className={'header'}>Kişisel Bilgiler</div>
             <div className={'content'}>
-              <div class='form-row'>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault01'>İsim</label>
+              <div className="form-row">
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault01">İsim</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='validationDefault01'
+                    type="text"
+                    className="form-control"
+                    id="validationDefault01"
                     value={patient?.name}
                     required
                   />
                 </div>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault02'>Soyisim</label>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault02">Soyisim</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='validationDefault02'
+                    type="text"
+                    className="form-control"
+                    id="validationDefault02"
                     value={patient?.surname}
                     required
                   />
                 </div>
-                <div class='col-md-6 mb-3'>
-                  <label for='inputTC'>TC Kimlik No</label>
+                <div className="col-md-6 mb-3">
+                  <label htmlFor="inputTC">TC Kimlik No</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='inputTC'
+                    type="text"
+                    className="form-control"
+                    id="inputTC"
                     value={patient?.tcNumber}
                   />
                 </div>
               </div>
               <div className={'form-row'} style={{ marginBottom: '0' }}>
                 <div className={'col-md-3 mb-3'}>
-                  <label for='sexRadio1'>Cinsiyet</label>
+                  <label htmlFor="sexRadio1">Cinsiyet</label>
 
                   <div className={'row'} style={{ marginTop: '0' }}>
-                    <div class='form-check' style={{ marginRight: '5px' }}>
+                    <div className="form-check" style={{ marginRight: '5px' }}>
                       <input
-                        class='form-check-input'
-                        type='radio'
-                        name='exampleRadios'
-                        id='sexRadio1'
-                        value='option1'
+                        className="form-check-input"
+                        type="radio"
+                        name="exampleRadios"
+                        id="sexRadio1"
+                        value="option1"
                         checked
                       />
-                      <label class='form-check-label' for='exampleRadios1'>
+                      <label
+                        className="form-check-label"
+                        htmlFor="exampleRadios1"
+                      >
                         Erkek
                       </label>
                     </div>
 
-                    <div class='form-check'>
+                    <div className="form-check">
                       <input
-                        class='form-check-input'
-                        type='radio'
-                        name='exampleRadios'
-                        id='sexRadio2'
-                        value='option2'
+                        className="form-check-input"
+                        type="radio"
+                        name="exampleRadios"
+                        id="sexRadio2"
+                        value="option2"
                         disabled
                       />
-                      <label class='form-check-label' for='exampleRadios2'>
+                      <label
+                        className="form-check-label"
+                        htmlFor="exampleRadios2"
+                      >
                         Kadın
                       </label>
                     </div>
                   </div>
                 </div>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault04'>Uyruk</label>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault04">Uyruk</label>
                   <select
-                    class='custom-select'
-                    id='validationDefault04'
+                    className="custom-select"
+                    id="validationDefault04"
                     required
                   >
                     <option selected disabled value={patient?.nationality}>
@@ -729,25 +706,25 @@ class PatientDetail extends Component {
                     <option>Yabancı</option>
                   </select>
                 </div>
-                <div class='col-md-6 mb-3'>
-                  <label for='dentistName'>Diş Hekimi</label>
+                <div className="col-md-6 mb-3">
+                  <label htmlFor="dentistName">Diş Hekimi</label>
                   <input
-                    id='dentistName'
-                    type='text'
-                    class='form-control'
+                    id="dentistName"
+                    type="text"
+                    className="form-control"
                     value={patient?.Dentist.name}
                   />
                 </div>
               </div>
-              <div class='form-row' style={{ marginTop: '0' }}>
-                <div class='col-md-6 mb-3'>
-                  <label for='validationDefault01'>Doğum Tarihi</label>
+              <div className="form-row" style={{ marginTop: '0' }}>
+                <div className="col-md-6 mb-3">
+                  <label htmlFor="validationDefault01">Doğum Tarihi</label>
                   {patient?.birthDate && (
                     <DatePicker initialValue={patient?.birthDate} />
                   )}
                 </div>
-                <div class='col-md-6 mb-3'>
-                  <label for='validationDefault02'>Kayıt Tarihi</label>
+                <div className="col-md-6 mb-3">
+                  <label htmlFor="validationDefault02">Kayıt Tarihi</label>
                   {patient?.createdAt && (
                     <DatePicker initialValue={patient?.createdAt} />
                   )}
@@ -759,29 +736,29 @@ class PatientDetail extends Component {
           <div className={'item patientInfoPart'}>
             <div className={'header'}>İletişim Bilgileri</div>
             <div className={'content'}>
-              <div class='form-row'>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault04'>İlçe</label>
+              <div className="form-row">
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault04">İlçe</label>
                   <select
-                    class='custom-select'
-                    id='validationDefault04'
+                    className="custom-select"
+                    id="validationDefault04"
                     required
                   >
-                    <option selected disabled value=''>
+                    <option selected disabled value="">
                       Seçiniz...
                     </option>
                     <option>Başakşehir</option>
                     <option>Sarıyer</option>
                   </select>
                 </div>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault04'>Şehir</label>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault04">Şehir</label>
                   <select
-                    class='custom-select'
-                    id='validationDefault04'
+                    className="custom-select"
+                    id="validationDefault04"
                     required
                   >
-                    <option selected disabled value=''>
+                    <option selected disabled value="">
                       {patient?.city}
                     </option>
                     <option>İstanbul</option>
@@ -790,66 +767,68 @@ class PatientDetail extends Component {
                     <option>Çanakkale</option>
                   </select>
                 </div>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault04'>Ülke</label>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault04">Ülke</label>
                   <select
-                    class='custom-select'
-                    id='validationDefault04'
+                    className="custom-select"
+                    id="validationDefault04"
                     required
                   >
-                    <option selected disabled value=''>
+                    <option selected disabled value="">
                       {patient?.country}
                     </option>
                     <option>Türkiye</option>
                     <option>USA</option>
                   </select>
                 </div>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault05'>Posta Kodu</label>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault05">Posta Kodu</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='validationDefault05'
+                    type="text"
+                    className="form-control"
+                    id="validationDefault05"
                     required
                   />
                 </div>
               </div>
-              <div class='form-row'>
-                <div class='col-md-6 mb-3'>
-                  <label for='exampleFormControlInput1'>E-mail adresi</label>
+              <div className="form-row">
+                <div className="col-md-6 mb-3">
+                  <label htmlFor="exampleFormControlInput1">
+                    E-mail adresi
+                  </label>
                   <input
-                    type='email'
-                    class='form-control'
-                    id='exampleFormControlInput1'
+                    type="email"
+                    className="form-control"
+                    id="exampleFormControlInput1"
                     value={patient?.email}
                   />
                 </div>
-                <div class='col-md-3 mb-3'>
-                  <label for='inputAddress'>Telefon1</label>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="inputAddress">Telefon1</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='inputAddress'
+                    type="text"
+                    className="form-control"
+                    id="inputAddress"
                     value={patient?.phone}
                   />
                 </div>
-                <div class='col-md-3 mb-3'>
-                  <label for='validationDefault05'>Telefon2</label>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationDefault05">Telefon2</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='validationDefault05'
+                    type="text"
+                    className="form-control"
+                    id="validationDefault05"
                     value={patient?.phone}
                   />
                 </div>
               </div>
-              <div class='form-row'>
-                <div class='col-md-12 mb-3'>
-                  <label for='exampleFormControlInput1'>Adres</label>
+              <div className="form-row">
+                <div className="col-md-12 mb-3">
+                  <label htmlFor="exampleFormControlInput1">Adres</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='exampleFormControlInput1'
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
                     value={patient?.address}
                   />
                 </div>
@@ -862,42 +841,41 @@ class PatientDetail extends Component {
   };
 
   renderTreatmentPlanningTab = () => {
-    let { patient } = this.state;
     return (
       <div>
         <div className={'createAppointment'}>
-          <div class='dropdown'>
+          <div className="dropdown">
             <a
-              class='btn btn-secondary dropdown-toggle plansDropdown'
-              href='#'
-              role='button'
-              id='dropdownMenuLink'
-              data-toggle='dropdown'
-              aria-haspopup='true'
-              aria-expanded='false'
+              className="btn btn-secondary dropdown-toggle plansDropdown"
+              href="#"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
             >
               {this.state.selectedPlan}
             </a>
 
             <div
-              class='dropdown-menu myDropdownMenu'
-              aria-labelledby='dropdownMenuLink'
+              className="dropdown-menu myDropdownMenu"
+              aria-labelledby="dropdownMenuLink"
             >
               {this.state.selectedPlan === 'Planlama 0' ? (
                 <a
-                  class='dropdown-item disabled'
-                  href='#'
+                  className="dropdown-item disabled"
+                  href="#"
                   onClick={() => {
                     this.setState({ selectedPlan: 'Planlama 0' });
                   }}
-                  aria-disabled='true'
+                  aria-disabled="true"
                 >
                   Planlama 0
                 </a>
               ) : (
                 <a
-                  class='dropdown-item'
-                  href='#'
+                  className="dropdown-item"
+                  href="#"
                   onClick={() => {
                     this.setState({ selectedPlan: 'Planlama 0' });
                   }}
@@ -908,19 +886,19 @@ class PatientDetail extends Component {
 
               {this.state.selectedPlan === 'Planlama 1' ? (
                 <a
-                  class='dropdown-item disabled'
-                  href='#'
+                  className="dropdown-item disabled"
+                  href="#"
                   onClick={() => {
                     this.setState({ selectedPlan: 'Planlama 1' });
                   }}
-                  aria-disabled='true'
+                  aria-disabled="true"
                 >
                   Planlama 1
                 </a>
               ) : (
                 <a
-                  class='dropdown-item'
-                  href='#'
+                  className="dropdown-item"
+                  href="#"
                   onClick={() => {
                     this.setState({ selectedPlan: 'Planlama 1' });
                   }}
@@ -931,19 +909,19 @@ class PatientDetail extends Component {
 
               {this.state.selectedPlan === 'Tedavi' ? (
                 <a
-                  class='dropdown-item disabled'
-                  href='#'
+                  className="dropdown-item disabled"
+                  href="#"
                   onClick={() => {
                     this.setState({ selectedPlan: 'Tedavi' });
                   }}
-                  aria-disabled='true'
+                  aria-disabled="true"
                 >
                   Tedavi
                 </a>
               ) : (
                 <a
-                  class='dropdown-item'
-                  href='#'
+                  className="dropdown-item"
+                  href="#"
                   onClick={() => {
                     this.setState({ selectedPlan: 'Tedavi' });
                   }}
@@ -992,40 +970,40 @@ class PatientDetail extends Component {
           <div className={'paymentPaidTreatmentTableWrapper'}>
             {/* ADD payment Button */}
             <a
-              type='button'
-              data-toggle='modal'
-              data-target='#addUserModal'
+              type="button"
+              data-toggle="modal"
+              data-target="#addUserModal"
               className={'addPayment'}
             >
               Ödeme Ekle<img src={PaymentIcon}></img>
             </a>
 
             <div
-              class='modal fade'
-              id='addUserModal'
-              tabIndex='-1'
-              aria-labelledby='exampleModalLabel'
-              aria-hidden='true'
+              className="modal fade"
+              id="addUserModal"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
             >
-              <div class='modal-dialog'>
-                <div class='modal-content'>
-                  <div class='modal-header'>
-                    <h5 class='modal-title' id='exampleModalLabel'>
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
                       Ödeme Ekle
                     </h5>
                     <button
-                      type='button'
-                      class='close'
-                      data-dismiss='modal'
-                      aria-label='Close'
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
                     >
-                      <span aria-hidden='true'>&times;</span>
+                      <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class='modal-body'>
+                  <div className="modal-body">
                     <form>
-                      <div class='form-row' style={{ marginTop: '0' }}>
-                        <div class='col-md-6 mb-3'>
+                      <div className="form-row" style={{ marginTop: '0' }}>
+                        <div className="col-md-6 mb-3">
                           <label>Ödeme Tarihi</label>
                           <DatePicker
                             onChange={(event) => {
@@ -1033,13 +1011,13 @@ class PatientDetail extends Component {
                             }}
                           />
                         </div>
-                        <div class='form-group col-md-6 mb-3'>
-                          <label for='exampleFormControlSelect1'>
+                        <div className="form-group col-md-6 mb-3">
+                          <label htmlFor="exampleFormControlSelect1">
                             Ödeme Tipi
                           </label>
                           <select
-                            class='form-control'
-                            id='exampleFormControlSelect1'
+                            className="form-control"
+                            id="exampleFormControlSelect1"
                             required
                             onChange={(event) =>
                               this.setState({
@@ -1047,59 +1025,59 @@ class PatientDetail extends Component {
                               })
                             }
                           >
-                            <option selected value='Nakit'>
+                            <option selected value="Nakit">
                               Nakit
                             </option>
-                            <option value='Kredi Kartı'>Kredi Kartı</option>
-                            <option value='Senet'>Senet</option>
-                            <option value='Havale'>Havale</option>
+                            <option value="Kredi Kartı">Kredi Kartı</option>
+                            <option value="Senet">Senet</option>
+                            <option value="Havale">Havale</option>
                           </select>
                         </div>
                       </div>
 
-                      <div class='form-row'>
-                        <div class='col-md-6 mb-3'>
-                          <label for='formGroupExampleInput'>Tutar</label>
+                      <div className="form-row">
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="formGroupExampleInput">Tutar</label>
                           <input
-                            type='text'
-                            class='form-control'
-                            id='formGroupExampleInput'
+                            type="text"
+                            className="form-control"
+                            id="formGroupExampleInput"
                             onChange={(event) =>
                               this.setState({ modalPrice: event.target.value })
                             }
                           />
                         </div>
-                        <div class='form-group col-md-6 mb-3'>
-                          <label for='exampleFormControlSelect2'>
+                        <div className="form-group col-md-6 mb-3">
+                          <label htmlFor="exampleFormControlSelect2">
                             Para Birimi
                           </label>
                           <select
-                            class='form-control'
-                            id='exampleFormControlSelect2'
+                            className="form-control"
+                            id="exampleFormControlSelect2"
                             onChange={(event) =>
                               this.setState({
                                 modalCurrency: event.target.value,
                               })
                             }
                           >
-                            <option selected value='TRY'>
+                            <option selected value="TRY">
                               TRY
                             </option>
-                            <option value='USD'>USD</option>
-                            <option value='EUR'>EUR</option>
-                            <option value='GBP'>GBP</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
                           </select>
                         </div>
                       </div>
-                      <div class='form-row'>
-                        <div class='col-md-12 mb-3'>
-                          <label for='exampleFormControlTextarea1'>
+                      <div className="form-row">
+                        <div className="col-md-12 mb-3">
+                          <label htmlFor="exampleFormControlTextarea1">
                             Açıklama
                           </label>
                           <input
-                            type='text'
-                            class='form-control'
-                            id='formGroupExampleInput'
+                            type="text"
+                            className="form-control"
+                            id="formGroupExampleInput"
                             onChange={(event) =>
                               this.setState({
                                 modalDescription: event.target.value,
@@ -1108,13 +1086,13 @@ class PatientDetail extends Component {
                           />
                         </div>
                       </div>
-                      <div class='form-row'>
-                        <div class='form-group col-md-12 mb-3'>
-                          <label for='exampleFormControlSelect2'>
+                      <div className="form-row">
+                        <div className="form-group col-md-12 mb-3">
+                          <label htmlFor="exampleFormControlSelect2">
                             Diş Hekimi
                           </label>
                           <select
-                            class='form-control'
+                            className="form-control"
                             reuired
                             onChange={(event) =>
                               this.setState({
@@ -1122,7 +1100,7 @@ class PatientDetail extends Component {
                               })
                             }
                           >
-                            <option selected disabled value=''>
+                            <option selected disabled value="">
                               Seçiniz...
                             </option>
                             {this.state.clinicians !== null &&
@@ -1136,17 +1114,17 @@ class PatientDetail extends Component {
                       </div>
                     </form>
                   </div>
-                  <div class='modal-footer'>
+                  <div className="modal-footer">
                     <button
-                      type='button'
-                      class='btn btn-secondary'
-                      data-dismiss='modal'
+                      type="button"
+                      className="btn btn-secondary"
+                      data-dismiss="modal"
                     >
                       Kapat
                     </button>
                     <button
-                      type='button'
-                      class='btn btn-primary'
+                      type="button"
+                      className="btn btn-primary"
                       onClick={async () => {
                         await store.clinicAddPayment(
                           getCookie('user_id'),
@@ -1186,65 +1164,65 @@ class PatientDetail extends Component {
         <div className={'patientNotesWrapper'}>
           {/* ADD payment Button */}
           <a
-            type='button'
-            data-toggle='modal'
-            data-target='#addUserModal'
+            type="button"
+            data-toggle="modal"
+            data-target="#addUserModal"
             className={'addNotes'}
           >
             Not Ekle<img src={NotesIcon}></img>
           </a>
 
           <div
-            class='modal fade'
-            id='addUserModal'
-            tabIndex='-1'
-            aria-labelledby='exampleModalLabel'
-            aria-hidden='true'
+            className="modal fade"
+            id="addUserModal"
+            tabIndex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
           >
-            <div class='modal-dialog'>
-              <div class='modal-content'>
-                <div class='modal-header'>
-                  <h5 class='modal-title' id='exampleModalLabel'>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
                     Not Ekle
                   </h5>
                   <button
-                    type='button'
-                    class='close'
-                    data-dismiss='modal'
-                    aria-label='Close'
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
                   >
-                    <span aria-hidden='true'>&times;</span>
+                    <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class='modal-body container'>
+                <div className="modal-body container">
                   <form>
-                    <div class='form-row' style={{ marginTop: '0' }}></div>
-                    <div class='form-group'>
-                      <label for='exampleFormControlTextarea1'>
+                    <div className="form-row" style={{ marginTop: '0' }}></div>
+                    <div className="form-group">
+                      <label htmlFor="exampleFormControlTextarea1">
                         Lütfen Not Ekleyiniz.
                       </label>
                       <textarea
                         onChange={(e) => {
                           this.setState({ newNote: e.target.value });
                         }}
-                        class='form-control'
-                        id='exampleFormControlTextarea1'
-                        rows='8'
+                        className="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="8"
                       ></textarea>
                     </div>
                   </form>
                 </div>
-                <div class='modal-footer'>
+                <div className="modal-footer">
                   <button
-                    type='button'
-                    class='btn btn-secondary'
-                    data-dismiss='modal'
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
                   >
                     Kapat
                   </button>
                   <button
-                    type='button'
-                    class='btn btn-primary'
+                    type="button"
+                    className="btn btn-primary"
                     onClick={async () => {
                       await store.clinicAddNote(
                         getCookie('user_id'),
@@ -1518,7 +1496,7 @@ class PatientDetail extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight='50vh'
+            maxHeight="50vh"
             bordered
             small
             searchLabel={'Ara'}
@@ -1539,11 +1517,11 @@ class PatientDetail extends Component {
       <div>
         {this.state.tariffs !== null ? (
           <>
-            <div class='col-md-6 mb-3'>
-              <label for='tariffs'>Tarifler</label>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="tariffs">Tarifler</label>
               <select
-                class='custom-select'
-                id='tarifName'
+                className="custom-select"
+                id="tarifName"
                 required
                 onChange={(event) => {
                   this.setState({ selectedTarif: event.target.value });
@@ -1559,12 +1537,14 @@ class PatientDetail extends Component {
                   );
                 }}
               >
-                <option selected disabled value=''>
+                <option selected disabled value="">
                   Seçiniz...
                 </option>
                 {this.state.tariffs !== null &&
                   this.state.tariffs.map((tarif) => (
-                    <option value={tarif._id}>{tarif.tariff}</option>
+                    <option key={tarif.id} value={tarif._id}>
+                      {tarif.tariff}
+                    </option>
                   ))}
               </select>
             </div>
@@ -1573,7 +1553,7 @@ class PatientDetail extends Component {
                 striped
                 paging={false}
                 scrollY
-                maxHeight='50vh'
+                maxHeight="50vh"
                 bordered
                 small
                 searchLabel={'Ara'}
@@ -1600,7 +1580,7 @@ class PatientDetail extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight='50vh'
+            maxHeight="50vh"
             bordered
             small
             searchLabel={'Ara'}
@@ -1623,7 +1603,7 @@ class PatientDetail extends Component {
           <MDBDataTable
             striped
             scrollY
-            maxHeight='50vh'
+            maxHeight="50vh"
             bordered
             small
             searchLabel={'Ara'}
@@ -1646,19 +1626,19 @@ class PatientDetail extends Component {
           <div>
             {isPlan ? (
               <button
-                type='button'
-                class='btn btn-success addTreatmentButton'
-                data-toggle='modal'
-                data-target='#newTreatmentPlan'
+                type="button"
+                className="btn btn-success addTreatmentButton"
+                data-toggle="modal"
+                data-target="#newTreatmentPlan"
               >
                 Yeni Tedavi Plani Ekle
               </button>
             ) : (
               <button
-                type='button'
-                class='btn btn-success addTreatmentButton'
-                data-toggle='modal'
-                data-target='#newTreatmentPlan'
+                type="button"
+                className="btn btn-success addTreatmentButton"
+                data-toggle="modal"
+                data-target="#newTreatmentPlan"
               >
                 Yeni Tedavi Ekle
               </button>
@@ -1666,14 +1646,14 @@ class PatientDetail extends Component {
           </div>
         ) : (
           <span
-            class='d-inline-block'
-            data-toggle='popover'
-            data-content='Lütfen, önce bir diş seçimi yapınız.'
+            className="d-inline-block"
+            data-toggle="popover"
+            data-content="Lütfen, önce bir diş seçimi yapınız."
           >
             <button
-              class='btn btn-secondary addTreatmentButton'
+              className="btn btn-secondary addTreatmentButton"
               style={{ pointerEvents: null }}
-              type='button'
+              type="button"
               disabled
             >
               Lütfen, önce diş seçiniz.
@@ -1695,18 +1675,18 @@ class PatientDetail extends Component {
     return (
       <div>
         <a
-          href='#'
+          href="#"
           className={'underTableIcon1'}
-          data-toggle='tooltip'
-          title='Make Contract'
+          data-toggle="tooltip"
+          title="Make Contract"
         >
           <img src={ContractIMG}></img>
         </a>
         <a
-          href='#'
+          href="#"
           className={'underTableIcon2'}
-          data-toggle='tooltip'
-          title='Make Proforma'
+          data-toggle="tooltip"
+          title="Make Proforma"
         >
           <img src={ProformaIMG}></img>
         </a>
@@ -1720,7 +1700,7 @@ class PatientDetail extends Component {
     return (
       <div className={'Profile'}>
         <div className={'patientProfileCard'}>
-          <img className={'profileImage'} src={patient?.avatar} alt='avatar' />
+          <img className={'profileImage'} src={patient?.avatar} alt="avatar" />
         </div>
 
         <div className={'profileName'}>{patient?.name}</div>

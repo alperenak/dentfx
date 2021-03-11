@@ -57,7 +57,7 @@ function App() {
   ] = useContext(AlertContext);
   const [fullScreenLoading] = useContext(FullScreenLoadingContext);
   const [loading] = useContext(MainLoadingContext);
-  console.log(loading);
+  // console.log(loading);
   useEffect(() => {
     if (getCookie('token')) {
       setAuthorized(true);
@@ -88,249 +88,253 @@ function App() {
               <UserTopBar v-if={authorized} />
             </div>
             <div className="zeusContainer">
-              <div className="col-md-2 leftPart">
+              <div className="leftPart">
                 <SideBar v-if={authorized} />
               </div>
               {isUser ? (
                 <>
-                  <div className="col-md-11 h-100 middlePart">
-                    <Switch>
-                      <Route
-                        v-if={authorized}
-                        path="/"
-                        exact
-                        render={(props) => <Home {...props} />}
-                      />
+                  <div className="middlePart">
+                    <div className="middlePartContainer">
+                      <Switch>
+                        <Route
+                          v-if={authorized}
+                          path="/"
+                          exact
+                          render={(props) => <Home {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/appointment"
-                        exact
-                        render={(props) => <Appointment {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/appointment"
+                          exact
+                          render={(props) => <Appointment {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/calendar"
-                        exact
-                        render={(props) => <ACalendar {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/calendar"
+                          exact
+                          render={(props) => <ACalendar {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/appointment/search"
-                        exact
-                        render={(props) => <SearchAppointment {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/appointment/search"
+                          exact
+                          render={(props) => <SearchAppointment {...props} />}
+                        />
 
-                      <Route
-                        path="/profile/:id"
-                        exact
-                        render={(props) => <Profile />}
-                      />
+                        <Route
+                          path="/profile/:id"
+                          exact
+                          render={(props) => <Profile {...props} />}
+                        />
 
-                      <Route
-                        path="/patients/"
-                        exact
-                        render={(props) => <Patients {...props} />}
-                      />
+                        <Route
+                          path="/patients/"
+                          exact
+                          render={(props) => <Patients {...props} />}
+                        />
 
-                      <Route
-                        path="/messages/details/:id"
-                        exact
-                        render={(props) => <MessageDetails {...props} />}
-                      />
+                        <Route
+                          path="/messages/details/:id"
+                          exact
+                          render={(props) => <MessageDetails {...props} />}
+                        />
 
-                      <Route
-                        path="/messages"
-                        exact
-                        render={(props) => <Messages {...props} />}
-                      />
+                        <Route
+                          path="/messages"
+                          exact
+                          render={(props) => <Messages {...props} />}
+                        />
 
-                      <Route
-                        path="/messages/new"
-                        exact
-                        render={(props) => <NewMessage {...props} />}
-                      />
+                        <Route
+                          path="/messages/new"
+                          exact
+                          render={(props) => <NewMessage {...props} />}
+                        />
 
-                      <Route
-                        path="/clinic/:id"
-                        exact
-                        render={(props) => <ClinicDetail {...props} />}
-                      />
+                        <Route
+                          path="/clinic/:id"
+                          exact
+                          render={(props) => <ClinicDetail {...props} />}
+                        />
 
-                      <Route
-                        path="/patients/:id"
-                        exact
-                        render={(props) => <PatientDetail {...props} />}
-                      />
+                        <Route
+                          path="/patients/:id"
+                          exact
+                          render={(props) => <PatientDetail {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/appointment/create/:id"
-                        exact
-                        render={(props) => <CreateAppointment {...props} />}
-                      />
-                      <Route
-                        v-if={authorized}
-                        path="/paymenthistory"
-                        exact
-                        render={(props) => <PaymentHistory {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/appointment/create/:id"
+                          exact
+                          render={(props) => <CreateAppointment {...props} />}
+                        />
+                        <Route
+                          v-if={authorized}
+                          path="/paymenthistory"
+                          exact
+                          render={(props) => <PaymentHistory {...props} />}
+                        />
 
-                      <Route
-                        path="/clinician"
-                        exact
-                        render={(props) => <Clinician {...props} />}
-                      />
+                        <Route
+                          path="/clinician"
+                          exact
+                          render={(props) => <Clinician {...props} />}
+                        />
 
-                      <Route
-                        path="/clinician/:id"
-                        exact
-                        render={(props) => <ClinicianDetails {...props} />}
-                      />
+                        <Route
+                          path="/clinician/:id"
+                          exact
+                          render={(props) => <ClinicianDetails {...props} />}
+                        />
 
-                      <Route
-                        path="/clinician/new"
-                        exact
-                        render={(props) => <NewClinician {...props} />}
-                      />
+                        <Route
+                          path="/clinician/new"
+                          exact
+                          render={(props) => <NewClinician {...props} />}
+                        />
 
-                      <Route
-                        path="/addTreatment"
-                        exact
-                        render={(props) => <AddTreatment {...props} />}
-                      />
-                    </Switch>
+                        <Route
+                          path="/addTreatment"
+                          exact
+                          render={(props) => <AddTreatment {...props} />}
+                        />
+                      </Switch>
+                    </div>
                   </div>
                   {/* <div className={'col-md-3 rightPart'}>
                       <RightMenu />
                     </div> */}
                 </>
               ) : (
-                <div className="col-md-10 middlePart">
-                  {loading ? (
-                    <Loading fullscreen noBackground />
-                  ) : (
-                    <Switch>
-                      <Route
-                        v-if={authorized}
-                        path="/"
-                        exact
-                        render={(props) => <Home {...props} />}
-                      />
+                <div className="middlePart">
+                  <div className="middlePartContainer">
+                    {loading ? (
+                      <Loading fullscreen noBackground />
+                    ) : (
+                      <Switch>
+                        <Route
+                          v-if={authorized}
+                          path="/"
+                          exact
+                          render={(props) => <Home {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/appointment"
-                        exact
-                        render={(props) => <Appointment {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/appointment"
+                          exact
+                          render={(props) => <Appointment {...props} />}
+                        />
 
-                      <Route
-                        path="/dentist/:id"
-                        exact
-                        render={(props) => <DentistDetail {...props} />}
-                      />
+                        <Route
+                          path="/dentist/:id"
+                          exact
+                          render={(props) => <DentistDetail {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/calendar"
-                        exact
-                        render={(props) => <ACalendar {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/calendar"
+                          exact
+                          render={(props) => <ACalendar {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/appointment/search"
-                        exact
-                        render={(props) => <SearchAppointment {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/appointment/search"
+                          exact
+                          render={(props) => <SearchAppointment {...props} />}
+                        />
 
-                      <Route
-                        path="/profile/:id"
-                        exact
-                        render={(props) => <Profile {...props} />}
-                      />
+                        <Route
+                          path="/profile/:id"
+                          exact
+                          render={(props) => <Profile {...props} />}
+                        />
 
-                      <Route
-                        path="/patients/"
-                        exact
-                        render={(props) => <Patients {...props} />}
-                      />
+                        <Route
+                          path="/patients/"
+                          exact
+                          render={(props) => <Patients {...props} />}
+                        />
 
-                      <Route
-                        path="/messages/details/:id"
-                        exact
-                        render={(props) => <MessageDetails {...props} />}
-                      />
+                        <Route
+                          path="/messages/details/:id"
+                          exact
+                          render={(props) => <MessageDetails {...props} />}
+                        />
 
-                      <Route
-                        path="/messages"
-                        exact
-                        render={(props) => <Messages {...props} />}
-                      />
+                        <Route
+                          path="/messages"
+                          exact
+                          render={(props) => <Messages {...props} />}
+                        />
 
-                      <Route
-                        path="/messages/new"
-                        exact
-                        render={(props) => <NewMessage {...props} />}
-                      />
+                        <Route
+                          path="/messages/new"
+                          exact
+                          render={(props) => <NewMessage {...props} />}
+                        />
 
-                      <Route
-                        path="/clinic/:id"
-                        exact
-                        render={(props) => <ClinicDetail {...props} />}
-                      />
+                        <Route
+                          path="/clinic/:id"
+                          exact
+                          render={(props) => <ClinicDetail {...props} />}
+                        />
 
-                      <Route
-                        path="/patients/:id"
-                        exact
-                        render={(props) => <PatientDetail {...props} />}
-                      />
+                        <Route
+                          path="/patients/:id"
+                          exact
+                          render={(props) => <PatientDetail {...props} />}
+                        />
 
-                      <Route
-                        v-if={authorized}
-                        path="/appointment/create/:id"
-                        exact
-                        render={(props) => <CreateAppointment {...props} />}
-                      />
+                        <Route
+                          v-if={authorized}
+                          path="/appointment/create/:id"
+                          exact
+                          render={(props) => <CreateAppointment {...props} />}
+                        />
 
-                      <Route
-                        path="/clinician"
-                        exact
-                        render={(props) => <Clinician {...props} />}
-                      />
-                      <Route
-                        path="/clinician/:id"
-                        exact
-                        render={(props) => <ClinicianDetails {...props} />}
-                      />
-                      <Route
-                        path="/treatmentManagement"
-                        exact
-                        render={(props) => <TreatmentManagement {...props} />}
-                      />
+                        <Route
+                          path="/clinician"
+                          exact
+                          render={(props) => <Clinician {...props} />}
+                        />
+                        <Route
+                          path="/clinician/:id"
+                          exact
+                          render={(props) => <ClinicianDetails {...props} />}
+                        />
+                        <Route
+                          path="/treatmentManagement"
+                          exact
+                          render={(props) => <TreatmentManagement {...props} />}
+                        />
 
-                      <Route
-                        path="/clinician/new"
-                        exact
-                        render={(props) => <NewClinician {...props} />}
-                      />
+                        <Route
+                          path="/clinician/new"
+                          exact
+                          render={(props) => <NewClinician {...props} />}
+                        />
 
-                      <Route
-                        path="/addTreatment"
-                        exact
-                        render={(props) => <AddTreatment {...props} />}
-                      />
+                        <Route
+                          path="/addTreatment"
+                          exact
+                          render={(props) => <AddTreatment {...props} />}
+                        />
 
-                      <Route
-                        path="/reports"
-                        exact
-                        render={(props) => <Reports {...props} />}
-                      />
-                    </Switch>
-                  )}
+                        <Route
+                          path="/reports"
+                          exact
+                          render={(props) => <Reports {...props} />}
+                        />
+                      </Switch>
+                    )}
+                  </div>
                 </div>
               )}
               {/* <Footer /> */}

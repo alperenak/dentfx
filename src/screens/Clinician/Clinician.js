@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { MDBDataTable, MDBBtn } from 'mdbreact';
+import { MDBDataTable } from 'mdbreact';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import CheckMark from '../../components/CheckMark/checkMark';
 import DatePicker from '../../components/DatePicker/DatePicker';
 
 /*** Styles ***/
-import styles from './clinician.scss';
+import './clinician.scss';
 import AddUserIcon from '../../icons/add-user.svg';
 
 /*** Utils ***/
@@ -16,65 +16,65 @@ import { Link } from 'react-router-dom';
 
 const Step1 = () => {
   return (
-    <div className='stepWrapper'>
-      <form class='needs-validation' novalidate>
-        <div class='form-row'>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault01'>İsim</label>
+    <div className="stepWrapper">
+      <form className="needs-validation" noValidate>
+        <div className="form-row">
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault01">İsim</label>
             <input
-              type='text'
-              class='form-control'
-              id='validationDefault01'
-              placeholder='Hasan'
+              type="text"
+              className="form-control"
+              id="validationDefault01"
+              placeholder="Hasan"
               required
             />
           </div>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault02'>Soyisim</label>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault02">Soyisim</label>
             <input
-              type='text'
-              class='form-control'
-              id='validationDefault02'
-              placeholder='Demirkıran'
+              type="text"
+              className="form-control"
+              id="validationDefault02"
+              placeholder="Demirkıran"
               required
             />
           </div>
         </div>
-        <div class='form-row'>
-          <div class='col-md-9 mb-3'>
-            <label for='inputTC'>TC Kimlik No</label>
+        <div className="form-row">
+          <div className="col-md-9 mb-3">
+            <label htmlFor="inputTC">TC Kimlik No</label>
             <input
-              type='text'
-              class='form-control'
-              id='inputTC'
-              placeholder='000 0000 0000'
+              type="text"
+              className="form-control"
+              id="inputTC"
+              placeholder="000 0000 0000"
             />
           </div>
           <div className={'col-md-3 mb-3'} style={{ paddingLeft: '2rem' }}>
-            <label for='sexRadio1'>Cinsiyet</label>
+            <label htmlFor="sexRadio1">Cinsiyet</label>
             <div className={'row'} style={{ marginTop: '0' }}>
-              <div class='form-check' style={{ marginRight: '5px' }}>
+              <div className="form-check" style={{ marginRight: '5px' }}>
                 <input
-                  class='form-check-input'
-                  type='radio'
-                  name='exampleRadios'
-                  id='sexRadio1'
-                  value='option1'
+                  className="form-check-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="sexRadio1"
+                  value="option1"
                   checked
                 />
-                <label class='form-check-label' for='exampleRadios1'>
+                <label className="form-check-label" htmlFor="exampleRadios1">
                   Erkek
                 </label>
               </div>
-              <div class='form-check'>
+              <div className="form-check">
                 <input
-                  class='form-check-input'
-                  type='radio'
-                  name='exampleRadios'
-                  id='sexRadio2'
-                  value='option2'
+                  className="form-check-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="sexRadio2"
+                  value="option2"
                 />
-                <label class='form-check-label' for='exampleRadios2'>
+                <label className="form-check-label" htmlFor="exampleRadios2">
                   Kadın
                 </label>
               </div>
@@ -82,33 +82,33 @@ const Step1 = () => {
           </div>
         </div>
         <div className={'form-row'} style={{ marginBottom: '0' }}>
-          <div class='col-md-4 mb-3'>
-            <label for='validationDefault04'>Uyruk</label>
-            <select class='custom-select' id='validationDefault04' required>
-              <option selected disabled value=''>
+          <div className="col-md-4 mb-3">
+            <label htmlFor="validationDefault04">Uyruk</label>
+            <select className="custom-select" id="validationDefault04" required>
+              <option selected disabled value="">
                 Seçiniz...
               </option>
               <option>Türk</option>
               <option>Yabancı</option>
             </select>
           </div>
-          <div class='col-md-8 mb-3'>
-            <label for='dentistName'>Diş Hekimi</label>
+          <div className="col-md-8 mb-3">
+            <label htmlFor="dentistName">Diş Hekimi</label>
             <input
-              id='dentistName'
-              type='text'
-              class='form-control'
-              placeholder='Diş Hekimi'
+              id="dentistName"
+              type="text"
+              className="form-control"
+              placeholder="Diş Hekimi"
             />
           </div>
         </div>
-        <div class='form-row' style={{ marginTop: '0' }}>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault01'>Doğum Tarihi</label>
+        <div className="form-row" style={{ marginTop: '0' }}>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault01">Doğum Tarihi</label>
             <DatePicker />
           </div>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault02'>Kayıt Tarihi</label>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault02">Kayıt Tarihi</label>
             <DatePicker />
           </div>
         </div>
@@ -118,23 +118,23 @@ const Step1 = () => {
 };
 const Step2 = () => {
   return (
-    <div className='stepWrapper'>
-      <form class='was-validated'>
-        <div class='form-row'>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault04'>İlçe</label>
-            <select class='custom-select' id='validationDefault04' required>
-              <option selected disabled value=''>
+    <div className="stepWrapper">
+      <form className="was-validated">
+        <div className="form-row">
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault04">İlçe</label>
+            <select className="custom-select" id="validationDefault04" required>
+              <option selected disabled value="">
                 Seçiniz...
               </option>
               <option>Başakşehir</option>
               <option>Sarıyer</option>
             </select>
           </div>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault04'>Şehir</label>
-            <select class='custom-select' id='validationDefault04' required>
-              <option selected disabled value=''>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault04">Şehir</label>
+            <select className="custom-select" id="validationDefault04" required>
+              <option selected disabled value="">
                 Seçiniz...
               </option>
               <option>İstanbul</option>
@@ -145,69 +145,69 @@ const Step2 = () => {
           </div>
         </div>
 
-        <div class='form-row'>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault04'>Ülke</label>
-            <select class='custom-select' id='validationDefault04' required>
-              <option selected disabled value=''>
+        <div className="form-row">
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault04">Ülke</label>
+            <select className="custom-select" id="validationDefault04" required>
+              <option selected disabled value="">
                 Seçiniz...
               </option>
               <option>Türkiye</option>
               <option>USA</option>
             </select>
           </div>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault05'>Posta Kodu</label>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault05">Posta Kodu</label>
             <input
-              type='text'
-              class='form-control'
-              id='validationDefault05'
+              type="text"
+              className="form-control"
+              id="validationDefault05"
               required
             />
           </div>
         </div>
 
-        <div class='form-row'>
-          <div class='col-md-12 mb-3'>
-            <label for='exampleFormControlInput1'>E-mail adresi</label>
+        <div className="form-row">
+          <div className="col-md-12 mb-3">
+            <label htmlFor="exampleFormControlInput1">E-mail adresi</label>
             <input
-              type='email'
-              class='form-control'
-              id='exampleFormControlInput1'
-              placeholder='hasan@gmail.com'
+              type="email"
+              className="form-control"
+              id="exampleFormControlInput1"
+              placeholder="hasan@gmail.com"
             />
           </div>
         </div>
 
-        <div class='form-row'>
-          <div class='col-md-6 mb-3'>
-            <label for='inputAddress'>Telefon1</label>
+        <div className="form-row">
+          <div className="col-md-6 mb-3">
+            <label htmlFor="inputAddress">Telefon1</label>
             <input
-              type='text'
-              class='form-control'
-              id='inputAddress'
-              placeholder='+09 000 000 0000'
+              type="text"
+              className="form-control"
+              id="inputAddress"
+              placeholder="+09 000 000 0000"
             />
           </div>
-          <div class='col-md-6 mb-3'>
-            <label for='validationDefault05'>Telefon2</label>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="validationDefault05">Telefon2</label>
             <input
-              type='text'
-              class='form-control'
-              id='validationDefault05'
-              placeholder='+09 000 000 0000'
+              type="text"
+              className="form-control"
+              id="validationDefault05"
+              placeholder="+09 000 000 0000"
             />
           </div>
         </div>
 
-        <div class='form-row'>
-          <div class='col-md-12 mb-3'>
-            <label for='exampleFormControlInput1'>Adres</label>
+        <div className="form-row">
+          <div className="col-md-12 mb-3">
+            <label htmlFor="exampleFormControlInput1">Adres</label>
             <input
-              type='text'
-              class='form-control'
-              id='exampleFormControlInput1'
-              placeholder='Rumeli Hisarüstü Mah...'
+              type="text"
+              className="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Rumeli Hisarüstü Mah..."
             />
           </div>
         </div>
@@ -218,7 +218,7 @@ const Step2 = () => {
 
 const Step3 = () => {
   return (
-    <div className='stepWrapper'>
+    <div className="stepWrapper">
       <CheckMark />
     </div>
   );
@@ -231,7 +231,6 @@ class Clinician extends Component {
     let clinicId = getCookie('user_id');
     let res = await store.getClinicDetail({ clinicId });
     this.setState({ clinicians: res.data.Dentist });
-    console.log(this.state.clinicians);
     this.setState({
       patientData: {
         columns: [
@@ -270,13 +269,13 @@ class Clinician extends Component {
           return {
             ...dentist,
             avatar: (
-              <div class='tableAvatar'>
+              <div className="tableAvatar">
                 <img src={dentist.avatar} />
               </div>
             ),
             button: (
-              <Link to={`/clinician/${dentist.id}`} className='tableAvatar'>
-                <button type='button' class='btn btn-secondary'>
+              <Link to={`/clinician/${dentist.id}`} className="tableAvatar">
+                <button type="button" className="btn btn-secondary">
                   İncele
                 </button>
               </Link>
@@ -285,18 +284,12 @@ class Clinician extends Component {
         }),
       },
     });
-    console.log(this.state.patientData);
   };
 
   render() {
     const step1Content = <Step1 />;
     const step2Content = <Step2 />;
     const step3Content = <Step3 />;
-
-    function step1Validator() {
-      //return a boolean
-      return true;
-    }
 
     function step2Validator() {
       // return a boolean
@@ -317,37 +310,37 @@ class Clinician extends Component {
     return (
       <div>
         <a
-          type='button'
-          data-toggle='modal'
-          data-target='#addUserModal'
+          type="button"
+          data-toggle="modal"
+          data-target="#addUserModal"
           className={'addUser'}
         >
           <img src={AddUserIcon}></img>
         </a>
 
         <div
-          class='modal fade'
-          id='addUserModal'
-          tabindex='-1'
-          aria-labelledby='exampleModalLabel'
-          aria-hidden='true'
+          className="modal fade"
+          id="addUserModal"
+          tabIndex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
         >
-          <div class='modal-dialog'>
-            <div class='modal-content'>
-              <div class='modal-header'>
-                <h5 class='modal-title' id='exampleModalLabel'>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
                   Hasta Ekle
                 </h5>
                 <button
-                  type='button'
-                  class='close'
-                  data-dismiss='modal'
-                  aria-label='Close'
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
                 >
-                  <span aria-hidden='true'>&times;</span>
+                  <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class='modal-body'>
+              <div className="modal-body">
                 <StepProgressBar
                   startingStep={0}
                   onSubmit={onFormSubmit}
@@ -377,15 +370,15 @@ class Clinician extends Component {
                   ]}
                 />
               </div>
-              <div class='modal-footer'>
+              <div className="modal-footer">
                 <button
-                  type='button'
-                  class='btn btn-secondary'
-                  data-dismiss='modal'
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
                 >
                   Kapat
                 </button>
-                <button type='button' class='btn btn-primary'>
+                <button type="button" className="btn btn-primary">
                   Klinisyen Ekle
                 </button>
               </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +11,6 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  IconButton,
 } from '@material-ui/core';
 import { LocationCity, Search, LocationOn } from '@material-ui/icons';
 import { useWideCardMediaStyles } from '@mui-treasury/styles/cardMedia/wide';
@@ -109,33 +109,33 @@ const LandingBody = () => {
   return (
     <>
       <link
-        rel='stylesheet'
-        type='text/css'
-        charset='UTF-8'
-        href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+        rel="stylesheet"
+        type="text/css"
+        charset="UTF-8"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
       />
       <link
-        rel='stylesheet'
-        type='text/css'
-        href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
       />
-      <div className='body'>
-        <div className='body__banner'>
-          <p className='body__banner__title'>
+      <div className="body">
+        <div className="body__banner">
+          <p className="body__banner__title">
             Türkiye’nin her yerinden diş klinikleri bulun
           </p>
-          <p className='body__banner__description'>
+          <p className="body__banner__description">
             Tek aramayla tüm kliniklere ulaşın!
           </p>
-          <div className='body__banner__search'>
-            <Grid container spacing={1} alignItems='flex-end'>
+          <div className="body__banner__search">
+            <Grid container spacing={1} alignItems="flex-end">
               <Grid item>
                 <LocationCity style={{ color: '#a12b70' }} />
               </Grid>
               <Grid item>
                 <TextField
-                  id='input-with-icon-grid'
-                  placeholder='Arama adı, konum, uzmanlık alanı'
+                  id="input-with-icon-grid"
+                  placeholder="Arama adı, konum, uzmanlık alanı"
                   inputProps={{ style: { fontSize: 12, width: 200 } }}
                   onChange={(e) => {
                     setKeyword(e.target.value);
@@ -155,8 +155,8 @@ const LandingBody = () => {
               </Grid>
               <Grid item>
                 <TextField
-                  id='input-with-icon-grid'
-                  placeholder='Sehire gore arama'
+                  id="input-with-icon-grid"
+                  placeholder="Sehire gore arama"
                   inputProps={{ style: { fontSize: 12, width: 200 } }}
                   onChange={(e) => {
                     setLocation(e.target.value);
@@ -173,7 +173,7 @@ const LandingBody = () => {
               ></hr>
               <Grid item>
                 <Button
-                  variant='contained'
+                  variant="contained"
                   startIcon={<Search />}
                   style={{
                     backgroundColor: '#a12b70',
@@ -188,18 +188,18 @@ const LandingBody = () => {
               </Grid>
             </Grid>
           </div>
-          <p className='body__banner__searchDescription'>
+          <p className="body__banner__searchDescription">
             Uzmanlığa göre hızlı aramayı deneyin:
           </p>
-          <div className='body__banner__icons'>
-            <img className='body__banner__icons__icon' src={implantIcon} />
-            <img className='body__banner__icons__icon' src={ortodonti} />
-            <img className='body__banner__icons__icon' src={gulusTasarimi} />
+          <div className="body__banner__icons">
+            <img className="body__banner__icons__icon" src={implantIcon} />
+            <img className="body__banner__icons__icon" src={ortodonti} />
+            <img className="body__banner__icons__icon" src={gulusTasarimi} />
           </div>
         </div>
 
-        <div className='body__popular'>
-          <p className='body__popular__title'>Popüler Klinikler</p>
+        <div className="body__popular">
+          <p className="body__popular__title">Popüler Klinikler</p>
           <div>
             <Slider {...settings}>
               <div>
@@ -218,9 +218,9 @@ const LandingBody = () => {
                 <img style={{ width: '450px', height: '300px' }} src={chair} />
               </div>
             </Slider>
-            <div className='body__popular__button'>
+            <div className="body__popular__button">
               <Button
-                variant='contained'
+                variant="contained"
                 style={{
                   backgroundColor: '#a12b70',
                   color: 'white',
@@ -228,7 +228,7 @@ const LandingBody = () => {
                   height: '30px',
                   fontSize: '12px',
                 }}
-                href='/searchPage'
+                href="/searchPage"
               >
                 Tumunu gor
               </Button>
@@ -236,29 +236,29 @@ const LandingBody = () => {
           </div>
         </div>
 
-        <div className='body__stats'>
-          <div className='body__stats__words'>
-            <Grid container spacing={10} alignItems='flex-end'>
+        <div className="body__stats">
+          <div className="body__stats__words">
+            <Grid container spacing={10} alignItems="flex-end">
               <Grid item>
-                <div className='body__stats__words__items'>
+                <div className="body__stats__words__items">
                   <h1>3</h1>
                   <h6>SehirI</h6>
                 </div>
               </Grid>
               <Grid item>
-                <div className='body__stats__words__items'>
+                <div className="body__stats__words__items">
                   <h1>121</h1>
                   <h6>Klinik</h6>
                 </div>
               </Grid>
               <Grid item>
-                <div className='body__stats__words__items'>
+                <div className="body__stats__words__items">
                   <h1>423</h1>
                   <h6>Doktor</h6>
                 </div>
               </Grid>
               <Grid item>
-                <div className='body__stats__words__items'>
+                <div className="body__stats__words__items">
                   <h1>10.521</h1>
                   <h6>Hasta</h6>
                 </div>
@@ -267,10 +267,10 @@ const LandingBody = () => {
           </div>
         </div>
 
-        <div className='body__clinics'>
-          <p className='body__clinics__title'>Bölümlere Göre Klinikler</p>
-          <div className='body__clinics__cards'>
-            <Grid container spacing={2} alignItems='flex-end'>
+        <div className="body__clinics">
+          <p className="body__clinics__title">Bölümlere Göre Klinikler</p>
+          <div className="body__clinics__cards">
+            <Grid container spacing={2} alignItems="flex-end">
               <Grid item>
                 <Card elevation={0} className={styles.root}>
                   <CardMedia classes={mediaStyles} image={dentalcabinet} />
@@ -399,9 +399,9 @@ const LandingBody = () => {
               </Grid>
             </Grid>
           </div>
-          <div className='body__clinics__button'>
+          <div className="body__clinics__button">
             <Button
-              variant='contained'
+              variant="contained"
               style={{
                 backgroundColor: '#a12b70',
                 color: 'white',
@@ -415,8 +415,8 @@ const LandingBody = () => {
           </div>
         </div>
 
-        <div className='body__message'>
-          <div className='body__message__words'>
+        <div className="body__message">
+          <div className="body__message__words">
             <h2>
               Sağlık hizmeti sağlayıcılarının Dentfx'te listelendiğinden emin
               oluyoruz.
@@ -425,23 +425,23 @@ const LandingBody = () => {
           </div>
         </div>
 
-        <div className='body__nasil'>
-          <p className='body__nasil__title'>Nasıl Çalışır?</p>
-          <p className='body__nasil__description'>
+        <div className="body__nasil">
+          <p className="body__nasil__title">Nasıl Çalışır?</p>
+          <p className="body__nasil__description">
             Nerden başlayacağınızdan emin değilseniz aşağıdaki adımları izleyin.
           </p>
-          <div className='body__nasil__cards'>
-            <Grid container spacing={10} alignItems='flex-end'>
+          <div className="body__nasil__cards">
+            <Grid container spacing={10} alignItems="flex-end">
               <Grid item>
-                <Card className={styles.roott} variant='outlined'>
+                <Card className={styles.roott} variant="outlined">
                   <CardContent style={{ textAlign: 'center' }}>
                     <img
                       src={searchMap}
                       style={{ textAlign: 'center', marginBottom: '10px' }}
                     />
                     <Typography
-                      variant='h5'
-                      component='h2'
+                      variant="h5"
+                      component="h2"
                       style={{
                         textAlign: 'center',
                         color: '#a12b70',
@@ -451,8 +451,8 @@ const LandingBody = () => {
                       İhtiyacınız olan Kliniği bulun
                     </Typography>
                     <Typography
-                      variant='body2'
-                      component='p'
+                      variant="body2"
+                      component="p"
                       style={{ color: '#7c7c7c', marginBottom: '10px' }}
                     >
                       Tam olarak istediğinizi elde etmek için şehiri veya
@@ -464,15 +464,15 @@ const LandingBody = () => {
                 </Card>
               </Grid>
               <Grid item>
-                <Card className={styles.roott} variant='outlined'>
+                <Card className={styles.roott} variant="outlined">
                   <CardContent style={{ textAlign: 'center' }}>
                     <img
                       src={randevu}
                       style={{ textAlign: 'center', marginBottom: '10px' }}
                     />
                     <Typography
-                      variant='h5'
-                      component='h2'
+                      variant="h5"
+                      component="h2"
                       style={{
                         textAlign: 'center',
                         color: '#a12b70',
@@ -482,8 +482,8 @@ const LandingBody = () => {
                       Randevu isteği gönderin
                     </Typography>
                     <Typography
-                      variant='body2'
-                      component='p'
+                      variant="body2"
+                      component="p"
                       style={{ color: '#7c7c7c' }}
                     >
                       Kliniklere bakın. Kliniğin sayfasında kliniğin
@@ -495,7 +495,7 @@ const LandingBody = () => {
                 </Card>
               </Grid>
               <Grid item>
-                <Card className={styles.roott} variant='outlined'>
+                <Card className={styles.roott} variant="outlined">
                   <CardContent
                     style={{ textAlign: 'center', marginBottom: '10px' }}
                   >
@@ -504,8 +504,8 @@ const LandingBody = () => {
                       style={{ textAlign: 'center', marginBottom: '10px' }}
                     />
                     <Typography
-                      variant='h5'
-                      component='h2'
+                      variant="h5"
+                      component="h2"
                       style={{
                         textAlign: 'center',
                         color: '#a12b70',
@@ -515,8 +515,8 @@ const LandingBody = () => {
                       Kliniğin sizinle iletişime geçmesini isteyin
                     </Typography>
                     <Typography
-                      variant='body2'
-                      component='p'
+                      variant="body2"
+                      component="p"
                       style={{ color: '#7c7c7c' }}
                     >
                       Yolculuğunuz hakkında herhangi bir sorunuz varsa,
@@ -531,12 +531,12 @@ const LandingBody = () => {
           </div>
         </div>
 
-        <div className='body__gorusler'>
-          <div className='body__gorusler__cards'>
-            <p className='body__gorusler__title'>Görüşler</p>
-            <Grid container spacing={10} alignItems='flex-end'>
+        <div className="body__gorusler">
+          <div className="body__gorusler__cards">
+            <p className="body__gorusler__title">Görüşler</p>
+            <Grid container spacing={10} alignItems="flex-end">
               <Grid item>
-                <Card className={styles.roottt} variant='outlined'>
+                <Card className={styles.roottt} variant="outlined">
                   <CardContent>
                     <p style={{ fontSize: '12px' }}>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -547,10 +547,10 @@ const LandingBody = () => {
                       porttitor lectus mattis. Diam eu in amet, arcu enim donec
                       imperdiet.
                     </p>
-                    <Typography variant='h5' component='h2'>
+                    <Typography variant="h5" component="h2">
                       İhtiyacınız olan Kliniği bulun
                     </Typography>
-                    <Typography variant='body2' component='p'>
+                    <Typography variant="body2" component="p">
                       Tam olarak istediğinizi elde etmek için şehiri veya
                       departmanı seçerek aramanızı filtrelerle kişiselleştirin.
                       Hatta bunları sağlanan hizmetlere göre
@@ -560,7 +560,7 @@ const LandingBody = () => {
                 </Card>
               </Grid>
               <Grid item>
-                <Card className={styles.roottt} variant='outlined'>
+                <Card className={styles.roottt} variant="outlined">
                   <CardContent>
                     <p style={{ fontSize: '12px' }}>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -571,10 +571,10 @@ const LandingBody = () => {
                       porttitor lectus mattis. Diam eu in amet, arcu enim donec
                       imperdiet.
                     </p>
-                    <Typography variant='h5' component='h2'>
+                    <Typography variant="h5" component="h2">
                       İhtiyacınız olan Kliniği bulun
                     </Typography>
-                    <Typography variant='body2' component='p'>
+                    <Typography variant="body2" component="p">
                       Tam olarak istediğinizi elde etmek için şehiri veya
                       departmanı seçerek aramanızı filtrelerle kişiselleştirin.
                       Hatta bunları sağlanan hizmetlere göre
@@ -584,7 +584,7 @@ const LandingBody = () => {
                 </Card>
               </Grid>
               <Grid item>
-                <Card className={styles.roottt} variant='outlined'>
+                <Card className={styles.roottt} variant="outlined">
                   <CardContent>
                     <p style={{ fontSize: '12px' }}>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -595,10 +595,10 @@ const LandingBody = () => {
                       porttitor lectus mattis. Diam eu in amet, arcu enim donec
                       imperdiet.
                     </p>
-                    <Typography variant='h5' component='h2'>
+                    <Typography variant="h5" component="h2">
                       İhtiyacınız olan Kliniği bulun
                     </Typography>
-                    <Typography variant='body2' component='p'>
+                    <Typography variant="body2" component="p">
                       Tam olarak istediğinizi elde etmek için şehiri veya
                       departmanı seçerek aramanızı filtrelerle kişiselleştirin.
                       Hatta bunları sağlanan hizmetlere göre
@@ -611,10 +611,10 @@ const LandingBody = () => {
           </div>
         </div>
 
-        <div className='body__references'>
-          <p className='body__references__title'>Referanslarimiz</p>
-          <div className='body__references__cards'>
-            <Grid container spacing={10} alignItems='flex-end'>
+        <div className="body__references">
+          <p className="body__references__title">Referanslarimiz</p>
+          <div className="body__references__cards">
+            <Grid container spacing={10} alignItems="flex-end">
               <Grid item>
                 <img src={ref1} />
               </Grid>

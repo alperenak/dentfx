@@ -1,313 +1,308 @@
-@import '../../helpers/responsiveBreakpointsMixins';
-@import '../../helpers/variableBreakpoints';
+@import "../../helpers/responsiveBreakpointsMixins";
+@import "../../helpers/variableBreakpoints";
 
-.login{
-
+.login {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__inner {
+    position: relative;
     overflow: hidden;
-    height: 100%;
+    display: flex;
+    border-radius: 16px;
+    box-shadow: 0 0 18px 0 rgba(26, 90, 255, 0.1);
     width: 100%;
-	&__container{
-		display: flex;
-	    justify-content: center;
-	    align-items: center;
-	}
-	&__inner{
-		position: relative;
-	    overflow: hidden;
-	    display: flex;
-	    border-radius: 16px;
-	    box-shadow: 0 0 18px 0 rgba(26, 90, 255, 0.1);
-	    width: 100%;
-		background-color: white;
-		height: 740px;
-	    @include x-large {
-	      flex-direction: column;
-	    }
-	}
-	&__image{
-		position: relative;
-        height: auto;
-		background-size: cover;
-        @include x-large {
-        	display: none;
+    background-color: white;
+    height: 740px;
+    @include x-large {
+      flex-direction: column;
+    }
+  }
+  &__image {
+    position: relative;
+    height: auto;
+    background-size: cover;
+    @include x-large {
+      display: none;
+    }
+    &__loginImage {
+      height: 100%;
+      width: 100%;
+    }
+    &__loginIcon {
+      position: absolute;
+      height: 40px;
+      width: 112px;
+      top: 32px;
+      left: calc(50% - 56px);
+    }
+    &__loginText {
+      position: absolute;
+      bottom: 64px;
+      right: 64px;
+      width: 45%;
+    }
+    &__header {
+      font-family: "SofiaBold";
+      font-size: 20px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.6;
+      letter-spacing: normal;
+      text-align: left;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    &__text {
+      font-family: "SofiaRegular";
+      font-size: 10px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.88;
+      letter-spacing: normal;
+      text-align: left;
+      color: #ffffff;
+    }
+  }
+  &__formContainer {
+    height: 100%;
+    width: 50%;
+    padding: 16px 64px;
+    @include x-large {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  &__welcomingSection {
+    display: flex;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    & img {
+      width: 48px;
+      height: 48px;
+    }
+    &__textContainer {
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 22px;
+    }
+    &__header {
+      font-family: "SofiaBold";
+      font-size: 20px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: $darkBlue;
+
+      @include small {
+        font-size: 16px;
+      }
+    }
+    &__text {
+      font-family: "SofiaRegular";
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: #909ab2;
+
+      @include small {
+        font-size: 12px;
+      }
+    }
+  }
+  &__buttonContainer {
+    display: flex;
+    justify-content: center;
+    &__signUp {
+      height: 40px;
+      width: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-family: "SofiaRegular";
+      font-size: 14px;
+      cursor: pointer;
+      background-color: $transparent-blue !important;
+      height: 58px;
+      width: 200px;
+      transition: 0.3s;
+      color: $darkBlue !important;
+      padding: 0 24px;
+      @include small {
+        font-size: 12px;
+      }
+      &:hover {
+        opacity: 0.8;
+        text-decoration: none;
+      }
+      border: 0;
+    }
+    &__tertiary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-family: "SofiaRegular";
+      font-size: 14px;
+      cursor: pointer;
+      background-color: $darkBlue !important;
+      height: 58px;
+      width: 100% !important;
+      transition: 0.3s;
+      color: white;
+      padding: 0 24px;
+
+      @include small {
+        font-size: 12px;
+      }
+      &:hover {
+        opacity: 0.8;
+      }
+      border: 0;
+    }
+    &__primary {
+      cursor: pointer;
+      font-family: "SofiaRegular";
+      transition: 0.3s;
+      font-size: 13px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: $blue !important;
+
+      &:hover {
+        color: $darkBlue !important;
+      }
+      border: 0;
+    }
+    &__ghost {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-family: "SofiaRegular";
+      font-size: 14px;
+      cursor: pointer;
+      background-color: $transparent-blue !important;
+      height: 58px;
+      width: 100% !important;
+      transition: 0.3s;
+      color: $darkBlue !important;
+      padding: 0 24px;
+
+      @include small {
+        font-size: 12px;
+      }
+      &:hover {
+        opacity: 0.8;
+      }
+      border: 0;
+    }
+  }
+  &__inputContainer {
+    margin-bottom: 20px;
+    &__input {
+      width: 100%;
+      label {
+        font-family: "SofiaBold";
+        font-size: 18px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.22;
+        letter-spacing: normal;
+        text-align: left;
+        color: #2c3f58;
+        padding: 0 1px;
+
+        @include small {
+          font-size: calc(2px + 10px);
         }
-		&__loginImage {
-        	height: 100%;
-        	width: 100%;
-        }
-		&__loginIcon {
-        	position: absolute;
-        	height: 40px;
-        	width: 112px;
-        	top: 32px;
-        	left: calc(50% - 56px);
-        }
-		&__loginText {
-			position: absolute;
-			bottom: 64px;
-			right: 64px;
-			width: 45%;
-	  	}
-		&__header {
-			font-family: 'SofiaBold';
-			font-size: 20px;
-			font-weight: bold;
-			font-stretch: normal;
-			font-style: normal;
-			line-height: 1.6;
-			letter-spacing: normal;
-			text-align: left;
-			color: #ffffff;
-			margin-bottom: 10px;
-		}
-		&__text {
-			font-family: 'SofiaRegular';
-			font-size: 10px;
-			font-weight: 500;
-			font-stretch: normal;
-			font-style: normal;
-			line-height: 1.88;
-			letter-spacing: normal;
-			text-align: left;
-			color: #ffffff;
-        }
-	}
-	&__formContainer{
-		height: 100%;
-        width: 50%;
-        padding: 16px 64px;
-        @include x-large {
-        	height: 100%;
-        	width: 100%;
+      }
+      input {
+        width: calc(100%);
+        display: flex;
+        outline: none;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 16px;
+        margin: 8px 0 0;
+        background-color: #ffffff;
+        border-radius: 8px;
+        border: solid 1px #e7eeff;
+
+        @include small {
+          padding: 8px 12px;
         }
 
-	}
-	&__welcomingSection {
-		display: flex;
-		margin-bottom: 40px;
-		margin-top: 40px;
-		& img {
-        	width: 48px;
-        	height: 48px;
+        &:focus-within {
+          border: 1px solid #2c3f58;
         }
-		&__textContainer {
-        	display: flex;
-        	align-items: start;
-        	flex-direction: column;
-        	justify-content: space-between;
-        	margin-left: 22px;
-
-		}
-		&__header {
-			font-family: 'SofiaBold';
-			font-size: 20px;
-			font-weight: bold;
-			font-stretch: normal;
-			font-style: normal;
-			letter-spacing: normal;
-			text-align: left;
-			color: $darkBlue;
-
-			@include small {
-				font-size: 16px;
-			}
-		}
-		&__text {
-			font-family: 'SofiaRegular';
-			font-size: 14px;
-			font-weight: normal;
-			font-stretch: normal;
-			font-style: normal;
-			letter-spacing: normal;
-			text-align: left;
-			color: #909ab2;
-
-			@include small {
-				font-size: 12px;
-			}
-		}
-
-	}
-	&__buttonContainer {
-		display: flex;
-		justify-content: center;
-		&__signUp {
-			height: 40px;
-			width: 104px;
-			display: flex;
-	        align-items: center;
-	        justify-content: center;
-	        border-radius: 12px;
-	        font-family: 'SofiaRegular';
-	        font-size: 14px;
-	        cursor: pointer;
-	        background-color: $transparent-blue!important;
-	        height: 58px;
-	        width: 200px;
-	        transition: 0.3s;
-	        color: $darkBlue!important;
-	        padding: 0 24px;
-	        @include small {
-	            font-size: 12px;
-	        }
-	        &:hover {
-	            opacity: 0.8;
-				text-decoration: none;
-	        }
-			border:0;
-		}
-		&__tertiary {
-	        display: flex;
-	        align-items: center;
-	        justify-content: center;
-	        border-radius: 12px;
-	        font-family: 'SofiaRegular';
-	        font-size: 14px;
-	        cursor: pointer;
-	        background-color: $darkBlue!important;
-	        height: 58px;
-			width: 100%!important;
-	        transition: 0.3s;
-	        color: white;
-	        padding: 0 24px;
-
-	        @include small {
-	            font-size: 12px;
-	        }
-	        &:hover {
-	            opacity: 0.8;
-	        }
-			border:0;
-	    }
-		&__primary{
-			cursor: pointer;
-	        font-family: 'SofiaRegular';
-	        transition: 0.3s;
-	        font-size: 13px;
-	        font-weight: 500;
-	        font-stretch: normal;
-	        font-style: normal;
-	        letter-spacing: normal;
-	        text-align: left;
-	        color: $blue!important;
-
-	        &:hover {
-	            color: $darkBlue!important;
-	        }
-			border:0;
-		}
-		&__ghost {
-	        display: flex;
-	        align-items: center;
-	        justify-content: center;
-	        border-radius: 12px;
-	        font-family: 'SofiaRegular';
-	        font-size: 14px;
-	        cursor: pointer;
-	        background-color: $transparent-blue!important;
-	        height: 58px;
-	        width: 100%!important;
-	        transition: 0.3s;
-	        color: $darkBlue!important;
-	        padding: 0 24px;
-
-	        @include small {
-	            font-size: 12px;
-	        }
-	        &:hover {
-	            opacity: 0.8;
-	        }
-			border:0;
-	    }
-	}
-	&__inputContainer{
-		margin-bottom: 20px;
-        &__input {
-        	width: 100%;
-			label{
-				font-family: "SofiaBold";
-			    font-size: 18px;
-			    font-weight: bold;
-			    font-stretch: normal;
-			    font-style: normal;
-			    line-height: 1.22;
-			    letter-spacing: normal;
-			    text-align: left;
-			    color: #2c3f58;
-			    padding: 0 1px;
-
-			    @include small {
-			      font-size: calc(2px + 10px);
-
-			    }
-			}
-			input{
-				width: calc(100%);
-				display: flex;
-			    outline: none;
-			    justify-content: center;
-			    align-items: center;
-			    padding: 12px 16px;
-			    margin: 8px 0 0;
-			    background-color: #ffffff;
-			    border-radius: 8px;
-			    border: solid 1px #e7eeff;
-
-			    @include small {
-			      padding: 8px 12px;
-			    }
-
-			    &:focus-within {
-			      border: 1px solid #2c3f58;
-			    }
-			}
-        }
-	}
-	&__forgotPassword {
-		display: flex;
-		justify-content: flex-end;
-	}
-	&__signInButtons {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		margin-top: 30px;
-		margin-bottom: 30px;
-	  	&__signInButton {
-			width: 100%;
-		}
-		&__strokeContainer {
-			display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 16px;
-			margin-top: 20px;
-			margin-bottom: 20px;
-			&__stroke{
-				height: 1px;
-	            width: 100%;
-	            background-color: #e7eeff;
-			}
-			&__strokeText {
-            	font-family: 'SofiaRegular';
-            	font-size: 12px;
-            	font-weight: normal;
-            	font-stretch: normal;
-            	font-style: normal;
-            	line-height: 1.5;
-            	letter-spacing: normal;
-            	text-align: center;
-            	color: #778699;
-            	margin: 0 7px;
-            }
-		}
-	}
-
+      }
+    }
+  }
+  &__forgotPassword {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__signInButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    &__signInButton {
+      width: 100%;
+    }
+    &__strokeContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 16px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      &__stroke {
+        height: 1px;
+        width: 100%;
+        background-color: #e7eeff;
+      }
+      &__strokeText {
+        font-family: "SofiaRegular";
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-align: center;
+        color: #778699;
+        margin: 0 7px;
+      }
+    }
+  }
 }
-.loginImageCol{
-	height:auto;
-	background-size: cover;
-	@include x-large {
-		display: none;
-	}
+.loginImageCol {
+  height: auto;
+  background-size: cover;
+  background-image: url("../../assets/images/login-photo.png");
+  @include x-large {
+    display: none;
+  }
 }

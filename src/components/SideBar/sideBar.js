@@ -17,6 +17,7 @@ import {
   TedaviGecmisi,
   TedaviYonetim,
 } from '../../icons';
+// import Card from '../Card/card';
 
 function usePrevious(value) {
   const ref = useRef();
@@ -143,24 +144,27 @@ function RenderList() {
     if (item?.not.includes(getCookie('user_type'))) return <div></div>;
 
     return (
-      <Link
-        key={i}
-        to={item.href}
-        className={returnClassName(item.href, clickedLink)}
-        onClick={() => setClickedLink(item.href)}
-      >
-        {item.MenuIcon}
-        <div className={'list__listItem__text'}>{item.title}</div>
-      </Link>
+      <div key={i} className="listWrapper">
+        <Link
+          to={item.href}
+          className={returnClassName(item.href, clickedLink)}
+          onClick={() => setClickedLink(item.href)}
+        >
+          {item.MenuIcon}
+          <div className={'list__listItem__text'}>{item.title}</div>
+        </Link>
+      </div>
     );
   });
 }
 
 export default function SideBar() {
   return (
+    // <Card type="whiteBoard">
     <div className="list sideBarClass">
       <RenderList />
     </div>
+    // </Card>
   );
 }
 

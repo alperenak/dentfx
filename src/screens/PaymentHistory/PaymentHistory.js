@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
-import store from '../../store';
 import { MDBDataTable } from 'mdbreact';
-import { getCookie } from '../../utils/cookie';
 
 /*** Styles ***/
-import styles from './PaymentHistory.scss';
-import PaymentIcon from '../../icons/credit-cards-payment.svg';
-import NotesIcon from '../../icons/writing.svg';
-
-/*** Components ***/
-import DatePicker from '../../components/DatePicker/DatePicker';
-import StepProgressBar from 'react-step-progress';
-
-import ContractIMG from '../../assets/icons/contract.svg';
-import ProformaIMG from '../../assets/icons/proforma.svg';
-import Modal from '../../components/Modal/modal';
-import Dropdown from '../../components/Dropdown/dropdown';
+import './PaymentHistory.scss';
 
 class PaymentHistory extends Component {
   constructor() {

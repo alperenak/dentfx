@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*** Styles ***/
-import styles from "./checkbox.scss";
+import styles from './checkbox.scss';
 
 class Checkbox extends Component {
   state = {
-    value: "",
+    value: '',
   };
 
   onChange = (event) => {
@@ -17,26 +17,25 @@ class Checkbox extends Component {
 
   render() {
     let {
-      name,
       label,
       disabled,
       value,
       className,
       clickable,
       onClick,
-      defaultValue
+      defaultValue,
     } = this.props;
     return (
       <div
         className={`${styles.boxWrapper} ${
-          disabled ? styles.disabled : ""
+          disabled ? styles.disabled : ''
         } ${className}`}
       >
         <input
           name={'checkbox'}
-          autoComplete={"off"}
+          autoComplete={'off'}
           autoFocus={false}
-          type={"checkbox"}
+          type={'checkbox'}
           disabled={disabled}
           defaultValue={value ? defaultValue : ''}
           onChange={this.onChange}
@@ -67,10 +66,10 @@ Checkbox.propTypes = {
 };
 
 Checkbox.defaultProps = {
-    disabled: false,
-    label: "",
-    name: "",
-    value: "",
-    size: "half",
-    className: ''
+  disabled: false,
+  label: '',
+  name: '',
+  value: '',
+  size: 'half',
+  className: '',
 };

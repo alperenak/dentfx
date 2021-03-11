@@ -1,15 +1,13 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import TopBar from '../../components/TopBar/topBar';
+import React, { useEffect, useState } from 'react';
 
 /*** Components ***/
 import ClinicListItem from '../../components/ClinicListItem/clinicListItem';
 
 /*** Utils ***/
 import store from '../../store';
-import { getCookie } from '../../utils/cookie';
 
 /*** Styles ***/
-import styles from './searchPage.scss';
+import './searchPage.scss';
 import Map from '../../components/Map/map';
 
 export default function SearchPage() {
@@ -34,8 +32,8 @@ export default function SearchPage() {
   }, []);
   return (
     <div>
-      <div className='home container'>
-        <div className='home__mapContainer'>
+      <div className="home container">
+        <div className="home__mapContainer">
           <Map clinics={clinics} />
         </div>
         {clinics &&

@@ -1,25 +1,25 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 /*** Styles ***/
-import styles from "./sidebar.scss";
+import './sidebar.scss';
 
 /*** Icons ***/
-import homeIcon from "../../icons/home-icon.svg";
-import homeIconBlue from "../../icons/home-icon-blue.svg";
-import profileIcon from "../../icons/profile-icon.svg";
-import profileIconBlue from "../../icons/profile-icon-blue.svg";
-import messageIcon from "../../icons/messages-icon.svg";
-import messageIconBlue from "../../icons/messages-icon-blue.svg";
-import randevuIcon from "../../icons/randevu-icon.svg";
-import randevuIconBlue from "../../icons/randevu-icon-blue.svg";
-import walletIcon from "../../icons/wallet-icon.svg";
-import walletIconBlue from "../../icons/wallet-icon-blue.svg";
-import kampanyaIcon from "../../icons/kampanya-icon.svg";
-import kampanyaIconBlue from "../../icons/kampanya-icon-blue.svg";
-import dentfxSocialIcon from "../../icons/dentfx-social-icon.svg";
-import dentfxSocialIconBlue from "../../icons/dentfx-social-icon-blue.svg";
-import { getCookie } from "../../utils/cookie";
+import homeIcon from '../../icons/home-icon.svg';
+import homeIconBlue from '../../icons/home-icon-blue.svg';
+import profileIcon from '../../icons/profile-icon.svg';
+import profileIconBlue from '../../icons/profile-icon-blue.svg';
+import messageIcon from '../../icons/messages-icon.svg';
+import messageIconBlue from '../../icons/messages-icon-blue.svg';
+import randevuIcon from '../../icons/randevu-icon.svg';
+import randevuIconBlue from '../../icons/randevu-icon-blue.svg';
+import walletIcon from '../../icons/wallet-icon.svg';
+import walletIconBlue from '../../icons/wallet-icon-blue.svg';
+import kampanyaIcon from '../../icons/kampanya-icon.svg';
+import kampanyaIconBlue from '../../icons/kampanya-icon-blue.svg';
+import dentfxSocialIcon from '../../icons/dentfx-social-icon.svg';
+import dentfxSocialIconBlue from '../../icons/dentfx-social-icon-blue.svg';
+import { getCookie } from '../../utils/cookie';
 
 function usePrevious(value) {
   const ref = useRef();
@@ -34,79 +34,79 @@ function usePrevious(value) {
 function RenderList() {
   const tempList = [
     {
-      title: "Anasayfa",
+      title: 'Anasayfa',
       icon: homeIcon,
       hoverIcon: homeIconBlue,
-      href: `/`,
-      not: ["dentist"],
+      href: '/',
+      not: ['dentist'],
     },
     {
-      title: "Profilim",
+      title: 'Profilim',
       icon: profileIcon,
       hoverIcon: profileIconBlue,
-      href: `/profile/${getCookie("user_id")}`,
+      href: `/profile/${getCookie('user_id')}`,
       not: [],
     },
     {
-      title: "Sorularım",
+      title: 'Sorularım',
       icon: messageIcon,
       hoverIcon: messageIconBlue,
-      href: `/messages`,
+      href: '/messages',
       not: [],
     },
     {
-      title: "Randevularım",
+      title: 'Randevularım',
       icon: randevuIcon,
       hoverIcon: randevuIconBlue,
-      href: `/appointment`,
+      href: '/appointment',
       not: [],
     },
-	{
-      title: "Takvim",
+    {
+      title: 'Takvim',
       icon: randevuIcon,
       hoverIcon: randevuIconBlue,
-      href: `/calendar`,
+      href: '/calendar',
       not: ['user'],
     },
     {
-      title: "Cüzdanım",
+      title: 'Cüzdanım',
       icon: walletIcon,
       hoverIcon: walletIconBlue,
-      href: `/wallet`,
-      not: ["dentist", "clinic"],
+      href: '/wallet',
+      not: ['dentist', 'clinic'],
     },
     {
-      title: "Kampanyalar",
+      title: 'Kampanyalar',
       icon: kampanyaIcon,
       hoverIcon: kampanyaIconBlue,
-      href: `/campaigns`,
-      not: ["dentist", "clinic"],
+      href: '/campaigns',
+      not: ['dentist', 'clinic'],
     },
     {
-      title: "DentFX Social",
+      title: 'DentFX Social',
       icon: dentfxSocialIcon,
       hoverIcon: dentfxSocialIconBlue,
-      href: `/social`,
-      not: ["dentist", "clinic"],
+      href: '/social',
+      not: ['dentist', 'clinic'],
     },
     {
-      title: "Fatura ",
+      title: 'Fatura ',
       icon: dentfxSocialIcon,
       hoverIcon: dentfxSocialIconBlue,
-      href: `/fatura`,
-      not: ["dentist", "user"],
+      href: '/fatura',
+      not: ['dentist', 'user'],
     },
     {
-      title: "Klinisyen",
+      title: 'Klinisyen',
       icon: dentfxSocialIcon,
       hoverIcon: dentfxSocialIconBlue,
-      href: `/clinician`,
-      not: ["dentist", "user"],
+      href: '/clinician',
+      not: ['dentist', 'user'],
     },
   ];
 
   const [list, setList] = useState(tempList);
-  const [hoverItem, setHoverItem] = useState(-1);
+  const [hoverItem] = useState(-1);
 
   const mounted = useRef();
   const prevList = usePrevious(list);
@@ -133,21 +133,17 @@ function RenderList() {
   });
 
   return list.map((item, i) => {
-    if (item?.not.includes(getCookie("user_type"))) return <div></div>;
+    if (item?.not.includes(getCookie('user_type'))) return <div></div>;
     return (
-		<Link
-			key={i}
-			to={item.href}
-			className="list__listItem"
-		>
-			{hoverItem !== i && !item.selected && (
-				<img src={item.icon} alt={"icon"} />
-			)}
-			{(hoverItem === i || item.selected) && (
-				<img src={item.hoverIcon} alt={"icon"} />
-			)}
-			<div className={"list__listItem__text"}>{item.title}</div>
-		</Link>
+      <Link key={i} to={item.href} className="list__listItem">
+        {hoverItem !== i && !item.selected && (
+          <img src={item.icon} alt={'icon'} />
+        )}
+        {(hoverItem === i || item.selected) && (
+          <img src={item.hoverIcon} alt={'icon'} />
+        )}
+        <div className={'list__listItem__text'}>{item.title}</div>
+      </Link>
     );
   });
 }

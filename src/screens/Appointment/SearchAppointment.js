@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from "./appointment.scss";
+import styles from './appointment.scss';
 
 /*** Components ***/
-import Input from "../../components/Input";
-import ReactStars from "react-rating-stars-component";
+import Input from '../../components/Input';
+import ReactStars from 'react-rating-stars-component';
 
 /*** Icons ***/
-import illustration from "../../icons/illustration_2.svg";
-import store from "../../store";
+import illustration from '../../icons/illustration_2.svg';
+import store from '../../store';
 
 class SearchAppointment extends Component {
   constructor(props) {
@@ -20,17 +20,16 @@ class SearchAppointment extends Component {
   state = {
     searchParams: {
       date: new Date().toLocaleDateString(),
-      keyword: "",
-      city: "",
-      country: "",
+      keyword: '',
+      city: '',
+      country: '',
     },
     searchResults: [],
   };
 
   scrollToMyRef = () => {
     // window.scrollTo(0, this.myRef.current.offsetTop);
-    this.myRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    console.log(this.myRef.current.offsetTop);
+    this.myRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   submitAppointment = async () => {
@@ -89,10 +88,9 @@ class SearchAppointment extends Component {
             <Input
               type="text"
               size="full"
-              label={"What are you looking for?"}
+              label={'What are you looking for?'}
               placeholder="Ex.: Kanal Tedavisi"
               onChange={(keyword) => {
-                console.log(keyword);
                 this.setState({
                   searchParams: { ...this.state.searchParams, keyword },
                 });
@@ -104,13 +102,13 @@ class SearchAppointment extends Component {
             <Input
               type="date"
               size="full"
-              label={"From Date"}
+              label={'From Date'}
               //defaultValue={new Date().toLocaleDateString()}
-              name={"dateStart"}
+              name={'dateStart'}
               onChange={(date) => {
-                date = new Date(dateStart).toLocaleDateString();
+                let comdate = new Date(date).toLocaleDateString();
                 this.setState({
-                  searchParams: { ...this.state.searchParams, date },
+                  searchParams: { ...this.state.searchParams, comdate },
                 });
               }}
             />
@@ -120,8 +118,8 @@ class SearchAppointment extends Component {
             <Input
               type="text"
               size="full"
-              label={"City"}
-              placeholder={"Istanbul"}
+              label={'City'}
+              placeholder={'Istanbul'}
               onChange={(city) => {
                 this.setState({
                   searchParams: { ...this.state.searchParams, city },
@@ -134,8 +132,8 @@ class SearchAppointment extends Component {
             <Input
               type="text"
               size="full"
-              label={"Country"}
-              placeholder={"Turkey"}
+              label={'Country'}
+              placeholder={'Turkey'}
               onChange={(country) => {
                 this.setState({
                   searchParams: { ...this.state.searchParams, country },

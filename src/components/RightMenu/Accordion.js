@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from './rightMenu.scss';
+import './rightMenu.scss';
 
 /*** Icons ***/
 import sendIcon from '../../icons/send.svg';
-import checkpointIcon from '../../icons/Shape.svg';
-import checkpointIcon_negative from '../../icons/Shape_2.svg';
 import dentalImplantIcon from '../../icons/dental-implant.svg';
 import dropdownIcon from '../../icons/dropdown-disabled.svg';
-import dentHospitalIcon from '../../icons/dent-hospital-icon.svg';
-import dentalAnalysisIcon from '../../icons/dental-analysis-icon.svg';
 
 class Accordion extends Component {
   state = { classname_open: '' };
@@ -29,18 +25,18 @@ class Accordion extends Component {
       <div
         className={`${'rightBar__treatmentHistory__accordionContainer'} ${classname_open}`}
       >
-        <div className='rightBar__treatmentHistory__accordionContainer__header'>
-          <div className='rightBar__treatmentHistory__accordionContainer__icon'>
-            <img src={dentalImplantIcon} alt='' />
+        <div className="rightBar__treatmentHistory__accordionContainer__header">
+          <div className="rightBar__treatmentHistory__accordionContainer__icon">
+            <img src={dentalImplantIcon} alt="" />
           </div>
 
-          <div className='rightBar__treatmentHistory__accordionContainer__content'>
-            <div className='rightBar__treatmentHistory__accordionContainer__content__title'>
+          <div className="rightBar__treatmentHistory__accordionContainer__content">
+            <div className="rightBar__treatmentHistory__accordionContainer__content__title">
               {record?.treatment}
             </div>
-            <div className='rightBar__treatmentHistory__accordionContainer__content__extras'>
-              <div className='date'>{record?.createdAt.substr(0, 10)}</div>
-              <div className='price'>
+            <div className="rightBar__treatmentHistory__accordionContainer__content__extras">
+              <div className="date">{record?.createdAt.substr(0, 10)}</div>
+              <div className="price">
                 {record?.price}
                 {record?.currency}
               </div>
@@ -50,7 +46,7 @@ class Accordion extends Component {
             className={`${'rightBar__treatmentHistory__accordionContainer__toggler'} ${classname_open}`}
             onClick={this.onClickExpand}
           >
-            <img src={dropdownIcon} alt='' />
+            <img src={dropdownIcon} alt="" />
           </div>
         </div>
 
@@ -97,7 +93,7 @@ class Accordion extends Component {
             );
           })} */}
           <button>
-            <img src={sendIcon} alt='' />
+            <img src={sendIcon} alt="" />
             Send Message to Doctor
           </button>
         </div>

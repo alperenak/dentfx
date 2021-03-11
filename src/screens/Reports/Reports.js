@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getCookie } from '../../utils/cookie';
 import 'react-step-progress/dist/index.css';
-import styles from './reports.scss';
+import './reports.scss';
 import Chart from 'react-apexcharts';
 import store from '../../store';
 

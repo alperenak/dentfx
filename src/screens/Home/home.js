@@ -1,27 +1,25 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 /*** Components ***/
-import ClinicListItem from "../../components/ClinicListItem/clinicListItem";
-import RightMenu from "../../components/RightMenu/RightMenu";
+import ClinicListItem from '../../components/ClinicListItem/clinicListItem';
 
 /*** Utils ***/
-import store from "../../store";
-import { getCookie } from "../../utils/cookie";
+import store from '../../store';
 
 /*** Styles ***/
-import styles from "./home.scss";
-import Map from "../../components/Map/map";
+import './home.scss';
+import Map from '../../components/Map/map';
 
 export default function Home() {
   const [clinics, setClinics] = useState([]);
   useEffect(() => {
     async function getClinics() {
       let res = await store.getClinics({
-        city: "",
-        latitude: "",
-        longitude: "",
-        range: "",
-        rate: "",
+        city: '',
+        latitude: '',
+        longitude: '',
+        range: '',
+        rate: '',
       });
       setClinics(res.data);
     }

@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import styles from './AppointmentCard.scss';
 
 /*** Icons ***/
-import dropdownIcon from '../../icons/dropdown-disabled.svg';
 import dentHospitalIcon from '../../icons/dental-icon.png';
 import toothPic from '../../icons/tooth.svg';
 
@@ -46,7 +45,7 @@ class AppointmentCard extends Component {
 
   //Randevuyu Onayla butonu
   onClickApproveAppointment = async () => {
-    console.log('Appointment Approved');
+    // console.log('Appointment Approved');
     let { data } = this.props;
 
     await store.approveAppointment({ appointmentID: data.id });
@@ -60,12 +59,7 @@ class AppointmentCard extends Component {
   };
 
   renderDetailsButton = () => {
-    let {
-      isDone,
-      isConfirmed,
-      isCancelledByDentist,
-      isCancelledByUser,
-    } = this.props.data;
+    let { isDone, isCancelledByDentist, isCancelledByUser } = this.props.data;
 
     let { userType } = this.props;
 
@@ -113,7 +107,7 @@ class AppointmentCard extends Component {
     );
   };
 
-  renderBadge = (data) => {
+  renderBadge = () => {
     let { status } = this.state;
 
     if (status === 'completed')
@@ -147,29 +141,29 @@ class AppointmentCard extends Component {
     if (userType !== 'user' && this.state.status === 'completed') {
       return (
         <div>
-          <div className='form-check'>
+          <div className="form-check">
             <input
-              onChange={(event) => this.setState({ isPatientArrived: true })}
-              className='form-check-input'
-              type='radio'
-              name='exampleRadios'
-              id='exampleRadios1'
-              value='option1'
+              onChange={() => this.setState({ isPatientArrived: true })}
+              className="form-check-input"
+              type="radio"
+              name="exampleRadios"
+              id="exampleRadios1"
+              value="option1"
             />
-            <label className='form-check-label' htmlFor='exampleRadios1'>
+            <label className="form-check-label" htmlFor="exampleRadios1">
               Patient Arrived
             </label>
           </div>
-          <div className='form-check'>
+          <div className="form-check">
             <input
-              onChange={(event) => this.setState({ isPatientArrived: false })}
-              className='form-check-input'
-              type='radio'
-              name='exampleRadios'
-              id='exampleRadios2'
-              value='option2'
+              onChange={() => this.setState({ isPatientArrived: false })}
+              className="form-check-input"
+              type="radio"
+              name="exampleRadios"
+              id="exampleRadios2"
+              value="option2"
             />
-            <label className='form-check-label' htmlFor='exampleRadios2'>
+            <label className="form-check-label" htmlFor="exampleRadios2">
               Patient not Arrived
             </label>
           </div>
@@ -182,16 +176,16 @@ class AppointmentCard extends Component {
     let { status, accordionActive } = this.state;
     return (
       <div className={`${'cardWrapper'} ${status} ${accordionActive}  `}>
-        <div className='cardWrapper__header'>
-          <div className='cardWrapper__header__leftIcon'>
-            <img src={dentHospitalIcon} alt='' />
+        <div className="cardWrapper__header">
+          <div className="cardWrapper__header__leftIcon">
+            <img src={dentHospitalIcon} alt="" />
           </div>
-          <div className='cardWrapper__content__clinicInfo'>
+          <div className="cardWrapper__content__clinicInfo">
             <div className={styles.title}> {data?.Clinic?.name} </div>
             {this.renderBadge(data)}
           </div>
         </div>
-        <div className='cardWrapper__content'>
+        <div className="cardWrapper__content">
           <div className={'cardWrapper__appointmentInfoWrapper'}>
             <div className={'cardWrapper__appointmentInfoWrapper__dentist'}>
               {`${data?.Dentist?.name} ${data?.Dentist?.surname}`}
@@ -204,27 +198,27 @@ class AppointmentCard extends Component {
               elit. Etiam fringilla aliquet arcu.
               {this.renderDetailsButton()}
             </div>
-            <div className='cardWrapper__appointmentInfoWrapper__appointmentInfo'>
-              <div className='cardWrapper__appointmentInfoWrapper__appointmentInfo__date'>
+            <div className="cardWrapper__appointmentInfoWrapper__appointmentInfo">
+              <div className="cardWrapper__appointmentInfoWrapper__appointmentInfo__date">
                 {data?.date}
               </div>
-              <div className='cardWrapper__appointmentInfoWrapper__appointmentInfo__time'>
+              <div className="cardWrapper__appointmentInfoWrapper__appointmentInfo__time">
                 {data?.startTime}
               </div>
-              <div className='cardWrapper__appointmentInfoWrapper__appointmentInfo__price'>
+              <div className="cardWrapper__appointmentInfoWrapper__appointmentInfo__price">
                 $70
               </div>
             </div>
           </div>
         </div>
 
-        <div className='container row'>
-          <div className='radioButtons'>{this.renderRadioButton()}</div>
+        <div className="container row">
+          <div className="radioButtons">{this.renderRadioButton()}</div>
 
-          <div className='radioWrapper'>
+          <div className="radioWrapper">
             {this.state.isPatientArrived && (
-              <div class='col-xl-4 col-lg-4 col-md-6 col-sm-1'>
-                <a href='/addTreatment' className='addTreatment'>
+              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-1">
+                <a href="/addTreatment" classNameName="addTreatment">
                   <p>Add Treatment</p>
                   <img src={toothPic} alt={'logo'} />
                 </a>
@@ -234,8 +228,8 @@ class AppointmentCard extends Component {
             {this.state.isPatientArrived !== undefined &&
               !this.state.isPatientArrived &&
               this.state.status === 'completed' && (
-                <div class='col-xl-4 col-lg-4 col-md-6 col-sm-1'>
-                  <a to='' className='reportPatient'>
+                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-1">
+                  <a to="" className="reportPatient">
                     <p>Report Patient</p>
                     <img src={toothPic} alt={'logo'} />
                   </a>

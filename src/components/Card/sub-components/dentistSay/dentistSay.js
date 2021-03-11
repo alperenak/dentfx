@@ -1,6 +1,6 @@
-import React from "react";
-import { Star, StarDisable } from "../../../../icons";
-import styles from "./dentistSay.scss";
+import React from 'react';
+import { Star, StarDisable } from '../../../../icons';
+import styles from './dentistSay.scss';
 
 export default function DentistSay(props) {
   let { name, starCount, content, avatar } = props;
@@ -34,7 +34,7 @@ function RenderStars({ starCount }) {
 function RenderDisableStar({ disableCount }) {
   let arr = [];
   for (let i = 0; i < disableCount; i++) {
-    arr.push("");
+    arr.push('');
   }
   if (disableCount !== 0) {
     return (
@@ -49,7 +49,7 @@ function RenderDisableStar({ disableCount }) {
 function RenderActiveStar({ activeCount }) {
   let arr = [];
   for (let i = 0; i < activeCount; i++) {
-    arr.push("");
+    arr.push('');
   }
 
   if (activeCount !== 0) {

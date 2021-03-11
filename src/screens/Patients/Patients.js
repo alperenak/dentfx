@@ -6,7 +6,7 @@ import CheckMark from '../../components/CheckMark/checkMark';
 import DatePicker from '../../components/DatePicker/DatePicker';
 
 /*** Styles ***/
-import styles from './patients.scss';
+import './patients.scss';
 import AddUserIcon from '../../icons/add-user.svg';
 
 /*** Utils ***/
@@ -88,13 +88,13 @@ class Patients extends Component {
           return {
             ...patient,
             avatar: (
-              <div class='tableAvatar'>
+              <div className="tableAvatar">
                 <img src={patient.avatar} />
               </div>
             ),
             button: (
-              <Link to={`/patients/${patient.id}`} className='tableAvatar'>
-                <button type='button' class='btn btn-secondary'>
+              <Link to={`/patients/${patient.id}`} className="tableAvatar">
+                <button type="button" className="btn btn-secondary">
                   İncele
                 </button>
               </Link>
@@ -107,29 +107,29 @@ class Patients extends Component {
 
   renderStep1 = () => {
     return (
-      <div className='stepWrapper'>
-        <form class='needs-validation' novalidate>
-          <div class='form-row'>
-            <div class='col-md-6 mb-3'>
-              <label for='validationDefault01'>İsim</label>
+      <div className="stepWrapper">
+        <form className="needs-validation" noValidate>
+          <div className="form-row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="validationDefault01">İsim</label>
               <input
-                type='text'
-                class='form-control'
-                id='validationDefault01'
-                placeholder='Hasan'
+                type="text"
+                className="form-control"
+                id="validationDefault01"
+                placeholder="Hasan"
                 required
                 onChange={(event) =>
                   this.setState({ patient_name: event.target.value })
                 }
               />
             </div>
-            <div class='col-md-6 mb-3'>
-              <label for='validationDefault02'>Soyisim</label>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="validationDefault02">Soyisim</label>
               <input
-                type='text'
-                class='form-control'
-                id='validationDefault02'
-                placeholder='Demirkıran'
+                type="text"
+                className="form-control"
+                id="validationDefault02"
+                placeholder="Demirkıran"
                 required
                 onChange={(event) =>
                   this.setState({ patient_surname: event.target.value })
@@ -137,30 +137,30 @@ class Patients extends Component {
               />
             </div>
           </div>
-          <div class='form-row'>
-            <div class='col-md-6 mb-3'>
-              <label for='inputTC'>TC Kimlik No</label>
+          <div className="form-row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="inputTC">TC Kimlik No</label>
               <input
-                type='text'
-                class='form-control'
-                id='inputTC'
-                placeholder='000 0000 0000'
+                type="text"
+                className="form-control"
+                id="inputTC"
+                placeholder="000 0000 0000"
                 onChange={(event) =>
                   this.setState({ patient_tcNumber: event.target.value })
                 }
               />
             </div>
-            <div class='col-md-6 mb-3'>
-              <label for='validationDefault04'>Currency</label>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="validationDefault04">Currency</label>
               <select
-                class='custom-select'
-                id='validationDefault04'
+                className="custom-select"
+                id="validationDefault04"
                 required
                 onChange={(event) =>
                   this.setState({ patient_currency: event.target.value })
                 }
               >
-                <option selected disabled value=''>
+                <option selected disabled value="">
                   Seçiniz...
                 </option>
                 <option>TRY</option>
@@ -171,72 +171,72 @@ class Patients extends Component {
             </div>
           </div>
           <div className={'form-row'} style={{ marginBottom: '0' }}>
-            <div class='col-md-4 mb-3'>
-              <label for='validationDefault04'>Uyruk</label>
+            <div className="col-md-4 mb-3">
+              <label htmlFor="validationDefault04">Uyruk</label>
               <select
-                class='custom-select'
-                id='validationDefault04'
+                className="custom-select"
+                id="validationDefault04"
                 required
                 onChange={(event) =>
                   this.setState({ patient_nationality: event.target.value })
                 }
               >
-                <option selected disabled value=''>
+                <option selected disabled value="">
                   Seçiniz...
                 </option>
                 <option>Türk</option>
                 <option>Yabancı</option>
               </select>
             </div>
-            <div class='col-md-8 mb-3'>
-              <label for='dentistName'>Diş Hekimi</label>
+            <div className="col-md-8 mb-3">
+              <label htmlFor="dentistName">Diş Hekimi</label>
               <select
-                class='custom-select'
-                id='dentistName'
+                className="custom-select"
+                id="dentistName"
                 required
                 onChange={(event) =>
                   this.setState({ patient_Dentist: event.target.value })
                 }
               >
-                <option selected disabled value=''>
+                <option selected disabled value="">
                   Seçiniz...
                 </option>
                 {this.state.clinicians !== null &&
-                  this.state.clinicians.map((doctor) => (
-                    <option value={doctor.id}>
+                  this.state.clinicians.map((doctor, index) => (
+                    <option key={index} value={doctor.id}>
                       {doctor.name} {doctor.surname}
                     </option>
                   ))}
               </select>
             </div>
           </div>
-          <div class='form-row' style={{ marginTop: '0' }}>
-            <div class='col-md-16 mb-3'>
-              <label for='validationDefault01'>Doğum Tarihi</label>
+          <div className="form-row" style={{ marginTop: '0' }}>
+            <div className="col-md-16 mb-3">
+              <label htmlFor="validationDefault01">Doğum Tarihi</label>
               <DatePicker
                 onChange={(event) => {
-                  console.log(event);
                   this.setState({ patient_birthDate: event._d });
                 }}
               />
             </div>
-            <div class='col-md-6 mb-3'>
-              <label for='tariffs'>Tarifler</label>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="tariffs">Tarifler</label>
               <select
-                class='custom-select'
-                id='tarifName'
+                className="custom-select"
+                id="tarifName"
                 required
                 onChange={(event) =>
                   this.setState({ patient_tariff: event.target.value })
                 }
               >
-                <option selected disabled value=''>
+                <option selected disabled value="">
                   Seçiniz...
                 </option>
-                {console.log(this.state.tariffs)}
                 {this.state.tariffs !== null &&
-                  this.state.tariffs.map((tarif) => (
-                    <option value={tarif._id}>{tarif.tariff}</option>
+                  this.state.tariffs.map((tarif, index) => (
+                    <option key={index} value={tarif._id}>
+                      {tarif.tariff}
+                    </option>
                   ))}
               </select>
             </div>
@@ -248,20 +248,20 @@ class Patients extends Component {
 
   renderStep2 = () => {
     return (
-      <div className='stepWrapper'>
-        <form class='was-validated'>
-          <div class='form-row'>
-            <div class='col-md-6 mb-3'>
-              <label for='validationDefault04'>Şehir</label>
+      <div className="stepWrapper">
+        <form className="was-validated">
+          <div className="form-row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="validationDefault04">Şehir</label>
               <select
-                class='custom-select'
-                id='validationDefault04'
+                className="custom-select"
+                id="validationDefault04"
                 required
                 onChange={(event) =>
                   this.setState({ patient_city: event.target.value })
                 }
               >
-                <option selected disabled value=''>
+                <option selected disabled value="">
                   Seçiniz...
                 </option>
                 <option>İstanbul</option>
@@ -272,18 +272,18 @@ class Patients extends Component {
             </div>
           </div>
 
-          <div class='form-row'>
-            <div class='col-md-6 mb-3'>
-              <label for='validationDefault04'>Ülke</label>
+          <div className="form-row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="validationDefault04">Ülke</label>
               <select
-                class='custom-select'
-                id='validationDefault04'
+                className="custom-select"
+                id="validationDefault04"
                 required
                 onChange={(event) =>
                   this.setState({ patient_country: event.target.value })
                 }
               >
-                <option selected disabled value=''>
+                <option selected disabled value="">
                   Seçiniz...
                 </option>
                 <option>Türkiye</option>
@@ -293,14 +293,14 @@ class Patients extends Component {
             </div>
           </div>
 
-          <div class='form-row'>
-            <div class='col-md-12 mb-3'>
-              <label for='exampleFormControlInput1'>E-mail adresi</label>
+          <div className="form-row">
+            <div className="col-md-12 mb-3">
+              <label htmlFor="exampleFormControlInput1">E-mail adresi</label>
               <input
-                type='email'
-                class='form-control'
-                id='exampleFormControlInput1'
-                placeholder='hasan@gmail.com'
+                type="email"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="hasan@gmail.com"
                 onChange={(event) =>
                   this.setState({ patient_email: event.target.value })
                 }
@@ -308,14 +308,14 @@ class Patients extends Component {
             </div>
           </div>
 
-          <div class='form-row'>
-            <div class='col-md-12 mb-3'>
-              <label for='inputAddress'>Telefon</label>
+          <div className="form-row">
+            <div className="col-md-12 mb-3">
+              <label htmlFor="inputAddress">Telefon</label>
               <input
-                type='text'
-                class='form-control'
-                id='inputAddress'
-                placeholder='+09 000 000 0000'
+                type="text"
+                className="form-control"
+                id="inputAddress"
+                placeholder="+09 000 000 0000"
                 onChange={(event) =>
                   this.setState({ patient_phone: event.target.value })
                 }
@@ -323,14 +323,14 @@ class Patients extends Component {
             </div>
           </div>
 
-          <div class='form-row'>
-            <div class='col-md-12 mb-3'>
-              <label for='exampleFormControlInput1'>Adres</label>
+          <div className="form-row">
+            <div className="col-md-12 mb-3">
+              <label htmlFor="exampleFormControlInput1">Adres</label>
               <input
-                type='text'
-                class='form-control'
-                id='exampleFormControlInput1'
-                placeholder='Rumeli Hisarüstü Mah...'
+                type="text"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Rumeli Hisarüstü Mah..."
                 onChange={(event) =>
                   this.setState({ patient_address: event.target.value })
                 }
@@ -344,7 +344,7 @@ class Patients extends Component {
 
   renderStep3 = () => {
     return (
-      <div className='stepWrapper'>
+      <div className="stepWrapper">
         <CheckMark />
       </div>
     );
@@ -395,10 +395,8 @@ class Patients extends Component {
       country: this.state.patient_country,
       address: this.state.patient_address,
     };
-    console.log(clinicId);
-    console.log(patient);
 
-    let res = await store.AddPatient(clinicId, patient);
+    store.AddPatient(clinicId, patient);
   };
 
   render() {
@@ -409,37 +407,37 @@ class Patients extends Component {
     return (
       <div>
         <a
-          type='button'
-          data-toggle='modal'
-          data-target='#addUserModal'
+          type="button"
+          data-toggle="modal"
+          data-target="#addUserModal"
           className={'addUser'}
         >
           <img src={AddUserIcon}></img>
         </a>
 
         <div
-          class='modal fade'
-          id='addUserModal'
-          tabindex='-1'
-          aria-labelledby='exampleModalLabel'
-          aria-hidden='true'
+          className="modal fade"
+          id="addUserModal"
+          tabIndex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
         >
-          <div class='modal-dialog'>
-            <div class='modal-content'>
-              <div class='modal-header'>
-                <h5 class='modal-title' id='exampleModalLabel'>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
                   Hasta Ekle
                 </h5>
                 <button
-                  type='button'
-                  class='close'
-                  data-dismiss='modal'
-                  aria-label='Close'
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
                 >
-                  <span aria-hidden='true'>&times;</span>
+                  <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class='modal-body'>
+              <div className="modal-body">
                 {this.state.clinicians !== null && (
                   <StepProgressBar
                     startingStep={0}
@@ -478,14 +476,14 @@ class Patients extends Component {
         <div className={'patientTable'}>
           {this.state.patientData !== null ? (
             <MDBDataTable
-              striped
-              bordered
               small
               data={this.state.patientData}
               searchLabel={'Ara'}
               entriesLabel={'Girdileri Göster'}
               info={false}
+              noRecordsFoundLabel={'Sonuç Bulunamadı'}
               paginationLabel={['Önceki', 'Sonraki']}
+              noBottomColumns={true}
             />
           ) : (
             <p>YUKLENIYOR</p>

@@ -1,21 +1,24 @@
-export function setCookie(name, value, {days = 365, domain = null, path = "/"}) {
-  let expires = "";
+export function setCookie(
+  name,
+  value,
+  { days = 365, domain = null, path = '/' }
+) {
+  let expires = '';
   if (days) {
     let date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    expires = "; expires=" + date.toUTCString();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = '; expires=' + date.toUTCString();
     if (domain) {
-      domain = `domain=${domain};path=${path}`
-    }
-    else {
-      domain = `path=${path}`
+      domain = `domain=${domain};path=${path}`;
+    } else {
+      domain = `path=${path}`;
     }
   }
-  document.cookie = name + "=" + (value || "") + expires + "; " + domain;
+  document.cookie = name + '=' + (value || '') + expires + '; ' + domain;
 }
 
 export function getCookie(name) {
-  let nameEQ = name + "=";
+  let nameEQ = name + '=';
   let ca = document.cookie.split(';');
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
@@ -26,11 +29,12 @@ export function getCookie(name) {
 }
 
 export function eraseCookie(name) {
-  if(Array.isArray(name)) {
-    name.map(n => {
+  if (Array.isArray(name)) {
+    name.map((n) => {
       document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     });
   } else {
-    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie =
+      name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   }
 }

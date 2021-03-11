@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Dot1,
   Dot2,
@@ -12,8 +12,7 @@ import {
   Dot10,
   Dot11,
   Dot12,
-} from "../../icons";
-const DotStyles = [{ postion: "absolute" }];
+} from '../../icons';
 export default function Dot() {
   return (
     <>

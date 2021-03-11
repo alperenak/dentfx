@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { MDBDataTable } from 'mdbreact';
-import Button from '../../components/Button/button';
-import Dropdown from '../../components/Dropdown/dropdown';
-import EditableTable from '../../components/EditableTable/editableTable';
 import store from '../../store';
 import { getCookie } from '../../utils/cookie';
 import './treatmentManagement.scss';
-import { listen } from 'socket.io';
 
 export default class treatmentManagement extends Component {
   constructor(props) {
@@ -49,14 +45,14 @@ export default class treatmentManagement extends Component {
             tariff: tarif.tariff,
             button: (
               <button
-                type='button'
-                class='btn btn-danger'
+                type="button"
+                className="btn btn-danger"
                 onClick={async () => {
                   await store.deleteClinicTariff({
                     clinicId: this.state.clinicId,
                     tarifId: tarif._id,
                   });
-                  location.reload();
+                  window.window.location.reload();
                 }}
               >
                 Sil
@@ -88,36 +84,36 @@ export default class treatmentManagement extends Component {
   renderNewTarifModal = () => {
     return (
       <div
-        class='modal fade'
-        id='addTarifModal'
-        tabindex='-1'
-        aria-labelledby='exampleModalLabel'
-        aria-hidden='true'
+        className="modal fade"
+        id="addTarifModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
       >
-        <div class='modal-dialog'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h5 class='modal-title' id='exampleModalLabel'>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Tarif Ekle
               </h5>
               <button
-                type='button'
-                class='close'
-                data-dismiss='modal'
-                aria-label='Close'
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
               >
-                <span aria-hidden='true'>&times;</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class='modal-body'>
-              <div class='form-row'>
-                <div class='col-md-12 mb-3'>
-                  <label for='exampleFormControlInput1'>Tarif Ismi</label>
+            <div className="modal-body">
+              <div className="form-row">
+                <div className="col-md-12 mb-3">
+                  <label htmlFor="exampleFormControlInput1">Tarif Ismi</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='exampleFormControlInput1'
-                    placeholder='TBD 2020 (USD)'
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="TBD 2020 (USD)"
                     onChange={(event) =>
                       this.setState({ newTarifName: event.target.value })
                     }
@@ -125,14 +121,14 @@ export default class treatmentManagement extends Component {
                 </div>
               </div>
               <button
-                type='submit'
-                className='btn btn-primary'
+                type="submit"
+                className="btn btn-primary"
                 onClick={async () => {
                   await store.createClinicTariff({
                     clinicId: this.state.clinicId,
                     tarifName: this.state.newTarifName,
                   });
-                  location.reload();
+                  window.location.reload();
                 }}
               >
                 Ekle
@@ -147,23 +143,25 @@ export default class treatmentManagement extends Component {
   renderTarifelerDropDown = () => {
     return this.state.tarifeler !== null ? (
       <div>
-        <label className='mt-2' for='tarifDropdown'>
+        <label className="mt-2" htmlFor="tarifDropdown">
           Tarifler
         </label>
         <select
-          class='form-control'
-          id='dentistName'
+          className="form-control"
+          id="dentistName"
           required
           onChange={(event) => {
             this.setState({ selectedTarifID: event.target.value });
           }}
         >
-          <option selected disabled value=''>
+          <option selected disabled value="">
             Seçiniz...
           </option>
           {this.state.tarifeler !== null &&
             this.state.tarifeler.map((item) => (
-              <option value={item._id}>{item.tariff}</option>
+              <option key={item.tariff} value={item._id}>
+                {item.tariff}
+              </option>
             ))}
         </select>
       </div>
@@ -210,16 +208,15 @@ export default class treatmentManagement extends Component {
           currency: item.currency,
           button: (
             <button
-              type='button'
-              class='btn btn-danger'
+              type="button"
+              className="btn btn-danger"
               onClick={async () => {
-                console.log(item._id);
                 await store.deleteTedaviByID({
                   clinicId: this.state.clinicId,
                   tarifId: tarifID,
                   tedaviId: item._id,
                 });
-                location.reload();
+                window.location.reload();
               }}
             >
               Sil
@@ -247,60 +244,60 @@ export default class treatmentManagement extends Component {
   renderNewTedaviModal = (tarifID) => {
     return (
       <div
-        class='modal fade'
-        id='addTedaviModal'
-        tabindex='-1'
-        aria-labelledby='exampleModalLabel'
-        aria-hidden='true'
+        className="modal fade"
+        id="addTedaviModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
       >
-        <div class='modal-dialog'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h5 class='modal-title' id='exampleModalLabel'>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Tedavi Ekle
               </h5>
               <button
-                type='button'
-                class='close'
-                data-dismiss='modal'
-                aria-label='Close'
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
               >
-                <span aria-hidden='true'>&times;</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class='modal-body'>
-              <div class='form-row'>
-                <div class='col-md-12 mb-3'>
-                  <label for='exampleFormControlInput1'>Tedavi Ismi</label>
+            <div className="modal-body">
+              <div className="form-row">
+                <div className="col-md-12 mb-3">
+                  <label htmlFor="exampleFormControlInput1">Tedavi Ismi</label>
                   <input
-                    type='text'
-                    class='form-control'
-                    id='exampleFormControlInput1'
-                    placeholder='Implant Cikarilmasi'
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="Implant Cikarilmasi"
                     onChange={(event) =>
                       this.setState({ newTedaviName: event.target.value })
                     }
                   />
-                  <label for='exampleFormControlInput1'>Fiyat</label>
+                  <label htmlFor="exampleFormControlInput1">Fiyat</label>
                   <input
-                    type='number'
-                    class='form-control'
-                    id='exampleFormControlInput1'
-                    placeholder='250'
+                    type="number"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="250"
                     onChange={(event) =>
                       this.setState({ newTedaviPrice: event.target.value })
                     }
                   />
-                  <label for='validationDefault04'>Para Birimi</label>
+                  <label htmlFor="validationDefault04">Para Birimi</label>
                   <select
-                    class='custom-select'
-                    id='validationDefault04'
+                    className="custom-select"
+                    id="validationDefault04"
                     required
                     onChange={(event) =>
                       this.setState({ newTedaviCurrency: event.target.value })
                     }
                   >
-                    <option selected disabled value=''>
+                    <option selected disabled value="">
                       Seçiniz...
                     </option>
                     <option>TRY</option>
@@ -311,8 +308,8 @@ export default class treatmentManagement extends Component {
                 </div>
               </div>
               <button
-                type='submit'
-                className='btn btn-primary'
+                type="submit"
+                className="btn btn-primary"
                 onClick={async () => {
                   await store.createNewTedavi({
                     clinicId: this.state.clinicId,
@@ -321,7 +318,7 @@ export default class treatmentManagement extends Component {
                     tedaviCurrency: this.state.newTedaviCurrency,
                     tedaviPrice: this.state.newTedaviPrice,
                   });
-                  location.reload();
+                  window.location.reload();
                 }}
               >
                 Ekle
@@ -340,10 +337,10 @@ export default class treatmentManagement extends Component {
           <h2 className={'mb-2'}>Tarifeler</h2>
           <div className={'p-1'}>
             <button
-              type='button'
-              data-toggle='modal'
-              data-target='#addTarifModal'
-              className=' btn btn-primary'
+              type="button"
+              data-toggle="modal"
+              data-target="#addTarifModal"
+              className=" btn btn-primary"
             >
               Tarif Ekle
             </button>
@@ -356,10 +353,10 @@ export default class treatmentManagement extends Component {
           <div className={'p-1'}>
             {this.state.selectedTarifID && (
               <button
-                type='button'
-                data-toggle='modal'
-                data-target='#addTedaviModal'
-                className='btn btn-primary'
+                type="button"
+                data-toggle="modal"
+                data-target="#addTedaviModal"
+                className="btn btn-primary"
               >
                 Tedavi ekle
               </button>

@@ -1,10 +1,7 @@
-import React from "react";
-import styles from "./card.scss";
-import Features from "./sub-components/features/features";
-import DentistSay from "./sub-components/dentistSay/dentistSay";
-import PropTypes from "prop-types";
-import Packages from "./sub-components/packages/packages";
-import BigPackages from "./sub-components/bigPackages/bigPackages";
+import React from 'react';
+import './card.scss';
+import PropTypes from 'prop-types';
+import WhiteBoard from './sub-components/WhiteBoard';
 
 export default function Card(props) {
   return (
@@ -16,19 +13,22 @@ export default function Card(props) {
 
 function RenderByTypes(props) {
   let { type } = props;
-  if (type === "features") {
-    return <Features {...props} />;
-  } else if (type === "dentistSay") {
-    return <DentistSay {...props} />;
-  } else if (type === "packages") {
-    return <Packages {...props} />;
-  } else if (type === "bigPackages") {
-    return <BigPackages {...props} />;
+  // if (type === 'features') {
+  //   return <Features {...props} />;
+  // } else if (type === 'dentistSay') {
+  //   return <DentistSay {...props} />;
+  // } else if (type === 'packages') {
+  //   return <Packages {...props} />;
+  // } else if (type === 'bigPackages') {
+  //   return <BigPackages {...props} />;
+  // }
+  if (type === 'whiteBoard') {
+    return <WhiteBoard {...props} />;
   } else {
     return <div>hata</div>;
   }
 }
 
 Card.propTypes = {
-  type: PropTypes.string
+  type: PropTypes.string,
 };

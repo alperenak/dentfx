@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*** Styles ***/
-import styles from "./select.scss";
+import styles from './select.scss';
 
 /*** Icons ***/
-import selectIcon from "../../../../icons/selectbox.svg";
-import searchIcon from "../../../../icons/search.svg";
+import selectIcon from '../../../../icons/selectbox.svg';
+import searchIcon from '../../../../icons/search.svg';
 
 class Select extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Select extends Component {
     this.state = {
       dropDownOpened: false,
       externalSource: [...this.props.externalSource],
-      value: "",
+      value: '',
       selectedValue: this.props.defaultValue,
       selectedValues: this.props.multiple
         ? this.props.defaultValue
@@ -27,11 +27,11 @@ class Select extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   handleClickOutside = (event) => {
@@ -166,58 +166,58 @@ class Select extends Component {
       <div
         ref={this.wrapperRef}
         onClick={this.onClickInput}
-        className={`${"selectWrapper"} ${
-          disabled ? "disabled" : ""
+        className={`${'selectWrapper'} ${
+          disabled ? 'disabled' : ''
         } ${className}`}
       >
         <label v-if={label} htmlFor={name}>
           {label}
         </label>
-        <div v-if={labelDescription} className={"labelDescription"}>
+        <div v-if={labelDescription} className={'labelDescription'}>
           {labelDescription}
         </div>
         <div
           className={`
-                    ${"inputContainer"}
-                    ${dropDownOpened ? styles.focus : ""}
-                    ${size} ${errorList.length > 0 ? "error" : ""}
+                    ${'inputContainer'}
+                    ${dropDownOpened ? styles.focus : ''}
+                    ${size} ${errorList.length > 0 ? 'error' : ''}
                 `}
         >
-          <div v-if={selectedValues.length > 0} className={`${"inputSelf"}`}>
+          <div v-if={selectedValues.length > 0} className={`${'inputSelf'}`}>
             {selectedValues.map((vl, i) =>
-              i < selectedValues.length - 1 ? vl.value + ", " : vl.value
+              i < selectedValues.length - 1 ? vl.value + ', ' : vl.value
             )}
           </div>
           <div
             v-else-if={selectedValue.value?.length > 0}
-            className={`${"inputSelf"}`}
+            className={`${'inputSelf'}`}
           >
             {selectedValue.value}
           </div>
-          <div v-else className={`${"inputPlaceholder"}`}>
+          <div v-else className={`${'inputPlaceholder'}`}>
             {placeholder}
           </div>
-          <img src={selectIcon} alt={"selectIcon"} />
+          <img src={selectIcon} alt={'selectIcon'} />
         </div>
         <ul
           v-if={dropDownOpened}
-          className={"dropDown"}
+          className={'dropDown'}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
           }}
         >
-          <div className={"searchWrapper"}>
-            <img src={searchIcon} alt={"searchIcon"} />
+          <div className={'searchWrapper'}>
+            <img src={searchIcon} alt={'searchIcon'} />
             <input
-              autoComplete={"off"}
-              className={"searchDropDown"}
+              autoComplete={'off'}
+              className={'searchDropDown'}
               autoFocus={true}
-              type={"text"}
+              type={'text'}
               disabled={false}
               onChange={(e) => this.onChange(e)}
               value={value}
-              placeholder={"Search"}
+              placeholder={'Search'}
             />
           </div>
           {externalSource.length ? (
@@ -226,7 +226,7 @@ class Select extends Component {
                 <li
                   key={el.key}
                   onClick={() => this.onClickListItem(el.key)}
-                  className={`${el.selected ? "selected" : ""}`}
+                  className={`${el.selected ? 'selected' : ''}`}
                 >
                   {el.value}
                 </li>
@@ -261,11 +261,11 @@ Select.propTypes = {
 Select.defaultProps = {
   disabled: false,
   multiple: false,
-  label: "",
-  name: "",
-  placeholder: "placeholder",
-  size: "half",
+  label: '',
+  name: '',
+  placeholder: 'placeholder',
+  size: 'half',
   errorList: [],
   externalSource: [],
-  className: "",
+  className: '',
 };

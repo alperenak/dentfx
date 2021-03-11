@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import styles from './messages.scss';
+import './messages.scss';
 
 import mailIcon from '../../icons/mail_blue.png';
 
@@ -11,7 +11,7 @@ class NewMessage extends Component {
   state = { dentist: '', message: '', files: null, searchResults: null };
 
   onSubmit = async () => {
-    let { dentist, message, files } = this.state;
+    let { message, files } = this.state;
     let formData = new FormData();
     formData.append('attachements', files[0]);
 

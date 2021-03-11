@@ -155,24 +155,7 @@
     }
     &__notifications {
       left: calc(100% - 500px);
-      ::-webkit-scrollbar {
-        height: 0px;
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-        -webkit-border-radius: 10px;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb {
-        -webkit-border-radius: 10px;
-        border-radius: 10px;
-        background: #bdbdbe;
-        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
-      }
-      ::-webkit-scrollbar-thumb:window-inactive {
-        background: #bdbdbe;
-      }
+
       & .dropdownMenu {
         width: 400px;
         height: 300px;

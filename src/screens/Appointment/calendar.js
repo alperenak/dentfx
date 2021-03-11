@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from './appointment.scss';
+import './appointment.scss';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 /*** Utils ***/
@@ -9,7 +9,6 @@ import store from '../../store';
 import { getCookie } from '../../utils/cookie';
 
 //*** Icons ***/
-import addCircle from '../../icons/Icons_add-circle.svg';
 import Search from '../../icons/search.svg';
 import RightSolid from '../../icons/chevron-right-solid.svg';
 import ExternalIcon from '../../assets/icons/external-link-alt-solid.svg';
@@ -18,9 +17,7 @@ import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 
 import moment from 'moment';
 import 'moment/locale/tr';
-import { func } from 'prop-types';
 import Modal from '../../components/Modal/modal';
-import Input from '../../components/Input';
 import Dropdown from '../../components/Dropdown/dropdown';
 import Tabs from '../../components/Tabs/tabs';
 import PatientSearch from '../../components/PatientSearch/patientSearch';
@@ -179,11 +176,13 @@ class ACalendar extends Component {
   state = {
     appointmentDentistId: '',
     events,
+    modalShow: false,
     patientNameData: [],
     calendarEvents: [],
     modalType: '',
     dropdownActive: false,
     patientState: 'Gelmedi',
+    patientId: '',
     patientName: '',
     appointmentNotes: '',
     appointmentExplanation: 'Acil',
@@ -210,20 +209,21 @@ class ACalendar extends Component {
     resourceMap = clinicObject.Dentist.map((dentist) => {
       return {
         resourceId: dentist.id,
-        resourceTitle: `${dentist.name} ${dentist.surname} `,
+        resourceTitle: `${dentist?.name} ${dentist?.surname} `,
       };
     });
 
     if (response.data) {
       let _allAppointments = response.data.map((appointment) => {
-        let title = `Randevu-${appointment.User.name} ${appointment.User.surname}--${appointment.treatmentType}--`;
-        let dateArr = appointment.date.split('.');
-        let dateArsr = appointment.startTime.split('.');
-        let dateArrs = appointment.startTime.split('.');
+        let title = `Randevu-${appointment.User?.name} ${appointment.User?.surname}--${appointment?.treatmentType}--`;
+        // let dateArr = appointment.date.split('.');
+        // let dateArsr = appointment.startTime.split('.');
+        // let dateArrs = appointment.startTime.split('.');
         let [day, month, year] = appointment.date.split('.');
         let [startHour, startMinutes] = appointment.startTime.split(':');
         let [endHour, endMinutes] = appointment.endTime.split(':');
-
+        // eslint-disable-next-line no-console
+        console.log(day, month, year);
         return {
           id: appointment.id,
           title: title,
@@ -247,8 +247,24 @@ class ACalendar extends Component {
       appointmentNotes: '',
     });
   };
+  closeModal = () => {
+    this.setState({
+      modalShow: false,
+    });
+  };
   handleSelectOnCreateEvent = (e) => {
-    $('#createEventOnCalendar').modal('show');
+    // window.$ = $;
+
+    // window.$('#createEventOnCalendar').modal('show');
+    // var myModal = new bootstrap.Modal(
+    //   document.getElementById('createEventOnCalendar'),
+    //   {
+    //     keyboard: false,
+    //   }
+    // );
+    // myModal.show();
+
+    this.setState({ modalShow: true });
     this.setState({
       selectedResourceId: e.resourceId,
       start: e.start,
@@ -256,7 +272,6 @@ class ACalendar extends Component {
       end: e.end,
       minuteRange: this.getDate(e.start, e.end),
     });
-    console.log(this.state);
   };
   getDate = (start, end) => {
     const startDate = new Date(start);
@@ -265,8 +280,10 @@ class ACalendar extends Component {
     return result;
   };
   handleSelectOnEvent = (e) => {
-    $('#createEventOnCalendar').modal('show');
+    // window.$ = $;
+    // window.$('#createEventOnCalendar').modal('show');
     let event = e.title.split('-');
+    this.setState({ modalShow: true });
 
     this.setState({
       patientName: event[1],
@@ -283,7 +300,7 @@ class ACalendar extends Component {
     });
   };
   render() {
-    let { activeLink, tabName } = this.state;
+    let { tabName } = this.state;
     const localizer = momentLocalizer(moment);
     return (
       <div>
@@ -299,54 +316,60 @@ class ACalendar extends Component {
             },
           ]}
         />
+        {tabName === 'normal' && (
+          <Calendar
+            selectable
+            localizer={localizer}
+            events={this.state.allAppointments}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 1000 }}
+            culture="tr"
+            messages={messages}
+            defaultView={Views.WEEK}
+            onSelectEvent={(e) => this.handleSelectOnEvent(e)}
+            onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
+            dayPropGetter={customDayPropGetter}
+            slotPropGetter={customSlotPropGetter}
+            components={{
+              event: Event,
+              agenda: {
+                event: EventAgenda,
+              },
+            }}
+          />
+        )}
 
-        <Calendar
-          v-if={tabName === 'normal'}
-          selectable
-          localizer={localizer}
-          events={this.state.allAppointments}
-          startAccessor='start'
-          endAccessor='end'
-          style={{ height: 1000 }}
-          culture='tr'
-          messages={messages}
-          defaultView={Views.WEEK}
-          onSelectEvent={(e) => this.handleSelectOnEvent(e)}
-          onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
-          dayPropGetter={customDayPropGetter}
-          slotPropGetter={customSlotPropGetter}
-          components={{
-            event: Event,
-            agenda: {
-              event: EventAgenda,
-            },
-          }}
-        />
-        <Calendar
-          v-if={tabName === 'dentist'}
-          selectable
-          events={this.state.allAppointments}
-          resources={resourceMap}
-          resourceIdAccessor='resourceId'
-          onSelectEvent={(e) => this.handleSelectOnEvent(e)}
-          onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
-          resourceTitleAccessor='resourceTitle'
-          localizer={localizer}
-          defaultView={Views.DAY}
-          defaultDate={new Date()}
-          views={['day']}
-        />
+        {tabName === 'dentist' && (
+          <Calendar
+            selectable
+            events={this.state.allAppointments}
+            resources={resourceMap}
+            resourceIdAccessor="resourceId"
+            onSelectEvent={(e) => this.handleSelectOnEvent(e)}
+            onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
+            resourceTitleAccessor="resourceTitle"
+            localizer={localizer}
+            defaultView={Views.DAY}
+            defaultDate={new Date()}
+            views={['day']}
+          />
+        )}
+
         {/* CREATE APPOINTMENT MODAL */}
 
         <Modal
           modalTitle={'Randevu oluştur'}
-          modalId='createEventOnCalendar'
+          modalId="createEventOnCalendar"
           modalFooterButtonTitle={'Kapat'}
           modalFooterSecondButtonTitle={'Kaydet'}
           modalFooterSecondButtonType={'primary'}
+          modalShow={this.state.modalShow}
+          modalHandleClose={() => this.closeModal()}
           modalFooterButtonOnClick={() => {
             this.resetState();
           }}
+          moda
           modalFooterSecondButtonOnClick={() => {
             if (this.state.mode === 'create') {
               if (this.state.isNew) {
@@ -376,7 +399,7 @@ class ACalendar extends Component {
               } else if (!this.state.isNew) {
                 let startDate = this.state.start;
                 let payload = {
-                  user: '',
+                  user: this.state.patientId,
                   dentist: this.state.appointmentDentistId,
                   treatmentType: this.state.appointmentExplanation,
                   date: `${
@@ -417,19 +440,20 @@ class ACalendar extends Component {
             }
           }}
         >
-          <label className='mt-2' for='patientName'>
+          <label className="mt-2" htmlFor="patientName">
             Hastanın Adı
             {this.state.patientId && (
               <Link
                 to={`patients/${this.state.patientId}`}
                 onClick={() => {
-                  $('#createEventOnCalendar').modal('hide');
+                  // window.$ = $;
+                  // window.$('#createEventOnCalendar').modal('hide');
                 }}
               >
                 <img
                   src={ExternalIcon}
-                  width='15'
-                  height='15'
+                  width="15"
+                  height="15"
                   style={{ cursor: 'pointer' }}
                 />
               </Link>
@@ -454,14 +478,14 @@ class ACalendar extends Component {
           <DropdownItem
             dropdownActive={this.state.dropdownActive}
             parent={
-              <div class='input-group'>
+              <div className="input-group">
                 <input
-                  type='text'
-                  id='patientName'
-                  class='form-control'
-                  placeholder='Hastanın Adı'
-                  aria-label='Hastanın Adı'
-                  aria-describedby='basic-addon2'
+                  type="text"
+                  id="patientName"
+                  className="form-control"
+                  placeholder="Hastanın Adı"
+                  aria-label="Hastanın Adı"
+                  aria-describedby="basic-addon2"
                   value={this.state.patientName}
                   onChange={(e) => {
                     this.setState({ patientName: e.target.value });
@@ -472,15 +496,13 @@ class ACalendar extends Component {
                         .then((e) =>
                           this.setState({ patientNameData: e.data })
                         );
-
                       this.setState({ dropdownActive: true });
-                      $('#patientSearchSpecific').modal('show');
                     } else this.setState({ dropdownActive: false });
                   }}
                 />
-                <div class='input-group-append'>
-                  <button class='btn btn-outline-secondary' type='button'>
-                    <img src={Search} width='20' />
+                <div className="input-group-append">
+                  <button className="btn btn-outline-secondary" type="button">
+                    <img src={Search} width="20" />
                   </button>
                 </div>
               </div>
@@ -501,18 +523,18 @@ class ACalendar extends Component {
             this.state.patientNameData.length == 0) &&
           this.state.patientName.length > 2 ? (
             <div
-              class='custom-control custom-checkbox mt-2'
-              onClick={(e) => {
+              className="custom-control custom-checkbox mt-2"
+              onClick={() => {
                 let checkbox = document.getElementById('customCheck1').checked;
                 this.setState({ isNew: checkbox });
               }}
             >
               <input
-                type='checkbox'
-                class='custom-control-input'
-                id='customCheck1'
+                type="checkbox"
+                className="custom-control-input"
+                id="customCheck1"
               />
-              <label class='custom-control-label' for='customCheck1'>
+              <label className="custom-control-label" htmlFor="customCheck1">
                 {'Yeni hastanın kaydını oluştur'}
               </label>
             </div>
@@ -599,10 +621,10 @@ class ACalendar extends Component {
               return item.resourceTitle;
             })}
           />
-          <div class='d-flex align-items-center justify-content-left'>
+          <div className="d-flex align-items-center justify-content-left">
             <button
-              type='button'
-              class='btn border mt-2 mr-2 mb-2'
+              type="button"
+              className="btn border mt-2 mr-2 mb-2"
               onClick={() => {
                 if (this.state.minuteRange > 15)
                   this.setState({ minuteRange: this.state.minuteRange - 15 });
@@ -611,14 +633,14 @@ class ACalendar extends Component {
               <img style={{ width: 12.5, height: 12.5 }} src={LeftSolid} />
             </button>
             <input
-              type='text'
+              type="text"
               style={{ width: 60 }}
-              class='form-control'
+              className="form-control"
               value={this.state.minuteRange}
             />
             <button
-              type='button'
-              class='btn border m-2'
+              type="button"
+              className="btn border m-2"
               onClick={() =>
                 this.setState({ minuteRange: this.state.minuteRange + 15 })
               }
@@ -627,11 +649,11 @@ class ACalendar extends Component {
             </button>
             dakika
           </div>
-          <label for='exampleFormControlTextarea1'>Notlar</label>
+          <label htmlFor="exampleFormControlTextarea1">Notlar</label>
           <textarea
-            class='form-control'
-            id='exampleFormControlTextarea1'
-            rows='3'
+            className="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
             onChange={(e) =>
               this.setState({ appointmentNotes: e.target.value })
             }
@@ -641,21 +663,21 @@ class ACalendar extends Component {
     );
   }
 }
-function RenderInput({ labelName, onChange, placeholder, inputId }) {
-  return (
-    <>
-      <label for={inputId}>{labelName}</label>
-      <input
-        type='email'
-        class='form-control'
-        id={inputId}
-        aria-describedby='emailHelp'
-        placeholder={placeholder}
-        onChange={onChange}
-      ></input>
-    </>
-  );
-}
+// function RenderInput({ labelName, onChange, placeholder, inputId }) {
+//   return (
+//     <>
+//       <label htmlFor={inputId}>{labelName}</label>
+//       <input
+//         type="email"
+//         className="form-control"
+//         id={inputId}
+//         aria-describedby="emailHelp"
+//         placeholder={placeholder}
+//         onChange={onChange}
+//       ></input>
+//     </>
+//   );
+// }
 function getResources(arr, resourceId) {
   let name = '';
   arr.map((item) => {

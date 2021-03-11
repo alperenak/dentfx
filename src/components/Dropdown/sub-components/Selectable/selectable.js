@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Selectable({
   defaultValue,
@@ -9,25 +9,25 @@ export default function Selectable({
 }) {
   return (
     <>
-      <label className="mt-2" for={id}>
+      <label className="mt-2" htmlFor={id}>
         {labelName}
       </label>
       <select
-        class="form-control"
+        className="form-control"
         id={id}
         onChange={(e) => onChange(e.target.value)}
       >
         {defaultValue ? (
           <option selected="selected">{defaultValue}</option>
         ) : (
-          ""
+          ''
         )}
         {selectableData
           .filter((item) => {
             return defaultValue !== item;
           })
-          .map((item) => {
-            return <option>{item}</option>;
+          .map((item, index) => {
+            return <option key={index}>{item}</option>;
           })}
       </select>
     </>

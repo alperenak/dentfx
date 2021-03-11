@@ -1,8 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
 function SvgOnerilenPaketIcon(props) {
   let { svgColor, className } = props;
-  console.log(props);
   return (
     <svg
       width="1em"
@@ -59,10 +58,7 @@ function SvgOnerilenPaketIcon(props) {
 export default SvgOnerilenPaketIcon;
 
 function RenderStopGradient({ svgColor }) {
-  console.log("svgColor: ", typeof svgColor === "string");
-  if (typeof svgColor === "string") {
-    console.log("stringgggggggggggggg");
-
+  if (typeof svgColor === 'string') {
     return (
       <>
         <stop offset={0} stopColor={svgColor} />
@@ -73,14 +69,13 @@ function RenderStopGradient({ svgColor }) {
       </>
     );
   } else {
-    console.log("artik ");
     return (
       <>
-        <stop offset={0} stopColor={"#ffff93"} />
-        <stop offset={0.315} stopColor={"#ffda7d"} />
-        <stop offset={0.627} stopColor={"#ffc16f"} />
-        <stop offset={1} stopColor={"#ffba6c"} />
-        <stop offset={1} stopColor={"#fdb76a"} />
+        <stop offset={0} stopColor={'#ffff93'} />
+        <stop offset={0.315} stopColor={'#ffda7d'} />
+        <stop offset={0.627} stopColor={'#ffc16f'} />
+        <stop offset={1} stopColor={'#ffba6c'} />
+        <stop offset={1} stopColor={'#fdb76a'} />
       </>
     );
   }

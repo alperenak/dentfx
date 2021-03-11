@@ -1,23 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import styles from "./messages.scss";
+import styles from './messages.scss';
 
-import backButton from "../../icons/Chevron-right.svg";
-import detailsIcon from "../../icons/three-dots-more-indicator.svg";
-import addFile from "../../icons/add-file.svg";
-import sendButton from "../../icons/send-button.svg";
+import backButton from '../../icons/Chevron-right.svg';
+import detailsIcon from '../../icons/three-dots-more-indicator.svg';
+import addFile from '../../icons/add-file.svg';
+import sendButton from '../../icons/send-button.svg';
 
-import store from "../../store";
+import store from '../../store';
 
-import MessageSingle from "../../components/MessageSingle/MessageSingle";
-import { getCookie } from "../../utils/cookie";
+import MessageSingle from '../../components/MessageSingle/MessageSingle';
 
 class MessageDetails extends Component {
   state = {
     conversationID: null,
     singleMessages: [],
     sender: {},
-    messageToSend: "",
+    messageToSend: '',
   };
   componentDidMount = async () => {
     let conversationID = this.props.match.params.id;
@@ -50,9 +49,9 @@ class MessageDetails extends Component {
     });
 
     await this.getMessageDetails();
-    this.setState({ messageToSend: "" });
+    this.setState({ messageToSend: '' });
 
-    var list = document.getElementById("list");
+    var list = document.getElementById('list');
     list.scrollTop = list.offsetHeight;
   };
 
@@ -60,59 +59,80 @@ class MessageDetails extends Component {
     this.setState({ messageToSend: e.target.value });
   };
 
-	render() {
-		let { sender, singleMessages } = this.state;
+  render() {
+    let { sender, singleMessages } = this.state;
 
-		return (
-			<div className="messageDetailsContainer">
-				<div className="messageDetailsContainer__header">
-					<div className="messageDetailsContainer__header__avatar">
-						<img src={sender?.avatar} alt="" />
-						<div className={sender?.onlineStatus ? "messageDetailsContainer__header__avatar__online" : "messageDetailsContainer__header__avatar__offline"}></div>
-					</div>
-					<div className="messageDetailsContainer__header__senderInfo">
-						<div className="messageDetailsContainer__header__senderInfo__name">{sender?.name}</div>
-					</div>
+    return (
+      <div className="messageDetailsContainer">
+        <div className="messageDetailsContainer__header">
+          <div className="messageDetailsContainer__header__avatar">
+            <img src={sender?.avatar} alt="" />
+            <div
+              className={
+                sender?.onlineStatus
+                  ? 'messageDetailsContainer__header__avatar__online'
+                  : 'messageDetailsContainer__header__avatar__offline'
+              }
+            ></div>
+          </div>
+          <div className="messageDetailsContainer__header__senderInfo">
+            <div className="messageDetailsContainer__header__senderInfo__name">
+              {sender?.name}
+            </div>
+          </div>
 
-					<div className="messageDetailsContainer__header__rightButtons">
-						<div className="messageDetailsContainer__header__rightButtons__backButton" onClick={() => (window.location = "/messages")}>
-							<img src={backButton} alt="" />
-							<div className={styles.text}> Back </div>
-						</div>
+          <div className="messageDetailsContainer__header__rightButtons">
+            <div
+              className="messageDetailsContainer__header__rightButtons__backButton"
+              onClick={() => (window.location = '/messages')}
+            >
+              <img src={backButton} alt="" />
+              <div className={styles.text}> Back </div>
+            </div>
 
-						<div className="messageDetailsContainer__header__rightButtons__detailsButton">
-							<img src={detailsIcon} alt="" />
-						</div>
-					</div>
-				</div>
+            <div className="messageDetailsContainer__header__rightButtons__detailsButton">
+              <img src={detailsIcon} alt="" />
+            </div>
+          </div>
+        </div>
 
-				<div className="messageDetailsContainer__messagesContainer" id="list">
-					{singleMessages.length > 0 &&
-					singleMessages.map((message, i) => {
-						if (message.isMine)
-							return <MessageSingle message={message} key={i} />;
-						else
-							return (
-								<MessageSingle message={message} sender={sender} key={i} />
-							);
-					})}
-				</div>
+        <div className="messageDetailsContainer__messagesContainer" id="list">
+          {singleMessages.length > 0 &&
+            singleMessages.map((message, i) => {
+              if (message.isMine)
+                return <MessageSingle message={message} key={i} />;
+              else
+                return (
+                  <MessageSingle message={message} sender={sender} key={i} />
+                );
+            })}
+        </div>
 
-				<div className="messageDetailsContainer__sendMessageContainer">
-					<div className={`${styles.leftIcon} ${styles.icon}`}>
-						<img src={addFile} alt="" />
-					</div>
-					<div className="messageDetailsContainer__sendMessageContainer__inputContainer">
-						<input type="text" name="messageToSend" onChange={this.onChange} value={this.state.messageToSend}/>
-					</div>
+        <div className="messageDetailsContainer__sendMessageContainer">
+          <div className={`${styles.leftIcon} ${styles.icon}`}>
+            <img src={addFile} alt="" />
+          </div>
+          <div className="messageDetailsContainer__sendMessageContainer__inputContainer">
+            <input
+              type="text"
+              name="messageToSend"
+              onChange={this.onChange}
+              value={this.state.messageToSend}
+            />
+          </div>
 
-					<div className={`${styles.rightIcon} ${"messageDetailsContainer__sendMessageContainer__icon"}`} onClick={this.onSendMessage}>
-						<img src={sendButton} alt="" />
-					</div>
-				</div>
-			</div>
-		);
-	}
+          <div
+            className={`${
+              styles.rightIcon
+            } ${'messageDetailsContainer__sendMessageContainer__icon'}`}
+            onClick={this.onSendMessage}
+          >
+            <img src={sendButton} alt="" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default MessageDetails;

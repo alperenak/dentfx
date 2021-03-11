@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from './appointment.scss';
+import './appointment.scss';
 
 /*** Utils ***/
 import store from '../../store';
@@ -81,7 +81,6 @@ class Appointment extends Component {
 
   onClickNav = (clicked) => {
     this.setState({ activeLink: clicked });
-    console.log(this.state.completedAppointments);
   };
 
   renderTopBar = () => {
