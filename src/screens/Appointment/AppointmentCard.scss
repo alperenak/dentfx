@@ -9,252 +9,259 @@ $activeBadge: #1a5aff;
 $pendingBadge: #7b700aa8;
 
 .cardWrapper {
-	overflow: hidden;
-	width: 100%;
-	border-radius: 8px;
-	margin: 25px 0;
-	padding: 0 0 25px 0;
-	padding-left: 15px;
-	padding-right: 15px;
-	transition: 0.5s ease;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 8px;
+  margin: 25px 0;
+  padding: 0 0 25px 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  transition: 0.5s ease;
 
-	&__accordionActive {
-		padding: 0 0 50px 0;
-	}
-	&__accordionInactive {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		-ms-text-overflow: ellipsis;
-		-o-text-overflow: ellipsis;
-		& button {
-		display: none;
-		}
-	}
+  &__accordionActive {
+    padding: 0 0 50px 0;
+  }
+  &__accordionInactive {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    & button {
+      display: none;
+    }
+  }
 
-	&.active {
-    	background-color: $activeBG;
-    	& .badge {
-      	background-color: $activeBadge;
-    	}
-  	}
-  	&.completed {
-    	background-color: $completedBG;
-    	& .badge {
-      		background-color: $completedBadge;
-    	}
-  	}
-  	&.cancelled {
-    	background-color: $cancelledBG;
-    	& .badge {
-      		background-color: $cancelledBadge;
-    	}
-  	}
-  	&.pending {
-    	background-color: $pendingBG;
-    	& .badge {
-      		background-color: $pendingBadge;
-    	}
-  	}
+  &.active {
+    background-color: $activeBG;
+    & .badge {
+      background-color: $activeBadge;
+    }
+  }
+  &.completed {
+    background-color: $completedBG;
+    & .badge {
+      background-color: $completedBadge;
+    }
+  }
+  &.cancelled {
+    background-color: $cancelledBG;
+    & .badge {
+      background-color: $cancelledBadge;
+    }
+  }
+  &.pending {
+    background-color: $pendingBG;
+    & .badge {
+      background-color: $pendingBadge;
+    }
+  }
 
-  	&__header {
-	    display: flex;
-	    flex-direction: row;
-	    justify-content: flex-start!important;
-	    width: 100%;
-		align-items: center;
-		&__lefticon {
-			height: 32px;
-			justify-self: flex-start;
-			padding: 15px 15px;
-		}
-	    &__righticon {
-			height: 32px;
-			padding: 15px 15px;
-			justify-self: flex-end;
-			cursor: pointer;
-	    }
-  	}
-	&__content {
-		margin: 15px 0;
-		&__clinicInfo {
-			display: flex;
-			flex-direction: row;
-			margin-left: 20px;
-			&__badge {
-				font-size: 12px;
-				position: relative;
-				left: 25px;
-				border-radius: 10px;
-				color: white;
-				height: 24px;
-				width: 125px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start !important;
+    width: 100%;
+    align-items: center;
+    &__lefticon {
+      height: 32px;
+      justify-self: flex-start;
+      padding: 15px 15px;
+    }
+    &__righticon {
+      height: 32px;
+      padding: 15px 15px;
+      justify-self: flex-end;
+      cursor: pointer;
+    }
+  }
+  &__content {
+    margin: 15px 0;
+    &__clinicInfo {
+      display: flex;
+      flex-direction: row;
+      margin-left: 20px;
+      &__badge {
+        font-size: 12px;
+        position: relative;
+        left: 25px;
+        border-radius: 10px;
+        color: white;
+        height: 24px;
+        width: 125px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .active {
+        background-color: $activeBadge;
+      }
+      .completed {
+        background-color: $completedBadge;
+      }
+      .cancelled {
+        background-color: $cancelledBadge;
+      }
+      .pending {
+        background-color: $pendingBadge;
+      }
+    }
+  }
+  &__appointmentInfoWrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    align-items: flex-start;
+    &__dentist {
+      color: $activeBadge;
+    }
+    &__details {
+      color: #909ab2;
+      &__accordionActive {
+        display: flex;
+        flex-direction: column;
+        width: 450px;
 
-			}
-			.active {
-				background-color: $activeBadge;
-			}
-			.completed {
-				background-color: $completedBadge;
-			}
-			.cancelled {
-				background-color: $cancelledBadge;
-			}
-			.pending {
-				background-color: $pendingBadge;
-			}
-		}
-	}
-	&__appointmentInfoWrapper {
-		display: flex;
-		width: 100%;
-		flex-direction: column;
-		height: 100%;
-		justify-content: space-around;
-		align-items: flex-start;
-		&__dentist {
-			color: $activeBadge;
-		}
-		&__details {
-  			color: #909ab2;
-			&__accordionActive {
-				display: flex;
-				flex-direction: column;
-				width: 450px;
+        & button {
+          margin: 25px 0 0 0;
+          height: 36px;
+          font-weight: bolder;
+          border-radius: 4px;
 
-				& button {
-					margin: 25px 0 0 0;
-					height: 36px;
-					font-weight: bolder;
-					border-radius: 4px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      &__accordionInactive {
+        width: 450px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        & button {
+          display: none;
+        }
+      }
+    }
 
-					&:hover {
-						cursor: pointer;
-					}
-				}
+    &__appointmentInfo {
+      display: flex;
+      float: left;
+      flex-direction: row;
+      width: 60%;
+      justify-content: space-between;
+      margin-top: 15px;
+      & div:not(:first-child)::before {
+        color: #909ab2;
+        content: ' •  ';
+      }
 
-			}
-			&__accordionInactive {
-				width: 450px;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				-ms-text-overflow: ellipsis;
-				-o-text-overflow: ellipsis;
-				& button {
-					display: none;
-				}
-			}
-		}
+      &__price {
+        color: $cancelledBadge;
+      }
+    }
+  }
+  &__positiveBtn {
+    color: white;
+    background-color: $activeBadge;
+    border: 3px solid $activeBadge;
+    width: 100% !important;
+    margin: 25px 0 0 0;
+    height: 36px;
+    font-weight: bolder;
+    border-radius: 4px;
 
-		&__appointmentInfo {
-			display: flex;
-			float: left;
-			flex-direction: row;
-			width: 60%;
-			justify-content: space-between;
-			margin-top: 15px;
-			& div:not(:first-child)::before {
-				color: #909ab2;
-				content: " •  ";
-			}
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__negativeBtn {
+    color: $cancelledBadge;
+    background-color: transparent;
+    border: 3px solid $cancelledBadge;
+    width: 100% !important;
+    margin: 25px 0 0 0;
+    height: 36px;
+    font-weight: bolder;
+    border-radius: 4px;
 
-			&__price {
-				color: $cancelledBadge;
-			}
-		}
-	}
-	&__positiveBtn {
-		color: white;
-		background-color: $activeBadge;
-		border: 3px solid $activeBadge;
-		width:100%!important;
-		margin: 25px 0 0 0;
-		height: 36px;
-		font-weight: bolder;
-		border-radius: 4px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
-		&:hover {
-			cursor: pointer;
-		}
-	}
-	&__negativeBtn {
-		color: $cancelledBadge;
-		background-color: transparent;
-		border: 3px solid $cancelledBadge;
-		width:100%!important;
-		margin: 25px 0 0 0;
-		height: 36px;
-		font-weight: bolder;
-		border-radius: 4px;
+  & .radioWrapper {
+    margin: auto;
+    & .addTreatment {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+      border: none;
+      border-radius: 20px;
+      background-color: #04ebc6;
+      padding: 0px 15px 0px 15px;
+      white-space: nowrap;
+      width: fit-content;
 
-		&:hover {
-			cursor: pointer;
-		}
-	}
+      :hover {
+        text-decoration: none;
+      }
 
+      img {
+        width: 1rem;
+        height: 1rem;
+      }
+      p {
+        margin-bottom: 0;
+        color: white;
+        margin-right: 10px;
+      }
+    }
 
-	& .radioWrapper{
+    & .reportPatient {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+      border: none;
+      border-radius: 20px;
+      background-color: red;
+      padding: 0px 15px 0px 15px;
+      white-space: nowrap;
+      width: fit-content;
 
-
-
-		margin: auto;
-		& .addTreatment{
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-			border: none;
-			border-radius: 20px;
-			background-color: #04EBC6;
-			padding: 0px 15px 0px 15px;
-			white-space: nowrap;
-			width: fit-content;
-
-			:hover{
-				text-decoration: none;
-			}
-	
-			img{
-				width: 1rem;
-				height: 1rem;
-			}
-			p{
-				margin-bottom: 0;
-				color: white;
-				margin-right: 10px;
-			}
-
-	
-		}
-
-		& .reportPatient{
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-			border: none;
-			border-radius: 20px;
-			background-color: red;
-			padding: 0px 15px 0px 15px;
-			white-space: nowrap;
-			width: fit-content;
-	
-			img{
-				width: 1rem;
-				height: 1rem;
-			}
-			p{
-				margin-bottom: 0;
-				color: black;
-				margin-right: 10px;
-			}
-		}
-
-	}
-
+      img {
+        width: 1rem;
+        height: 1rem;
+      }
+      p {
+        margin-bottom: 0;
+        color: black;
+        margin-right: 10px;
+      }
+    }
+  }
 }
 
+.rbc-event {
+  background-color: #1a5aff !important;
+  border: none !important;
+  z-index: 1;
+  transition: all 0.2s;
+  min-width: 0px;
+  min-height: 0px;
+  border-radius: 12px !important;
+
+  &:hover {
+    z-index: 2;
+    min-width: 200px !important;
+    height: auto;
+    min-height: 100px !important;
+  }
+}
+@import 'react-big-calendar/lib/sass/styles';

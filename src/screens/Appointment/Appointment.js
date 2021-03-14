@@ -222,7 +222,7 @@ class Appointment extends Component {
     return (
       <>
         {loading ? (
-          <Loading noBackground fullscreen />
+          <Loading innerScreen />
         ) : (
           <div>
             {this.renderTopBar()}

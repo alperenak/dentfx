@@ -1,16 +1,19 @@
 import React from 'react';
-import styles from './index.module.scss';
-import LoadingIcon from '../../icons/Loading.svg';
+import './loading.scss';
+import Logo from '../../icons/Logo';
+import LoadingIcon from '../../icons/loading.svg';
 
-export default function Loading({ noBackground, fullscreen }) {
+export default function Loading({ noBackground, fullscreen, innerScreen }) {
   return (
     <div
-      className={`loadingContainer ${noBackground ? 'noBackground' : ''} ${
-        fullscreen ? 'fullscreen' : ''
-      }
+      className={`loadingContainer ${noBackground && 'noBackground'} ${
+        fullscreen && 'fullscreen'
+      } ${innerScreen && 'innerScreen'}
       `}
     >
-      <img src={LoadingIcon} className={styles.loading} />
+      <Logo className="loadingLogo" />
+
+      <img src={LoadingIcon} className="loading" />
     </div>
   );
 }

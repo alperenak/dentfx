@@ -5,7 +5,7 @@ import store from '../../store';
 import { getCookie } from '../../utils/cookie';
 
 /*** Styles ***/
-import styles from './profile.scss';
+import './profile.scss';
 
 /*** Icons ***/
 import editIcon from '../../icons/edit-icon.svg';
@@ -121,7 +121,7 @@ export default function Profile() {
   function overviewTab() {
     return (
       <>
-        <div className="settingsWrapper" style={{ marginBottom: '-430px' }}>
+        <div className="settingsWrapper">
           <div className="row">
             <form>
               <div className={'item profileInfoPart'}>
@@ -322,7 +322,7 @@ export default function Profile() {
             )}
           </div>
 
-          <div className={styles.tabContent}>
+          <div className={'tabContent'}>
             {selectedTab === 0 && overviewTab()}
             {selectedTab === 1 && aboutUsTab()}
             {selectedTab === 2 && galleryTab()}

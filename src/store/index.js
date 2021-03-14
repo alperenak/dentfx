@@ -659,7 +659,19 @@ export default {
       errorMessageBuilder
     );
   },
+  async UpdateAppointment(appointmentId, payload) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/appointment/${appointmentId}`;
 
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
   async SearchChat({ keyword }) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';

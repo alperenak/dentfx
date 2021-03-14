@@ -24,10 +24,22 @@ import PatientSearch from '../../components/PatientSearch/patientSearch';
 import DropdownItem from '../../components/Dropdown/sub-components/DropdownItem/dropdownItem';
 import { Link } from 'react-router-dom';
 
+// ! patientName: event[1],
+// ! patientState: event[2],
+// ! appointmentExplanation: event[3],
+// ! appointmentNotes: event[4],
+// ! appointmentDentist: event[5],
+
 function Event({ event }) {
+  let eventArr = event.title.split('-');
+
   return (
-    <span>
-      <strong>{event.title}</strong>
+    <span style={{ width: '100%' }}>
+      <div className="eventPatientName">Hastanın Adı: {eventArr[1]}</div>
+      {/* <div className="eventPatientState">{eventArr[2]}</div> */}
+      <div className="eventAppointmentExplanation">Tedavi: {eventArr[3]}</div>
+      <div className="eventAppointmentNotes">Diş Hekimi: {eventArr[4]}</div>
+      <div className="eventAppointmentDentist">{eventArr[5]}</div>
       {event.desc && ':  ' + event.desc}
     </span>
   );
@@ -200,7 +212,6 @@ class ACalendar extends Component {
     let userId = getCookie('user_id');
     let userType = getCookie('user_type');
     this.setState({ userType });
-
     const response = await store.getAppointments({ userId });
     let clinicResponse = await store.getClinicDetail({
       clinicId: getCookie('user_id'),
@@ -215,7 +226,15 @@ class ACalendar extends Component {
 
     if (response.data) {
       let _allAppointments = response.data.map((appointment) => {
-        let title = `Randevu-${appointment.User?.name} ${appointment.User?.surname}--${appointment?.treatmentType}--`;
+        let title = `Randevu-${
+          appointment.User?.name ? appointment.User.name : 'Adı Bulunamadı'
+        } ${appointment.User?.surname ? appointment.User.surname : ''}-${
+          appointment?.id
+        }-${appointment?.treatmentType}-${
+          appointment.Dentist?.name
+            ? appointment.Dentist.name
+            : 'Diş Hekimi Bulunamadı'
+        } ${appointment.Dentist?.surname ? appointment.Dentist.surname : ''}-`;
         // let dateArr = appointment.date.split('.');
         // let dateArsr = appointment.startTime.split('.');
         // let dateArrs = appointment.startTime.split('.');
@@ -223,19 +242,22 @@ class ACalendar extends Component {
         let [startHour, startMinutes] = appointment.startTime.split(':');
         let [endHour, endMinutes] = appointment.endTime.split(':');
         // eslint-disable-next-line no-console
-        console.log(day, month, year);
+        this.setState({
+          appointmentDentist: `${appointment.Dentist?.name} ${appointment.Dentist?.surname}`,
+          appointmentDentistId: appointment.Dentist?.id,
+          appointmentExplanation: appointment?.treatmentType,
+        });
         return {
           id: appointment.id,
+          userId: appointment.User?.id,
           title: title,
-          start: new Date(year, month, day, startHour, startMinutes, 0),
-          end: new Date(year, month, day, endHour, endMinutes, 0),
-          resourceId: appointment.Dentist.id,
+          start: new Date(year, month - 1, day, startHour, startMinutes, 0),
+          end: new Date(year, month - 1, day, endHour, endMinutes, 0),
+          resourceId: appointment.Dentist?.id,
         };
       });
       this.setState({
         allAppointments: _allAppointments,
-        appointmentDentist: resourceMap[0].resourceTitle,
-        appointmentDentistId: resourceMap[0].resourceId,
       });
     }
   };
@@ -252,6 +274,92 @@ class ACalendar extends Component {
       modalShow: false,
     });
   };
+  // ! new Patient Create Appointment
+
+  newPatientCreateAppointment() {
+    let startDate = this.state.start;
+    let payload = {
+      isNew: true,
+      name: this.state.patientName,
+      Clinic: getCookie('user_id'),
+      Dentist: this.state.appointmentDentistId,
+      treatmentType: this.state.appointmentExplanation,
+      date: `${
+        String(startDate.getDate()).length === 1
+          ? `0${startDate.getDate()}`
+          : startDate.getDate()
+      }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ''}${
+        startDate.getMonth() + 1
+      }.${startDate.getFullYear()}`,
+      startTime: convertHourMinute(this.state.start),
+      endTime: convertHourMinute(this.state.end),
+      isCheckIn: false,
+      note: this.state.appointmentNotes,
+      description: this.patientState,
+      paymentType: 'onCheckIn',
+    };
+    store.CreateAppointment(payload).then(() => this.componentDidMount());
+  }
+
+  existedPatientCreateAppointment() {
+    let startDate = this.state.start;
+    let payload = {
+      User: this.state.patientId,
+      Dentist: this.state.appointmentDentistId,
+      Clinic: getCookie('user_id'),
+      treatmentType: this.state.appointmentExplanation,
+      date: `${
+        String(startDate.getDate()).length === 1
+          ? `0${startDate.getDate()}`
+          : startDate.getDate()
+      }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ''}${
+        startDate.getMonth() + 1
+      }.${startDate.getFullYear()}`,
+      startTime: convertHourMinute(this.state.start),
+      endTime: convertHourMinute(
+        new Date(this.state.start.getTime() + this.state.minuteRange * 60000)
+      ),
+      isCheckIn: false,
+      paymentType: 'onCheckIn',
+      note: this.state.appointmentNotes,
+      description: this.patientState,
+    };
+    store.CreateAppointment(payload).then(() => {
+      this.componentDidMount();
+    });
+  }
+
+  updateAppointment() {
+    let startDate = this.state.start;
+    // eslint-disable-next-line no-unused-vars
+    let payload = {
+      name: this.state.patientName,
+      Clinic: getCookie('user_id'),
+      Dentist: this.state.appointmentDentistId,
+      User: this.state.patientId,
+      treatmentType: this.state.appointmentExplanation,
+      date: `${
+        String(startDate.getDate()).length === 1
+          ? `0${startDate.getDate()}`
+          : startDate.getDate()
+      }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ''}${
+        startDate.getMonth() + 1
+      }.${startDate.getFullYear()}`,
+      startTime: convertHourMinute(this.state.start),
+      endTime: convertHourMinute(
+        new Date(this.state.start.getTime() + this.state.minuteRange * 60000)
+      ),
+      isCheckIn: false,
+      note: this.state.appointmentNotes,
+      description: this.patientState,
+      paymentType: 'onCheckIn',
+    };
+
+    store.UpdateAppointment(this.state.id, payload).then(() => {
+      this.componentDidMount();
+    });
+  }
+
   handleSelectOnCreateEvent = (e) => {
     // window.$ = $;
 
@@ -284,13 +392,15 @@ class ACalendar extends Component {
     // window.$('#createEventOnCalendar').modal('show');
     let event = e.title.split('-');
     this.setState({ modalShow: true });
-
+    // eslint-disable-next-line no-console
+    console.log(e);
     this.setState({
       patientName: event[1],
       patientState: event[2],
       appointmentExplanation: event[3],
       appointmentNotes: event[4],
       appointmentDentist: event[5],
+      patientId: e.userId,
       id: e.id,
       selectedResourceId: e.resourceId,
       mode: 'select',
@@ -301,6 +411,8 @@ class ACalendar extends Component {
   };
   render() {
     let { tabName } = this.state;
+    // eslint-disable-next-line no-console
+    console.log(this.state.allAppointments);
     const localizer = momentLocalizer(moment);
     return (
       <div>
@@ -331,6 +443,7 @@ class ACalendar extends Component {
             onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
             dayPropGetter={customDayPropGetter}
             slotPropGetter={customSlotPropGetter}
+            tooltipAccessor=""
             components={{
               event: Event,
               agenda: {
@@ -350,93 +463,98 @@ class ACalendar extends Component {
             onSelectSlot={(e) => this.handleSelectOnCreateEvent(e)}
             resourceTitleAccessor="resourceTitle"
             localizer={localizer}
+            tooltipAccessor=""
             defaultView={Views.DAY}
             defaultDate={new Date()}
             views={['day']}
+            components={{
+              event: Event,
+            }}
           />
         )}
 
         {/* CREATE APPOINTMENT MODAL */}
-
+        {/* 
+          modalThirdFooterType,
+          modalThirdFooterOnClick,
+          modalThirdFooterTitle, 
+          modalThirdButtonVisibilty
+    */}
         <Modal
-          modalTitle={'Randevu oluştur'}
+          modalTitle={
+            this.state.mode === 'select'
+              ? 'Randevuyu Güncelle'
+              : 'Randevu Oluştur'
+          }
           modalId="createEventOnCalendar"
+          modalThirdButtonVisibilty={
+            this.state.mode === 'select' ? true : false
+          }
           modalFooterButtonTitle={'Kapat'}
           modalFooterSecondButtonTitle={'Kaydet'}
           modalFooterSecondButtonType={'primary'}
+          modalThirdFooterType={'danger'}
+          modalThirdFooterTitle={'İptal Et'}
+          modalThirdFooterOnClick={() => {
+            store.CancelAppointment({ appointmentID: this.state.id });
+          }}
           modalShow={this.state.modalShow}
           modalHandleClose={() => this.closeModal()}
           modalFooterButtonOnClick={() => {
+            this.closeModal();
             this.resetState();
           }}
-          moda
           modalFooterSecondButtonOnClick={() => {
+            this.closeModal();
             if (this.state.mode === 'create') {
               if (this.state.isNew) {
-                let startDate = this.state.start;
-                let payload = {
-                  isNew: true,
-                  name: this.state.patientName,
-                  dentist: this.state.appointmentDentistId,
-                  treatmentType: this.state.appointmentExplanation,
-                  date: `${
-                    String(startDate.getDate()).length === 1
-                      ? `0${startDate.getDate()}`
-                      : startDate.getDate()
-                  }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ''}${
-                    startDate.getMonth() + 1
-                  }.${startDate.getFullYear()}`,
-                  startTime: convertHourMinute(this.state.start),
-                  endTime: convertHourMinute(this.state.end),
-                  isCheckIn: false,
-                  note: this.state.appointmentNotes,
-                  description: this.patientState,
-                  paymentType: 'onCheckIn',
-                };
-                store
-                  .CreateAppointment(payload)
-                  .then(() => this.componentDidMount());
+                this.newPatientCreateAppointment();
               } else if (!this.state.isNew) {
-                let startDate = this.state.start;
-                let payload = {
-                  user: this.state.patientId,
-                  dentist: this.state.appointmentDentistId,
-                  treatmentType: this.state.appointmentExplanation,
-                  date: `${
-                    String(startDate.getDate()).length === 1
-                      ? `0${startDate.getDate()}`
-                      : startDate.getDate()
-                  }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ''}${
-                    startDate.getMonth() + 1
-                  }.${startDate.getFullYear()}`,
-                  startTime: convertHourMinute(this.state.start),
-                  endTime: convertHourMinute(this.state.end),
-                  isCheckIn: false,
-                  paymentType: 'onCheckIn',
-                  note: this.state.appointmentNotes,
-                  description: this.patientState,
-                };
-                store.CreateAppointment(payload);
+                this.existedPatientCreateAppointment();
               }
             } else if (this.state.mode === 'select') {
-              let arr = this.state.allAppointments.filter((item) => {
-                return item.id !== this.state.id;
-              });
-              this.setState({
-                allAppointments: [
-                  ...arr,
-                  {
-                    id: this.state.id,
-                    title: `Randevu-${this.state.patientName}-${this.state.patientState}-${this.state.appointmentExplanation}-${this.state.appointmentNotes}-${this.state.appointmentDentist}`,
-                    start: this.state.start,
-                    end: new Date(
-                      this.state.start.getTime() +
-                        this.state.minuteRange * 60000
-                    ),
-                    resourceId: this.state.selectedResourceId,
-                  },
-                ],
-              });
+              // let arr = this.state.allAppointments.filter((item) => {
+              //   return item.id !== this.state.id;
+              // });
+
+              // let startDate = this.state.start;
+              // let payload = {
+              //   isNew: true,
+              //   name: this.state.patientName,
+              //   Clinic: getCookie('user_id'),
+              //   Dentist: this.state.appointmentDentistId,
+              //   treatmentType: this.state.appointmentExplanation,
+              //   date: `${
+              //     String(startDate.getDate()).length === 1
+              //       ? `0${startDate.getDate()}`
+              //       : startDate.getDate()
+              //   }.${String(startDate.getMonth() + 1).length === 1 ? 0 : ''}${
+              //     startDate.getMonth() + 1
+              //   }.${startDate.getFullYear()}`,
+              //   startTime: convertHourMinute(this.state.start),
+              //   endTime: convertHourMinute(this.state.end),
+              //   isCheckIn: false,
+              //   note: this.state.appointmentNotes,
+              //   description: this.patientState,
+              //   paymentType: 'onCheckIn',
+              // };
+              this.updateAppointment();
+
+              // this.setState({
+              //   allAppointments: [
+              //     ...arr,
+              //     {
+              //       id: this.state.id,
+              //       title: `Randevu-${this.state.patientName}-${this.state.patientState}-${this.state.appointmentExplanation}-${this.state.appointmentNotes}-${this.state.appointmentDentist}`,
+              //       start: this.state.start,
+              //       end: new Date(
+              //         this.state.start.getTime() +
+              //           this.state.minuteRange * 60000
+              //       ),
+              //       resourceId: this.state.selectedResourceId,
+              //     },
+              //   ],
+              // });
             }
           }}
         >
@@ -554,6 +672,7 @@ class ACalendar extends Component {
             id={'selectableDropdown'}
             type={'selectable'}
             labelName={'Açıklama'}
+            value={this.state.appointmentExplanation}
             onChange={(e) => {
               this.setState({ appointmentExplanation: e });
             }}

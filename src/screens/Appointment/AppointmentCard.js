@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /*** Styles ***/
-import styles from './AppointmentCard.scss';
+import './AppointmentCard.scss';
 
 /*** Icons ***/
 import dentHospitalIcon from '../../icons/dental-icon.png';
@@ -13,7 +13,7 @@ import store from '../../store';
 class AppointmentCard extends Component {
   state = {
     status: '',
-    accordionActive: styles.accordionInactive,
+    accordionActive: 'accordionInactive',
     data: [],
     isPatientArrived: undefined,
   };
@@ -181,7 +181,7 @@ class AppointmentCard extends Component {
             <img src={dentHospitalIcon} alt="" />
           </div>
           <div className="cardWrapper__content__clinicInfo">
-            <div className={styles.title}> {data?.Clinic?.name} </div>
+            <div className={'title'}> {data?.Clinic?.name} </div>
             {this.renderBadge(data)}
           </div>
         </div>
@@ -218,7 +218,7 @@ class AppointmentCard extends Component {
           <div className="radioWrapper">
             {this.state.isPatientArrived && (
               <div className="col-xl-4 col-lg-4 col-md-6 col-sm-1">
-                <a href="/addTreatment" classNameName="addTreatment">
+                <a href="/addTreatment" className="addTreatment">
                   <p>Add Treatment</p>
                   <img src={toothPic} alt={'logo'} />
                 </a>

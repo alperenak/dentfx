@@ -4,6 +4,7 @@ export default function Selectable({
   defaultValue,
   labelName,
   selectableData,
+  value,
   id,
   onChange,
 }) {
@@ -16,6 +17,7 @@ export default function Selectable({
         className="form-control"
         id={id}
         onChange={(e) => onChange(e.target.value)}
+        value={value}
       >
         {defaultValue ? (
           <option selected="selected">{defaultValue}</option>

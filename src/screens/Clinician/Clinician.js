@@ -7,12 +7,14 @@ import DatePicker from '../../components/DatePicker/DatePicker';
 
 /*** Styles ***/
 import './clinician.scss';
+// eslint-disable-next-line no-unused-vars
 import AddUserIcon from '../../icons/add-user.svg';
 
 /*** Utils ***/
 import store from '../../store';
 import { getCookie } from '../../utils/cookie';
 import { Link } from 'react-router-dom';
+import Loading from '../../components/Loading';
 
 const Step1 = () => {
   return (
@@ -309,14 +311,14 @@ class Clinician extends Component {
 
     return (
       <div>
-        <a
+        {/* <a
           type="button"
           data-toggle="modal"
           data-target="#addUserModal"
           className={'addUser'}
         >
           <img src={AddUserIcon}></img>
-        </a>
+        </a> */}
 
         <div
           className="modal fade"
@@ -385,9 +387,8 @@ class Clinician extends Component {
             </div>
           </div>
         </div>
-
-        <div className={'cliniciansTable'}>
-          {this.state.patientData !== null ? (
+        {this.state.patientData !== null ? (
+          <div className={'cliniciansTable'}>
             <MDBDataTable
               striped
               bordered
@@ -398,10 +399,10 @@ class Clinician extends Component {
               info={false}
               paginationLabel={['Önceki', 'Sonraki']}
             />
-          ) : (
-            <p>YUKLENIYOR</p>
-          )}
-        </div>
+          </div>
+        ) : (
+          <Loading innerScreen />
+        )}
       </div>
     );
   }
