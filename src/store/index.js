@@ -233,7 +233,19 @@ export default {
       errorMessageBuilder
     );
   },
-
+  async updateClinicPatientProfile(clinicID, PatientId, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${PatientId}`;
+    let payload = { ...props };
+    return await http.makePutRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
   async updateClinicGallery(clinicID, props) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';

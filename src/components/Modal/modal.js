@@ -16,6 +16,7 @@ export default function Modal(props) {
     modalFooterSecondButtonOnClick,
     modalThirdFooterType,
     modalThirdFooterOnClick,
+    modalFooterSecondButtonVisibility = true,
     modalThirdFooterTitle,
     modalThirdButtonVisibilty,
   } = props;
@@ -46,16 +47,18 @@ export default function Modal(props) {
           >
             {modalFooterButtonTitle}
           </Button>
-          <Button
-            variant={
-              modalFooterSecondButtonType
-                ? modalFooterSecondButtonType
-                : 'secondary'
-            }
-            onClick={modalFooterSecondButtonOnClick}
-          >
-            {modalFooterSecondButtonTitle}
-          </Button>
+          {modalFooterSecondButtonVisibility && (
+            <Button
+              variant={
+                modalFooterSecondButtonType
+                  ? modalFooterSecondButtonType
+                  : 'secondary'
+              }
+              onClick={modalFooterSecondButtonOnClick}
+            >
+              {modalFooterSecondButtonTitle}
+            </Button>
+          )}
         </ModalComp.Footer>
       )}
     </ModalComp>

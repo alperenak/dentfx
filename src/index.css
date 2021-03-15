@@ -48,3 +48,6 @@ body,
   font-family: 'SofiaRegular';
   overflow: hidden;
 }
+a {
+  text-decoration: none !important;
+}

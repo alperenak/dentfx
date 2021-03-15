@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react';
 import store from '../../store';
 import { MDBDataTable } from 'mdbreact';
@@ -54,6 +55,7 @@ class PatientDetail extends Component {
     this.state = {
       patient: null,
       selectedTab: 0,
+      modalShow: false,
       selectedPlan: 'Planlama 0',
       selectedTooth: '',
       treatmentPlan0Data: null,
@@ -74,6 +76,25 @@ class PatientDetail extends Component {
       modalDescription: null,
       modalDentist: null,
       newNote: null,
+
+      // ! about patient details
+
+      patientName: '',
+      patientId: '',
+      patientSurname: '',
+      patientTCNumber: '',
+      patientGender: '',
+      patientNationality: '',
+      patientDentist: '',
+      patientBirthday: '',
+      patientDistrict: '',
+      patientCity: '',
+      patientCountry: '',
+      patientPostCode: '',
+      patientEmail: '',
+      patientNumberOne: '',
+      patientNumberTwo: '',
+      patientAddress: '',
     };
   }
 
@@ -590,6 +611,9 @@ class PatientDetail extends Component {
   };
 
   componentDidMount = async () => {
+    // let clinicResponse = await store.getClinicDetail({
+    //   clinicId: getCookie('user_id'),
+    // });
     let { match } = this.props;
     let clinicId = getCookie('user_id');
     let patientId = match.params.id;
@@ -601,6 +625,29 @@ class PatientDetail extends Component {
 
     let patientDetails = await store.getPatientsDetail({ clinicId, patientId });
     let payments = await store.getPatientPayments(clinicId, patientId);
+
+    console.log(payments);
+
+    // ! about patient details
+    let pt = patientDetails.data;
+    this.setState({
+      patientId: pt?.id,
+      patientName: pt?.name,
+      patientSurname: pt?.surname,
+      patientTCNumber: pt?.tcNumber,
+      patientGender: pt?.name,
+      patientNationality: pt?.nationality,
+      patientDentist: `${pt?.Dentist.name} ${pt?.Dentist.surname}`,
+      patientBirthday: pt?.birthDate,
+      patientDistrict: pt?.district,
+      patientCity: pt?.city,
+      patientCountry: pt?.country,
+      patientPostCode: pt?.postCode,
+      patientEmail: pt?.email,
+      patientNumberOne: pt?.phone,
+      patientNumberTwo: pt?.phone2,
+      patientAddress: pt?.address,
+    });
 
     this.setState({ patient: patientDetails.data });
     this.setState({ payments: payments.data });
@@ -619,16 +666,19 @@ class PatientDetail extends Component {
       <div className={'aboutTab'}>
         <form>
           <div className={'item patientInfoPart'}>
-            <div className={'header'}>Kişisel Bilgiler</div>
+            <div className="GenerallyTitle">Kişisel Bilgiler</div>
             <div className={'content'}>
               <div className="form-row">
                 <div className="col-md-3 mb-3">
                   <label htmlFor="validationDefault01">İsim</label>
                   <input
                     type="text"
+                    value={this.state.patientName}
                     className="form-control"
                     id="validationDefault01"
-                    value={patient?.name}
+                    onChange={(e) =>
+                      this.setState({ patientName: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -638,7 +688,10 @@ class PatientDetail extends Component {
                     type="text"
                     className="form-control"
                     id="validationDefault02"
-                    value={patient?.surname}
+                    value={this.state.patientSurname}
+                    onChange={(e) =>
+                      this.setState({ patientSurname: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -648,7 +701,10 @@ class PatientDetail extends Component {
                     type="text"
                     className="form-control"
                     id="inputTC"
-                    value={patient?.tcNumber}
+                    value={this.state.patientTCNumber}
+                    onChange={(e) =>
+                      this.setState({ patientTCNumber: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -697,11 +753,17 @@ class PatientDetail extends Component {
                   <select
                     className="custom-select"
                     id="validationDefault04"
+                    value={this.state.patientNationality}
+                    onChange={(e) =>
+                      this.setState({ patientNationality: e.target.value })
+                    }
                     required
                   >
-                    <option selected disabled value={patient?.nationality}>
-                      {patient?.nationality}
-                    </option>
+                    {/* <option
+                      selected
+                      disabled
+                      value={this.state.patientNationality}
+                    ></option> */}
                     <option>Türk</option>
                     <option>Yabancı</option>
                   </select>
@@ -712,7 +774,10 @@ class PatientDetail extends Component {
                     id="dentistName"
                     type="text"
                     className="form-control"
-                    value={patient?.Dentist.name}
+                    value={this.state.patientDentist}
+                    onChange={(e) =>
+                      this.setState({ patientDentist: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -720,7 +785,10 @@ class PatientDetail extends Component {
                 <div className="col-md-6 mb-3">
                   <label htmlFor="validationDefault01">Doğum Tarihi</label>
                   {patient?.birthDate && (
-                    <DatePicker initialValue={patient?.birthDate} />
+                    <DatePicker
+                      onChange={(e) => this.setState({ patientBirthday: e })}
+                      initialValue={new Date(this.state.patientBirthday)}
+                    />
                   )}
                 </div>
                 <div className="col-md-6 mb-3">
@@ -734,52 +802,44 @@ class PatientDetail extends Component {
           </div>
 
           <div className={'item patientInfoPart'}>
-            <div className={'header'}>İletişim Bilgileri</div>
+            <div className={'GenerallyTitle'}>İletişim Bilgileri</div>
             <div className={'content'}>
               <div className="form-row">
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="validationDefault04">İlçe</label>
-                  <select
-                    className="custom-select"
-                    id="validationDefault04"
-                    required
-                  >
-                    <option selected disabled value="">
-                      Seçiniz...
-                    </option>
-                    <option>Başakşehir</option>
-                    <option>Sarıyer</option>
-                  </select>
+                  <label htmlFor="ilce">İlçe</label>
+                  <input
+                    id="ilce"
+                    type="text"
+                    className="form-control"
+                    value={this.state.patientDistrict}
+                    onChange={(e) =>
+                      this.setState({ patientDistrict: e.target.value })
+                    }
+                  />
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="validationDefault04">Şehir</label>
-                  <select
-                    className="custom-select"
-                    id="validationDefault04"
-                    required
-                  >
-                    <option selected disabled value="">
-                      {patient?.city}
-                    </option>
-                    <option>İstanbul</option>
-                    <option>Ankara</option>
-                    <option>Eskişehir</option>
-                    <option>Çanakkale</option>
-                  </select>
+                  <label htmlFor="Sehir">Şehir</label>
+                  <input
+                    id="Sehir"
+                    type="text"
+                    className="form-control"
+                    value={this.state.patientCity}
+                    onChange={(e) =>
+                      this.setState({ patientCity: e.target.value })
+                    }
+                  />
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="validationDefault04">Ülke</label>
-                  <select
-                    className="custom-select"
-                    id="validationDefault04"
-                    required
-                  >
-                    <option selected disabled value="">
-                      {patient?.country}
-                    </option>
-                    <option>Türkiye</option>
-                    <option>USA</option>
-                  </select>
+                  <label htmlFor="ulke">Ülke</label>
+                  <input
+                    id="ulke"
+                    type="text"
+                    className="form-control"
+                    value={this.state.patientCountry}
+                    onChange={(e) =>
+                      this.setState({ patientCountry: e.target.value })
+                    }
+                  />
                 </div>
                 <div className="col-md-3 mb-3">
                   <label htmlFor="validationDefault05">Posta Kodu</label>
@@ -788,49 +848,89 @@ class PatientDetail extends Component {
                     className="form-control"
                     id="validationDefault05"
                     required
+                    value={this.state.patientPostCode}
+                    onChange={(e) =>
+                      this.setState({ patientPostCode: e.target.value })
+                    }
                   />
                 </div>
               </div>
               <div className="form-row">
                 <div className="col-md-6 mb-3">
-                  <label htmlFor="exampleFormControlInput1">
-                    E-mail adresi
-                  </label>
+                  <label htmlFor="exampleFormControlInput1">Email adresi</label>
                   <input
                     type="email"
                     className="form-control"
                     id="exampleFormControlInput1"
-                    value={patient?.email}
+                    value={this.state.patientEmail}
+                    onChange={(e) =>
+                      this.setState({ patientEmail: e.target.value })
+                    }
                   />
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="inputAddress">Telefon1</label>
+                  <label htmlFor="inputAddress">Telefon</label>
                   <input
                     type="text"
                     className="form-control"
                     id="inputAddress"
-                    value={patient?.phone}
+                    value={this.state.patientNumberOne}
+                    onChange={(e) =>
+                      this.setState({ patientNumberOne: e.target.value })
+                    }
                   />
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="validationDefault05">Telefon2</label>
+                  <label htmlFor="validationDefault05">2. Telefon</label>
                   <input
                     type="text"
                     className="form-control"
                     id="validationDefault05"
-                    value={patient?.phone}
+                    value={this.state.patientNumberTwo}
+                    onChange={(e) =>
+                      this.setState({ patientNumberTwo: e.target.value })
+                    }
                   />
                 </div>
               </div>
               <div className="form-row">
-                <div className="col-md-12 mb-3">
+                <div className="col-md-8 mb-3">
                   <label htmlFor="exampleFormControlInput1">Adres</label>
                   <input
                     type="text"
                     className="form-control"
                     id="exampleFormControlInput1"
-                    value={patient?.address}
+                    value={this.state.patientAddress}
+                    onChange={(e) =>
+                      this.setState({ patientAddress: e.target.value })
+                    }
                   />
+                </div>
+                <div className="d-flex align-items-end justify-content-center mb-3 ml-3 col-md-2">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      // eslint-disable-next-line no-unused-vars
+                      let payload = {
+                        id: this.state.patientId,
+                        country: this.state.patientCountry,
+                        city: this.state.patientCity,
+                        address: this.state.patientAddress,
+                        phone: this.state.patientNumberOne,
+                        phone2: this.state.patientNumberTwo,
+                        tcNumber: this.state.patientTCNumber,
+                        postCode: this.state.patientPostCode,
+                        email: this.state.patientEmail,
+                        birthDate: this.state.patientBirthday,
+                      };
+                      store.updateClinicPatientProfile(
+                        getCookie('user_id'),
+                        this.state.patientId
+                      );
+                    }}
+                  >
+                    Kaydet
+                  </button>
                 </div>
               </div>
             </div>
@@ -1629,6 +1729,7 @@ class PatientDetail extends Component {
                 type="button"
                 className="btn btn-success addTreatmentButton"
                 data-toggle="modal"
+                onClick={() => this.setState({ modalShow: true })}
                 data-target="#newTreatmentPlan"
               >
                 Yeni Tedavi Plani Ekle
@@ -1638,6 +1739,7 @@ class PatientDetail extends Component {
                 type="button"
                 className="btn btn-success addTreatmentButton"
                 data-toggle="modal"
+                onClick={() => this.setState({ modalShow: true })}
                 data-target="#newTreatmentPlan"
               >
                 Yeni Tedavi Ekle
@@ -1661,8 +1763,11 @@ class PatientDetail extends Component {
           </span>
         )}
         <Modal
+          modalShow={this.state.modalShow}
+          modalHandleClose={() => this.setState({ modalShow: false })}
           modalId={'newTreatmentPlan'}
           modalFooterButtonTitle={'Kapat'}
+          modalFooterSecondButtonVisibility={false}
           modalTitle={'Tedavi Plani Seciniz'}
         >
           {this.renderTreatmentList()}
@@ -1704,9 +1809,7 @@ class PatientDetail extends Component {
         </div>
 
         <div className={'profileName'}>{patient?.name}</div>
-        <div
-          className={'location'}
-        >{`${patient?.city}, ${patient?.country}`}</div>
+        <div className={'location'}>{patient?.email ? patient.email : ''}</div>
 
         <div className={'tabs'}>
           <div
