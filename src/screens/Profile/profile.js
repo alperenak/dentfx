@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 
 /*** Utils ***/
@@ -9,6 +10,7 @@ import './profile.scss';
 
 /*** Icons ***/
 import editIcon from '../../icons/edit-icon.svg';
+import deleteImage from '../../icons/trash.svg';
 // import birthdayIcon from "../../icons/birthday-icon.svg";
 // import phoneIcon from "../../icons/phone-icon.svg";
 // import emailIcon from "../../icons/email-icon.svg";
@@ -25,20 +27,22 @@ import { useDropzone } from 'react-dropzone';
 // import Map from "../../components/Map/map";
 // import { EditorState } from "draft-js";
 // import { Editor } from "react-draft-wysiwyg";
-import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { AlertContext } from '../../context/alertContext';
 import Loading from '../../components/Loading';
 import Map from '../../components/Map/map';
-import { Editor } from 'draft-js';
-import { EditorState } from 'draft-js';
+// import draftToHtml from 'draftjs-to-html';
+// import htmlToDraft from 'html-to-draftjs';
+// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+
+import { EditorState, convertFromHTML } from 'draft-js';
+import { convertToHTML } from 'draft-convert';
+import { Editor } from 'react-draft-wysiwyg';
 // import draftToHtml from 'draftjs-to-html';
 // import htmlToDraft from 'html-to-draftjs';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
 
-// import { Carousel } from "react-responsive-carousel";
+import { Carousel } from 'react-responsive-carousel';
 
 export default function Profile() {
   //#region General States
@@ -56,7 +60,9 @@ export default function Profile() {
   const [setAlertboxActive, setAlertData] = useContext(AlertContext);
   const [profilePhone, setProfilePhone] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(false);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [carouselImages, setCarouselImages] = useState([]);
+  // const [convertedContent, setConvertedContent] = useState('');
   //#endregion
 
   //#region Notifications States
@@ -69,7 +75,27 @@ export default function Profile() {
   // const state = {
   //   editorState: EditorState.createEmpty(),
   // };
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  // const exportHTML = () => {
+  //   setConvertedContent(
+  //     convertToHTML(this.state.editorState.getCurrentContent())
+  //   );
+  // };
+
+  // const updateHTML = (e) => {
+  //   e.preventDefault();
+  //   this.setState({ convertedContent: e.target.value });
+  // };
+
+  // const importHTML = () => {
+  //   const { editorState } = this.state;
+  //   this.onChange(
+  //     EditorState.push(
+  //       editorState,
+  //       convertFromHTML(this.state.convertedContent)
+  //     )
+  //   );
+  // };
 
   const onEditorStateChange = (editorStatee) => {
     setEditorState(editorStatee);
@@ -109,6 +135,15 @@ export default function Profile() {
         setProfilePhoto(data.data?.avatar);
         setProfilePhone(data.data.phone);
         setCarouselImages(data.data?.gallery);
+
+        // const blocksFromHTML = convertFromHTML(data.data?.description);
+        // const inComingHTML = editorState.createFromBlockArray(
+        //   blocksFromHTML.contentBlocks,
+        //   blocksFromHTML.entityMap
+        // );
+
+        // setEditorState(EditorState.createWithContent(inComingHTML));
+        // EditorState.push(editorState, convertFromHTML(data.data?.description));
       });
       // console.log(res.data);
     }
@@ -185,11 +220,22 @@ export default function Profile() {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          setAlertboxActive(true);
-                          setAlertData({
-                            type: 'success',
-                            title: 'Kullanıcı bilgileri başarıyla kaydedildi',
-                          });
+                          let payload = {
+                            name: profileFullName,
+                            country: profileCountry,
+                            city: profileCity,
+                            address: profileAddress,
+                          };
+                          store
+                            .updateClinicProfile(getCookie('user_id'), payload)
+                            .then(() => {
+                              setAlertboxActive(true);
+                              setAlertData({
+                                type: 'success',
+                                title:
+                                  'Kullanıcı bilgileri başarıyla kaydedildi',
+                              });
+                            });
                         }}
                         className="btn btn-primary"
                         id="profileSaveButton"
@@ -214,16 +260,34 @@ export default function Profile() {
 
   function aboutUsTab() {
     return (
-      <div className="settingsWrapper">
-        <div className="row">
-          <div>
-            <Editor
-              editorState={editorState}
-              wrapperClassName="demo-wrapper"
-              editorClassName="demo-editor"
-              onEditorStateChange={onEditorStateChange}
-            />
-          </div>
+      <div className="settingsWrapper w-100 d-flex align-items-center justify-content-center">
+        <div className="draftJSeditorWrapper">
+          <Editor
+            editorState={editorState}
+            wrapperClassName="demo-wrapper"
+            placeholder="Hakkında bir şeyler yaz..."
+            editorClassName="demo-editor"
+            onEditorStateChange={onEditorStateChange}
+          />
+          <button
+            className="btn btn-primary draftJSSaveButton"
+            onClick={() => {
+              let payload = {
+                description: convertToHTML(editorState.getCurrentContent()),
+              };
+              store
+                .updateClinicProfile(getCookie('user_id'), payload)
+                .then(() => {
+                  setAlertboxActive(true);
+                  setAlertData({
+                    type: 'success',
+                    title: 'Kullanıcı bilgileri başarıyla kaydedildi',
+                  });
+                });
+            }}
+          >
+            Kaydet
+          </button>
         </div>
       </div>
     );
@@ -232,15 +296,18 @@ export default function Profile() {
   function galleryTab() {
     return (
       <>
-        <div className="settingsWrapper" style={{ marginBottom: '-500px' }}>
+        <div className="settingsWrapper">
           <div className="row">
-            <div style={{ width: '500px', height: '500px' }}>
-              <GalleryDropZone />
-              <Carousel>
+            <div className="galleryWrapper">
+              <Carousel className="galleryCarousel" showStatus={false}>
                 {carouselImages.map((carouselImage) => {
                   return (
                     <>
-                      <button
+                      <GalleryDropZone />
+                      <div className="deleteGalleryImage">
+                        <img src={deleteImage} alt="" />
+                      </div>
+                      {/* <button
                         onClick={async () => {
                           await store.deleteCarouselImage(
                             getCookie('user_id'),
@@ -252,7 +319,7 @@ export default function Profile() {
                         className="btn btn-primary"
                       >
                         Sil
-                      </button>
+                      </button> */}
                       <div key={carouselImage._id}>
                         <img src={carouselImage.link} />
                       </div>
@@ -270,7 +337,7 @@ export default function Profile() {
   return (
     <>
       {loading ? (
-        <Loading noBackground fullscreen />
+        <Loading innerScreen />
       ) : (
         <div className={'ProfileContainer'}>
           <div className={'profileCard'}>
@@ -308,7 +375,7 @@ export default function Profile() {
                     selectedTab === 1 ? 'profile__tabs__selected' : ''
                   }`}
                 >
-                  Hakkimizda
+                  Hakkımızda
                 </div>
                 <div
                   onClick={() => setSelectedTab(2)}
@@ -316,7 +383,7 @@ export default function Profile() {
                     selectedTab === 2 ? 'profile__tabs__selected' : ''
                   }`}
                 >
-                  Gallery
+                  Galeri
                 </div>
               </>
             )}
@@ -391,15 +458,15 @@ const uploadGalleryImage = async (url, link) => {
 };
 
 function Dropzonesss() {
-  const { getInputProps, open } = useDropzone({
+  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
     // Disable click and keydown behavior
     noClick: true,
     noKeyboard: true,
   });
 
-  // const files = acceptedFiles.map((file) => {
-  //   getProfileUploadLink(file);
-  // });
+  const files = acceptedFiles.map((file) => {
+    getProfileUploadLink(file);
+  });
 
   return (
     <div className="profile__profileCard__editIcon__2" onClick={open}>
@@ -410,17 +477,20 @@ function Dropzonesss() {
 }
 
 function GalleryDropZone() {
-  const { getRootProps, getInputProps, open } = useDropzone({
+  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
     // Disable click and keydown behavior
     noClick: true,
     noKeyboard: true,
   });
 
+  const files = acceptedFiles.map((file) => {
+    getGalleryUploadLink(file);
+  });
+
   return (
-    <div {...getRootProps()} onClick={open}>
+    <div className="addGallerImage" {...getRootProps()} onClick={open}>
       <input {...getInputProps()} />
-      <p>Drop the files here ...</p> :
-      <p>Drag drop some files here, or click to select files</p>
+      <img src={editIcon} alt="" />
     </div>
   );
 }
