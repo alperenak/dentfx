@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^12.1.10",
     "apexcharts": "^3.24.0",
     "axios": "^0.19.2",
+    "babel-eslint": "^10.1.0",
     "bootstrap": "^4.6.0",
     "css-loader": "^3.6.0",
     "draft-convert": "^2.1.10",
