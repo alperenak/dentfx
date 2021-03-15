@@ -1,9 +1,13 @@
+.getPaddingMargin {
+  margin: 20px 0;
+}
 .Profile {
   width: 100%;
   & .GenerallyTitle {
     font-weight: bold;
     color: #061b52;
   }
+
   & .patientProfileCard {
     position: relative;
     width: 100%;
@@ -70,14 +74,18 @@
   }
 
   & .paymentTreatmentTableWrapper {
-    margin-right: 2rem;
+    width: 100%;
     & .tableHeader {
       margin: 3rem 0rem 1rem 0rem;
     }
+    padding: 1rem;
+    margin-right: 0px !important;
   }
 
   & .paymentPaidTreatmentTableWrapper {
     border-top: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    width: 100%;
     margin-top: 3rem;
     & .tableHeader {
       margin: 3rem 0rem 1rem 0rem;
@@ -98,8 +106,10 @@
   }
 
   & .patientNotesWrapper {
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-    margin-top: 3rem;
+    border-top: none !important;
+    padding: 0.5rem 0;
+    width: 100% !important;
+    margin-top: 0px !important;
     & .tableHeader {
       margin: 3rem 0rem 1rem 0rem;
     }
@@ -160,7 +170,7 @@
   flex-direction: column;
 
   & .item {
-    margin: 15px 0;
+    margin: 20px 0 !important;
     display: flex;
     flex-direction: column;
     & div {

@@ -7,7 +7,6 @@ import { getCookie } from '../../utils/cookie';
 /*** Styles ***/
 import './patientdetail.scss';
 import PaymentIcon from '../../icons/credit-cards-payment.svg';
-import NotesIcon from '../../icons/writing.svg';
 
 /*** Components ***/
 import DatePicker from '../../components/DatePicker/DatePicker';
@@ -48,6 +47,9 @@ import tooth32 from '../../assets/images/tooth/tooth-32.jpg';
 import ContractIMG from '../../assets/icons/contract.svg';
 import ProformaIMG from '../../assets/icons/proforma.svg';
 import Modal from '../../components/Modal/modal';
+import Loading from '../../components/Loading';
+import Dropdown from '../../components/Dropdown/dropdown';
+import { findById } from '../../helpers/usefulFunc';
 
 class PatientDetail extends Component {
   constructor() {
@@ -57,10 +59,17 @@ class PatientDetail extends Component {
       selectedTab: 0,
       modalShow: false,
       selectedPlan: 'Planlama 0',
+      selectedPlanId: 'Planlama 0',
+      plans: [
+        { value: 'Planlama 0', id: '1' },
+        { value: 'Planlama 1', id: '2' },
+        { value: 'Tedavi', id: '3' },
+      ],
       selectedTooth: '',
       treatmentPlan0Data: null,
       treatmentPlan1Data: null,
       treatmentData: null,
+      loading: false,
       treatmentList: null,
       paidTreatmentData: null,
       notesForPatientData: null,
@@ -109,7 +118,7 @@ class PatientDetail extends Component {
             width: 150,
           },
           {
-            label: 'Dis',
+            label: 'Diş',
             field: 'dis',
             sort: 'asc',
             width: 100,
@@ -121,7 +130,7 @@ class PatientDetail extends Component {
             width: 150,
           },
           {
-            label: 'Dis Hekimi',
+            label: 'Diş Hekimi',
             field: 'dis_hekimi',
             sort: 'asc',
             width: 70,
@@ -472,12 +481,19 @@ class PatientDetail extends Component {
           },
         ],
         rows: this.state.patient.notes.map((note) => {
+          let dt = new Date(note?.created);
           return {
-            tarih: note.created.substr(1, 10),
+            tarih: `${
+              String(dt.getDate()).length === 1
+                ? `0${dt.getDate()}`
+                : dt.getDate()
+            }.${String(dt.getMonth() + 1).length === 1 ? 0 : ''}${
+              dt.getMonth() + 1
+            }.${dt.getFullYear()}`,
             not: note.body,
             button_düzenle: (
               <button type="button" className="btn btn-secondary">
-                Duzenle
+                Düzenle
               </button>
             ),
             button_sil: (
@@ -485,12 +501,17 @@ class PatientDetail extends Component {
                 type="button"
                 className="btn btn-danger"
                 onClick={async () => {
-                  await store.clinicDeleteNote(
-                    getCookie('user_id'),
-                    this.state.patient.id,
-                    note._id
-                  );
-                  window.location.reload();
+                  this.setState({ loading: true });
+                  await store
+                    .clinicDeleteNote(
+                      getCookie('user_id'),
+                      this.state.patient.id,
+                      note._id
+                    )
+                    .then(() => {
+                      this.setState({ loading: false });
+                      this.componentDidMount();
+                    });
                 }}
               >
                 Sil
@@ -547,8 +568,15 @@ class PatientDetail extends Component {
           },
         ],
         rows: this.state.patient.treatments.map((treatment) => {
+          let dt = new Date(treatment.createdAt);
           return {
-            tarih: treatment.createdAt,
+            tarih: `${
+              String(dt.getDate()).length === 1
+                ? `0${dt.getDate()}`
+                : dt.getDate()
+            }.${String(dt.getMonth() + 1).length === 1 ? 0 : ''}${
+              dt.getMonth() + 1
+            }.${dt.getFullYear()}`,
             dis: treatment.teeth,
             tedavi: treatment.treatment,
             dis_hekimi: `Dr. ${treatment.Dentist.name} ${treatment.Dentist.surname}`,
@@ -614,12 +642,13 @@ class PatientDetail extends Component {
     // let clinicResponse = await store.getClinicDetail({
     //   clinicId: getCookie('user_id'),
     // });
+    this.setState({ loading: true });
     let { match } = this.props;
     let clinicId = getCookie('user_id');
     let patientId = match.params.id;
     let tariffs = await store.getClinicTariffs({ clinicId });
     let clinic = await store.getClinicDetail({ clinicId });
-
+    console.log(tariffs);
     this.setState({ tariffs: tariffs.data });
     this.setState({ clinicians: clinic.data.Dentist });
 
@@ -627,7 +656,9 @@ class PatientDetail extends Component {
     let payments = await store.getPatientPayments(clinicId, patientId);
 
     console.log(payments);
-
+    if (patientDetails.data) {
+      this.setState({ loading: false });
+    }
     // ! about patient details
     let pt = patientDetails.data;
     this.setState({
@@ -942,103 +973,33 @@ class PatientDetail extends Component {
 
   renderTreatmentPlanningTab = () => {
     return (
-      <div>
-        <div className={'createAppointment'}>
-          <div className="dropdown">
-            <a
-              className="btn btn-secondary dropdown-toggle plansDropdown"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              {this.state.selectedPlan}
-            </a>
-
-            <div
-              className="dropdown-menu myDropdownMenu"
-              aria-labelledby="dropdownMenuLink"
-            >
-              {this.state.selectedPlan === 'Planlama 0' ? (
-                <a
-                  className="dropdown-item disabled"
-                  href="#"
-                  onClick={() => {
-                    this.setState({ selectedPlan: 'Planlama 0' });
-                  }}
-                  aria-disabled="true"
-                >
-                  Planlama 0
-                </a>
-              ) : (
-                <a
-                  className="dropdown-item"
-                  href="#"
-                  onClick={() => {
-                    this.setState({ selectedPlan: 'Planlama 0' });
-                  }}
-                >
-                  Planlama 0
-                </a>
-              )}
-
-              {this.state.selectedPlan === 'Planlama 1' ? (
-                <a
-                  className="dropdown-item disabled"
-                  href="#"
-                  onClick={() => {
-                    this.setState({ selectedPlan: 'Planlama 1' });
-                  }}
-                  aria-disabled="true"
-                >
-                  Planlama 1
-                </a>
-              ) : (
-                <a
-                  className="dropdown-item"
-                  href="#"
-                  onClick={() => {
-                    this.setState({ selectedPlan: 'Planlama 1' });
-                  }}
-                >
-                  Planlama 1
-                </a>
-              )}
-
-              {this.state.selectedPlan === 'Tedavi' ? (
-                <a
-                  className="dropdown-item disabled"
-                  href="#"
-                  onClick={() => {
-                    this.setState({ selectedPlan: 'Tedavi' });
-                  }}
-                  aria-disabled="true"
-                >
-                  Tedavi
-                </a>
-              ) : (
-                <a
-                  className="dropdown-item"
-                  href="#"
-                  onClick={() => {
-                    this.setState({ selectedPlan: 'Tedavi' });
-                  }}
-                >
-                  Tedavi
-                </a>
-              )}
-            </div>
+      <div className="patientInfoPart getPaddingMargin  d-flex justify-content-center align-items-center flex-column">
+        <div className="w-100 d-flex justify-content-between align-items-center">
+          <div className="GenerallyTitle">Tedavi ve Planlama</div>
+          <div
+            style={{ width: 200 }}
+            className="d-flex align-items-center justify-content-center"
+          >
+            <Dropdown
+              withId
+              type="selectable"
+              value={this.state.selectedPlanId}
+              onChange={(e) =>
+                this.setState({
+                  selectedPlanId: e,
+                  selectedPlan: findById(e, this.state.plans),
+                })
+              }
+              selectableData={this.state.plans}
+            />
           </div>
         </div>
-
         {this.state.selectedPlan === 'Planlama 0' && (
-          <div>
+          <div className="w-100">
             {this.renderTeeth()}
             {this.renderNewTreatmentButton(true)}
             {this.renderTreatmentPlan0Table()}
-            {this.renderUnderTablebuttons()}
+            {/* {this.renderUnderTablebuttons()} */}
           </div>
         )}
         {this.state.selectedPlan === 'Planlama 1' && (
@@ -1061,10 +1022,10 @@ class PatientDetail extends Component {
 
   renderPaymentTab = () => {
     return (
-      <div>
-        <div className={'row'}>
+      <div className="patientInfoPart getPaddingMargin">
+        <div className={'row d-flex justify-content-center align-items-center'}>
           <div className={'paymentTreatmentTableWrapper'}>
-            <h2 className={'tableHeader'}>Tedaviler</h2>
+            <div className={'GenerallyTitle mb-3'}>Tedaviler</div>
             {this.renderTreatmentTable()}
           </div>
           <div className={'paymentPaidTreatmentTableWrapper'}>
@@ -1226,21 +1187,26 @@ class PatientDetail extends Component {
                       type="button"
                       className="btn btn-primary"
                       onClick={async () => {
-                        await store.clinicAddPayment(
-                          getCookie('user_id'),
-                          this.state.patient.id,
-                          {
-                            paymentTime: this.getFormattedDate(
-                              this.state.modalPaymentDate
-                            ),
-                            paymentType: this.state.modalPaymentType,
-                            amount: this.state.modalPrice,
-                            currency: this.state.modalCurrency,
-                            description: this.state.modalDescription,
-                            Dentist: this.state.modalDentist,
-                          }
-                        );
-                        window.location.reload();
+                        this.setState({ loading: true });
+                        await store
+                          .clinicAddPayment(
+                            getCookie('user_id'),
+                            this.state.patient.id,
+                            {
+                              paymentTime: this.getFormattedDate(
+                                this.state.modalPaymentDate
+                              ),
+                              paymentType: this.state.modalPaymentType,
+                              amount: this.state.modalPrice,
+                              currency: this.state.modalCurrency,
+                              description: this.state.modalDescription,
+                              Dentist: this.state.modalDentist,
+                            }
+                          )
+                          .then(() => {
+                            this.setState({ loading: false });
+                            this.componentDidMount();
+                          });
                       }}
                     >
                       Ödeme Ekle
@@ -1250,7 +1216,7 @@ class PatientDetail extends Component {
               </div>
             </div>
 
-            <h2 className={'tableHeader'}>Alınan Paralar</h2>
+            <div className={'GenerallyTitle mb-3'}>Alınan Paralar</div>
             {this.renderPaidtreatmentsTable()}
           </div>
         </div>
@@ -1260,17 +1226,17 @@ class PatientDetail extends Component {
 
   renderNotesTab = () => {
     return (
-      <div>
+      <div className="patientInfoPart getPaddingMargin d-flex justify-content-center">
         <div className={'patientNotesWrapper'}>
           {/* ADD payment Button */}
-          <a
+          {/* <a
             type="button"
             data-toggle="modal"
             data-target="#addUserModal"
             className={'addNotes'}
           >
             Not Ekle<img src={NotesIcon}></img>
-          </a>
+          </a> */}
 
           <div
             className="modal fade"
@@ -1323,13 +1289,19 @@ class PatientDetail extends Component {
                   <button
                     type="button"
                     className="btn btn-primary"
+                    data-dismiss="modal"
                     onClick={async () => {
-                      await store.clinicAddNote(
-                        getCookie('user_id'),
-                        this.state.patient.id,
-                        { body: this.state.newNote }
-                      );
-                      window.location.reload();
+                      this.setState({ loading: true });
+                      await store
+                        .clinicAddNote(
+                          getCookie('user_id'),
+                          this.state.patient.id,
+                          { body: this.state.newNote }
+                        )
+                        .then(() => {
+                          this.setState({ loading: false });
+                          this.componentDidMount();
+                        });
                     }}
                   >
                     Not Ekle
@@ -1339,7 +1311,18 @@ class PatientDetail extends Component {
             </div>
           </div>
 
-          <h2 className={'tableHeader'}>Notlar</h2>
+          <div className="w-100 d-flex justify-content-between align-items-center mb-3">
+            <div className="GenerallyTitle">Notlar</div>
+            <div>
+              <button
+                className="btn btn-primary"
+                data-toggle="modal"
+                data-target="#addUserModal"
+              >
+                Not Ekle
+              </button>
+            </div>
+          </div>
           {this.renderPatientsNotes()}
         </div>
       </div>
@@ -1555,8 +1538,8 @@ class PatientDetail extends Component {
         {this.state.treatmentPlan0Data !== null ? (
           <MDBDataTable
             className={'myTableClass'}
-            striped
-            bordered
+            noRecordsFoundLabel="Kayıt bulunamadı"
+            noBottomColumns
             small
             searchLabel={'Ara'}
             entriesLabel={'Girdileri Göster'}
@@ -1575,8 +1558,8 @@ class PatientDetail extends Component {
       <div>
         {this.state.treatmentPlan1Data !== null ? (
           <MDBDataTable
-            striped
-            bordered
+            noRecordsFoundLabel="Kayıt bulunamadı"
+            noBottomColumns
             small
             searchLabel={'Ara'}
             entriesLabel={'Girdileri Göster'}
@@ -1594,10 +1577,10 @@ class PatientDetail extends Component {
       <div>
         {this.state.treatmentData !== null ? (
           <MDBDataTable
-            striped
             scrollY
             maxHeight="50vh"
-            bordered
+            noRecordsFoundLabel="Kayıt bulunamadı"
+            noBottomColumns
             small
             searchLabel={'Ara'}
             entriesLabel={'Girdileri Göster'}
@@ -1650,12 +1633,12 @@ class PatientDetail extends Component {
             </div>
             {this.state.tarifList !== null ? (
               <MDBDataTable
-                striped
+                noRecordsFoundLabel="Kayıt bulunamadı"
                 paging={false}
                 scrollY
                 maxHeight="50vh"
-                bordered
                 small
+                noBottomColumns
                 searchLabel={'Ara'}
                 entriesLabel={'Girdileri Göster'}
                 paginationLabel={['Önceki', 'Sonraki']}
@@ -1678,11 +1661,11 @@ class PatientDetail extends Component {
       <div>
         {this.state.paidTreatmentList !== null ? (
           <MDBDataTable
-            striped
             scrollY
+            noRecordsFoundLabel="Kayıt bulunamadı"
             maxHeight="50vh"
-            bordered
             small
+            noBottomColumns
             searchLabel={'Ara'}
             entriesLabel={'Girdileri Göster'}
             paginationLabel={['Önceki', 'Sonraki']}
@@ -1701,12 +1684,12 @@ class PatientDetail extends Component {
       <div>
         {this.state.notesForPatientData !== null ? (
           <MDBDataTable
-            striped
             scrollY
             maxHeight="50vh"
-            bordered
+            noRecordsFoundLabel="Kayıt bulunamadı"
             small
             searchLabel={'Ara'}
+            noBottomColumns
             entriesLabel={'Girdileri Göster'}
             paginationLabel={['Önceki', 'Sonraki']}
             info={false}
@@ -1800,51 +1783,63 @@ class PatientDetail extends Component {
   };
 
   render() {
-    let { patient, selectedTab } = this.state;
+    let { patient, selectedTab, loading } = this.state;
 
     return (
-      <div className={'Profile'}>
-        <div className={'patientProfileCard'}>
-          <img className={'profileImage'} src={patient?.avatar} alt="avatar" />
-        </div>
+      <>
+        {loading ? (
+          <Loading innerScreen />
+        ) : (
+          <div className={'Profile'}>
+            <div className={'patientProfileCard'}>
+              <img
+                className={'profileImage'}
+                src={patient?.avatar}
+                alt="avatar"
+              />
+            </div>
 
-        <div className={'profileName'}>{patient?.name}</div>
-        <div className={'location'}>{patient?.email ? patient.email : ''}</div>
+            <div className={'profileName'}>{patient?.name}</div>
+            <div className={'location'}>
+              {patient?.email ? patient.email : ''}
+            </div>
 
-        <div className={'tabs'}>
-          <div
-            onClick={() => this.setSelectedTab(0)}
-            className={`${'tab'} ${selectedTab === 0 ? 'selected' : ''}`}
-          >
-            Hasta Bilgileri
-          </div>
-          <div
-            onClick={() => this.setSelectedTab(1)}
-            className={`${'tab'} ${selectedTab === 1 ? 'selected' : ''}`}
-          >
-            Tedavi ve Planlama
-          </div>
-          <div
-            onClick={() => this.setSelectedTab(2)}
-            className={`${'tab'} ${selectedTab === 2 ? 'selected' : ''}`}
-          >
-            Ödeme
-          </div>
-          <div
-            onClick={() => this.setSelectedTab(3)}
-            className={`${'tab'} ${selectedTab === 3 ? 'selected' : ''}`}
-          >
-            Not
-          </div>
-        </div>
+            <div className={'tabs'}>
+              <div
+                onClick={() => this.setSelectedTab(0)}
+                className={`${'tab'} ${selectedTab === 0 ? 'selected' : ''}`}
+              >
+                Hasta Bilgileri
+              </div>
+              <div
+                onClick={() => this.setSelectedTab(1)}
+                className={`${'tab'} ${selectedTab === 1 ? 'selected' : ''}`}
+              >
+                Tedavi ve Planlama
+              </div>
+              <div
+                onClick={() => this.setSelectedTab(2)}
+                className={`${'tab'} ${selectedTab === 2 ? 'selected' : ''}`}
+              >
+                Ödeme
+              </div>
+              <div
+                onClick={() => this.setSelectedTab(3)}
+                className={`${'tab'} ${selectedTab === 3 ? 'selected' : ''}`}
+              >
+                Not
+              </div>
+            </div>
 
-        <div>
-          {selectedTab === 0 && this.renderPatientInfoTab()}
-          {selectedTab === 1 && this.renderTreatmentPlanningTab()}
-          {selectedTab === 2 && this.renderPaymentTab()}
-          {selectedTab === 3 && this.renderNotesTab()}
-        </div>
-      </div>
+            <div>
+              {selectedTab === 0 && this.renderPatientInfoTab()}
+              {selectedTab === 1 && this.renderTreatmentPlanningTab()}
+              {selectedTab === 2 && this.renderPaymentTab()}
+              {selectedTab === 3 && this.renderNotesTab()}
+            </div>
+          </div>
+        )}
+      </>
     );
   }
 
