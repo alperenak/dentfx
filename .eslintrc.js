@@ -13,6 +13,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
+  parser: 'babel-eslint',
   rules: {
     quotes: ['error', 'single'],
     'no-console': ['error', { allow: ['warn', 'error'] }],

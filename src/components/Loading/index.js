@@ -1,7 +1,7 @@
 import React from 'react';
 import './loading.scss';
 import Logo from '../../icons/Logo';
-import LoadingIcon from '../../icons/loading.svg';
+import LoadingIcon from '../../icons/Loading.svg';
 
 export default function Loading({ noBackground, fullscreen, innerScreen }) {
   return (
