@@ -1,6 +1,12 @@
 .list-mobile {
   display: none;
 }
+
+html,
+body,
+#root {
+  overflow: hidden !important;
+}
 .listWrapper {
   padding: 20px 0;
 }

@@ -8,22 +8,22 @@ import googleplay from '../../../assets/images/googleplay.jpeg';
 const LandingHeader = () => {
   return (
     <>
-      <div className='header'>
-        <div className='header__logoContainer'>
-          <Logo className='header__logoContainer__logo' />
+      <div className="header">
+        <div className="header__logoContainer">
+          <Logo className="header__logoContainer__logo" />
         </div>
-        <div className='header__links'>
+        <div className="header__links">
           <Link
-            className='header__buttonContainer__menu'
+            className="header__buttonContainer__menu"
             to={'/login'}
             style={{ textDecoration: 'none' }}
           >
-            Giris yap
+            Giriş Yap
           </Link>
-          <div className='header__rectangle'>
+          <div className="header__rectangle">
             <img src={appstore} />
           </div>
-          <div className='header__rectangle'>
+          <div className="header__rectangle">
             <img src={googleplay} />
           </div>
         </div>

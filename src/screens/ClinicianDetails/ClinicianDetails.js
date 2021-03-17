@@ -76,7 +76,7 @@ const ClinicianDetails = ({ match }) => {
                 />
               </div>
               <div className="col-md-4 mb-3">
-                <label htmlFor="validationDefault02">Telefon Numarasi</label>
+                <label htmlFor="validationDefault02">Telefon Numarası</label>
                 <input
                   type="text"
                   className="form-control"
@@ -108,7 +108,7 @@ const ClinicianDetails = ({ match }) => {
           </div>
         </div>
       </form>
-      <div className="treatmentTypeTable">
+      <div className="treatmentTypeTable profileInfoPart">
         <MDBDataTable
           striped
           bordered
@@ -121,9 +121,12 @@ const ClinicianDetails = ({ match }) => {
       </div>
 
       <h2>
-        {dentist?.name} {dentist?.surname} Hakkinda
+        {dentist?.name} {dentist?.surname} Hakkında
       </h2>
-      <div style={{ paddingBottom: '5rem' }} className="settingsWrapper">
+      <div
+        style={{ paddingBottom: '5rem' }}
+        className="settingsWrapper profileInfoPart"
+      >
         <div className="row">
           <div>
             <Editor

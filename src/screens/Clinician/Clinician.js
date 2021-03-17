@@ -390,9 +390,8 @@ class Clinician extends Component {
         {this.state.patientData !== null ? (
           <div className={'cliniciansTable'}>
             <MDBDataTable
-              striped
-              bordered
               small
+              noBottomColumns
               data={this.state.patientData}
               searchLabel={'Ara'}
               entriesLabel={'Girdileri Göster'}
