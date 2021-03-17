@@ -238,9 +238,11 @@ class ACalendar extends Component {
         // let dateArr = appointment.date.split('.');
         // let dateArsr = appointment.startTime.split('.');
         // let dateArrs = appointment.startTime.split('.');
-        let [day, month, year] = appointment.date.split('.');
-        let [startHour, startMinutes] = appointment.startTime.split(':');
-        let [endHour, endMinutes] = appointment.endTime.split(':');
+        let [day, month, year] = appointment?.date
+          ? appointment.date.split('.')
+          : '01.01.1997';
+        let [startHour, startMinutes] = appointment?.startTime.split(':');
+        let [endHour, endMinutes] = appointment?.endTime.split(':');
         // eslint-disable-next-line no-console
         this.setState({
           appointmentDentist: `${appointment.Dentist?.name} ${appointment.Dentist?.surname}`,

@@ -7,12 +7,14 @@ import DatePicker from '../../components/DatePicker/DatePicker';
 
 /*** Styles ***/
 import './patients.scss';
-import AddUserIcon from '../../icons/add-user.svg';
+// import AddUserIcon from '../../icons/add-user.svg';
 
 /*** Utils ***/
 import store from '../../store';
 import { getCookie } from '../../utils/cookie';
 import { Link } from 'react-router-dom';
+import Loading from '../../components/Loading';
+import { Col, Form } from 'react-bootstrap';
 
 class Patients extends Component {
   constructor(props) {
@@ -34,6 +36,7 @@ class Patients extends Component {
       patient_city: '',
       patient_country: '',
       patient_address: '',
+      formValidate: false,
     };
   }
 
@@ -104,28 +107,32 @@ class Patients extends Component {
       },
     });
   };
-
+  handleSubmit() {}
   renderStep1 = () => {
     return (
       <div className="stepWrapper">
-        <form className="needs-validation" noValidate>
-          <div className="form-row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="validationDefault01">İsim</label>
-              <input
+        <Form
+          noValidate
+          validated={this.state.formValidate}
+          onSubmit={this.handleSubmit}
+        >
+          <Form.Row>
+            <Form.Group as={Col} md="6" controlId="validationCustom01">
+              <Form.Label htmlFor="validaationDefault01">First name</Form.Label>
+              <Form.Control
                 type="text"
+                required
                 className="form-control"
                 id="validationDefault01"
                 placeholder="Hasan"
-                required
                 onChange={(event) =>
                   this.setState({ patient_name: event.target.value })
                 }
               />
-            </div>
-            <div className="col-md-6 mb-3">
-              <label htmlFor="validationDefault02">Soyisim</label>
-              <input
+            </Form.Group>
+            <Form.Group as={Col} md="6" controlId="validationCustom02">
+              <Form.Label htmlFor="validationDefault02">First name</Form.Label>
+              <Form.Control
                 type="text"
                 className="form-control"
                 id="validationDefault02"
@@ -135,12 +142,12 @@ class Patients extends Component {
                   this.setState({ patient_surname: event.target.value })
                 }
               />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="inputTC">TC Kimlik No</label>
-              <input
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} md="6" controlId="inputTC">
+              <Form.Label htmlFor="inputTC">TC Kimlik No</Form.Label>
+              <Form.Control
                 type="text"
                 className="form-control"
                 id="inputTC"
@@ -149,12 +156,13 @@ class Patients extends Component {
                   this.setState({ patient_tcNumber: event.target.value })
                 }
               />
-            </div>
-            <div className="col-md-6 mb-3">
-              <label htmlFor="validationDefault04">Currency</label>
-              <select
+            </Form.Group>
+            <Form.Group as={Col} md="6" controlId="validationDefault04">
+              <Form.Label htmlFor="validationDefault04">Currency</Form.Label>
+              <Form.Control
                 className="custom-select"
                 id="validationDefault04"
+                as="select"
                 required
                 onChange={(event) =>
                   this.setState({ patient_currency: event.target.value })
@@ -167,11 +175,11 @@ class Patients extends Component {
                 <option>USD</option>
                 <option>EUR</option>
                 <option>GBP</option>
-              </select>
-            </div>
-          </div>
+              </Form.Control>
+            </Form.Group>
+          </Form.Row>
           <div className={'form-row'} style={{ marginBottom: '0' }}>
-            <div className="col-md-4 mb-3">
+            <div className="col-md-6 mb-3">
               <label htmlFor="validationDefault04">Uyruk</label>
               <select
                 className="custom-select"
@@ -188,7 +196,7 @@ class Patients extends Component {
                 <option>Yabancı</option>
               </select>
             </div>
-            <div className="col-md-8 mb-3">
+            <div className="col-md-6 mb-3">
               <label htmlFor="dentistName">Diş Hekimi</label>
               <select
                 className="custom-select"
@@ -211,7 +219,7 @@ class Patients extends Component {
             </div>
           </div>
           <div className="form-row" style={{ marginTop: '0' }}>
-            <div className="col-md-16 mb-3">
+            <div className="col-md-6 mb-3">
               <label htmlFor="validationDefault01">Doğum Tarihi</label>
               <DatePicker
                 onChange={(event) => {
@@ -241,7 +249,7 @@ class Patients extends Component {
               </select>
             </div>
           </div>
-        </form>
+        </Form>
       </div>
     );
   };
@@ -249,30 +257,29 @@ class Patients extends Component {
   renderStep2 = () => {
     return (
       <div className="stepWrapper">
-        <form className="was-validated">
+        <form className="needs-validation">
           <div className="form-row">
             <div className="col-md-6 mb-3">
               <label htmlFor="validationDefault04">Şehir</label>
-              <select
+              {/* <select
                 className="custom-select"
                 id="validationDefault04"
                 required
                 onChange={(event) =>
                   this.setState({ patient_city: event.target.value })
                 }
-              >
-                <option selected disabled value="">
-                  Seçiniz...
-                </option>
-                <option>İstanbul</option>
-                <option>Ankara</option>
-                <option>Eskişehir</option>
-                <option>Çanakkale</option>
-              </select>
+              > */}
+              <input
+                type="email"
+                className="form-control"
+                id="validationDefault04"
+                placeholder="hasan@gmail.com"
+                value={this.state.patient_city}
+                onChange={(event) =>
+                  this.setState({ patient_city: event.target.value })
+                }
+              />
             </div>
-          </div>
-
-          <div className="form-row">
             <div className="col-md-6 mb-3">
               <label htmlFor="validationDefault04">Ülke</label>
               <select
@@ -406,14 +413,14 @@ class Patients extends Component {
 
     return (
       <div>
-        <a
+        {/* <a
           type="button"
           data-toggle="modal"
           data-target="#addUserModal"
           className={'addUser'}
         >
           <img src={AddUserIcon}></img>
-        </a>
+        </a> */}
 
         <div
           className="modal fade"
@@ -472,23 +479,34 @@ class Patients extends Component {
             </div>
           </div>
         </div>
-
-        <div className={'patientTable'}>
-          {this.state.patientData !== null ? (
-            <MDBDataTable
-              small
-              data={this.state.patientData}
-              searchLabel={'Ara'}
-              entriesLabel={'Girdileri Göster'}
-              info={false}
-              noRecordsFoundLabel={'Sonuç Bulunamadı'}
-              paginationLabel={['Önceki', 'Sonraki']}
-              noBottomColumns={true}
-            />
-          ) : (
-            <p>YUKLENIYOR</p>
-          )}
-        </div>
+        {this.state.patientData !== null ? (
+          <>
+            <div className="w-100 d-flex justify-content-between align-items-center">
+              <div className="GenerallyTitle">Hastalar</div>
+              <button
+                className="btn btn-primary"
+                data-toggle="modal"
+                data-target="#addUserModal"
+              >
+                Hasta Ekle
+              </button>
+            </div>
+            <div className={'patientTable'}>
+              <MDBDataTable
+                small
+                data={this.state.patientData}
+                searchLabel={'Ara'}
+                entriesLabel={'Girdileri Göster'}
+                info={false}
+                noRecordsFoundLabel={'Sonuç Bulunamadı'}
+                paginationLabel={['Önceki', 'Sonraki']}
+                noBottomColumns={true}
+              />
+            </div>
+          </>
+        ) : (
+          <Loading innerScreen />
+        )}
       </div>
     );
   }

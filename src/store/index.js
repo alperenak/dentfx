@@ -259,7 +259,47 @@ export default {
       errorMessageBuilder
     );
   },
+  async addTreatmentToPlan(clinicID, patientId, toWhichPlan, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientId}/plan?plan=${toWhichPlan}`;
+    let payload = { ...props };
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+  async addTreatmentToTreatmentList(clinicID, patientId, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientId}/treatment`;
+    let payload = { ...props };
 
+    return await http.makePostRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+  async deleteTreatmentFromPlanList(clinicID, patientId, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientId}/treatment`;
+    let payload = { ...props };
+
+    return await http.makeDeleteRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
   async deleteCarouselImage(clinicID, itemID) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';

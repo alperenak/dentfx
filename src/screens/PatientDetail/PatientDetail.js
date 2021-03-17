@@ -70,7 +70,7 @@ class PatientDetail extends Component {
       treatmentPlan1Data: null,
       treatmentData: null,
       loading: false,
-      treatmentList: null,
+      treatmentList: [],
       paidTreatmentData: null,
       notesForPatientData: null,
       tariffs: null,
@@ -85,11 +85,13 @@ class PatientDetail extends Component {
       modalDescription: null,
       modalDentist: null,
       newNote: null,
+      plansData: [],
 
       // ! about patient details
 
       patientName: '',
       patientId: '',
+      treatmentSelectedClinicianId: '',
       patientSurname: '',
       patientTCNumber: '',
       patientGender: '',
@@ -579,11 +581,34 @@ class PatientDetail extends Component {
             }.${dt.getFullYear()}`,
             dis: treatment.teeth,
             tedavi: treatment.treatment,
-            dis_hekimi: `Dr. ${treatment.Dentist.name} ${treatment.Dentist.surname}`,
+            dis_hekimi: `Dr. ${treatment.Dentist?.name} ${treatment.Dentist?.surname}`,
             toplam: treatment.price,
             para_birimi: treatment.currency,
             button2: (
-              <button type="button" className="btn btn-danger">
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => {
+                  let payload = {
+                    Dentist: {
+                      _id: '5ff0bbf36be7a7199cd79540',
+                      name: 'Ekrem',
+                      surname: 'Şanslı',
+                    },
+                    createdAt: '2021-01-24T00:42:22.771Z',
+                    _id: '600cc3270651744c12845552',
+                    teeth: 24,
+                    treatment: 'Diş İmplant',
+                    price: 1200,
+                    currency: 'TRY',
+                  };
+                  store.deleteTreatmentFromPlanList(
+                    getCookie('user_id'),
+                    this.state.patientId,
+                    payload
+                  );
+                }}
+              >
                 Sil
               </button>
             ),
@@ -628,7 +653,32 @@ class PatientDetail extends Component {
             price: treatment.price,
             currency: treatment.currency,
             button1: (
-              <button type="button" className="btn btn-success">
+              <button
+                onClick={() => {
+                  // eslint-disable-next-line no-unused-vars
+                  this.setState({ loading: true });
+                  let payload = {
+                    teeth: this.state.selectedTooth,
+                    treatment: treatment.treatment,
+                    price: treatment.price,
+                    currency: treatment.currency,
+                    Dentist: this.state.treatmentSelectedClinicianId,
+                  };
+                  store
+                    .addTreatmentToPlan(
+                      getCookie('user_id'),
+                      this.state.patientId,
+                      findById(this.state.selectedPlanId, this.state.plans),
+                      payload
+                    )
+                    .then(() => {
+                      this.setState({ loading: false });
+                      this.componentDidMount();
+                    });
+                }}
+                type="button"
+                className="btn btn-success"
+              >
                 Ekle
               </button>
             ),
@@ -655,30 +705,36 @@ class PatientDetail extends Component {
     let patientDetails = await store.getPatientsDetail({ clinicId, patientId });
     let payments = await store.getPatientPayments(clinicId, patientId);
 
-    console.log(payments);
     if (patientDetails.data) {
-      this.setState({ loading: false });
+      // ! about patient details
+      let pt = patientDetails.data;
+      this.setState({
+        loading: false,
+        patientId: pt?.id,
+        patientName: pt?.name,
+        patientSurname: pt?.surname,
+        patientTCNumber: pt?.tcNumber,
+        patientGender: pt?.name,
+        patientNationality: pt?.nationality,
+        patientDentist: `${pt?.Dentist.name} ${pt?.Dentist.surname}`,
+        patientBirthday: pt?.birthDate,
+        patientDistrict: pt?.district,
+        patientCity: pt?.city,
+        patientCountry: pt?.country,
+        patientPostCode: pt?.postCode,
+        patientEmail: pt?.email,
+        patientNumberOne: pt?.phone,
+        patientNumberTwo: pt?.phone2,
+        treatmentSelectedClinicianId: clinic.data?.Dentist[0].id,
+        selectedPlanId: pt?.plans[0]._id,
+        patientAddress: pt?.address,
+        plans: [
+          ...pt?.plans.map((item) => ({ id: item._id, value: item.name })),
+          { id: '3', value: 'Tedavi' },
+        ],
+        plansData: pt.plans,
+      });
     }
-    // ! about patient details
-    let pt = patientDetails.data;
-    this.setState({
-      patientId: pt?.id,
-      patientName: pt?.name,
-      patientSurname: pt?.surname,
-      patientTCNumber: pt?.tcNumber,
-      patientGender: pt?.name,
-      patientNationality: pt?.nationality,
-      patientDentist: `${pt?.Dentist.name} ${pt?.Dentist.surname}`,
-      patientBirthday: pt?.birthDate,
-      patientDistrict: pt?.district,
-      patientCity: pt?.city,
-      patientCountry: pt?.country,
-      patientPostCode: pt?.postCode,
-      patientEmail: pt?.email,
-      patientNumberOne: pt?.phone,
-      patientNumberTwo: pt?.phone2,
-      patientAddress: pt?.address,
-    });
 
     this.setState({ patient: patientDetails.data });
     this.setState({ payments: payments.data });
@@ -971,6 +1027,166 @@ class PatientDetail extends Component {
     );
   };
 
+  fillPlanTable = (list) => {
+    return {
+      columns: [
+        {
+          label: 'Tarih',
+          field: 'tarih',
+          sort: 'asc',
+          width: 150,
+        },
+        {
+          label: 'Diş',
+          field: 'dis',
+          sort: 'asc',
+          width: 100,
+        },
+        {
+          label: 'Tedavi',
+          field: 'tedavi',
+          sort: 'asc',
+          width: 150,
+        },
+        {
+          label: 'Diş Hekimi',
+          field: 'dis_hekimi',
+          sort: 'asc',
+          width: 70,
+        },
+        {
+          label: 'Toplam',
+          field: 'toplam',
+          sort: 'asc',
+          width: 80,
+        },
+        {
+          label: 'TRY/USD',
+          field: 'para_birimi',
+          sort: 'asc',
+          width: 150,
+        },
+        {
+          label: 'T. Aktar',
+          field: 'button1',
+          sort: 'asc',
+          width: 150,
+        },
+        {
+          label: 'Sil',
+          field: 'button2',
+          sort: 'asc',
+          width: 150,
+        },
+      ],
+      rows: list.map((plan) => {
+        let dt = new Date(plan.createdAt);
+        return {
+          tarih: `${
+            String(dt.getDate()).length === 1
+              ? `0${dt.getDate()}`
+              : dt.getDate()
+          }.${String(dt.getMonth() + 1).length === 1 ? 0 : ''}${
+            dt.getMonth() + 1
+          }.${dt.getFullYear()}`,
+          dis: plan.teeth,
+          tedavi: plan.treatment,
+          dis_hekimi: plan.Dentist.name,
+          toplam: plan.price,
+          para_birimi: plan.currency,
+          button1: (
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={() => {
+                // eslint-disable-next-line no-unused-vars
+                this.setState({ loading: true });
+                let payload = {
+                  teeth: plan.teeth,
+                  treatment: plan.treatment,
+                  price: plan.price,
+                  currency: plan.currency,
+                  Dentist: plan.Dentist._id,
+                };
+                store
+                  .addTreatmentToTreatmentList(
+                    getCookie('user_id'),
+                    this.state.patientId,
+                    payload
+                  )
+                  .then(() => {
+                    this.setState({ loading: false });
+                    this.componentDidMount();
+                  });
+              }}
+            >
+              Aktar
+            </button>
+          ),
+          button2: (
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => {
+                this.setState({ loading: true });
+                let payload = {
+                  Dentist: plan.Dentist,
+                  createdAt: plan.created,
+                  _id: plan._id,
+                  teeth: plan.teeth,
+                  treatment: plan.treatment,
+                  price: plan.price,
+                  currency: plan.currency,
+                };
+                store
+                  .deleteTreatmentFromPlanList(
+                    getCookie('user_id'),
+                    this.state.patientId,
+                    payload
+                  )
+                  .then(() => {
+                    this.setState({ loading: false });
+                    this.componentDidMount();
+                  });
+              }}
+            >
+              Sil
+            </button>
+          ),
+          // button1: (
+          //   <button
+          //     onClick={() => {
+          //       // eslint-disable-next-line no-unused-vars
+          //       this.setState({ loading: true });
+          //       let payload = {
+          //         teeth: this.state.selectedTooth,
+          //         treatment: plan.treatment,
+          //         price: plan.price,
+          //         currency: plan.currency,
+          //         Dentist: this.state.treatmentSelectedClinicianId,
+          //       };
+          //       store
+          //         .addTreatmentToPlan(
+          //           getCookie('user_id'),
+          //           this.state.patientId,
+          //           findById(this.state.selectedPlanId, this.state.plans),
+          //           payload
+          //         )
+          //         .then(() => {
+          //           this.setState({ loading: false });
+          //         });
+          //     }}
+          //     type="button"
+          //     className="btn btn-success"
+          //   >
+          //     Ekle
+          //   </button>
+          // ),
+        };
+      }),
+    };
+  };
+
   renderTreatmentPlanningTab = () => {
     return (
       <div className="patientInfoPart getPaddingMargin  d-flex justify-content-center align-items-center flex-column">
@@ -984,22 +1200,34 @@ class PatientDetail extends Component {
               withId
               type="selectable"
               value={this.state.selectedPlanId}
-              onChange={(e) =>
+              onChange={(e) => {
                 this.setState({
                   selectedPlanId: e,
                   selectedPlan: findById(e, this.state.plans),
-                })
-              }
+                });
+                // this.fillPlanTable(
+                //   this.state.plansData.filter((item) => item._id === e)[0]
+                //     .treatments
+                // );
+              }}
               selectableData={this.state.plans}
             />
           </div>
         </div>
-        {this.state.selectedPlan === 'Planlama 0' && (
+        <div className="w-100">
+          {this.renderTeeth()}
+          {this.renderNewTreatmentButton(true)}
+          {this.state.selectedPlan === 'Tedavi'
+            ? this.renderTreatmentTable()
+            : this.renderPlanningTable()}
+
+          {/* {this.state.selectedPlanId?} */}
+        </div>
+        {/* {this.state.selectedPlan === 'Planlama 0' && (
           <div className="w-100">
             {this.renderTeeth()}
             {this.renderNewTreatmentButton(true)}
             {this.renderTreatmentPlan0Table()}
-            {/* {this.renderUnderTablebuttons()} */}
           </div>
         )}
         {this.state.selectedPlan === 'Planlama 1' && (
@@ -1015,7 +1243,7 @@ class PatientDetail extends Component {
             {this.renderNewTreatmentButton(false)}
             {this.renderTreatmentTable()}
           </div>
-        )}
+        )} */}
       </div>
     );
   };
@@ -1335,97 +1563,97 @@ class PatientDetail extends Component {
         <div className={'row teethrow'}>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth1' })}
+            onClick={() => this.setState({ selectedTooth: 1 })}
           >
             <img src={tooth1} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth2' })}
+            onClick={() => this.setState({ selectedTooth: 2 })}
           >
             <img src={tooth2} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth3' })}
+            onClick={() => this.setState({ selectedTooth: 3 })}
           >
             <img src={tooth3} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth4' })}
+            onClick={() => this.setState({ selectedTooth: 4 })}
           >
             <img src={tooth4} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth5' })}
+            onClick={() => this.setState({ selectedTooth: 5 })}
           >
             <img src={tooth5} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth6' })}
+            onClick={() => this.setState({ selectedTooth: 6 })}
           >
             <img src={tooth6} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth7' })}
+            onClick={() => this.setState({ selectedTooth: 7 })}
           >
             <img src={tooth7} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth8' })}
+            onClick={() => this.setState({ selectedTooth: 8 })}
           >
             <img src={tooth8} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth9' })}
+            onClick={() => this.setState({ selectedTooth: 9 })}
           >
             <img src={tooth9} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth10' })}
+            onClick={() => this.setState({ selectedTooth: 10 })}
           >
             <img src={tooth10} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth11' })}
+            onClick={() => this.setState({ selectedTooth: 11 })}
           >
             <img src={tooth11} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth12' })}
+            onClick={() => this.setState({ selectedTooth: 12 })}
           >
             <img src={tooth12} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth13' })}
+            onClick={() => this.setState({ selectedTooth: 13 })}
           >
             <img src={tooth13} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth14' })}
+            onClick={() => this.setState({ selectedTooth: 14 })}
           >
             <img src={tooth14} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth15' })}
+            onClick={() => this.setState({ selectedTooth: 15 })}
           >
             <img src={tooth15} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth16' })}
+            onClick={() => this.setState({ selectedTooth: 16 })}
           >
             <img src={tooth16} />
           </button>
@@ -1433,97 +1661,97 @@ class PatientDetail extends Component {
         <div className={'row teethrow'}>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth17' })}
+            onClick={() => this.setState({ selectedTooth: 17 })}
           >
             <img src={tooth17} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth18' })}
+            onClick={() => this.setState({ selectedTooth: 18 })}
           >
             <img src={tooth18} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth19' })}
+            onClick={() => this.setState({ selectedTooth: 19 })}
           >
             <img src={tooth19} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth20' })}
+            onClick={() => this.setState({ selectedTooth: 20 })}
           >
             <img src={tooth20} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth21' })}
+            onClick={() => this.setState({ selectedTooth: 21 })}
           >
             <img src={tooth21} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth22' })}
+            onClick={() => this.setState({ selectedTooth: 22 })}
           >
             <img src={tooth22} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth23' })}
+            onClick={() => this.setState({ selectedTooth: 23 })}
           >
             <img src={tooth23} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth24' })}
+            onClick={() => this.setState({ selectedTooth: 24 })}
           >
             <img src={tooth24} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth25' })}
+            onClick={() => this.setState({ selectedTooth: 25 })}
           >
             <img src={tooth25} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth26' })}
+            onClick={() => this.setState({ selectedTooth: 26 })}
           >
             <img src={tooth26} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth27' })}
+            onClick={() => this.setState({ selectedTooth: 27 })}
           >
             <img src={tooth27} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth28' })}
+            onClick={() => this.setState({ selectedTooth: 28 })}
           >
             <img src={tooth28} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth29' })}
+            onClick={() => this.setState({ selectedTooth: 29 })}
           >
             <img src={tooth29} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth30' })}
+            onClick={() => this.setState({ selectedTooth: 30 })}
           >
             <img src={tooth30} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth31' })}
+            onClick={() => this.setState({ selectedTooth: 31 })}
           >
             <img src={tooth31} />
           </button>
           <button
             className={'teethClass'}
-            onClick={() => this.setState({ selectedTooth: 'tooth32' })}
+            onClick={() => this.setState({ selectedTooth: 32 })}
           >
             <img src={tooth32} />
           </button>
@@ -1532,7 +1760,7 @@ class PatientDetail extends Component {
     );
   };
 
-  renderTreatmentPlan0Table = () => {
+  renderPlanningTable = () => {
     return (
       <div>
         {this.state.treatmentPlan0Data !== null ? (
@@ -1545,7 +1773,11 @@ class PatientDetail extends Component {
             entriesLabel={'Girdileri Göster'}
             info={false}
             paginationLabel={['Önceki', 'Sonraki']}
-            data={this.state.treatmentPlan0Data}
+            data={this.fillPlanTable(
+              this.state.plansData.filter(
+                (item) => item._id === this.state.selectedPlanId
+              )[0].treatments
+            )}
           />
         ) : (
           <p>YUKLENIYOR</p>
@@ -1600,36 +1832,71 @@ class PatientDetail extends Component {
       <div>
         {this.state.tariffs !== null ? (
           <>
-            <div className="col-md-6 mb-3">
-              <label htmlFor="tariffs">Tarifler</label>
-              <select
-                className="custom-select"
-                id="tarifName"
-                required
-                onChange={(event) => {
-                  this.setState({ selectedTarif: event.target.value });
-                  this.setState({
-                    tarifList: this.state.tariffs.filter(
-                      (tarif) => tarif._id === event.target.value
-                    ),
-                  });
-                  this.fillTreatmentList(
-                    this.state.tariffs.filter(
-                      (tarif) => tarif._id === event.target.value
-                    )[0]?.list
-                  );
-                }}
-              >
-                <option selected disabled value="">
-                  Seçiniz...
-                </option>
-                {this.state.tariffs !== null &&
-                  this.state.tariffs.map((tarif) => (
-                    <option key={tarif.id} value={tarif._id}>
-                      {tarif.tariff}
-                    </option>
-                  ))}
-              </select>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label htmlFor="tariffs">Tarifler</label>
+                <select
+                  className="custom-select"
+                  id="tarifName"
+                  required
+                  onChange={(event) => {
+                    this.setState({ selectedTarif: event.target.value });
+                    this.setState({
+                      tarifList: this.state.tariffs.filter(
+                        (tarif) => tarif._id === event.target.value
+                      ),
+                    });
+                    this.fillTreatmentList(
+                      this.state.tariffs.filter(
+                        (tarif) => tarif._id === event.target.value
+                      )[0]?.list
+                    );
+                  }}
+                >
+                  <option selected disabled value="">
+                    Seçiniz...
+                  </option>
+                  {this.state.tariffs !== null &&
+                    this.state.tariffs.map((tarif) => (
+                      <option key={tarif.id} value={tarif._id}>
+                        {tarif.tariff}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div className=" col-md-6 mb-3">
+                <label htmlFor="exampleFormControlSelect2">Diş Hekimi</label>
+                {/* <select
+                  className="form-control"
+                  reuired
+                  onChange={(event) =>
+                    this.setState({
+                      modalDentist: event.target.value,
+                    })
+                  }
+                >
+                  <option selected disabled value="">
+                    Seçiniz...
+                  </option>
+                  {this.state.clinicians !== null &&
+                    this.state.clinicians.map((clinician) => (
+                      <option key={clinician.id} value={clinician.id}>
+                        {clinician.name} {clinician.surname}
+                      </option>
+                    ))}
+                </select> */}
+                <Dropdown
+                  withId
+                  type="selectable"
+                  selectableData={this.state.clinicians.map((item) => ({
+                    id: item.id,
+                    value: `${item.name} ${item.surname}`,
+                  }))}
+                  onChange={(e) =>
+                    this.setState({ treatmentSelectedClinicianId: e })
+                  }
+                />
+              </div>
             </div>
             {this.state.tarifList !== null ? (
               <MDBDataTable
