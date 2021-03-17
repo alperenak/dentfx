@@ -286,7 +286,21 @@ export default {
       errorMessageBuilder
     );
   },
-  async deleteTreatmentFromPlanList(clinicID, patientId, props) {
+  async deleteTreatmentFromPlanList(clinicID, patientId, toWhichPlan, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientId}/plan?plan=${toWhichPlan}`;
+    let payload = { ...props };
+
+    return await http.makeDeleteRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      payload,
+      errorMessageBuilder
+    );
+  },
+  async deleteTreatmentFromTreatmentList(clinicID, patientId, props) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';
     let path = `/clinic/${clinicID}/patient/${patientId}/treatment`;
@@ -890,6 +904,19 @@ export default {
     );
   },
 
+  async clinicUpdateNote(clinicID, patientID, noteId, props) {
+    let baseUrl = config.baseUrl;
+    let tokenCookieName = 'token';
+    let path = `/clinic/${clinicID}/patient/${patientID}/note/${noteId}`;
+
+    return await http.makePutRequest(
+      path,
+      baseUrl,
+      tokenCookieName,
+      props,
+      errorMessageBuilder
+    );
+  },
   async clinicDeleteNote(clinicID, patientID, noteID) {
     let baseUrl = config.baseUrl;
     let tokenCookieName = 'token';

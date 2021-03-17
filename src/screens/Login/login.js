@@ -58,7 +58,7 @@ export default function Login() {
               </div>
             </div>
           </div>
-          <div className={'login__formContainer col-xl-6 col-lg-12'}>
+          <div className={'col-xl-6 col-lg-12 login__formContainer '}>
             <div className={'login__buttonContainer'}>
               <Link to={'/signup'} className={'login__buttonContainer__signUp'}>
                 Kaydol

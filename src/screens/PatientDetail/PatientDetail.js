@@ -70,6 +70,7 @@ class PatientDetail extends Component {
       treatmentPlan1Data: null,
       treatmentData: null,
       loading: false,
+      editableNote: {},
       treatmentList: [],
       paidTreatmentData: null,
       notesForPatientData: null,
@@ -92,6 +93,7 @@ class PatientDetail extends Component {
       patientName: '',
       patientId: '',
       treatmentSelectedClinicianId: '',
+      noteMode: 'add',
       patientSurname: '',
       patientTCNumber: '',
       patientGender: '',
@@ -494,7 +496,22 @@ class PatientDetail extends Component {
             }.${dt.getFullYear()}`,
             not: note.body,
             button_düzenle: (
-              <button type="button" className="btn btn-secondary">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-toggle="modal"
+                data-target="#addUserModal"
+                onClick={() => {
+                  this.setState({
+                    noteMode: 'edit',
+                    editableNote: {
+                      _id: note._id,
+                      created: note.created,
+                      body: note.body,
+                    },
+                  });
+                }}
+              >
                 Düzenle
               </button>
             ),
@@ -589,24 +606,26 @@ class PatientDetail extends Component {
                 type="button"
                 className="btn btn-danger"
                 onClick={() => {
+                  this.setState({ loading: true });
+
                   let payload = {
-                    Dentist: {
-                      _id: '5ff0bbf36be7a7199cd79540',
-                      name: 'Ekrem',
-                      surname: 'Şanslı',
-                    },
-                    createdAt: '2021-01-24T00:42:22.771Z',
-                    _id: '600cc3270651744c12845552',
-                    teeth: 24,
-                    treatment: 'Diş İmplant',
-                    price: 1200,
-                    currency: 'TRY',
+                    _id: treatment._id,
+                    teeth: treatment.teeth,
+                    treatment: treatment.treatment,
+                    price: treatment.price,
+                    currency: treatment.currency,
+                    Dentist: treatment.Dentist?._id,
                   };
-                  store.deleteTreatmentFromPlanList(
-                    getCookie('user_id'),
-                    this.state.patientId,
-                    payload
-                  );
+                  store
+                    .deleteTreatmentFromTreatmentList(
+                      getCookie('user_id'),
+                      this.state.patientId,
+                      payload
+                    )
+                    .then(() => {
+                      this.setState({ loading: false });
+                      this.componentDidMount();
+                    });
                 }}
               >
                 Sil
@@ -727,6 +746,7 @@ class PatientDetail extends Component {
         patientNumberTwo: pt?.phone2,
         treatmentSelectedClinicianId: clinic.data?.Dentist[0].id,
         selectedPlanId: pt?.plans[0]._id,
+        selectedPlan: pt?.plans[0].name,
         patientAddress: pt?.address,
         plans: [
           ...pt?.plans.map((item) => ({ id: item._id, value: item.name })),
@@ -1142,6 +1162,7 @@ class PatientDetail extends Component {
                   .deleteTreatmentFromPlanList(
                     getCookie('user_id'),
                     this.state.patientId,
+                    this.state.selectedPlan,
                     payload
                   )
                   .then(() => {
@@ -1452,7 +1473,7 @@ class PatientDetail extends Component {
     );
   };
 
-  renderNotesTab = () => {
+  renderNotesTab = (noteMode) => {
     return (
       <div className="patientInfoPart getPaddingMargin d-flex justify-content-center">
         <div className={'patientNotesWrapper'}>
@@ -1477,7 +1498,7 @@ class PatientDetail extends Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
-                    Not Ekle
+                    {noteMode === 'add' ? ' Not Ekle' : 'Notu Düzenle'}
                   </h5>
                   <button
                     type="button"
@@ -1499,6 +1520,7 @@ class PatientDetail extends Component {
                         onChange={(e) => {
                           this.setState({ newNote: e.target.value });
                         }}
+                        defaultValue={this.state.editableNote?.body}
                         className="form-control"
                         id="exampleFormControlTextarea1"
                         rows="8"
@@ -1520,16 +1542,34 @@ class PatientDetail extends Component {
                     data-dismiss="modal"
                     onClick={async () => {
                       this.setState({ loading: true });
-                      await store
-                        .clinicAddNote(
-                          getCookie('user_id'),
-                          this.state.patient.id,
-                          { body: this.state.newNote }
-                        )
-                        .then(() => {
-                          this.setState({ loading: false });
-                          this.componentDidMount();
-                        });
+                      if (this.state.noteMode === 'add') {
+                        await store
+                          .clinicAddNote(
+                            getCookie('user_id'),
+                            this.state.patient.id,
+                            { body: this.state.newNote }
+                          )
+                          .then(() => {
+                            this.setState({ loading: false });
+                            this.componentDidMount();
+                          });
+                      } else if (this.state.noteMode === 'edit') {
+                        await store
+                          .clinicUpdateNote(
+                            getCookie('user_id'),
+                            this.state.patient.id,
+                            this.state.editableNote._id,
+                            {
+                              created: this.state.editableNote.created,
+                              _id: this.state.editableNote._id,
+                              body: this.state.newNote,
+                            }
+                          )
+                          .then(() => {
+                            this.setState({ loading: false });
+                            this.componentDidMount();
+                          });
+                      }
                     }}
                   >
                     Not Ekle
@@ -1546,6 +1586,9 @@ class PatientDetail extends Component {
                 className="btn btn-primary"
                 data-toggle="modal"
                 data-target="#addUserModal"
+                onClick={() => {
+                  this.setState({ noteMode: 'add' });
+                }}
               >
                 Not Ekle
               </button>
@@ -2102,7 +2145,7 @@ class PatientDetail extends Component {
               {selectedTab === 0 && this.renderPatientInfoTab()}
               {selectedTab === 1 && this.renderTreatmentPlanningTab()}
               {selectedTab === 2 && this.renderPaymentTab()}
-              {selectedTab === 3 && this.renderNotesTab()}
+              {selectedTab === 3 && this.renderNotesTab(this.state.noteMode)}
             </div>
           </div>
         )}

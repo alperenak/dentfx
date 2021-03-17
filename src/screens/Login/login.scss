@@ -1,5 +1,5 @@
-@import "../../helpers/responsiveBreakpointsMixins";
-@import "../../helpers/variableBreakpoints";
+@import '../../helpers/responsiveBreakpointsMixins';
+@import '../../helpers/variableBreakpoints';
 
 .login {
   overflow: hidden;
@@ -48,7 +48,7 @@
       width: 45%;
     }
     &__header {
-      font-family: "SofiaBold";
+      font-family: 'SofiaBold';
       font-size: 20px;
       font-weight: bold;
       font-stretch: normal;
@@ -60,7 +60,7 @@
       margin-bottom: 10px;
     }
     &__text {
-      font-family: "SofiaRegular";
+      font-family: 'SofiaRegular';
       font-size: 10px;
       font-weight: 500;
       font-stretch: normal;
@@ -75,6 +75,8 @@
     height: 100%;
     width: 50%;
     padding: 16px 64px;
+    padding-right: 64px !important;
+    padding-left: 64px !important;
     @include x-large {
       height: 100%;
       width: 100%;
@@ -96,7 +98,7 @@
       margin-left: 22px;
     }
     &__header {
-      font-family: "SofiaBold";
+      font-family: 'SofiaBold';
       font-size: 20px;
       font-weight: bold;
       font-stretch: normal;
@@ -110,7 +112,7 @@
       }
     }
     &__text {
-      font-family: "SofiaRegular";
+      font-family: 'SofiaRegular';
       font-size: 14px;
       font-weight: normal;
       font-stretch: normal;
@@ -134,7 +136,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 12px;
-      font-family: "SofiaRegular";
+      font-family: 'SofiaRegular';
       font-size: 14px;
       cursor: pointer;
       background-color: $transparent-blue !important;
@@ -157,7 +159,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 12px;
-      font-family: "SofiaRegular";
+      font-family: 'SofiaRegular';
       font-size: 14px;
       cursor: pointer;
       background-color: $darkBlue !important;
@@ -177,7 +179,7 @@
     }
     &__primary {
       cursor: pointer;
-      font-family: "SofiaRegular";
+      font-family: 'SofiaRegular';
       transition: 0.3s;
       font-size: 13px;
       font-weight: 500;
@@ -197,7 +199,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 12px;
-      font-family: "SofiaRegular";
+      font-family: 'SofiaRegular';
       font-size: 14px;
       cursor: pointer;
       background-color: $transparent-blue !important;
@@ -221,7 +223,7 @@
     &__input {
       width: 100%;
       label {
-        font-family: "SofiaBold";
+        font-family: 'SofiaBold';
         font-size: 18px;
         font-weight: bold;
         font-stretch: normal;
@@ -284,7 +286,7 @@
         background-color: #e7eeff;
       }
       &__strokeText {
-        font-family: "SofiaRegular";
+        font-family: 'SofiaRegular';
         font-size: 12px;
         font-weight: normal;
         font-stretch: normal;
@@ -301,7 +303,7 @@
 .loginImageCol {
   height: auto;
   background-size: cover;
-  background-image: url("../../assets/images/login-photo.png");
+  background-image: url('../../assets/images/login-photo.png');
   @include x-large {
     display: none;
   }
